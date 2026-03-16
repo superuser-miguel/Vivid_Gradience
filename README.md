@@ -5,7 +5,7 @@
 </h1>
 
 <p align="center">
-  <strong>Change the look of Adwaita, with ease — built for modern GNOME</strong>
+  <strong>Change the look of Adwaita, with ease — built for GNOME 48+</strong>
 </p>
 
 <br>
