@@ -2,16 +2,17 @@
 
 ### Supported Versions
 
-Only two latest versions are officially supported, but older versions get some help too.
+This project is in active development. Only the latest version is supported.
 
 | Version | Supported          |
 | ------- | ------------------ |
-| 0.4.x   | :white_check_mark: |
-| 0.3.x   | :white_check_mark: |
-| < 0.2   | :x:                |
+| latest  | :white_check_mark: |
+| older   | :x:                |
 
 ### Reporting a Vulnerability
 
-Normally Gradience can't have security issues, but if you have found a vulnerability, please don't submit a public issue.
+If you have found a vulnerability, please don't open a public issue.
 
-Instead, report this vulnerability to [ng.eric@ik.me](mailto:ng.eric@ik.me) and include as much details as possible.
+Instead, use GitHub's private vulnerability reporting at
+`https://github.com/superuser-miguel/Vivid_Gradience/security/advisories/new`
+or contact the maintainer directly via GitHub.
