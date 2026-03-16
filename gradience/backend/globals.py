@@ -41,13 +41,13 @@ user_plugin_dir = os.path.join(user_data_dir, "gradience", "plugins")
 system_plugin_dir = os.path.join(constants.pkgdatadir, "plugins")
 
 preset_repos_github = {
-    "Official": "https://github.com/hydroxycarbamide/Community/raw/next/official.json",
-    "Curated":  "https://github.com/hydroxycarbamide/Community/raw/next/curated.json"
+    "Official": "https://github.com/superuser-miguel/Community/raw/next/official.json",
+    "Curated":  "https://github.com/superuser-miguel/Community/raw/next/curated.json"
 }
 
 preset_repos_jsdelivr = {
-    "Official": "https://cdn.jsdelivr.net/gh/hydroxycarbamide/Community@next/official.json",
-    "Curated": "https://cdn.jsdelivr.net/gh/hydroxycarbamide/Community@next/curated.json"
+    "Official": "https://cdn.jsdelivr.net/gh/superuser-miguel/Community@next/official.json",
+    "Curated": "https://cdn.jsdelivr.net/gh/superuser-miguel/Community@next/curated.json"
 }
 
 # preset_repos should be dynamically imported depending of user settings

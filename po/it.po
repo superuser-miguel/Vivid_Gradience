@@ -500,7 +500,7 @@ msgid ""
 msgstr ""
 "Gradience usa GitHub per condividere le configurazioni degli utenti. È "
 "necessario creare un account GitHub ed effettuare il fork di <a "
-"href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/Community</"
+"href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/Community</"
 "a>. A quel punto è possibile caricare la propria configurazione, effettuare "
 "una pull request e condividerla con gli altri utenti!"
 
@@ -1284,10 +1284,10 @@ msgstr "Configurazioni di"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"I collaboratori su GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"I collaboratori su GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1360,7 +1360,7 @@ msgstr "Configurazioni preinstallate"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
 "Visitare <a href=\"https://github.com/GradienceTeam/"
@@ -2261,7 +2261,7 @@ msgstr "Tema della shell reimpostato con successo."
 #~ msgstr "Configurazioni preinstallate"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "Visitare <a href=\"https://github.com/GradienceTeam/"

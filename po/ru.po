@@ -1271,10 +1271,10 @@ msgstr "Предустановки"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"Участники на GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Участники на GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1347,10 +1347,10 @@ msgstr "Встроенные предустановки"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
-"Смотрите<a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"Смотрите<a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> на GitHub для большего количества предустановок."
 
 #: gradience/frontend/views/presets_manager_window.py:384
@@ -2260,7 +2260,7 @@ msgstr "Тема Shell успешно сброшена."
 #~ msgstr "Встроенные предустановки"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "Смотрите<a href=\"https://github.com/GradienceTeam/"

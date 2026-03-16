@@ -444,7 +444,7 @@ msgid ""
 "Enter a keyword to search on <a href=\"https://github.com/GradienceTeam/"
 "Community\">GradienceTeam/Community</a>."
 msgstr ""
-"<a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"<a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a>에서 검색할 키워드를 입력하세요."
 
 #: data/ui/presets_manager_window.blp:101
@@ -558,7 +558,7 @@ msgid ""
 "make a pull request and share it with the world!"
 msgstr ""
 "Gradience는 GitHub를 사용하여 프리셋을 공유합니다. GitHub 계정을 만들고 <a "
-"href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/Community</"
+"href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/Community</"
 "a>를 분기해야 합니다. 그런 다음 프리셋을 업로드하고 풀 리퀘스트(끌어오기 요"
 "청)를 하여 전 세계와 공유할 수 있습니다!"
 
@@ -1384,10 +1384,10 @@ msgstr "프리셋"
 #: gradience/frontend/views/about_dialog.py:71
 #, fuzzy
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"<a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"<a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a>에서 검색할 키워드를 입력하세요."
 
 #: gradience/frontend/views/main_window.py:204
@@ -1460,7 +1460,7 @@ msgstr "내장 프리셋"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
 "더 많은 프리셋은 Github에서 <a href=\"https://github.com/GradienceTeam/"
@@ -1921,7 +1921,7 @@ msgstr ""
 #~ "Enter a keyword to search on <a href=\"https://gradienceteam.github.io/"
 #~ "presets\">GradienceTeam/Community</a>."
 #~ msgstr ""
-#~ "<a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "<a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a>에서 검색할 키워드를 입력하세요."
 
 #~ msgid "Logout"
@@ -2285,7 +2285,7 @@ msgstr ""
 #~ msgstr "내장 사전 설정"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "더 많은 사전 설정은 Github에서 <a href=\"https://github.com/GradienceTeam/"

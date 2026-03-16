@@ -19,9 +19,9 @@
   
   <maintainer>
     <foaf:Person>
-      <foaf:name>hydroxycarbamide</foaf:name>
+      <foaf:name>superuser-miguel</foaf:name>
       <foaf:mbox rdf:resource="mailto:ng.eric@ik.me" />
-      <gnome:userid>hydroxycarbamide</gnome:userid>
+      <gnome:userid>superuser-miguel</gnome:userid>
     </foaf:Person>
   </maintainer>
 </Project>

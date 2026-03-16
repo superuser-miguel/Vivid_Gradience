@@ -1303,7 +1303,7 @@ msgstr "Konfigurasi oleh"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr "Kontributor GitHub GradienceTeam/Community"
 
@@ -1377,7 +1377,7 @@ msgstr "Konfigurasi Bawaan"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
 "Kunjungi <a href=\"https://github.com/GradienceTeam/"
@@ -2230,7 +2230,7 @@ msgstr "Tema Antarmuka Berhasil Tereset."
 
 #, fuzzy
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "Lihat <a href=\"https://github.com/GradienceTeam/"

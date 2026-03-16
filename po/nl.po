@@ -1287,10 +1287,10 @@ msgstr "Voorinstellingen door"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"Bijdragers op GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Bijdragers op GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1363,10 +1363,10 @@ msgstr "Ingebouwde voorinstellingen"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
-"Zie <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"Zie <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> op Github voor meer voorinstellingen."
 
 #: gradience/frontend/views/presets_manager_window.py:384
@@ -2183,10 +2183,10 @@ msgstr "Shell-thema succesvol opgeslagen"
 #~ msgstr "Ingebouwde voorinstellingen"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
-#~ "Zie <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "Zie <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> op Github voor meer voorinstellingen"
 
 #~ msgid ""

@@ -24,7 +24,7 @@ Generated with Gradience
 
 Issues caused by theming should be reported to Gradience repository, and not to upstream
 
-https://github.com/hydroxycarbamide/Gradience
+https://github.com/superuser-miguel/Vivid_Gradience
 */
 
 """

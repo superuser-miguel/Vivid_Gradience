@@ -1341,10 +1341,10 @@ msgstr "Szablony według"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"Współtwórcy na GitHubie https://github.com/hydroxycarbamide/Community/graphs/"
+"Współtwórcy na GitHubie https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1417,10 +1417,10 @@ msgstr "Wbudowane Profile"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
-"Zobacz <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"Zobacz <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> na Githubie po więcej profili."
 
 #: gradience/frontend/views/presets_manager_window.py:384
@@ -2281,7 +2281,7 @@ msgstr "Schemat zapisany pomyślnie!"
 #~ msgstr "Wbudowane profile"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "Zobacz <a href=\"https://github.com/GradienceTeam/"

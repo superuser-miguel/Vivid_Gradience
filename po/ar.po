@@ -529,7 +529,7 @@ msgid ""
 "make a pull request and share it with the world!"
 msgstr ""
 "يستخدم «تدرج» جِت.هَب لمشاركة إعدادك المسبق. تحتاج لإنشاء حساب جِت.هَب و نسخ "
-"مستودع <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"مستودع <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a>، بعد ذلك، يمكنك تحميل إعدادك المسبق وتقديم طلب سحب ومشاركته مع "
 "العالم!"
 
@@ -1292,10 +1292,10 @@ msgstr "الإعدادات المسبقة بواسطة"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"المساهمون من جت‌هب https://github.com/hydroxycarbamide/Community/graphs/"
+"المساهمون من جت‌هب https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1368,10 +1368,10 @@ msgstr "الإعدادات المسبقة المدمجة"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
-"راجع <a href=\"https://github.com/hydroxycarbamide/Community\"> GradienceTeam / "
+"راجع <a href=\"https://github.com/superuser-miguel/Community\"> GradienceTeam / "
 "Community </a> على جِت.هَب للحصول على مزيد من الإعدادات المسبقة."
 
 #: gradience/frontend/views/presets_manager_window.py:384
@@ -2186,10 +2186,10 @@ msgstr "صُفِّرت سمة الصدفة."
 #~ msgstr "إعدادات مسبقة مدمجة"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
-#~ "راجع <a href=\"https://github.com/hydroxycarbamide/Community\"> "
+#~ "راجع <a href=\"https://github.com/superuser-miguel/Community\"> "
 #~ "GradienceTeam / Community </a> على Github للحصول على مزيد من الإعدادات "
 #~ "المسبقة"
 

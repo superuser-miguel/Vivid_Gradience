@@ -1290,10 +1290,10 @@ msgstr "Preajustes de"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"Colaboradores en GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Colaboradores en GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1366,10 +1366,10 @@ msgstr "Preajustes incorporados"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
-"Consulte <a href=\"https://github.com/hydroxycarbamide/Community\">Equipo de "
+"Consulte <a href=\"https://github.com/superuser-miguel/Community\">Equipo de "
 "Gradience/Comunidad</a> en Github para ver más diseños."
 
 #: gradience/frontend/views/presets_manager_window.py:384
@@ -2187,10 +2187,10 @@ msgstr "Tema para Shell reiniciado con éxito."
 #~ msgstr "Diseños integrados"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
-#~ "Consulte <a href=\"https://github.com/hydroxycarbamide/Community\">Equipo de "
+#~ "Consulte <a href=\"https://github.com/superuser-miguel/Community\">Equipo de "
 #~ "Gradience/Comunidad</a> en Github para ver más diseños"
 
 #~ msgid ""

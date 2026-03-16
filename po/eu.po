@@ -1400,7 +1400,7 @@ msgstr "Diseinuak"
 #: gradience/frontend/views/about_dialog.py:71
 #, fuzzy
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
 "Sartu gako-hitz bat <a href=\"https://github.com/GradienceTeam/"
@@ -1480,10 +1480,10 @@ msgstr "Diseinu integratuak"
 #: gradience/frontend/views/presets_manager_window.py:358
 #, fuzzy
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
-"Kontsultatu <a href=\"https://github.com/hydroxycarbamide/Community\">Gradience/"
+"Kontsultatu <a href=\"https://github.com/superuser-miguel/Community\">Gradience/"
 "Komunitate Taldea</a> Github-en diseinu gehiago ikusteko"
 
 #: gradience/frontend/views/presets_manager_window.py:384
@@ -2198,7 +2198,7 @@ msgstr ""
 #~ msgstr "Diseinu integratuak"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "Kontsultatu <a href=\"https://github.com/GradienceTeam/"

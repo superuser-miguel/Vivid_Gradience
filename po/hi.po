@@ -1258,7 +1258,7 @@ msgstr "इनके द्वारा प्रीसेट"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
 "GitHub पर योगदानकर्ता https://github.com/GradienceTeam/Cmunity/graphs/"
@@ -1334,7 +1334,7 @@ msgstr "अंतर्निर्मित प्रीसेट"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
 "अधिक प्रीसेट के लिए Github पर <a href=\"https://github.com/GradienceTeam/"

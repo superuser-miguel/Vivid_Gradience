@@ -1259,10 +1259,10 @@ msgstr "Předvolby od"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"Přispěvatelé na GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Přispěvatelé na GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1335,7 +1335,7 @@ msgstr "Vestavěné předvolby"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
 "Další předvolby najdete <a href=\"https://github.com/GradienceTeam/"
@@ -2235,7 +2235,7 @@ msgstr "Motiv prostředí byl úspěšně resetován."
 
 #, fuzzy
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "Další předvolby najdete <a href=\"https://github.com/GradienceTeam/"
