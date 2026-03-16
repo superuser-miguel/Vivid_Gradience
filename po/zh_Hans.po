@@ -477,7 +477,7 @@ msgid ""
 "make a pull request and share it with the world!"
 msgstr ""
 "Gradience 使用 GitHub 分享您的预设。您需要创建一个 GitHub 帐户并 fork <a "
-"href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/Community</"
+"href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/Community</"
 "a>。然后，您可以上传您的预设，提出拉取请求并与全世界分享！"
 
 #: data/ui/share_window.blp:81 data/ui/welcome_window.blp:78
@@ -1197,10 +1197,10 @@ msgstr "预设作者"
 
 #: gradience/frontend/views/about_dialog.py:71
 msgid ""
-"Contributors on GitHub https://github.com/hydroxycarbamide/Community/graphs/"
+"Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 msgstr ""
-"GitHub 上的贡献者 https://github.com/hydroxycarbamide/Community/graphs/"
+"GitHub 上的贡献者 https://github.com/superuser-miguel/Community/graphs/"
 "contributors"
 
 #: gradience/frontend/views/main_window.py:204
@@ -1272,7 +1272,7 @@ msgstr "内置预设"
 
 #: gradience/frontend/views/presets_manager_window.py:358
 msgid ""
-"See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+"See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 "Community</a> on Github for more presets."
 msgstr ""
 "参见Github上的<a href=\"https://github.com/GradienceTeam/"
@@ -2153,7 +2153,7 @@ msgstr "Shell 主题成功重置。"
 #~ msgstr "内置预设"
 
 #~ msgid ""
-#~ "See <a href=\"https://github.com/hydroxycarbamide/Community\">GradienceTeam/"
+#~ "See <a href=\"https://github.com/superuser-miguel/Community\">GradienceTeam/"
 #~ "Community</a> on Github for more presets"
 #~ msgstr ""
 #~ "参见Github上的<a href=\"https://github.com/GradienceTeam/"

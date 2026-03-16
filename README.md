@@ -17,7 +17,7 @@
 </p>
 
 > Vivid Gradience is a fork of [Gradience](https://github.com/GradienceTeam/Gradience),
-> by way of [hydroxycarbamide's fork](https://github.com/superuser-miguel/Vivid_Gradience).
+> by way of [superuser-miguel's fork](https://github.com/superuser-miguel/Vivid_Gradience).
 > The original project was archived in June 2024.
 >
 > **Goals of this fork:**
@@ -107,7 +107,7 @@ for app developers. See [stopthemingmy.app](https://stopthemingmy.app) and
 ## 💝 Acknowledgments
 
 - [Artyom Fomin](https://github.com/ArtyIF) — original creator of Gradience
-- [hydroxycarbamide](https://github.com/hydroxycarbamide) — for keeping it alive
+- [superuser-miguel](https://github.com/superuser-miguel) — for keeping it alive
   and modernizing the runtime
 - [The Gradience Team](https://github.com/GradienceTeam) — for the original project
 - [Weblate](https://weblate.org) — translation platform
