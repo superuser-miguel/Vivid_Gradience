@@ -1,5 +1,5 @@
-project('gradience',
-          version: '0.8.0-beta4',
+project('vivid-gradience',
+          version: '0.1.0',
     meson_version: '>= 0.59.0',
   default_options: [ 'warning_level=2',
                      'werror=false',
@@ -12,13 +12,13 @@ i18n = import('i18n')
 python = import('python')
 
 # Project information
-PROJECT_URL = 'https://github.com/hydroxycarbamide/Gradience'
-BUGTRACKER_URL = 'https://github.com/hydroxycarbamide/Gradience/issues'
-HELP_URL = 'https://github.com/hydroxycarbamide/Gradience/discussions'
-TRANSLATE_URL = 'https://hosted.weblate.org/projects/hydroxycarbamide/gradience'
+PROJECT_URL = 'https://github.com/superuser-miguel/Vivid_Gradience'
+BUGTRACKER_URL = 'https://github.com/superuser-miguel/Vivid_Gradience/issues'
+HELP_URL = 'https://github.com/superuser-miguel/Vivid_Gradience/discussions'
+TRANSLATE_URL = ''
 
 # Constants
-PROJECT_RDNN_NAME = 'com.github.hydroxycarbamide.Gradience'
+PROJECT_RDNN_NAME = 'com.github.superuser-miguel.VividGradience'
 
 git_bin = find_program('git', required: false)
 
@@ -42,7 +42,7 @@ endif
 
 dependency('glib-2.0')
 dependency('gtk4', version: '>= 4.5.0')
-dependency('libadwaita-1', version: '>= 1.2.alpha')
+dependency('libadwaita-1', version: '>= 1.4.0')
 dependency('pygobject-3.0', version: '>= 3.42.0')
 dependency('libsoup-3.0', version: '>= 3.2.0')
 
