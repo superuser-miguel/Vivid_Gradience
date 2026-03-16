@@ -63,3 +63,51 @@ for GTK 3 or Libadwaita.
 <details>
   <summary>Manual revert</summary>
 ```shell
+rm -rf .config/gtk-4.0 .config/gtk-3.0
+flatpak uninstall adw-gtk3
+sudo flatpak override --reset
+```
+
+> ⚠️ `flatpak override --reset` resets **all** Flatpak overrides system-wide.
+
+</details>
+
+## 🏗️ Building from Source
+
+### Requirements
+
+- GNOME Platform 48+
+- `flatpak-builder`
+- `meson >= 0.59.0`
+
+### Flatpak (recommended)
+```shell
+git clone https://github.com/superuser-miguel/Vivid_Gradience.git
+cd Vivid_Gradience
+flatpak-builder --user --install --force-clean builddir \
+  build-aux/flatpak/com.github.superuser-miguel.VividGradience.Devel.json
+```
+
+### Local build
+```shell
+meson setup builddir --prefix=$HOME/.local
+ninja -C builddir
+ninja -C builddir install
+```
+
+For more details see [HACKING.md](HACKING.md).
+
+## 🌱 Gradience, stopthemingmy.app and Adwaita Developers
+
+Vivid Gradience is a tool for tinkerers, **not intended for distributions** to
+ship in their releases. We agree with the importance of a unified Adwaita look
+for app developers. See [stopthemingmy.app](https://stopthemingmy.app) and
+[gradienceteam.github.io/hack](https://gradienceteam.github.io/hack) for more.
+
+## 💝 Acknowledgments
+
+- [Artyom Fomin](https://github.com/ArtyIF) — original creator of Gradience
+- [hydroxycarbamide](https://github.com/hydroxycarbamide) — for keeping it alive
+  and modernizing the runtime
+- [The Gradience Team](https://github.com/GradienceTeam) — for the original project
+- [Weblate](https://weblate.org) — translation platform
