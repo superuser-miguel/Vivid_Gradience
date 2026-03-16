@@ -1,11 +1,17 @@
 # Maintainers
 
 This application was created by [@ArtyIF](https://github.com/ArtyIF).
-Now it's maintained by [@hydroxycarbamide](https://github.com/hydroxycarbamide).
 
-## Special thanks to the Gradience Team for maintaining it previously
+Vivid Gradience is currently maintained by [@superuser-miguel](https://github.com/superuser-miguel).
 
-- [@0xMRTT](https://github.com/0xMRTT) as main developer
-- [@daudix-UFO](https://github.com/daudix-UFO) as designer 
-- [@LyesSaadi](https://github.com/LyesSaadi) as packager
-- [@tfuxu](https://github.com/tfuxu) as developer
+## History
+
+Previously maintained as [Gradience](https://github.com/hydroxycarbamide/Gradience)
+by [@hydroxycarbamide](https://github.com/hydroxycarbamide).
+
+## Special thanks to the Gradience Team
+
+- [@0xMRTT](https://github.com/0xMRTT) — main developer
+- [@daudix-UFO](https://github.com/daudix-UFO) — designer
+- [@LyesSaadi](https://github.com/LyesSaadi) — packager
+- [@tfuxu](https://github.com/tfuxu) — developer
