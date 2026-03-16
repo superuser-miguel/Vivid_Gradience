@@ -6,7 +6,7 @@ Vivid Gradience is currently maintained by [@superuser-miguel](https://github.co
 
 ## History
 
-Previously maintained as [Gradience](https://github.com/hydroxycarbamide/Gradience)
+Previously maintained as [Gradience](https://github.com/superuser-miguel/Vivid_Gradience)
 by [@hydroxycarbamide](https://github.com/hydroxycarbamide).
 
 ## Special thanks to the Gradience Team

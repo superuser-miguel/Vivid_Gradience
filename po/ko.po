@@ -24,22 +24,22 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:4
-#: data/com.github.hydroxycarbamide.Gradience.desktop.in.in:3 data/ui/window.blp:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:4
+#: data/com.github.superuser-miguel.VividGradience.desktop.in.in:3 data/ui/window.blp:5
 msgid "Gradience"
 msgstr "Gradience"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:5
 #: data/ui/welcome_window.blp:64
 msgid "Change the look of Adwaita, with ease"
 msgstr "Adwaita의 외관을 쉽게 변경합니다"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:6
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:6
 #: gradience/frontend/views/about_dialog.py:41
 msgid "Gradience Team"
 msgstr "Gradience팀"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:14
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:14
 msgid ""
 "Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 "
 "theme."
@@ -47,52 +47,52 @@ msgstr ""
 "Gradience는 Libadwaita 애플리케이션과 adw-gtk3 테마를 커스터마이징하기 위한 "
 "도구입니다."
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:15
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:15
 msgid "The main features of Gradience include the following:"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:17
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:17
 #, fuzzy
 msgid "🎨️ Changing any color of Adwaita theme"
 msgstr "Adwaita 테마의 색상 변경"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:18
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:18
 #, fuzzy
 msgid "🖼️ Applying Material 3 color scheme from wallpaper"
 msgstr "바탕화면 이미지에서 Material 3 색상 적용"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:19
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:19
 #, fuzzy
 msgid "🎁️ Usage of other users presets"
 msgstr "다른 사용자의 사전 설정 사용"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:20
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:20
 #, fuzzy
 msgid "⚙️ Changing advanced options with CSS"
 msgstr "CSS로 고급 옵션 변경"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:21
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:21
 #, fuzzy
 msgid "🧩️ Extending functionality using plugins"
 msgstr "플러그인을 사용하여 기능 확장"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:27
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:27
 msgid "Screenshot of \"Colors\" Tab of Main UI"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:32
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:32
 msgid "Screenshot of \"Monet\" Tab of Main UI"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:37
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:37
 msgid "Screenshot of \"Advanced\" Tab of Main UI"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:42
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:42
 msgid "Screenshot of \"Installed\" Tab of Preset Manager"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:47
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:47
 msgid "Screenshot of \"Explore\" Tab of Preset Manager"
 msgstr ""
 

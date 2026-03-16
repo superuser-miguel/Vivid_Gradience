@@ -35,22 +35,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:4
-#: data/com.github.hydroxycarbamide.Gradience.desktop.in.in:3 data/ui/window.blp:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:4
+#: data/com.github.superuser-miguel.VividGradience.desktop.in.in:3 data/ui/window.blp:5
 msgid "Gradience"
 msgstr "Gradience"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:5
 #: data/ui/welcome_window.blp:64
 msgid "Change the look of Adwaita, with ease"
 msgstr "Ändere einfach das Aussehen von Adwaita"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:6
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:6
 #: gradience/frontend/views/about_dialog.py:41
 msgid "Gradience Team"
 msgstr "Gradience Team"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:14
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:14
 msgid ""
 "Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 "
 "theme."
@@ -58,50 +58,50 @@ msgstr ""
 "Gradience ist ein Programm um Libadwaita Apps und das adw-gtk3 Thema zu "
 "ändern."
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:15
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:15
 msgid "The main features of Gradience include the following:"
 msgstr "Zu den wichtigsten Funktionen von Gradience gehören:"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:17
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:17
 msgid "🎨️ Changing any color of Adwaita theme"
 msgstr "Ändert eine beliebige Farbe des Adwaita-Themes"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:18
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:18
 msgid "🖼️ Applying Material 3 color scheme from wallpaper"
 msgstr "🖼️ Generiere Material 3 Farbenschema aus dem Hintergrundbild"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:19
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:19
 msgid "🎁️ Usage of other users presets"
 msgstr "🎁️ Nutze Voreinstellungen von anderen Nutzern"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:20
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:20
 msgid "⚙️ Changing advanced options with CSS"
 msgstr "Ändere fortgeschrittene Optionen mit CSS"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:21
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:21
 msgid "🧩️ Extending functionality using plugins"
 msgstr "Erweitere die Programmfunktionalität mit Plugins"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:27
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:27
 msgid "Screenshot of \"Colors\" Tab of Main UI"
 msgstr ""
 "Screenshot von der Registerkarte \"Farben\" der Hauptbenutzeroberfläche"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:32
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:32
 msgid "Screenshot of \"Monet\" Tab of Main UI"
 msgstr "Screenshot von der Registerkarte \"Monet\" der Hauptbenutzeroberfläche"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:37
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:37
 msgid "Screenshot of \"Advanced\" Tab of Main UI"
 msgstr ""
 "Screenshot von der Registerkarte \"Erweitert\" der Hauptbenutzeroberfläche"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:42
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:42
 msgid "Screenshot of \"Installed\" Tab of Preset Manager"
 msgstr ""
 "Screenshot von der Registerkarte \"Installiert\" der Hauptbenutzeroberfläche"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:47
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:47
 msgid "Screenshot of \"Explore\" Tab of Preset Manager"
 msgstr ""
 "Screenshot von der Registerkarte \"Erkunden\" des Voreinstellungsmanagers"

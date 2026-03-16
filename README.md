@@ -17,7 +17,7 @@
 </p>
 
 > Vivid Gradience is a fork of [Gradience](https://github.com/GradienceTeam/Gradience),
-> by way of [hydroxycarbamide's fork](https://github.com/hydroxycarbamide/Gradience).
+> by way of [hydroxycarbamide's fork](https://github.com/superuser-miguel/Vivid_Gradience).
 > The original project was archived in June 2024.
 >
 > **Goals of this fork:**

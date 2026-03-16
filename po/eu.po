@@ -23,23 +23,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.1\n"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:4
-#: data/com.github.hydroxycarbamide.Gradience.desktop.in.in:3 data/ui/window.blp:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:4
+#: data/com.github.superuser-miguel.VividGradience.desktop.in.in:3 data/ui/window.blp:5
 msgid "Gradience"
 msgstr "Gradience"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:5
 #: data/ui/welcome_window.blp:64
 #, fuzzy
 msgid "Change the look of Adwaita, with ease"
 msgstr "Aldatu Adwaitaren itxura, erraz."
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:6
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:6
 #: gradience/frontend/views/about_dialog.py:41
 msgid "Gradience Team"
 msgstr "Gradience taldea"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:14
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:14
 msgid ""
 "Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 "
 "theme."
@@ -47,57 +47,57 @@ msgstr ""
 "Gradience Libadwaita aplikazioak eta adw-gtk3 gaia pertsonalizatzeko tresna "
 "bat da."
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:15
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:15
 msgid "The main features of Gradience include the following:"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:17
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:17
 #, fuzzy
 #| msgid "Change any color of Adwaita theme"
 msgid "🎨️ Changing any color of Adwaita theme"
 msgstr "Adwaita gaiaren edozein kolore alda dezakezu"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:18
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:18
 #, fuzzy
 #| msgid "Apply Material 3 colors from wallpaper"
 msgid "🖼️ Applying Material 3 color scheme from wallpaper"
 msgstr "Hondoko Material 3 koloreak aplika ditzakezu"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:19
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:19
 #, fuzzy
 #| msgid "Use other users presets"
 msgid "🎁️ Usage of other users presets"
 msgstr "Beste erabiltzaile batzuen diseinuak erabili"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:20
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:20
 #, fuzzy
 #| msgid "Change advanced options with CSS"
 msgid "⚙️ Changing advanced options with CSS"
 msgstr "CSSrekin aukera aurreratuak aldatu"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:21
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:21
 #, fuzzy
 #| msgid "Extend functionality using plugins"
 msgid "🧩️ Extending functionality using plugins"
 msgstr "Funtzionaltasuna pluginen bidez zabaldu"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:27
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:27
 msgid "Screenshot of \"Colors\" Tab of Main UI"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:32
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:32
 msgid "Screenshot of \"Monet\" Tab of Main UI"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:37
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:37
 msgid "Screenshot of \"Advanced\" Tab of Main UI"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:42
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:42
 msgid "Screenshot of \"Installed\" Tab of Preset Manager"
 msgstr ""
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:47
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:47
 msgid "Screenshot of \"Explore\" Tab of Preset Manager"
 msgstr ""
 

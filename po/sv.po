@@ -24,22 +24,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 5.4-dev\n"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:4
-#: data/com.github.hydroxycarbamide.Gradience.desktop.in.in:3 data/ui/window.blp:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:4
+#: data/com.github.superuser-miguel.VividGradience.desktop.in.in:3 data/ui/window.blp:5
 msgid "Gradience"
 msgstr "Gradience"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:5
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:5
 #: data/ui/welcome_window.blp:64
 msgid "Change the look of Adwaita, with ease"
 msgstr "Ändra utseendet på Adwaita, med lätthet"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:6
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:6
 #: gradience/frontend/views/about_dialog.py:41
 msgid "Gradience Team"
 msgstr "Gradience Team"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:14
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:14
 msgid ""
 "Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 "
 "theme."
@@ -47,47 +47,47 @@ msgstr ""
 "Gradience är ett verktyg för att anpassa Libadwaita program och adw-gtk3-"
 "temat."
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:15
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:15
 msgid "The main features of Gradience include the following:"
 msgstr "Huvudfunktionerna i Gradience inkluderar följande:"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:17
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:17
 msgid "🎨️ Changing any color of Adwaita theme"
 msgstr "🎨️ Ändra valfri färg på Adwaita temat"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:18
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:18
 msgid "🖼️ Applying Material 3 color scheme from wallpaper"
 msgstr "🖼️ Applicera Material 3 färgscheman från bakgrundsbild"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:19
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:19
 msgid "🎁️ Usage of other users presets"
 msgstr "🎁️ Användning av andra användares förinställningar"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:20
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:20
 msgid "⚙️ Changing advanced options with CSS"
 msgstr "⚙️ Ändra avancerade alternativ med CSS"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:21
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:21
 msgid "🧩️ Extending functionality using plugins"
 msgstr "🧩️ Utökad funktionalitet med insticksprogram"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:27
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:27
 msgid "Screenshot of \"Colors\" Tab of Main UI"
 msgstr "Skärmdump av \"Färger\" fliken av Huvud UI"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:32
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:32
 msgid "Screenshot of \"Monet\" Tab of Main UI"
 msgstr "Skärmdump av \"Monet\" fliken av Huvud UI"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:37
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:37
 msgid "Screenshot of \"Advanced\" Tab of Main UI"
 msgstr "Skärmdump av \"Avancerat\" fliken av Huvud UI"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:42
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:42
 msgid "Screenshot of \"Installed\" Tab of Preset Manager"
 msgstr "Skärmdump av \"Avancerat\" fliken i förinställninghanteraren"
 
-#: data/com.github.hydroxycarbamide.Gradience.appdata.xml.in.in:47
+#: data/com.github.superuser-miguel.VividGradience.appdata.xml.in.in:47
 msgid "Screenshot of \"Explore\" Tab of Preset Manager"
 msgstr "Skärmdump av \"Färger\" fliken i förinställninghanteraren"
 
