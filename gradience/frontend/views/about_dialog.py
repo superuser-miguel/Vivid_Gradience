@@ -1,7 +1,7 @@
 # about_dialog.py
 #
 # Change the look of Adwaita, with ease
-# Copyright (C) 2023, Gradience Team
+# Copyright (C) 2025, Gradience Team
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,41 +33,36 @@ class GradienceAboutDialog:
 
         self.setup()
 
-    def setup(self):
+def setup(self):
         self.about_dialog = Adw.AboutDialog(
-            application_name="Gradience",
+            application_name="Vivid Gradience",
             application_icon=constants.app_id,
-            developer_name=_("Gradience Team"),
+            developer_name=_("superuser-miguel"),
             website=constants.project_url,
             support_url=constants.help_url,
             issue_url=constants.bugtracker_url,
             developers=[
-                "0xMRTT https://github.com/0xMRTT",
-                "Artyom Fomin https://github.com/ArtyIF",
-                "Verantor https://github.com/Verantor",
-                "tfuxu https://github.com/tfuxu",
-                "u1F98E https://github.com/u1f98e"
+                "superuser-miguel https://github.com/superuser-miguel",
             ],
             designers=[
                 "David Lapshin https://github.com/daudix-UFO"
             ],
             translator_credits=_(translator_credits),
-            copyright=_("Copyright © 2022-2023 Gradience Team"),
+            copyright=_("Copyright © 2022-2025 superuser-miguel"),
             license_type=Gtk.License.GPL_3_0,
             version=constants.version,
             release_notes_version=constants.rel_ver,
         )
 
         self.about_dialog.add_credit_section(
-            _("Plugins by"),
+            _("Original Gradience Team"),
             [
-                _("Contributors on GitHub https://github.com/superuser-miguel/Plugins/graphs/contributors")
-            ]
-        )
-        self.about_dialog.add_credit_section(
-            _("Presets by"),
-            [
-                _("Contributors on GitHub https://github.com/superuser-miguel/Community/graphs/contributors")
+                "Artyom Fomin https://github.com/ArtyIF",
+                "0xMRTT https://github.com/0xMRTT",
+                "Verantor https://github.com/Verantor",
+                "tfuxu https://github.com/tfuxu",
+                "u1F98E https://github.com/u1f98e",
+                "David Lapshin https://github.com/daudix-UFO"
             ]
         )
 
