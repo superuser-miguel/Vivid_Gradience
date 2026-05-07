@@ -29,6 +29,7 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Full theme preview
 - [ ] Generate preset from a single color
 - [ ] Visual enhancements beyond the original scope
+- [ ] Textures ! Carbon Fibre, Gloss, etc.
 
 ### 🧩 Plugins
 
