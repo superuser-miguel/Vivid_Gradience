@@ -4,7 +4,7 @@ If you'd like to see a new feature, open an issue or submit a PR.
 
 ### 🔧 Immediate Goals
 
-- [ ] Working Flatpak targeting GNOME 48+ / runtime 49
+- [ ] Working Flatpak targeting GNOME 48+ / runtime 50 (latest)
 - [ ] Verify all base theming features work with current libadwaita
 - [ ] Clean up and modernize the codebase
 
