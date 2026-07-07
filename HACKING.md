@@ -29,9 +29,9 @@ Use this method if you prefer the command line or have issues with GNOME Builder
 #### Prerequisites
 
 - `flatpak-builder`
-- GNOME SDK and Platform runtime 49
+- GNOME SDK and Platform runtime 50
 ```shell
-flatpak install org.gnome.Sdk//49 org.gnome.Platform//49
+flatpak install org.gnome.Sdk//50 org.gnome.Platform//50
 ```
 
 #### User installation
