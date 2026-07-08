@@ -1,0 +1,107 @@
+# Change the look of Adwaita, with ease
+# Copyright (C) 2022 Gradience Team
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program. If not, see <https://www.gnu.org/licenses/>.
+
+
+# Keeps the Flatpak on the latest stable GNOME runtime. Runs weekly: if a newer
+# org.gnome.Platform is published on Flathub, it bumps the manifest (and the CI
+# container tag) and pushes straight to main. The Build workflow then build-tests
+# the pushed commit, so a bump that breaks the build shows up red on main.
+
+name: Runtime Auto-Bump
+
+on:
+  schedule:
+    - cron: '0 6 * * 1'   # Mondays 06:00 UTC
+  workflow_dispatch:       # allow manual runs
+
+permissions:
+  contents: write
+
+env:
+  MANIFEST: build-aux/flatpak/io.github.superuser_miguel.VividGradience.json
+
+jobs:
+  autobump:
+    name: Bump to latest GNOME runtime
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Install flatpak
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y flatpak
+
+      - name: Determine latest stable org.gnome.Platform
+        id: latest
+        run: |
+          flatpak remote-add --if-not-exists --user flathub \
+            https://dl.flathub.org/repo/flathub.flatpakrepo
+          latest=$(flatpak remote-ls --user flathub --arch=x86_64 \
+            --columns=application,branch \
+            | awk '$1 == "org.gnome.Platform" { print $2 }' \
+            | grep -E '^[0-9]+$' | sort -n | tail -1)
+          if [ -z "$latest" ]; then
+            echo "::error::Could not determine latest org.gnome.Platform version from Flathub"
+            exit 1
+          fi
+          echo "latest=$latest" >> "$GITHUB_OUTPUT"
+          echo "Latest stable org.gnome.Platform: $latest"
+
+      - name: Read current runtime-version
+        id: current
+        run: |
+          current=$(grep -oP '"runtime-version"\s*:\s*"\K[0-9]+' "$MANIFEST")
+          if [ -z "$current" ]; then
+            echo "::error::Could not read runtime-version from $MANIFEST"
+            exit 1
+          fi
+          echo "current=$current" >> "$GITHUB_OUTPUT"
+          echo "Current runtime-version: $current"
+
+      - name: Bump manifest and CI container if behind
+        id: bump
+        env:
+          LATEST: ${{ steps.latest.outputs.latest }}
+          CURRENT: ${{ steps.current.outputs.current }}
+        run: |
+          if [ "$LATEST" -le "$CURRENT" ]; then
+            echo "Already on the latest runtime ($CURRENT). Nothing to do."
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          echo "Bumping GNOME runtime $CURRENT -> $LATEST"
+          sed -i -E "s/(\"runtime-version\"[[:space:]]*:[[:space:]]*\")$CURRENT(\")/\1$LATEST\2/" "$MANIFEST"
+          # Keep the Build workflow's container tag in sync (best effort).
+          sed -i -E "s/(flatpak-github-actions:gnome-)$CURRENT\b/\1$LATEST/" .github/workflows/build.yml || true
+          if git diff --quiet; then
+            echo "::error::Expected to bump $CURRENT -> $LATEST but no files changed. The runtime-version format may have drifted; update this workflow's sed patterns."
+            exit 1
+          fi
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Commit and push to main
+        if: steps.bump.outputs.changed == 'true'
+        env:
+          LATEST: ${{ steps.latest.outputs.latest }}
+          CURRENT: ${{ steps.current.outputs.current }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add "$MANIFEST" .github/workflows/build.yml
+          git commit -m "ci: bump GNOME runtime $CURRENT -> $LATEST"
+          git push
