@@ -10,6 +10,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Update runtime to GNOME 50 (latest stable)
+- Rename app-id to valid RDNN `io.github.superuser_miguel.VividGradience`
+  (old id had a hyphen in a non-final segment, which Flatpak rejects)
+
+### Fixed
+
+- Fix `IndentationError` crash in the About dialog (`setup` had escaped the class body)
+- Rename icon files that were still named after upstream, unbreaking the Flatpak build
 
 ## [0.8.0] - 2025-XX-YY
 
