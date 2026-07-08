@@ -127,7 +127,7 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
             dialog.present()
         elif is_gnome_available() and not user_themes_available:
             dialog = Adw.MessageDialog(transient_for=self.win, heading=_("User Themes Extension Missing"),
-                body=_("Gradience requires the User Themes extension installed to apply the Shell theme. You can still generate a theme, but you won't be able to apply it without this extension."))
+                body=_("Vivid Gradience requires the User Themes extension installed to apply the Shell theme. You can still generate a theme, but you won't be able to apply it without this extension."))
 
             dialog.add_response("install-extension", _("Install Extension"))
             dialog.add_response("continue-anyway", _("Continue Anyway"))
