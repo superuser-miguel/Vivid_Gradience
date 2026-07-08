@@ -240,7 +240,3 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
         self.toast_overlay.add_toast(
             Adw.Toast(title=_("Shell theme successfully reset."))
         )
-
-    @Gtk.Template.Callback()
-    def on_restore_button_clicked(self, *_args):
-        logging.debug("Nothing here yet")
