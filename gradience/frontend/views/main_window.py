@@ -140,18 +140,15 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         self.settings.set_boolean("window-fullscreen", self.is_fullscreen())
 
     def setup_theming_page(self):
-        # TODO: Show fallback page if no theme engines are enabled
-        no_engines_label = Gtk.Label.new("No Theme Engines enabled")
-
-        self.setup_empty_page()
         self.setup_shell_group()
         self.setup_monet_group()
+        self.update_theming_view()
 
-    def setup_empty_page(self):
-        self.empty_page = GradienceEmptyThemingGroup(self)
-
-        if not self.enabled_theme_engines:
-            self.content_theming.add(self.empty_page)
+    def update_theming_view(self):
+        # Show a StatusPage when no engines are enabled, the engine groups otherwise.
+        has_engines = bool(self.enabled_theme_engines)
+        self.theming_stack.set_visible_child_name("engines" if has_engines else "empty")
+        self.shell_warning_banner.set_revealed("shell" in self.enabled_theme_engines)
 
     def setup_shell_group(self):
         self.shell_group = GradienceShellThemingGroup(self)
