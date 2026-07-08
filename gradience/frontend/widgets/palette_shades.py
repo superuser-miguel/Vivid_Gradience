@@ -22,8 +22,10 @@ from gradience.backend.constants import rootdir
 
 
 @Gtk.Template(resource_path=f"{rootdir}/ui/palette_shades.ui")
-class GradiencePaletteShades(Adw.ActionRow):
+class GradiencePaletteShades(Adw.ExpanderRow):
     __gtype_name__ = "GradiencePaletteShades"
+
+    shades_box = Gtk.Template.Child()
 
     def __init__(self, prefix, color_title, n_shades, **kwargs):
         super().__init__(**kwargs)
