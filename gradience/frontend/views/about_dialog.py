@@ -48,7 +48,7 @@ class GradienceAboutDialog:
                 "David Lapshin https://github.com/daudix-UFO"
             ],
             translator_credits=_(translator_credits),
-            copyright=_("Copyright © 2022-2025 superuser-miguel"),
+            copyright=_("Copyright © 2022-2026 superuser-miguel"),
             license_type=Gtk.License.GPL_3_0,
             version=constants.version,
             release_notes_version=constants.rel_ver,
