@@ -55,6 +55,13 @@ class GradienceAboutDialog:
         )
 
         self.about_dialog.add_credit_section(
+            _("Forked From"),
+            [
+                "hydroxycarbamide https://github.com/hydroxycarbamide",
+            ]
+        )
+
+        self.about_dialog.add_credit_section(
             _("Original Gradience Team"),
             [
                 "Artyom Fomin https://github.com/ArtyIF",
