@@ -131,6 +131,8 @@ to ship by default**. A unified Adwaita look matters for app developers; see
 
 - [Artyom Fomin](https://github.com/ArtyIF) and
   [the Gradience Team](https://github.com/GradienceTeam) — the original Gradience
+- [hydroxycarbamide](https://github.com/hydroxycarbamide/Gradience) — whose
+  Gradience fork this project is based on
 - [superuser-miguel](https://github.com/superuser-miguel) — reviving and
   modernizing the fork
 - [Weblate](https://weblate.org) — translation platform
