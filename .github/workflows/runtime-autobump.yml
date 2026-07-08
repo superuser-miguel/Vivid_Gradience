@@ -17,8 +17,9 @@
 
 # Keeps the Flatpak on the latest stable GNOME runtime. Runs weekly: if a newer
 # org.gnome.Platform is published on Flathub, it bumps the manifest (and the CI
-# container tag) and pushes straight to main. The Build workflow then build-tests
-# the pushed commit, so a bump that breaks the build shows up red on main.
+# container tags), then BUILD-TESTS the bumped manifest. It only commits and
+# pushes to main if that build succeeds -- so a bump that would break the build
+# never lands on main; the run just fails red and waits for a human.
 
 name: Runtime Auto-Bump
 
@@ -37,21 +38,23 @@ jobs:
   autobump:
     name: Bump to latest GNOME runtime
     runs-on: ubuntu-24.04
+    container:
+      # Provides a working flatpak / flatpak-builder toolchain. The kept-current
+      # tag is maintained by this same workflow (see the sed over workflow files).
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      options: --privileged
     steps:
       - name: Checkout
         uses: actions/checkout@v6
-
-      - name: Install flatpak
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y flatpak
+        with:
+          submodules: recursive
 
       - name: Determine latest stable org.gnome.Platform
         id: latest
         run: |
-          flatpak remote-add --if-not-exists --user flathub \
+          flatpak remote-add --if-not-exists flathub \
             https://dl.flathub.org/repo/flathub.flatpakrepo
-          latest=$(flatpak remote-ls --user flathub --arch=x86_64 \
+          latest=$(flatpak remote-ls flathub --arch=x86_64 \
             --columns=application,branch \
             | awk '$1 == "org.gnome.Platform" { print $2 }' \
             | grep -E '^[0-9]+$' | sort -n | tail -1)
@@ -73,7 +76,7 @@ jobs:
           echo "current=$current" >> "$GITHUB_OUTPUT"
           echo "Current runtime-version: $current"
 
-      - name: Bump manifest and CI container if behind
+      - name: Bump manifest and CI container tags if behind
         id: bump
         env:
           LATEST: ${{ steps.latest.outputs.latest }}
@@ -86,22 +89,36 @@ jobs:
           fi
           echo "Bumping GNOME runtime $CURRENT -> $LATEST"
           sed -i -E "s/(\"runtime-version\"[[:space:]]*:[[:space:]]*\")$CURRENT(\")/\1$LATEST\2/" "$MANIFEST"
-          # Keep the Build workflow's container tag in sync (best effort).
-          sed -i -E "s/(flatpak-github-actions:gnome-)$CURRENT\b/\1$LATEST/" .github/workflows/build.yml || true
+          # Keep the flatpak-github-actions container tags in the workflows in sync.
+          for wf in .github/workflows/*.yml; do
+            sed -i -E "s/(flatpak-github-actions:gnome-)$CURRENT\b/\1$LATEST/" "$wf" || true
+          done
           if git diff --quiet; then
             echo "::error::Expected to bump $CURRENT -> $LATEST but no files changed. The runtime-version format may have drifted; update this workflow's sed patterns."
             exit 1
           fi
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
-      - name: Commit and push to main
+      - name: Build-test the bumped manifest
+        if: steps.bump.outputs.changed == 'true'
+        uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          repository-name: flathub
+          bundle: vivid-gradience.flatpak
+          manifest-path: build-aux/flatpak/io.github.superuser_miguel.VividGradience.json
+          cache-key: autobump-${{ github.run_id }}
+          arch: x86_64
+          verbose: true
+
+      - name: Commit and push to main (only if the build passed)
         if: steps.bump.outputs.changed == 'true'
         env:
           LATEST: ${{ steps.latest.outputs.latest }}
           CURRENT: ${{ steps.current.outputs.current }}
         run: |
+          git config --global --add safe.directory "$GITHUB_WORKSPACE"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$MANIFEST" .github/workflows/build.yml
+          git add "$MANIFEST" .github/workflows/*.yml
           git commit -m "ci: bump GNOME runtime $CURRENT -> $LATEST"
           git push
