@@ -1,14 +1,16 @@
-## 🛣️ Roadmap
+## Roadmap
 
 If you'd like to see a new feature, open an issue or submit a PR.
 
-### 🔧 Immediate Goals
+### Immediate Goals
 
-- [ ] Working Flatpak targeting GNOME 48+ / runtime 50 (latest)
+- [x] Working Flatpak targeting GNOME 48+ / runtime 50 (latest)
+- [x] Automatically track new GNOME runtime releases
+- [ ] Modernize the UI
 - [ ] Verify all base theming features work with current libadwaita
 - [ ] Clean up and modernize the codebase
 
-### ✅ Base Features (inherited)
+### Base Features (inherited)
 
 - [x] Customize named colors with color picker or text
 - [x] Explanations for some named colors
@@ -23,15 +25,19 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [x] Preset manager with community presets
 - [x] Autoload theme from CSS
 
-### 🎨 Planned Features
+### Planned Features
 
-- [ ] Light/dark preset pairs **(High priority)**
+- [ ] Color wheel for picking colors
+- [ ] Curated built-in themes (Catppuccin, Tokyo Night, and more)
+- [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
+- [ ] Light/dark preset pairs **(high priority)**
+- [ ] Day-to-night gradient automation
 - [ ] Full theme preview
-- [ ] Generate preset from a single color
-- [ ] Visual enhancements beyond the original scope
-- [ ] Textures ! Carbon Fibre, Gloss, etc.
+- [ ] Generate a preset from a single color
+- [ ] Textures (carbon fibre, gloss, and more)
+- [ ] Further visual enhancements beyond the original scope
 
-### 🧩 Plugins
+### Plugins
 
 - [x] Plugin support
 - [x] Firefox GNOME theme
