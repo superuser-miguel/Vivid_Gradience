@@ -5,6 +5,8 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
   title: _("Vivid Gradience");
   default-width: 950;
   default-height: 650;
+  width-request: 360;
+  height-request: 480;
 
   ShortcutController {
     Shortcut {
@@ -13,13 +15,21 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
     }
   }
 
-  Adw.ToastOverlay toast_overlay {
-    Gtk.Box main_view {
-      orientation: vertical;
+  Adw.Breakpoint {
+    condition ("max-width: 600sp")
+    setters {
+      header_switcher.visible: false;
+      switcher_bar.reveal: true;
+    }
+  }
 
-      Adw.HeaderBar titlebar {
+  content: Adw.ToastOverlay toast_overlay {
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
         centering-policy: strict;
 
+        [start]
         Button apply-button {
           styles ["suggested-action"]
           label: _("Apply");
@@ -31,37 +41,32 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
         Button save-preset-button {
           action-name: "app.save_preset";
           tooltip-text: _("Save Preset");
+
           Adw.ButtonContent {
             icon-name: "document-save-symbolic";
           }
         }
 
         [start]
-        Button {
-          icon-name: "applications-science-symbolic";
-          tooltip-text: _("Show Preview Window");
-          visible: false;
-        }
-
-        [title]
-        Adw.ViewSwitcher title {
-          stack: view_stack;
-          policy: wide;
-        }
-
-        [end]
-        Gtk.MenuButton {
-          tooltip-text: _("Main Menu");
-          icon-name: "open-menu-symbolic";
-          menu-model: main-menu;
-        }
-
-        [end]
         MenuButton presets-dropdown {
           menu-model: presets-menu;
           label: _("Presets");
           tooltip-text: _("Presets Menu");
           icon-name: "palette-symbolic";
+        }
+
+        [title]
+        Adw.ViewSwitcher header_switcher {
+          stack: view_stack;
+          policy: wide;
+        }
+
+        [end]
+        MenuButton {
+          primary: true;
+          tooltip-text: _("Main Menu");
+          icon-name: "open-menu-symbolic";
+          menu-model: main-menu;
         }
 
         [end]
@@ -73,47 +78,42 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
         }
       }
 
-      Gtk.Box {
-        orientation: vertical;
+      Adw.ViewStack view_stack {
+        vexpand: true;
+        hexpand: true;
 
-        Adw.ViewStack view_stack {
-          vexpand: true;
-          hexpand: true;
-
-          Adw.ViewStackPage {
-            name: "colors";
-            title: _("_Colors");
-            icon-name: "larger-brush-symbolic";
-
-            child: Adw.PreferencesPage content-colors { };
-            use-underline: true;
-          }
-
-          Adw.ViewStackPage {
-            name: "theming";
-            title: _("_Theming");
-            icon-name: "color-picker-symbolic";
-
-            child: Adw.PreferencesPage content-theming { };
-            use-underline: true;
-          }
-
-          Adw.ViewStackPage {
-            name: "plugins";
-            title: _("_Advanced");
-            icon-name: "settings-symbolic";
-
-            child: Adw.PreferencesPage content-plugins { };
-            use-underline: true;
-          }
+        Adw.ViewStackPage {
+          name: "colors";
+          title: _("_Colors");
+          icon-name: "larger-brush-symbolic";
+          use-underline: true;
+          child: Adw.PreferencesPage content-colors { };
         }
 
-        Adw.ViewSwitcherBar {
-          stack: view_stack;
+        Adw.ViewStackPage {
+          name: "theming";
+          title: _("_Theming");
+          icon-name: "color-picker-symbolic";
+          use-underline: true;
+          child: Adw.PreferencesPage content-theming { };
+        }
+
+        Adw.ViewStackPage {
+          name: "plugins";
+          title: _("_Advanced");
+          icon-name: "settings-symbolic";
+          use-underline: true;
+          child: Adw.PreferencesPage content-plugins { };
         }
       }
+
+      [bottom]
+      Adw.ViewSwitcherBar switcher_bar {
+        stack: view_stack;
+        reveal: false;
+      }
     }
-  }
+  };
 }
 
 
