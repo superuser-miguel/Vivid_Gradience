@@ -50,3 +50,12 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [x] GNOME Shell theming
 - [ ] GDM theming (needs verification)
 - [ ] KvLibadwaita
+
+### References
+
+Useful when working on the UI modernization:
+
+- [GNOME Human Interface Guidelines](https://developer.gnome.org/hig/) — layout, spacing, and widget-choice patterns
+- [Libadwaita documentation](https://gnome.pages.gitlab.gnome.org/libadwaita/doc/) — see `ToolbarView`, `Breakpoint`, and the row widgets
+- [Adwaita Demo](https://flathub.org/apps/org.gnome.Adwaita1.Demo) — interactive gallery of every widget
+- [Workbench](https://flathub.org/apps/re.sonny.Workbench) — live GTK4 / Adwaita / Blueprint playground
