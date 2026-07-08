@@ -27,7 +27,6 @@ from gradience.frontend.widgets.monet_theming_group import GradienceMonetTheming
 from gradience.frontend.widgets.palette_shades import GradiencePaletteShades
 from gradience.frontend.widgets.error_list_row import GradienceErrorListRow
 from gradience.frontend.widgets.option_row import GradienceOptionRow
-from gradience.frontend.widgets.theming_empty_group import GradienceEmptyThemingGroup
 from gradience.frontend.schemas.preset_schema import preset_schema
 
 from gradience.backend.logger import Logger
