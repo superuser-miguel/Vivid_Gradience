@@ -95,7 +95,41 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
           title: _("_Theming");
           icon-name: "color-picker-symbolic";
           use-underline: true;
-          child: Adw.PreferencesPage content-theming { };
+
+          child: Gtk.Stack theming_stack {
+            Gtk.StackPage {
+              name: "empty";
+              child: Adw.StatusPage {
+                icon-name: "color-picker-symbolic";
+                title: _("No Theme Engines Enabled");
+                description: _("Theme Engines extend Vivid Gradience with Monet and GNOME Shell theming. Enable them in Preferences to get started.");
+
+                Button {
+                  halign: center;
+                  label: _("Open Preferences");
+                  action-name: "app.preferences";
+
+                  styles ["pill", "suggested-action"]
+                }
+              };
+            }
+
+            Gtk.StackPage {
+              name: "engines";
+              child: Gtk.Box {
+                orientation: vertical;
+
+                Adw.Banner shell_warning_banner {
+                  title: _("Extensions that modify the Shell stylesheet may cause issues with themes");
+                  revealed: false;
+                }
+
+                Adw.PreferencesPage content-theming {
+                  vexpand: true;
+                }
+              };
+            }
+          };
         }
 
         Adw.ViewStackPage {
