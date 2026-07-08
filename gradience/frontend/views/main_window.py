@@ -40,6 +40,8 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
     content_colors = Gtk.Template.Child("content-colors")
     content_theming = Gtk.Template.Child("content-theming")
+    theming_stack = Gtk.Template.Child()
+    shell_warning_banner = Gtk.Template.Child()
     content_plugins = Gtk.Template.Child("content-plugins")
 
     view_stack = Gtk.Template.Child()
