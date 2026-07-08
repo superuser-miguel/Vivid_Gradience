@@ -47,13 +47,11 @@ class GradienceWelcomeWindow(Adw.Window):
 
     carousel_pages = [
         "welcome",  # 0
-        "release",  # 1
-        "agreement",  # 2
-        "finish",  # 3
+        "agreement",  # 1
+        "finish",  # 2
     ]
 
     page_welcome = Gtk.Template.Child()
-    page_release = Gtk.Template.Child()
 
     def __init__(self, window, update=False, **kwargs) -> None:
         super().__init__(**kwargs)
