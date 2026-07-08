@@ -3,18 +3,7 @@ using Adw 1;
 
 template $GradienceShellThemingGroup: Adw.PreferencesGroup {
   title: _("Shell Engine");
-  description: _("Generates GNOME Shell theme based on current preset.\nWARNING: Extensions that modify the Shell stylesheet may cause issues with themes.");
-
-  // TODO: Fix the warning being under shell-theming-expander
-  Label {
-    label: "Warning: Extensions that modify the Shell stylesheet may cause issues with themes";
-    halign: start;
-
-    styles [
-      "dim-label",
-      "warning"
-    ]
-  }
+  description: _("Generates GNOME Shell theme based on current preset.");
 
   Adw.ExpanderRow shell-theming-expander {
     title: _("Shell Engine Options");
