@@ -50,7 +50,7 @@ class GradiencePaletteShades(Adw.ExpanderRow):
             picker.set_valign(Gtk.Align.CENTER)
             picker.connect("notify::rgba", lambda *_: self.on_color_changed())
             self.color_pickers[str(i)] = picker
-            self.add_suffix(picker)
+            self.shades_box.append(picker)
 
     def on_color_changed(self, *_args):
         shades = {}
