@@ -169,12 +169,9 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         if self.monet_group.is_ancestor(self.content_theming):
             self.content_theming.remove(self.monet_group)
 
-        if self.empty_page.is_ancestor(self.content_theming):
-            self.content_theming.remove(self.empty_page)
-
         self.setup_shell_group()
         self.setup_monet_group()
-        self.setup_empty_page()
+        self.update_theming_view()
 
     def setup_colors_group(self):
         self.color_categories = []
