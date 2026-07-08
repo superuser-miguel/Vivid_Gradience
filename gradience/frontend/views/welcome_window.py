@@ -74,9 +74,7 @@ class GradienceWelcomeWindow(Adw.Window):
         self.connect("close-request", self.quit)
 
         if self.update:
-            self.page_welcome.set_title(_("Thanks for updating Gradience!"))
-
-        self.page_release.set_title(f"Gradience {rel_ver}")
+            self.page_welcome.set_title(_("Thanks for updating Vivid Gradience!"))
 
         self.page_changed()
 
