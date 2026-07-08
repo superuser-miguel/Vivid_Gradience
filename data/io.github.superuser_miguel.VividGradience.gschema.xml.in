@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schemalist gettext-domain="gradience">
-	<schema id="@APP_ID@" path="/com/github/superuser-miguel/Vivid_Gradience/">
+	<schema id="@APP_ID@" path="/io/github/superuser_miguel/Vivid_Gradience/">
 		<key name="window-width" type="i">
 			<default>1000</default>
 		</key>
