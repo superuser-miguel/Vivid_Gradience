@@ -1,4 +1,22 @@
 using Gtk 4.0;
 using Adw 1;
 
-template $GradiencePaletteShades : Adw.ActionRow {}
+template $GradiencePaletteShades : Adw.ExpanderRow {
+  Gtk.ListBoxRow {
+    activatable: false;
+    selectable: false;
+
+    Gtk.FlowBox shades_box {
+      selection-mode: none;
+      homogeneous: true;
+      min-children-per-line: 3;
+      max-children-per-line: 10;
+      row-spacing: 6;
+      column-spacing: 6;
+      margin-top: 6;
+      margin-bottom: 6;
+      margin-start: 12;
+      margin-end: 12;
+    }
+  }
+}
