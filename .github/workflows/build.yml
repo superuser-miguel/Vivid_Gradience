@@ -18,14 +18,13 @@
 name: Build
 
 on:
+  workflow_dispatch:        # run manually when you've made significant progress
   push:
-    branches: [ "main" ]
-    paths-ignore:
-      - '**/*.md'
+    tags:
+      - 'v*'                # and automatically on release tags
   pull_request:
     paths-ignore:
       - '**/*.md'
-  workflow_dispatch:
 
 jobs:
   flatpak:
