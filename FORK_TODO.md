@@ -25,19 +25,23 @@ with your own. Work through each section before publishing.
 
 ---
 
-## 2. App ID / Namespace
+## 2. App ID / Namespace — ✅ DONE
 
-Only needed if you are publishing under a different identity (e.g. Flathub).
-The RDNN `com.github.superuser-miguel.VividGradience` cascades through:
+App-id renamed to the valid RDNN `io.github.superuser_miguel.VividGradience`
+(the old `com.github.superuser-miguel.VividGradience` was invalid for Flatpak:
+hyphens are only allowed in the last segment). GitHub URLs keep the real
+hyphenated `superuser-miguel` account — only the app-id/resource paths changed.
 
-- [ ] `meson.build` — `PROJECT_RDNN_NAME`
-- [ ] Rename + update contents of `data/com.github.superuser-miguel.VividGradience.*`
+- [x] `meson.build` — `PROJECT_RDNN_NAME`
+- [x] Renamed + updated `data/io.github.superuser_miguel.VividGradience.*`
   - `*.appdata.xml.in.in`
   - `*.desktop.in.in`
-  - `*.gschema.xml.in` — GSettings path `/com/github/superuser-miguel/Vivid_Gradience/`
-- [ ] `data/gradience.gresource.xml` — resource prefix `/com/github/superuser-miguel/Vivid_Gradience`
-- [ ] `gradience/backend/constants.py.in` — `rootdir`
-- [ ] Rename + update `build-aux/flatpak/com.github.superuser-miguel.VividGradience*.json`
+  - `*.gschema.xml.in` — GSettings path `/io/github/superuser_miguel/Vivid_Gradience/`
+- [x] `data/gradience.gresource.xml` — resource prefix `/io/github/superuser_miguel/Vivid_Gradience`
+- [x] `gradience/backend/constants.py.in` — `rootdir`
+- [x] Renamed + updated `build-aux/flatpak/io.github.superuser_miguel.VividGradience*.json`
+- [x] Renamed icon files (were still `com.github.hydroxycarbamide.Gradience.*` from upstream)
+- [x] Updated `.github/workflows/{build,repo}.yml` manifest paths + `po/POTFILES`
 
 ---
 
