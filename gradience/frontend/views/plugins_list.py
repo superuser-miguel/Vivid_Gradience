@@ -89,8 +89,8 @@ class GradiencePluginsList:
         group.set_title(_("Plugins"))
         group.set_description(
             _(
-                "Plugins add additional features to Gradience, plugins are "
-                "made by Gradience community and can cause issues."
+                "Plugins add additional features to Vivid Gradience, plugins are "
+                "made by the Vivid Gradience community and can cause issues."
             )
         )
         empty = True
