@@ -30,7 +30,7 @@ https://github.com/superuser-miguel/Vivid_Gradience
 """
 
 theming_warning_end = """/*
-Generated with Gradience end
+Generated with Vivid Gradience end
 */
 """
 
