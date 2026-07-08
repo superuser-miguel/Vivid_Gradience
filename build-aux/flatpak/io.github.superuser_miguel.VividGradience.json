@@ -1,5 +1,5 @@
 {
-    "app-id" : "com.github.superuser-miguel.VividGradience",
+    "app-id" : "io.github.superuser_miguel.VividGradience",
     "runtime" : "org.gnome.Platform",
     "runtime-version" : "50",
     "sdk" : "org.gnome.Sdk",

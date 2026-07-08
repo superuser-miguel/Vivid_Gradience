@@ -18,7 +18,7 @@ HELP_URL = 'https://github.com/superuser-miguel/Vivid_Gradience/discussions'
 TRANSLATE_URL = ''
 
 # Constants
-PROJECT_RDNN_NAME = 'com.github.superuser-miguel.VividGradience'
+PROJECT_RDNN_NAME = 'io.github.superuser_miguel.VividGradience'
 
 git_bin = find_program('git', required: false)
 
