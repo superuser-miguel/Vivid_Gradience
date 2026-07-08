@@ -179,12 +179,28 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         self.setup_empty_page()
 
     def setup_colors_group(self):
-        for group in preset_schema["groups"]:
-            pref_group = Adw.PreferencesGroup()
-            pref_group.set_name(group["name"])
-            pref_group.set_title(group["title"])
-            pref_group.set_description(group["description"])
+        self.color_categories = []
 
+        # Search field to filter the (many) named colors.
+        self.colors_search = Gtk.SearchEntry(
+            hexpand=True,
+            placeholder_text=_("Search colors"),
+        )
+        self.colors_search.connect("search-changed", self.on_colors_search)
+        search_group = Adw.PreferencesGroup()
+        search_group.add(self.colors_search)
+        self.content_colors.add(search_group)
+
+        # Each color category becomes a collapsible ExpanderRow.
+        categories_group = Adw.PreferencesGroup()
+        for group in preset_schema["groups"]:
+            category = Adw.ExpanderRow()
+            category.set_name(group["name"])
+            category.set_title(group["title"])
+            if group.get("description"):
+                category.set_subtitle(group["description"])
+
+            variables = []
             for variable in group["variables"]:
                 pref_variable = GradienceOptionRow(
                     variable["name"],
@@ -192,17 +208,24 @@ class GradienceMainWindow(Adw.ApplicationWindow):
                     variable.get("explanation"),
                     variable["adw_gtk3_support"],
                 )
-                pref_group.add(pref_variable)
+                category.add_row(pref_variable)
 
                 pref_variable.connect_signals(update_vars=True)
                 self.app.pref_variables[variable["name"]] = pref_variable
 
-            self.content_colors.add(pref_group)
+                searchable = f"{variable['title']} {variable['name']}".lower()
+                variables.append((pref_variable, searchable))
 
-        palette_pref_group = Adw.PreferencesGroup()
-        palette_pref_group.set_name("palette_colors")
-        palette_pref_group.set_title(_("Palette Colors"))
-        palette_pref_group.set_description(
+            categories_group.add(category)
+            self.color_categories.append(
+                {"row": category, "title": group["title"].lower(), "variables": variables}
+            )
+        self.content_colors.add(categories_group)
+
+        self.palette_group = Adw.PreferencesGroup()
+        self.palette_group.set_name("palette_colors")
+        self.palette_group.set_title(_("Palette Colors"))
+        self.palette_group.set_description(
             _(
                 "Named palette colors used by some applications. Default "
                 "colors follow the "
@@ -214,9 +237,26 @@ class GradienceMainWindow(Adw.ApplicationWindow):
             palette_shades = GradiencePaletteShades(
                 color["prefix"], color["title"], color["n_shades"]
             )
-            palette_pref_group.add(palette_shades)
+            self.palette_group.add(palette_shades)
             self.app.pref_palette_shades[color["prefix"]] = palette_shades
-        self.content_colors.add(palette_pref_group)
+        self.content_colors.add(self.palette_group)
+
+    def on_colors_search(self, entry):
+        query = entry.get_text().strip().lower()
+
+        for category in self.color_categories:
+            title_match = query in category["title"]
+            any_visible = False
+            for row, searchable in category["variables"]:
+                visible = (not query) or title_match or (query in searchable)
+                row.set_visible(visible)
+                any_visible = any_visible or visible
+            category["row"].set_visible(any_visible)
+            # Expand matching categories while searching; collapse when cleared.
+            category["row"].set_expanded(bool(query) and any_visible)
+
+        # The palette section isn't part of the named-color search.
+        self.palette_group.set_visible(not query)
 
     def update_errors(self, errors):
         child = self.errors_list.get_row_at_index(0)
