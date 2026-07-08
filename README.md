@@ -50,13 +50,18 @@ some rough edges — issues and pull requests are welcome.
 
 **Near-term**
 
+- [ ] Modernize the UI
 - [ ] Track each new GNOME runtime release as it ships
 - [ ] Verify every theming feature against the latest Libadwaita
 - [ ] Clean up and modernize the codebase
 
 **Planned**
 
+- [ ] Color wheel for picking colors
+- [ ] Curated built-in themes (Catppuccin, Tokyo Night, and more)
+- [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
 - [ ] Light/dark preset pairs
+- [ ] Day-to-night gradient automation
 - [ ] Full theme preview
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
