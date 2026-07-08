@@ -20,9 +20,9 @@ from gradience.backend.models.preset import Preset
 
 
 theming_warning_start = """/*
-Generated with Gradience
+Generated with Vivid Gradience
 
-Issues caused by theming should be reported to Gradience repository, and not to upstream
+Issues caused by theming should be reported to the Vivid Gradience repository, and not to upstream
 
 https://github.com/superuser-miguel/Vivid_Gradience
 */
