@@ -14,7 +14,7 @@ if get_option('buildtype') == 'debug'
     configuration: local_conf
   )
 
-  launcher = join_paths(meson.project_build_root(), moduledir, 'frontend', 'local-' + meson.project_name())
+  launcher = join_paths(meson.project_build_root(), moduledir, 'frontend', 'local-gradience')
 
   run_target('run',
     command: [launcher]
