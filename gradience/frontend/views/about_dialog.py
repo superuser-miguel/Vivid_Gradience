@@ -33,7 +33,7 @@ class GradienceAboutDialog:
 
         self.setup()
 
-def setup(self):
+    def setup(self):
         self.about_dialog = Adw.AboutDialog(
             application_name="Vivid Gradience",
             application_icon=constants.app_id,
