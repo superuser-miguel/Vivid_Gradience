@@ -63,6 +63,15 @@ external plugins.
 - [ ] Kvantum / Qt (KvLibadwaita)
 - [ ] Retire the remaining mock plugin plumbing (save/apply no-ops in `main.py`)
 
+### Far Future
+
+Bigger ideas still under consideration — not committed.
+
+- [ ] Base16 / Tinted Theming importer — read machine-readable palette specs
+      ([tinted-theming/schemes](https://github.com/tinted-theming/schemes)) to
+      auto-generate presets and replace the hand-derived palette ramps with
+      canonical spec values
+
 ### References
 
 Useful when working on the UI modernization:
