@@ -34,11 +34,26 @@ some rough edges — issues and pull requests are welcome.
       and build-tests it before the change lands
 - [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
       `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
-- [x] Ready-made themes built in — Catppuccin, Gruvbox, Nord, Dracula, Tokyo
-      Night — in a visual preset gallery
+- [x] **30+ ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
+      Rosé Pine, Everforest, Solarized, and more — in a visual preset gallery
+      with per-theme color previews
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
 - [ ] Further codebase cleanup and visual enhancements
+
+## Screenshots
+
+<p align="center">
+  <img src="screenshots/presets.png" alt="Presets gallery" width="760"/>
+</p>
+
+<p align="center">
+  <img src="screenshots/colors.png" alt="Colors editor" width="380"/>
+  &nbsp;
+  <img src="screenshots/theming.png" alt="Theming engines" width="380"/>
+</p>
+
+<!-- Add images to screenshots/ — see screenshots/README.md for the expected filenames. -->
 
 ## Features
 
