@@ -362,5 +362,3 @@ class GradienceMainWindow(Adw.ApplicationWindow):
                 GradienceErrorListRow(error["error"], error["element"], error["line"])
             )
 
-    def on_presets_dropdown_activate(self, *args):
-        self.app.reload_user_defined_presets()
