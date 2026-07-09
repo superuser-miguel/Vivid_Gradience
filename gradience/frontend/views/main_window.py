@@ -147,10 +147,14 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
         name = data.get("name", slug)
         author = data.get("author", "")
-        colors = self._preview_colors(data.get("variables", {}))
+        variables = data.get("variables", {})
+        palette = data.get("palette", {})
 
-        preview = Gtk.DrawingArea(content_height=56, hexpand=True)
-        preview.set_draw_func(self._draw_swatches, colors)
+        bg = self._parse_color(variables.get("window_bg_color"))
+        hues = self._hue_colors(variables, palette)
+
+        preview = Gtk.DrawingArea(content_height=64, hexpand=True)
+        preview.set_draw_func(self._draw_preview, (bg, hues))
 
         name_label = Gtk.Label(label=name, xalign=0)
         name_label.add_css_class("heading")
