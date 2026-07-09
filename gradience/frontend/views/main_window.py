@@ -187,24 +187,63 @@ class GradienceMainWindow(Adw.ApplicationWindow):
             logging.error(f"Could not load bundled preset '{slug}': {e}")
             return None
 
-    def _preview_colors(self, variables):
+    @staticmethod
+    def _parse_color(value):
+        if not value:
+            return None
+        rgba = Gdk.RGBA()
+        return rgba if rgba.parse(value) else None
+
+    def _hue_colors(self, variables, palette):
+        # The theme's accent plus its main palette hues — its "character" colors.
         colors = []
-        for key in ("window_bg_color", "view_bg_color", "headerbar_bg_color",
-                    "accent_bg_color", "window_fg_color"):
-            value = variables.get(key, "")
-            rgba = Gdk.RGBA()
-            if value and rgba.parse(value):
-                colors.append(rgba)
+        accent = self._parse_color(variables.get("accent_bg_color"))
+        if accent:
+            colors.append(accent)
+        for hue in ("blue_", "green_", "yellow_", "orange_", "red_", "purple_"):
+            shade = palette.get(hue, {})
+            value = shade.get("3") if isinstance(shade, dict) else None
+            color = self._parse_color(value)
+            if color:
+                colors.append(color)
         return colors
 
-    def _draw_swatches(self, area, cr, width, height, colors):
-        if not colors:
+    @staticmethod
+    def _rounded_rect(cr, x, y, w, h, r):
+        cr.new_sub_path()
+        cr.arc(x + w - r, y + r, r, -math.pi / 2, 0)
+        cr.arc(x + w - r, y + h - r, r, 0, math.pi / 2)
+        cr.arc(x + r, y + h - r, r, math.pi / 2, math.pi)
+        cr.arc(x + r, y + r, r, math.pi, 1.5 * math.pi)
+        cr.close_path()
+
+    def _draw_preview(self, area, cr, width, height, data):
+        bg, hues = data
+        # Fill the preview with the theme's own background tone.
+        self._rounded_rect(cr, 0, 0, width, height, 8)
+        if bg:
+            cr.set_source_rgb(bg.red, bg.green, bg.blue)
+        else:
+            cr.set_source_rgb(0.5, 0.5, 0.5)
+        cr.fill()
+
+        if not hues:
             return
-        band = width / len(colors)
-        for i, color in enumerate(colors):
+
+        # Draw the theme's character colors as chips over the tinted background.
+        radius = 7
+        gap = 9
+        total = len(hues) * 2 * radius + (len(hues) - 1) * gap
+        x = (width - total) / 2 + radius
+        y = height / 2
+        for color in hues:
+            cr.arc(x, y, radius, 0, 2 * math.pi)
             cr.set_source_rgb(color.red, color.green, color.blue)
-            cr.rectangle(i * band, 0, band + 1, height)
-            cr.fill()
+            cr.fill_preserve()
+            cr.set_source_rgba(0, 0, 0, 0.18)
+            cr.set_line_width(1)
+            cr.stroke()
+            x += 2 * radius + gap
 
     def on_preset_card_clicked(self, _button, slug):
         self.app.load_preset_from_resource(f"{rootdir}/presets/{slug}.json")
