@@ -36,7 +36,8 @@ If you'd like to see a new feature, open an issue or submit a PR.
 ### Planned Features
 
 - [x] Visual preset gallery — a dedicated Presets tab with color previews
-- [x] Curated built-in themes — Catppuccin (Mocha/Latte), Gruvbox, Nord, Dracula, Tokyo Night
+- [x] Curated built-in themes — 30+ community color schemes (Catppuccin, Gruvbox,
+      Nord, Dracula, Rosé Pine, Everforest, Solarized, Tokyo Night, and more)
 - [ ] Show user presets in the gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
