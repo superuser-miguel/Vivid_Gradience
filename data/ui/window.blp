@@ -47,14 +47,6 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
           }
         }
 
-        [start]
-        MenuButton presets-dropdown {
-          menu-model: presets-menu;
-          label: _("Presets");
-          tooltip-text: _("Presets Menu");
-          icon-name: "palette-symbolic";
-        }
-
         [title]
         Adw.ViewSwitcher header_switcher {
           stack: view_stack;
