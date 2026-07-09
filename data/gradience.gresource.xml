@@ -32,6 +32,14 @@
     <file>presets/melange-dark.json</file>
     <file>presets/ayu-light.json</file>
     <file>presets/melange-light.json</file>
+    <file>presets/synthwave-84.json</file>
+    <file>presets/kanagawa-dragon.json</file>
+    <file>presets/zenburn.json</file>
+    <file>presets/oxocarbon.json</file>
+    <file>presets/poimandres.json</file>
+    <file>presets/flexoki-dark.json</file>
+    <file>presets/flexoki-light.json</file>
+    <file>presets/paper-color-light.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
