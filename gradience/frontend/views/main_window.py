@@ -101,10 +101,13 @@ class GradienceMainWindow(Adw.ApplicationWindow):
     # --- Presets gallery -------------------------------------------------
 
     BUILTIN_PRESET_SECTIONS = [
-        ("Adwaita", ["adwaita", "adwaita-dark"]),
-        ("Popular Themes", ["catppuccin-mocha", "catppuccin-latte",
-                            "gruvbox-dark", "nord", "dracula",
-                            "tokyo-night", "pretty-purple"]),
+        ("Adwaita", ["adwaita", "adwaita-dark", "pretty-purple"]),
+        ("Dark", ["catppuccin-mocha", "gruvbox-dark", "nord", "dracula",
+                  "tokyo-night", "rose-pine", "everforest-dark",
+                  "solarized-dark", "one-dark", "kanagawa", "ayu-mirage",
+                  "monokai"]),
+        ("Light", ["catppuccin-latte", "rose-pine-dawn", "everforest-light",
+                   "solarized-light", "gruvbox-light", "one-light"]),
     ]
 
     def setup_presets_gallery(self):
