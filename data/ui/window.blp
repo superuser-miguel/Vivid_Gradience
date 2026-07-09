@@ -93,6 +93,26 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
                 margin-bottom: 18;
                 margin-start: 12;
                 margin-end: 12;
+
+                Gtk.Box {
+                  orientation: vertical;
+                  spacing: 4;
+
+                  Gtk.Label {
+                    label: _("Presets");
+                    xalign: 0;
+
+                    styles ["title-2"]
+                  }
+
+                  Gtk.Label {
+                    label: _("Start from a ready-made color scheme, then fine-tune it in the Colors tab. Click a preset to load it, then press Apply to theme your desktop.");
+                    xalign: 0;
+                    wrap: true;
+
+                    styles ["dim-label"]
+                  }
+                }
               }
             }
           };
