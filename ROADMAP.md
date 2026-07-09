@@ -43,13 +43,20 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Textures (carbon fibre, gloss, and more)
 - [ ] Further visual enhancements beyond the original scope
 
-### Plugins
+### Theme Engines & Integrations
 
-- [x] Plugin support
-- [x] Firefox GNOME theme
-- [x] GNOME Shell theming
-- [ ] GDM theming (needs verification)
-- [ ] KvLibadwaita
+Extend theming to targets beyond GTK / adw-gtk3. The old yapsy-based plugin
+system is **retired** (it was shelved for maintenance and its UI has been
+removed); its capabilities are being rebuilt as first-class, built-in **Theme
+Engines** — like the current Monet and GNOME Shell engines — rather than
+external plugins.
+
+- [x] Monet engine (Material 3 palette from a wallpaper)
+- [x] GNOME Shell engine
+- [ ] Firefox / browser integration (the Flatpak already grants browser access)
+- [ ] GDM theming
+- [ ] Kvantum / Qt (KvLibadwaita)
+- [ ] Retire the remaining mock plugin plumbing (save/apply no-ops in `main.py`)
 
 ### References
 
