@@ -83,6 +83,30 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
         hexpand: true;
 
         Adw.ViewStackPage {
+          name: "presets";
+          title: _("_Presets");
+          icon-name: "palette-symbolic";
+          use-underline: true;
+
+          child: Gtk.ScrolledWindow {
+            hscrollbar-policy: never;
+
+            Adw.Clamp {
+              maximum-size: 900;
+
+              Gtk.Box presets_box {
+                orientation: vertical;
+                spacing: 18;
+                margin-top: 18;
+                margin-bottom: 18;
+                margin-start: 12;
+                margin-end: 12;
+              }
+            }
+          };
+        }
+
+        Adw.ViewStackPage {
           name: "colors";
           title: _("_Colors");
           icon-name: "larger-brush-symbolic";
