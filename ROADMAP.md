@@ -35,8 +35,10 @@ If you'd like to see a new feature, open an issue or submit a PR.
 
 ### Planned Features
 
+- [x] Visual preset gallery — a dedicated Presets tab with color previews
+- [x] Curated built-in themes — Catppuccin (Mocha/Latte), Gruvbox, Nord, Dracula, Tokyo Night
+- [ ] Show user presets in the gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
-- [ ] Curated built-in themes (Catppuccin, Tokyo Night, and more)
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
 - [ ] Light/dark preset pairs **(high priority)**
 - [ ] Day-to-night gradient automation
