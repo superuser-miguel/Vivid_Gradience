@@ -1,0 +1,263 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GradienceMainWindow : Adw.ApplicationWindow {
+  title: _("Vivid Gradience");
+  default-width: 950;
+  default-height: 650;
+  width-request: 360;
+  height-request: 480;
+
+  ShortcutController {
+    Shortcut {
+      trigger: "<primary>q";
+      action: "action(window.close)";
+    }
+  }
+
+  Adw.Breakpoint {
+    condition ("max-width: 600sp")
+    setters {
+      header_switcher.visible: false;
+      switcher_bar.reveal: true;
+    }
+  }
+
+  content: Adw.ToastOverlay toast_overlay {
+    Adw.ToolbarView {
+      [top]
+      Adw.HeaderBar {
+        centering-policy: strict;
+
+        [start]
+        Button apply-button {
+          styles ["suggested-action"]
+          label: _("Apply");
+          tooltip-text: _("Apply Preset");
+          action-name: "app.apply_color_scheme";
+        }
+
+        [start]
+        Button save-preset-button {
+          action-name: "app.save_preset";
+          tooltip-text: _("Save Preset");
+
+          Adw.ButtonContent {
+            icon-name: "document-save-symbolic";
+          }
+        }
+
+        [title]
+        Adw.ViewSwitcher header_switcher {
+          stack: view_stack;
+          policy: wide;
+        }
+
+        [end]
+        MenuButton {
+          primary: true;
+          tooltip-text: _("Main Menu");
+          icon-name: "open-menu-symbolic";
+          menu-model: main-menu;
+        }
+
+        [end]
+        MenuButton errors-button {
+          styles ["raised", "error"]
+          tooltip-text: _("CSS Errors");
+          icon-name: "dialog-warning-symbolic";
+          popover: errors-popover;
+        }
+      }
+
+      Adw.ViewStack view_stack {
+        vexpand: true;
+        hexpand: true;
+
+        Adw.ViewStackPage {
+          name: "presets";
+          title: _("_Presets");
+          icon-name: "palette-symbolic";
+          use-underline: true;
+
+          child: Gtk.ScrolledWindow {
+            hscrollbar-policy: never;
+
+            Adw.Clamp {
+              maximum-size: 900;
+
+              Gtk.Box presets_box {
+                orientation: vertical;
+                spacing: 18;
+                margin-top: 18;
+                margin-bottom: 18;
+                margin-start: 12;
+                margin-end: 12;
+
+                Gtk.Box {
+                  orientation: vertical;
+                  spacing: 4;
+
+                  Gtk.Label {
+                    label: _("Presets");
+                    xalign: 0;
+
+                    styles ["title-2"]
+                  }
+
+                  Gtk.Label {
+                    label: _("Start from a ready-made color scheme, then fine-tune it in the Colors tab. Click a preset to load it, then press Apply to theme your desktop.");
+                    xalign: 0;
+                    wrap: true;
+
+                    styles ["dim-label"]
+                  }
+                }
+              }
+            }
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "colors";
+          title: _("_Colors");
+          icon-name: "larger-brush-symbolic";
+          use-underline: true;
+          child: Adw.PreferencesPage content-colors { };
+        }
+
+        Adw.ViewStackPage {
+          name: "theming";
+          title: _("_Theming");
+          icon-name: "color-picker-symbolic";
+          use-underline: true;
+
+          child: Gtk.Stack theming_stack {
+            Gtk.StackPage {
+              name: "empty";
+              child: Adw.StatusPage {
+                icon-name: "color-picker-symbolic";
+                title: _("No Theme Engines Enabled");
+                description: _("Theme Engines extend Vivid Gradience with Monet and GNOME Shell theming. Enable them in Preferences to get started.");
+
+                Button {
+                  halign: center;
+                  label: _("Open Preferences");
+                  action-name: "app.preferences";
+
+                  styles ["pill", "suggested-action"]
+                }
+              };
+            }
+
+            Gtk.StackPage {
+              name: "engines";
+              child: Gtk.Box {
+                orientation: vertical;
+
+                Adw.Banner shell_warning_banner {
+                  title: _("Extensions that modify the Shell stylesheet may cause issues with themes");
+                  revealed: false;
+                }
+
+                Adw.PreferencesPage content-theming {
+                  vexpand: true;
+                }
+              };
+            }
+          };
+        }
+
+        Adw.ViewStackPage {
+          name: "plugins";
+          title: _("_Advanced");
+          icon-name: "settings-symbolic";
+          use-underline: true;
+          child: Adw.PreferencesPage content-plugins { };
+        }
+      }
+
+      [bottom]
+      Adw.ViewSwitcherBar switcher_bar {
+        stack: view_stack;
+        reveal: false;
+      }
+    }
+  };
+}
+
+
+menu main-menu {
+  section {
+    item {
+      label: _("Manage Presets");
+      action: "app.manage_presets";
+    }
+  }
+
+  section {
+    item {
+      label: _("Preferences");
+      action: "app.preferences";
+    }
+
+    item {
+      label: _("Keyboard Shortcuts");
+      action: "win.show-help-overlay";
+    }
+
+    item {
+      label: _("About Vivid Gradience");
+      action: "app.about";
+    }
+  }
+}
+
+menu presets-menu {
+  section {
+    label: _("Built-In Presets");
+
+    item {
+      label: "Adwaita";
+      action: "app.load_preset";
+      target: "adwaita";
+    }
+
+    item {
+      label: "Adwaita Dark";
+      action: "app.load_preset";
+      target: "adwaita-dark";
+    }
+
+     item {
+      label: "Pretty Purple";
+      action: "app.load_preset";
+      target: "pretty-purple";
+    }
+
+    item {
+      label: _("Manage Presets");
+      action: "app.manage_presets";
+    }
+  }
+}
+
+
+Popover errors-popover {
+  ListBox errors-list {
+    selection-mode: none;
+
+    [placeholder]
+    Label {
+      margin-top: 6;
+      margin-bottom: 6;
+      margin-start: 6;
+      margin-end: 6;
+      halign: start;
+      styles ["dim-label"]
+      max-width-chars: 30;
+      wrap: true;
+      justify: left;
+    }
+  }
+}
