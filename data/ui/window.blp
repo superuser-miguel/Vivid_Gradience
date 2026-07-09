@@ -213,36 +213,6 @@ menu main-menu {
   }
 }
 
-menu presets-menu {
-  section {
-    label: _("Built-In Presets");
-
-    item {
-      label: "Adwaita";
-      action: "app.load_preset";
-      target: "adwaita";
-    }
-
-    item {
-      label: "Adwaita Dark";
-      action: "app.load_preset";
-      target: "adwaita-dark";
-    }
-
-     item {
-      label: "Pretty Purple";
-      action: "app.load_preset";
-      target: "pretty-purple";
-    }
-
-    item {
-      label: _("Manage Presets");
-      action: "app.manage_presets";
-    }
-  }
-}
-
-
 Popover errors-popover {
   ListBox errors-list {
     selection-mode: none;
