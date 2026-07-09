@@ -45,6 +45,7 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Full theme preview
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
+- [ ] Redesigned splash / welcome page
 - [ ] Further visual enhancements beyond the original scope
 
 ### Theme Engines & Integrations
