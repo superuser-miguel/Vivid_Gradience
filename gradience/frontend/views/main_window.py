@@ -101,6 +101,107 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
         self.setup_theming_page()
         self.setup_colors_group()
+        self.setup_presets_gallery()
+
+    # --- Presets gallery -------------------------------------------------
+
+    BUILTIN_PRESET_SECTIONS = [
+        ("Adwaita", ["adwaita", "adwaita-dark"]),
+        ("Popular Themes", ["catppuccin-mocha", "catppuccin-latte",
+                            "gruvbox-dark", "nord", "dracula",
+                            "tokyo-night", "pretty-purple"]),
+    ]
+
+    def setup_presets_gallery(self):
+        for title, slugs in self.BUILTIN_PRESET_SECTIONS:
+            self.presets_box.append(self._build_preset_section(title, slugs))
+
+    def _build_preset_section(self, title, slugs):
+        section = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
+
+        label = Gtk.Label(label=_(title), xalign=0)
+        label.add_css_class("heading")
+        section.append(label)
+
+        flow = Gtk.FlowBox(
+            selection_mode=Gtk.SelectionMode.NONE,
+            homogeneous=True,
+            min_children_per_line=2,
+            max_children_per_line=4,
+            row_spacing=12,
+            column_spacing=12,
+        )
+        for slug in slugs:
+            card = self._build_preset_card(slug)
+            if card is not None:
+                flow.append(card)
+        section.append(flow)
+        return section
+
+    def _build_preset_card(self, slug):
+        data = self._load_preset_data(slug)
+        if data is None:
+            return None
+
+        name = data.get("name", slug)
+        author = data.get("author", "")
+        colors = self._preview_colors(data.get("variables", {}))
+
+        preview = Gtk.DrawingArea(content_height=56, hexpand=True)
+        preview.set_draw_func(self._draw_swatches, colors)
+
+        name_label = Gtk.Label(label=name, xalign=0)
+        name_label.add_css_class("heading")
+        name_label.set_ellipsize(Pango.EllipsizeMode.END)
+
+        content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
+        content.append(preview)
+        content.append(name_label)
+        if author:
+            author_label = Gtk.Label(label=author, xalign=0)
+            author_label.add_css_class("caption")
+            author_label.add_css_class("dim-label")
+            author_label.set_ellipsize(Pango.EllipsizeMode.END)
+            content.append(author_label)
+
+        button = Gtk.Button(child=content)
+        button.add_css_class("card")
+        button.add_css_class("activatable")
+        button.set_tooltip_text(_("Apply “{}”").format(name))
+        button.connect("clicked", self.on_preset_card_clicked, slug)
+        return button
+
+    def _load_preset_data(self, slug):
+        try:
+            gbytes = Gio.resources_lookup_data(
+                f"{rootdir}/presets/{slug}.json", Gio.ResourceLookupFlags.NONE
+            )
+            return json.loads(gbytes.get_data().decode("utf-8"))
+        except Exception as e:
+            logging.error(f"Could not load bundled preset '{slug}': {e}")
+            return None
+
+    def _preview_colors(self, variables):
+        colors = []
+        for key in ("window_bg_color", "view_bg_color", "headerbar_bg_color",
+                    "accent_bg_color", "window_fg_color"):
+            value = variables.get(key, "")
+            rgba = Gdk.RGBA()
+            if value and rgba.parse(value):
+                colors.append(rgba)
+        return colors
+
+    def _draw_swatches(self, area, cr, width, height, colors):
+        if not colors:
+            return
+        band = width / len(colors)
+        for i, color in enumerate(colors):
+            cr.set_source_rgb(color.red, color.green, color.blue)
+            cr.rectangle(i * band, 0, band + 1, height)
+            cr.fill()
+
+    def on_preset_card_clicked(self, _button, slug):
+        self.app.load_preset_from_resource(f"{rootdir}/presets/{slug}.json")
 
     # TODO: Check if org.freedesktop.portal.Settings portal will allow us to \
     # read org.gnome.desktop.background DConf key
