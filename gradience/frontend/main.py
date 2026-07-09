@@ -638,16 +638,8 @@ class GradienceApplication(Adw.Application):
         self.props.active_window.update_errors(self.global_errors)
 
     def reload_plugins(self):
-        self.plugins_list.reload()
-        logging.debug("reload plugins")
-
-        self.win.content_plugins.remove(self.plugins_group)
+        # Plugins are retired; reload only the Custom CSS group.
         self.win.content_plugins.remove(self.custom_css_group)
-
-        self.plugins_group = self.plugins_list.to_group()
-
-        self.win.content_plugins.add(self.plugins_group)
-        self.plugins_group = self.plugins_group
 
         self.custom_css_group = GradienceCustomCSSGroup(self.win)
 
@@ -656,12 +648,8 @@ class GradienceApplication(Adw.Application):
 
         self.custom_css_group.load_custom_css(self.custom_css)
         self.win.content_plugins.add(self.custom_css_group)
-        self.custom_css_group = self.custom_css_group
 
-        plugins_errors = self.plugins_list.validate()
-
-        self.props.active_window.update_errors(
-            self.global_errors + plugins_errors)
+        self.props.active_window.update_errors(self.global_errors)
 
 
 def main():
