@@ -102,12 +102,14 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
     BUILTIN_PRESET_SECTIONS = [
         ("Adwaita", ["adwaita", "adwaita-dark", "pretty-purple"]),
-        ("Dark", ["catppuccin-mocha", "gruvbox-dark", "nord", "dracula",
-                  "tokyo-night", "rose-pine", "everforest-dark",
-                  "solarized-dark", "one-dark", "kanagawa", "ayu-mirage",
-                  "monokai"]),
+        ("Dark", ["catppuccin-mocha", "catppuccin-frappe", "catppuccin-macchiato",
+                  "gruvbox-dark", "gruvbox-material", "nord", "dracula",
+                  "tokyo-night", "tokyo-night-storm", "rose-pine", "rose-pine-moon",
+                  "everforest-dark", "solarized-dark", "one-dark", "kanagawa",
+                  "ayu-mirage", "ayu-dark", "nightfox", "melange-dark", "monokai"]),
         ("Light", ["catppuccin-latte", "rose-pine-dawn", "everforest-light",
-                   "solarized-light", "gruvbox-light", "one-light"]),
+                   "solarized-light", "gruvbox-light", "one-light", "ayu-light",
+                   "melange-light"]),
     ]
 
     def setup_presets_gallery(self):
@@ -118,7 +120,7 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         section = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=8)
 
         label = Gtk.Label(label=_(title), xalign=0)
-        label.add_css_class("heading")
+        label.add_css_class("title-2")
         section.append(label)
 
         flow = Gtk.FlowBox(
