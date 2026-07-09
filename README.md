@@ -80,7 +80,7 @@ some rough edges — issues and pull requests are welcome.
 
 **Planned**
 
-- [x] Ready-made themes built in (Catppuccin, Gruvbox, Nord, Dracula, Tokyo Night)
+- [x] 30+ ready-made themes built in, in a visual gallery with color previews
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
