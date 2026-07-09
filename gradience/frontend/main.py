@@ -625,13 +625,8 @@ class GradienceApplication(Adw.Application):
         self.reload_variables()
 
     def setup_plugins(self):
-        logging.debug("setup plugins")
-
-        self.plugins_group = self.plugins_list.to_group()
-
-        self.win.content_plugins.add(self.plugins_group)
-        self.plugins_group = self.plugins_group
-
+        # Plugins are retired (superseded by built-in Theme Engines; see ROADMAP).
+        # This now only builds the Advanced page's Custom CSS group.
         self.custom_css_group = GradienceCustomCSSGroup(self.win)
 
         for app_type in preset_schema["custom_css_app_types"]:
@@ -639,12 +634,8 @@ class GradienceApplication(Adw.Application):
 
         self.custom_css_group.load_custom_css(self.custom_css)
         self.win.content_plugins.add(self.custom_css_group)
-        self.custom_css_group = self.custom_css_group
 
-        plugins_errors = self.plugins_list.validate()
-
-        self.props.active_window.update_errors(
-            self.global_errors + plugins_errors)
+        self.props.active_window.update_errors(self.global_errors)
 
     def reload_plugins(self):
         self.plugins_list.reload()
