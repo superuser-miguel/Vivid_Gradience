@@ -1,0 +1,119 @@
+{
+  "name": "Kanagawa Dragon",
+  "author": "rebelot",
+  "source": "https://github.com/rebelot/kanagawa.nvim",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#8a9a7b",
+    "accent_bg_color": "#8a9a7b",
+    "accent_fg_color": "#181616",
+    "destructive_color": "#c4746e",
+    "destructive_bg_color": "#c4746e",
+    "destructive_fg_color": "#181616",
+    "success_color": "#87a987",
+    "success_bg_color": "#87a987",
+    "success_fg_color": "#181616",
+    "warning_color": "#c4b28a",
+    "warning_bg_color": "#c4b28a",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#c4746e",
+    "error_bg_color": "#c4746e",
+    "error_fg_color": "#181616",
+    "window_bg_color": "#181616",
+    "window_fg_color": "#c5c9c5",
+    "view_bg_color": "#0d0c0c",
+    "view_fg_color": "#c5c9c5",
+    "headerbar_bg_color": "#1d1c19",
+    "headerbar_fg_color": "#c5c9c5",
+    "headerbar_border_color": "#c5c9c5",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#282727",
+    "card_fg_color": "#c5c9c5",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#282727",
+    "dialog_fg_color": "#c5c9c5",
+    "popover_bg_color": "#282727",
+    "popover_fg_color": "#c5c9c5",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#282727",
+    "thumbnail_fg_color": "#c5c9c5",
+    "sidebar_bg_color": "#1d1c19",
+    "sidebar_fg_color": "#c5c9c5",
+    "sidebar_border_color": "#0d0c0c",
+    "sidebar_backdrop_color": "#181616",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#0d0c0c",
+    "secondary_sidebar_fg_color": "#c5c9c5",
+    "secondary_sidebar_backdrop_color": "#0d0c0c",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#b9c8d0",
+      "2": "#a2b6c0",
+      "3": "#8ba4b0",
+      "4": "#6f838d",
+      "5": "#53626a"
+    },
+    "green_": {
+      "1": "#b7cbb7",
+      "2": "#9fba9f",
+      "3": "#87a987",
+      "4": "#6c876c",
+      "5": "#516551"
+    },
+    "yellow_": {
+      "1": "#dcd1b9",
+      "2": "#d0c1a1",
+      "3": "#c4b28a",
+      "4": "#9d8e6e",
+      "5": "#766b53"
+    },
+    "orange_": {
+      "1": "#d3beb0",
+      "2": "#c5a895",
+      "3": "#b6927b",
+      "4": "#927562",
+      "5": "#6d584a"
+    },
+    "red_": {
+      "1": "#dcaca8",
+      "2": "#d0908b",
+      "3": "#c4746e",
+      "4": "#9d5d58",
+      "5": "#764642"
+    },
+    "purple_": {
+      "1": "#c7bec8",
+      "2": "#b5a8b5",
+      "3": "#a292a3",
+      "4": "#827582",
+      "5": "#615862"
+    },
+    "brown_": {
+      "1": "#d3beb0",
+      "2": "#c5a895",
+      "3": "#b6927b",
+      "4": "#927562",
+      "5": "#6d584a"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

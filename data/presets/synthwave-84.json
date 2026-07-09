@@ -1,0 +1,119 @@
+{
+  "name": "Synthwave '84",
+  "author": "Robb Owen",
+  "source": "https://github.com/robb0wen/synthwave-vscode",
+  "license": "Free / OSS",
+  "variables": {
+    "accent_color": "#ff7edb",
+    "accent_bg_color": "#ff7edb",
+    "accent_fg_color": "#262335",
+    "destructive_color": "#fe4450",
+    "destructive_bg_color": "#fe4450",
+    "destructive_fg_color": "#262335",
+    "success_color": "#72f1b8",
+    "success_bg_color": "#72f1b8",
+    "success_fg_color": "#262335",
+    "warning_color": "#fede5d",
+    "warning_bg_color": "#fede5d",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#fe4450",
+    "error_bg_color": "#fe4450",
+    "error_fg_color": "#262335",
+    "window_bg_color": "#262335",
+    "window_fg_color": "#f0eff1",
+    "view_bg_color": "#241b2f",
+    "view_fg_color": "#f0eff1",
+    "headerbar_bg_color": "#2a2139",
+    "headerbar_fg_color": "#f0eff1",
+    "headerbar_border_color": "#f0eff1",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#34294f",
+    "card_fg_color": "#f0eff1",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#34294f",
+    "dialog_fg_color": "#f0eff1",
+    "popover_bg_color": "#34294f",
+    "popover_fg_color": "#f0eff1",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#34294f",
+    "thumbnail_fg_color": "#f0eff1",
+    "sidebar_bg_color": "#2a2139",
+    "sidebar_fg_color": "#f0eff1",
+    "sidebar_border_color": "#241b2f",
+    "sidebar_backdrop_color": "#262335",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#241b2f",
+    "secondary_sidebar_fg_color": "#f0eff1",
+    "secondary_sidebar_backdrop_color": "#241b2f",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#a7add1",
+      "2": "#8a92c2",
+      "3": "#6d77b3",
+      "4": "#575f8f",
+      "5": "#41476b"
+    },
+    "green_": {
+      "1": "#aaf7d4",
+      "2": "#8ef4c6",
+      "3": "#72f1b8",
+      "4": "#5bc193",
+      "5": "#44916e"
+    },
+    "yellow_": {
+      "1": "#feeb9e",
+      "2": "#fee57d",
+      "3": "#fede5d",
+      "4": "#cbb24a",
+      "5": "#988538"
+    },
+    "orange_": {
+      "1": "#ffb988",
+      "2": "#ffa261",
+      "3": "#ff8b39",
+      "4": "#cc6f2e",
+      "5": "#995322"
+    },
+    "red_": {
+      "1": "#fe8f96",
+      "2": "#fe6973",
+      "3": "#fe4450",
+      "4": "#cb3640",
+      "5": "#982930"
+    },
+    "purple_": {
+      "1": "#ddbef2",
+      "2": "#d2a8ee",
+      "3": "#c792ea",
+      "4": "#9f75bb",
+      "5": "#77588c"
+    },
+    "brown_": {
+      "1": "#ffb988",
+      "2": "#ffa261",
+      "3": "#ff8b39",
+      "4": "#cc6f2e",
+      "5": "#995322"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

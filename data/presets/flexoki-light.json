@@ -1,0 +1,119 @@
+{
+  "name": "Flexoki Light",
+  "author": "Steph Ango",
+  "source": "https://stephango.com/flexoki",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#af3029",
+    "accent_bg_color": "#af3029",
+    "accent_fg_color": "#ffffff",
+    "destructive_color": "#af3029",
+    "destructive_bg_color": "#af3029",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#66800b",
+    "success_bg_color": "#66800b",
+    "success_fg_color": "#ffffff",
+    "warning_color": "#ad8301",
+    "warning_bg_color": "#ad8301",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#af3029",
+    "error_bg_color": "#af3029",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#fffcf0",
+    "window_fg_color": "#100f0f",
+    "view_bg_color": "#ffffff",
+    "view_fg_color": "#100f0f",
+    "headerbar_bg_color": "#f2f0e5",
+    "headerbar_fg_color": "#100f0f",
+    "headerbar_border_color": "#100f0f",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.12)",
+    "card_bg_color": "#e6e4d9",
+    "card_fg_color": "#100f0f",
+    "card_shade_color": "rgba(0, 0, 0, 0.07)",
+    "dialog_bg_color": "#e6e4d9",
+    "dialog_fg_color": "#100f0f",
+    "popover_bg_color": "#e6e4d9",
+    "popover_fg_color": "#100f0f",
+    "popover_shade_color": "rgba(0, 0, 0, 0.07)",
+    "shade_color": "rgba(0, 0, 0, 0.07)",
+    "scrollbar_outline_color": "#ffffff",
+    "thumbnail_bg_color": "#e6e4d9",
+    "thumbnail_fg_color": "#100f0f",
+    "sidebar_bg_color": "#f2f0e5",
+    "sidebar_fg_color": "#100f0f",
+    "sidebar_border_color": "#ffffff",
+    "sidebar_backdrop_color": "#fffcf0",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "secondary_sidebar_bg_color": "#ffffff",
+    "secondary_sidebar_fg_color": "#100f0f",
+    "secondary_sidebar_backdrop_color": "#ffffff",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.07)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#799eca",
+      "2": "#4d7eb8",
+      "3": "#205ea6",
+      "4": "#1a4b85",
+      "5": "#133864"
+    },
+    "green_": {
+      "1": "#a3b36d",
+      "2": "#85993c",
+      "3": "#66800b",
+      "4": "#526609",
+      "5": "#3d4d07"
+    },
+    "yellow_": {
+      "1": "#ceb567",
+      "2": "#bd9c34",
+      "3": "#ad8301",
+      "4": "#8a6901",
+      "5": "#684f01"
+    },
+    "orange_": {
+      "1": "#d79773",
+      "2": "#c97544",
+      "3": "#bc5215",
+      "4": "#964211",
+      "5": "#71310d"
+    },
+    "red_": {
+      "1": "#cf837f",
+      "2": "#bf5954",
+      "3": "#af3029",
+      "4": "#8c2621",
+      "5": "#691d19"
+    },
+    "purple_": {
+      "1": "#9e8cc4",
+      "2": "#7e66b1",
+      "3": "#5e409d",
+      "4": "#4b337e",
+      "5": "#38265e"
+    },
+    "brown_": {
+      "1": "#d79773",
+      "2": "#c97544",
+      "3": "#bc5215",
+      "4": "#964211",
+      "5": "#71310d"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}
