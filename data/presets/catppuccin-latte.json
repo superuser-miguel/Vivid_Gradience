@@ -1,0 +1,119 @@
+{
+  "name": "Catppuccin Latte",
+  "author": "Catppuccin",
+  "source": "https://github.com/catppuccin/catppuccin",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#1e66f5",
+    "accent_bg_color": "#1e66f5",
+    "accent_fg_color": "#ffffff",
+    "destructive_color": "#d20f39",
+    "destructive_bg_color": "#d20f39",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#40a02b",
+    "success_bg_color": "#40a02b",
+    "success_fg_color": "#ffffff",
+    "warning_color": "#df8e1d",
+    "warning_bg_color": "#df8e1d",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#d20f39",
+    "error_bg_color": "#d20f39",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#eff1f5",
+    "window_fg_color": "#4c4f69",
+    "view_bg_color": "#ffffff",
+    "view_fg_color": "#4c4f69",
+    "headerbar_bg_color": "#e6e9ef",
+    "headerbar_fg_color": "#4c4f69",
+    "headerbar_border_color": "#4c4f69",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.12)",
+    "card_bg_color": "#ccd0da",
+    "card_fg_color": "#4c4f69",
+    "card_shade_color": "rgba(0, 0, 0, 0.07)",
+    "dialog_bg_color": "#ccd0da",
+    "dialog_fg_color": "#4c4f69",
+    "popover_bg_color": "#ccd0da",
+    "popover_fg_color": "#4c4f69",
+    "popover_shade_color": "rgba(0, 0, 0, 0.07)",
+    "shade_color": "rgba(0, 0, 0, 0.07)",
+    "scrollbar_outline_color": "#ffffff",
+    "thumbnail_bg_color": "#ccd0da",
+    "thumbnail_fg_color": "#4c4f69",
+    "sidebar_bg_color": "#e6e9ef",
+    "sidebar_fg_color": "#4c4f69",
+    "sidebar_border_color": "#ffffff",
+    "sidebar_backdrop_color": "#eff1f5",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "secondary_sidebar_bg_color": "#ffffff",
+    "secondary_sidebar_fg_color": "#4c4f69",
+    "secondary_sidebar_backdrop_color": "#ffffff",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.07)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#78a3f9",
+      "2": "#4b85f7",
+      "3": "#1e66f5",
+      "4": "#1852c4",
+      "5": "#123d93"
+    },
+    "green_": {
+      "1": "#8cc680",
+      "2": "#66b355",
+      "3": "#40a02b",
+      "4": "#338022",
+      "5": "#26601a"
+    },
+    "yellow_": {
+      "1": "#ecbb77",
+      "2": "#e5a54a",
+      "3": "#df8e1d",
+      "4": "#b27217",
+      "5": "#865511"
+    },
+    "orange_": {
+      "1": "#fea26d",
+      "2": "#fe833c",
+      "3": "#fe640b",
+      "4": "#cb5009",
+      "5": "#983c07"
+    },
+    "red_": {
+      "1": "#e46f88",
+      "2": "#db3f61",
+      "3": "#d20f39",
+      "4": "#a80c2e",
+      "5": "#7e0922"
+    },
+    "purple_": {
+      "1": "#b888f5",
+      "2": "#a061f2",
+      "3": "#8839ef",
+      "4": "#6d2ebf",
+      "5": "#52228f"
+    },
+    "brown_": {
+      "1": "#ebaeae",
+      "2": "#e49393",
+      "3": "#dd7878",
+      "4": "#b16060",
+      "5": "#854848"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

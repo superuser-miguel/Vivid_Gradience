@@ -1,0 +1,119 @@
+{
+  "name": "Dracula",
+  "author": "Dracula Theme",
+  "source": "https://draculatheme.com",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#bd93f9",
+    "accent_bg_color": "#bd93f9",
+    "accent_fg_color": "#282a36",
+    "destructive_color": "#ff5555",
+    "destructive_bg_color": "#ff5555",
+    "destructive_fg_color": "#282a36",
+    "success_color": "#50fa7b",
+    "success_bg_color": "#50fa7b",
+    "success_fg_color": "#282a36",
+    "warning_color": "#f1fa8c",
+    "warning_bg_color": "#f1fa8c",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#ff5555",
+    "error_bg_color": "#ff5555",
+    "error_fg_color": "#282a36",
+    "window_bg_color": "#282a36",
+    "window_fg_color": "#f8f8f2",
+    "view_bg_color": "#21222c",
+    "view_fg_color": "#f8f8f2",
+    "headerbar_bg_color": "#21222c",
+    "headerbar_fg_color": "#f8f8f2",
+    "headerbar_border_color": "#f8f8f2",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#44475a",
+    "card_fg_color": "#f8f8f2",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#44475a",
+    "dialog_fg_color": "#f8f8f2",
+    "popover_bg_color": "#44475a",
+    "popover_fg_color": "#f8f8f2",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#44475a",
+    "thumbnail_fg_color": "#f8f8f2",
+    "sidebar_bg_color": "#21222c",
+    "sidebar_fg_color": "#f8f8f2",
+    "sidebar_border_color": "#21222c",
+    "sidebar_backdrop_color": "#282a36",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#21222c",
+    "secondary_sidebar_fg_color": "#f8f8f2",
+    "secondary_sidebar_backdrop_color": "#21222c",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#b9f2fe",
+      "2": "#a2edfd",
+      "3": "#8be9fd",
+      "4": "#6fbaca",
+      "5": "#538c98"
+    },
+    "green_": {
+      "1": "#96fcb0",
+      "2": "#73fb95",
+      "3": "#50fa7b",
+      "4": "#40c862",
+      "5": "#30964a"
+    },
+    "yellow_": {
+      "1": "#f7fcba",
+      "2": "#f4fba3",
+      "3": "#f1fa8c",
+      "4": "#c1c870",
+      "5": "#919654"
+    },
+    "orange_": {
+      "1": "#ffd4a7",
+      "2": "#ffc689",
+      "3": "#ffb86c",
+      "4": "#cc9356",
+      "5": "#996e41"
+    },
+    "red_": {
+      "1": "#ff9999",
+      "2": "#ff7777",
+      "3": "#ff5555",
+      "4": "#cc4444",
+      "5": "#993333"
+    },
+    "purple_": {
+      "1": "#d7befb",
+      "2": "#caa9fa",
+      "3": "#bd93f9",
+      "4": "#9776c7",
+      "5": "#715895"
+    },
+    "brown_": {
+      "1": "#ffd4a7",
+      "2": "#ffc689",
+      "3": "#ffb86c",
+      "4": "#cc9356",
+      "5": "#996e41"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

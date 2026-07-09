@@ -1,0 +1,119 @@
+{
+  "name": "Gruvbox Dark",
+  "author": "Pavel Pertsev",
+  "source": "https://github.com/morhetz/gruvbox",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#fe8019",
+    "accent_bg_color": "#fe8019",
+    "accent_fg_color": "#282828",
+    "destructive_color": "#fb4934",
+    "destructive_bg_color": "#fb4934",
+    "destructive_fg_color": "#282828",
+    "success_color": "#b8bb26",
+    "success_bg_color": "#b8bb26",
+    "success_fg_color": "#282828",
+    "warning_color": "#fabd2f",
+    "warning_bg_color": "#fabd2f",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#fb4934",
+    "error_bg_color": "#fb4934",
+    "error_fg_color": "#282828",
+    "window_bg_color": "#282828",
+    "window_fg_color": "#ebdbb2",
+    "view_bg_color": "#1d2021",
+    "view_fg_color": "#ebdbb2",
+    "headerbar_bg_color": "#32302f",
+    "headerbar_fg_color": "#ebdbb2",
+    "headerbar_border_color": "#ebdbb2",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#3c3836",
+    "card_fg_color": "#ebdbb2",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#3c3836",
+    "dialog_fg_color": "#ebdbb2",
+    "popover_bg_color": "#3c3836",
+    "popover_fg_color": "#ebdbb2",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#3c3836",
+    "thumbnail_fg_color": "#ebdbb2",
+    "sidebar_bg_color": "#32302f",
+    "sidebar_fg_color": "#ebdbb2",
+    "sidebar_border_color": "#1d2021",
+    "sidebar_backdrop_color": "#282828",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#1d2021",
+    "secondary_sidebar_fg_color": "#ebdbb2",
+    "secondary_sidebar_backdrop_color": "#1d2021",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#b5c9c1",
+      "2": "#9cb7ad",
+      "3": "#83a598",
+      "4": "#69847a",
+      "5": "#4f635b"
+    },
+    "green_": {
+      "1": "#d4d67d",
+      "2": "#c6c951",
+      "3": "#b8bb26",
+      "4": "#93961e",
+      "5": "#6e7017"
+    },
+    "yellow_": {
+      "1": "#fcd782",
+      "2": "#fbca59",
+      "3": "#fabd2f",
+      "4": "#c89726",
+      "5": "#96711c"
+    },
+    "orange_": {
+      "1": "#feb375",
+      "2": "#fe9947",
+      "3": "#fe8019",
+      "4": "#cb6614",
+      "5": "#984d0f"
+    },
+    "red_": {
+      "1": "#fd9285",
+      "2": "#fc6d5d",
+      "3": "#fb4934",
+      "4": "#c93a2a",
+      "5": "#972c1f"
+    },
+    "purple_": {
+      "1": "#e5b6c3",
+      "2": "#dc9eaf",
+      "3": "#d3869b",
+      "4": "#a96b7c",
+      "5": "#7f505d"
+    },
+    "brown_": {
+      "1": "#e69e6e",
+      "2": "#de7d3e",
+      "3": "#d65d0e",
+      "4": "#ab4a0b",
+      "5": "#803808"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

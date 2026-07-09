@@ -1,0 +1,119 @@
+{
+  "name": "Nord",
+  "author": "Arctic Ice Studio",
+  "source": "https://www.nordtheme.com",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#88c0d0",
+    "accent_bg_color": "#5e81ac",
+    "accent_fg_color": "#eceff4",
+    "destructive_color": "#bf616a",
+    "destructive_bg_color": "#bf616a",
+    "destructive_fg_color": "#eceff4",
+    "success_color": "#a3be8c",
+    "success_bg_color": "#a3be8c",
+    "success_fg_color": "#eceff4",
+    "warning_color": "#ebcb8b",
+    "warning_bg_color": "#ebcb8b",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#bf616a",
+    "error_bg_color": "#bf616a",
+    "error_fg_color": "#eceff4",
+    "window_bg_color": "#2e3440",
+    "window_fg_color": "#eceff4",
+    "view_bg_color": "#2b303b",
+    "view_fg_color": "#eceff4",
+    "headerbar_bg_color": "#3b4252",
+    "headerbar_fg_color": "#eceff4",
+    "headerbar_border_color": "#eceff4",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#434c5e",
+    "card_fg_color": "#eceff4",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#434c5e",
+    "dialog_fg_color": "#eceff4",
+    "popover_bg_color": "#434c5e",
+    "popover_fg_color": "#eceff4",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#434c5e",
+    "thumbnail_fg_color": "#eceff4",
+    "sidebar_bg_color": "#3b4252",
+    "sidebar_fg_color": "#eceff4",
+    "sidebar_border_color": "#2b303b",
+    "sidebar_backdrop_color": "#2e3440",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#2b303b",
+    "secondary_sidebar_fg_color": "#eceff4",
+    "secondary_sidebar_backdrop_color": "#2b303b",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#b3c7da",
+      "2": "#9ab4cd",
+      "3": "#81a1c1",
+      "4": "#67819a",
+      "5": "#4d6174"
+    },
+    "green_": {
+      "1": "#c8d8ba",
+      "2": "#b5cba3",
+      "3": "#a3be8c",
+      "4": "#829870",
+      "5": "#627254"
+    },
+    "yellow_": {
+      "1": "#f3e0b9",
+      "2": "#efd5a2",
+      "3": "#ebcb8b",
+      "4": "#bca26f",
+      "5": "#8d7a53"
+    },
+    "orange_": {
+      "1": "#e3b7a9",
+      "2": "#d99f8d",
+      "3": "#d08770",
+      "4": "#a66c5a",
+      "5": "#7d5143"
+    },
+    "red_": {
+      "1": "#d9a0a6",
+      "2": "#cc8188",
+      "3": "#bf616a",
+      "4": "#994e55",
+      "5": "#733a40"
+    },
+    "purple_": {
+      "1": "#d2bbce",
+      "2": "#c3a5bd",
+      "3": "#b48ead",
+      "4": "#90728a",
+      "5": "#6c5568"
+    },
+    "brown_": {
+      "1": "#d9a99c",
+      "2": "#cd8d7b",
+      "3": "#c0705a",
+      "4": "#9a5a48",
+      "5": "#734336"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}
