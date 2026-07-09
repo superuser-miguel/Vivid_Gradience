@@ -56,18 +56,17 @@ some rough edges — issues and pull requests are welcome.
 
 **Near-term**
 
-- [ ] Modernize the UI — adopt current libadwaita composition:
-  - `Adw.ToolbarView` for modern header/bottom-bar elevation
-  - `Adw.Breakpoint` for an adaptive, narrow-window layout
-  - newer rows (`Adw.SwitchRow`, `Adw.SpinRow`, `Adw.EntryRow`) and a tidier header bar
+- [x] Modernize the UI — `ToolbarView`, adaptive `Breakpoint` layout, boxed
+      lists, `SwitchRow`/`EntryRow` (HIG polish ongoing)
 - [ ] Track each new GNOME runtime release as it ships
 - [ ] Verify every theming feature against the latest Libadwaita
 - [ ] Clean up and modernize the codebase
 
 **Planned**
 
+- [x] Ready-made themes built in (Catppuccin, Gruvbox, Nord, Dracula, Tokyo Night)
+- [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
-- [ ] Curated built-in themes (Catppuccin, Tokyo Night, and more)
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
 - [ ] Light/dark preset pairs
 - [ ] Day-to-night gradient automation
