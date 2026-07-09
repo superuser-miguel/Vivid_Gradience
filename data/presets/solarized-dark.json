@@ -1,0 +1,119 @@
+{
+  "name": "Solarized Dark",
+  "author": "Ethan Schoonover",
+  "source": "https://ethanschoonover.com/solarized",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#268bd2",
+    "accent_bg_color": "#268bd2",
+    "accent_fg_color": "#fdf6e3",
+    "destructive_color": "#dc322f",
+    "destructive_bg_color": "#dc322f",
+    "destructive_fg_color": "#fdf6e3",
+    "success_color": "#859900",
+    "success_bg_color": "#859900",
+    "success_fg_color": "#fdf6e3",
+    "warning_color": "#b58900",
+    "warning_bg_color": "#b58900",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#dc322f",
+    "error_bg_color": "#dc322f",
+    "error_fg_color": "#fdf6e3",
+    "window_bg_color": "#002b36",
+    "window_fg_color": "#93a1a1",
+    "view_bg_color": "#00252e",
+    "view_fg_color": "#93a1a1",
+    "headerbar_bg_color": "#073642",
+    "headerbar_fg_color": "#93a1a1",
+    "headerbar_border_color": "#93a1a1",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#073642",
+    "card_fg_color": "#93a1a1",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#073642",
+    "dialog_fg_color": "#93a1a1",
+    "popover_bg_color": "#073642",
+    "popover_fg_color": "#93a1a1",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#073642",
+    "thumbnail_fg_color": "#93a1a1",
+    "sidebar_bg_color": "#073642",
+    "sidebar_fg_color": "#93a1a1",
+    "sidebar_border_color": "#00252e",
+    "sidebar_backdrop_color": "#002b36",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#00252e",
+    "secondary_sidebar_fg_color": "#93a1a1",
+    "secondary_sidebar_backdrop_color": "#00252e",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#7db9e4",
+      "2": "#51a2db",
+      "3": "#268bd2",
+      "4": "#1e6fa8",
+      "5": "#17537e"
+    },
+    "green_": {
+      "1": "#b6c266",
+      "2": "#9dad33",
+      "3": "#859900",
+      "4": "#6a7a00",
+      "5": "#505c00"
+    },
+    "yellow_": {
+      "1": "#d3b866",
+      "2": "#c4a133",
+      "3": "#b58900",
+      "4": "#916e00",
+      "5": "#6d5200"
+    },
+    "orange_": {
+      "1": "#e09373",
+      "2": "#d56f45",
+      "3": "#cb4b16",
+      "4": "#a23c12",
+      "5": "#7a2d0d"
+    },
+    "red_": {
+      "1": "#ea8482",
+      "2": "#e35b59",
+      "3": "#dc322f",
+      "4": "#b02826",
+      "5": "#841e1c"
+    },
+    "purple_": {
+      "1": "#a7aadc",
+      "2": "#898dd0",
+      "3": "#6c71c4",
+      "4": "#565a9d",
+      "5": "#414476"
+    },
+    "brown_": {
+      "1": "#e09373",
+      "2": "#d56f45",
+      "3": "#cb4b16",
+      "4": "#a23c12",
+      "5": "#7a2d0d"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

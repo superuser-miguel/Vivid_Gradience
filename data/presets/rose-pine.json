@@ -1,0 +1,119 @@
+{
+  "name": "Ros\u00e9 Pine",
+  "author": "Ros\u00e9 Pine",
+  "source": "https://rosepinetheme.com",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#c4a7e7",
+    "accent_bg_color": "#c4a7e7",
+    "accent_fg_color": "#191724",
+    "destructive_color": "#eb6f92",
+    "destructive_bg_color": "#eb6f92",
+    "destructive_fg_color": "#191724",
+    "success_color": "#9ccfd8",
+    "success_bg_color": "#9ccfd8",
+    "success_fg_color": "#191724",
+    "warning_color": "#f6c177",
+    "warning_bg_color": "#f6c177",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#eb6f92",
+    "error_bg_color": "#eb6f92",
+    "error_fg_color": "#191724",
+    "window_bg_color": "#191724",
+    "window_fg_color": "#e0def4",
+    "view_bg_color": "#1a1826",
+    "view_fg_color": "#e0def4",
+    "headerbar_bg_color": "#1f1d2e",
+    "headerbar_fg_color": "#e0def4",
+    "headerbar_border_color": "#e0def4",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#26233a",
+    "card_fg_color": "#e0def4",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#26233a",
+    "dialog_fg_color": "#e0def4",
+    "popover_bg_color": "#26233a",
+    "popover_fg_color": "#e0def4",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#26233a",
+    "thumbnail_fg_color": "#e0def4",
+    "sidebar_bg_color": "#1f1d2e",
+    "sidebar_fg_color": "#e0def4",
+    "sidebar_border_color": "#1a1826",
+    "sidebar_backdrop_color": "#191724",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#1a1826",
+    "secondary_sidebar_fg_color": "#e0def4",
+    "secondary_sidebar_backdrop_color": "#1a1826",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#83acbc",
+      "2": "#5a90a5",
+      "3": "#31748f",
+      "4": "#275d72",
+      "5": "#1d4656"
+    },
+    "green_": {
+      "1": "#c4e2e8",
+      "2": "#b0d9e0",
+      "3": "#9ccfd8",
+      "4": "#7da6ad",
+      "5": "#5e7c82"
+    },
+    "yellow_": {
+      "1": "#fadaad",
+      "2": "#f8cd92",
+      "3": "#f6c177",
+      "4": "#c59a5f",
+      "5": "#947447"
+    },
+    "orange_": {
+      "1": "#f3d7d6",
+      "2": "#efc9c8",
+      "3": "#ebbcba",
+      "4": "#bc9695",
+      "5": "#8d7170"
+    },
+    "red_": {
+      "1": "#f3a9be",
+      "2": "#ef8ca8",
+      "3": "#eb6f92",
+      "4": "#bc5975",
+      "5": "#8d4358"
+    },
+    "purple_": {
+      "1": "#dccaf1",
+      "2": "#d0b9ec",
+      "3": "#c4a7e7",
+      "4": "#9d86b9",
+      "5": "#76648b"
+    },
+    "brown_": {
+      "1": "#d2a1af",
+      "2": "#c38295",
+      "3": "#b4637a",
+      "4": "#904f62",
+      "5": "#6c3b49"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}
