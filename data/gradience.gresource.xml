@@ -10,6 +10,18 @@
     <file>presets/nord.json</file>
     <file>presets/dracula.json</file>
     <file>presets/tokyo-night.json</file>
+    <file>presets/rose-pine.json</file>
+    <file>presets/rose-pine-dawn.json</file>
+    <file>presets/everforest-dark.json</file>
+    <file>presets/everforest-light.json</file>
+    <file>presets/solarized-dark.json</file>
+    <file>presets/solarized-light.json</file>
+    <file>presets/gruvbox-light.json</file>
+    <file>presets/one-dark.json</file>
+    <file>presets/one-light.json</file>
+    <file>presets/kanagawa.json</file>
+    <file>presets/ayu-mirage.json</file>
+    <file>presets/monokai.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
