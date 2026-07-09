@@ -132,6 +132,7 @@ class GradienceMainWindow(Adw.ApplicationWindow):
             row_spacing=12,
             column_spacing=12,
         )
+        flow.set_margin_start(12)
         for slug in slugs:
             card = self._build_preset_card(slug)
             if card is not None:
