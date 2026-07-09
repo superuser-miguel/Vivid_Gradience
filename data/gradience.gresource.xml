@@ -4,6 +4,12 @@
     <file>presets/adwaita.json</file>
     <file>presets/adwaita-dark.json</file>
     <file>presets/pretty-purple.json</file>
+    <file>presets/catppuccin-mocha.json</file>
+    <file>presets/catppuccin-latte.json</file>
+    <file>presets/gruvbox-dark.json</file>
+    <file>presets/nord.json</file>
+    <file>presets/dracula.json</file>
+    <file>presets/tokyo-night.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
