@@ -107,10 +107,12 @@ class GradienceMainWindow(Adw.ApplicationWindow):
                   "gruvbox-dark", "gruvbox-material", "nord", "dracula",
                   "tokyo-night", "tokyo-night-storm", "rose-pine", "rose-pine-moon",
                   "everforest-dark", "solarized-dark", "one-dark", "kanagawa",
-                  "ayu-mirage", "ayu-dark", "nightfox", "melange-dark", "monokai"]),
+                  "kanagawa-dragon", "ayu-mirage", "ayu-dark", "nightfox",
+                  "melange-dark", "monokai", "synthwave-84", "oxocarbon",
+                  "poimandres", "zenburn", "flexoki-dark"]),
         ("Light", ["catppuccin-latte", "rose-pine-dawn", "everforest-light",
                    "solarized-light", "gruvbox-light", "one-light", "ayu-light",
-                   "melange-light"]),
+                   "melange-light", "flexoki-light", "paper-color-light"]),
     ]
 
     def setup_presets_gallery(self):
