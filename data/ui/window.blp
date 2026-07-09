@@ -190,6 +190,13 @@ template $GradienceMainWindow : Adw.ApplicationWindow {
 menu main-menu {
   section {
     item {
+      label: _("Manage Presets");
+      action: "app.manage_presets";
+    }
+  }
+
+  section {
+    item {
       label: _("Preferences");
       action: "app.preferences";
     }
