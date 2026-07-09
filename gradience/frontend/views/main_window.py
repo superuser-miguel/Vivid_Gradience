@@ -73,9 +73,6 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         self.setup()
 
     def setup_signals(self):
-        self.presets_dropdown.get_popover().connect("show",
-            self.on_presets_dropdown_activate)
-
         self.connect("close-request",
             self.on_close_request)
 
