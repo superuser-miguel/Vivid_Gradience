@@ -17,6 +17,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import json
+import math
 from enum import Enum
 
 from gi.repository import Gtk, Adw, Gio, Gdk, Pango
