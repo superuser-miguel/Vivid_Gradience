@@ -85,7 +85,7 @@ some rough edges — issues and pull requests are welcome.
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
 - [ ] Light/dark preset pairs
-- [ ] Day-to-night gradient automation
+- [ ] Time-of-day theme cycle (day / afternoon / night auto-switching)
 - [ ] Full theme preview
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
