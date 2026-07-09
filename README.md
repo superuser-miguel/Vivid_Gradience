@@ -57,8 +57,9 @@ some rough edges — issues and pull requests are welcome.
 
 ## Features
 
-- Pick a ready-made theme out of the box — Catppuccin, Gruvbox, Nord, Dracula,
-  Tokyo Night, Adwaita — from a visual preset gallery with color previews
+- Pick from **30+ ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
+  Rosé Pine, Everforest, Solarized, Tokyo Night, and more — in a visual preset
+  gallery, each card previewing the theme's own colors
 - Recolor any part of the Adwaita theme with a color picker or hex values, in
   searchable, collapsible categories
 - Generate a Material 3 color scheme from your wallpaper
