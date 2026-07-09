@@ -184,80 +184,26 @@ class GradienceApplication(Adw.Application):
             "favourite", GLib.Variant("as", self.favourite))
 
     def reload_user_defined_presets(self):
-        if self.props.active_window.presets_menu.get_n_items() > 1:
-            self.props.active_window.presets_menu.remove(1)
-
+        # The header presets menu was removed (presets now live in the Presets
+        # tab). This just ensures the preset directories exist and rebuilds the
+        # custom_presets index used elsewhere.
         if not os.path.exists(presets_dir):
             os.makedirs(presets_dir)
+
+        for sub in ("user", "curated", "official"):
+            path = os.path.join(presets_dir, sub)
+            if not os.path.exists(path):
+                os.makedirs(path)
 
         self.custom_presets = {"user": {}}
 
         for repo in Path(presets_dir).iterdir():
-            logging.debug(f"presets_dir.iterdir: {repo}")
-
             try:
                 presets_list = PresetUtils().get_presets_list(repo)
             except (OSError, KeyError, AttributeError):
                 logging.error("Failed to retrieve a list of presets.")
-                self.toast_overlay.add_toast(
-                    Adw.Toast(title=_("Failed to load list of presets"))
-                )
             else:
                 self.custom_presets[repo.name] = presets_list
-
-        custom_menu_section = Gio.Menu()
-
-        try:
-            is_custom_presets = (
-                self.custom_presets["user"]
-                or self.custom_presets["curated"]
-                or self.custom_presets["official"]
-            )
-
-            if (is_custom_presets):
-                for repo, content in self.custom_presets.items():
-                    for preset, preset_name in content.items():
-                        logging.debug(preset_name)
-
-                        if preset_name in self.favourite:
-                            menu_item = Gio.MenuItem()
-                            menu_item.set_label(preset_name)
-
-                            if not preset.startswith("error"):
-                                menu_item.set_action_and_target_value(
-                                    "app.load_preset",
-                                    GLib.Variant("s", "custom-" + preset))
-                            else:
-                                menu_item.set_action_and_target_value("")
-
-                            custom_menu_section.append_item(menu_item)
-            else:
-                menu_item = Gio.MenuItem()
-                menu_item.set_label(_("No presets found"))
-                custom_menu_section.append_item(menu_item)
-
-        except KeyError:
-            if not os.path.exists(os.path.join(presets_dir, "user")):
-                os.makedirs(os.path.join(presets_dir, "user"))
-
-            if not os.path.exists(os.path.join(presets_dir, "curated")):
-                os.makedirs(os.path.join(presets_dir, "curated"))
-
-            if not os.path.exists(os.path.join(presets_dir, "official")):
-                os.makedirs(os.path.join(presets_dir, "official"))
-
-        open_in_file_manager_item = Gio.MenuItem()
-        open_in_file_manager_item.set_label(_("Open in File Manager"))
-
-        open_in_file_manager_item.set_action_and_target_value(
-            "app.open_preset_directory"
-        )
-
-        # custom_menu_section.append_item(open_in_file_manager_item)
-
-        self.props.active_window.presets_menu.append_section(
-            _("Favorite Presets"), custom_menu_section
-        )
 
     def show_presets_manager(self, *_args):
         presets = GradiencePresetWindow(self.win)
