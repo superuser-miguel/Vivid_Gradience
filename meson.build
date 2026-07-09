@@ -42,7 +42,7 @@ endif
 
 dependency('glib-2.0')
 dependency('gtk4', version: '>= 4.5.0')
-dependency('libadwaita-1', version: '>= 1.4.0')
+dependency('libadwaita-1', version: '>= 1.6.0')
 dependency('pygobject-3.0', version: '>= 3.42.0')
 dependency('libsoup-3.0', version: '>= 3.2.0')
 
