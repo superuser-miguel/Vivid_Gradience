@@ -1,0 +1,119 @@
+{
+  "name": "Nightfox",
+  "author": "EdenEast",
+  "source": "https://github.com/EdenEast/nightfox.nvim",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#719cd6",
+    "accent_bg_color": "#719cd6",
+    "accent_fg_color": "#192330",
+    "destructive_color": "#c94f6d",
+    "destructive_bg_color": "#c94f6d",
+    "destructive_fg_color": "#192330",
+    "success_color": "#81b29a",
+    "success_bg_color": "#81b29a",
+    "success_fg_color": "#192330",
+    "warning_color": "#dbc074",
+    "warning_bg_color": "#dbc074",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#c94f6d",
+    "error_bg_color": "#c94f6d",
+    "error_fg_color": "#192330",
+    "window_bg_color": "#192330",
+    "window_fg_color": "#cdcecf",
+    "view_bg_color": "#131a24",
+    "view_fg_color": "#cdcecf",
+    "headerbar_bg_color": "#212e3f",
+    "headerbar_fg_color": "#cdcecf",
+    "headerbar_border_color": "#cdcecf",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#29394f",
+    "card_fg_color": "#cdcecf",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#29394f",
+    "dialog_fg_color": "#cdcecf",
+    "popover_bg_color": "#29394f",
+    "popover_fg_color": "#cdcecf",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#29394f",
+    "thumbnail_fg_color": "#cdcecf",
+    "sidebar_bg_color": "#212e3f",
+    "sidebar_fg_color": "#cdcecf",
+    "sidebar_border_color": "#131a24",
+    "sidebar_backdrop_color": "#192330",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#131a24",
+    "secondary_sidebar_fg_color": "#cdcecf",
+    "secondary_sidebar_backdrop_color": "#131a24",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#aac4e6",
+      "2": "#8db0de",
+      "3": "#719cd6",
+      "4": "#5a7dab",
+      "5": "#445e80"
+    },
+    "green_": {
+      "1": "#b3d1c2",
+      "2": "#9ac1ae",
+      "3": "#81b29a",
+      "4": "#678e7b",
+      "5": "#4d6b5c"
+    },
+    "yellow_": {
+      "1": "#e9d9ac",
+      "2": "#e2cd90",
+      "3": "#dbc074",
+      "4": "#af9a5d",
+      "5": "#837346"
+    },
+    "orange_": {
+      "1": "#f8c7a0",
+      "2": "#f6b581",
+      "3": "#f4a261",
+      "4": "#c3824e",
+      "5": "#92613a"
+    },
+    "red_": {
+      "1": "#df95a7",
+      "2": "#d4728a",
+      "3": "#c94f6d",
+      "4": "#a13f57",
+      "5": "#792f41"
+    },
+    "purple_": {
+      "1": "#c4afe6",
+      "2": "#b194de",
+      "3": "#9d79d6",
+      "4": "#7e61ab",
+      "5": "#5e4980"
+    },
+    "brown_": {
+      "1": "#f8c7a0",
+      "2": "#f6b581",
+      "3": "#f4a261",
+      "4": "#c3824e",
+      "5": "#92613a"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

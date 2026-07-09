@@ -1,0 +1,119 @@
+{
+  "name": "Melange Dark",
+  "author": "savq",
+  "source": "https://github.com/savq/melange-nvim",
+  "license": "MIT",
+  "variables": {
+    "accent_color": "#ebc06d",
+    "accent_bg_color": "#ebc06d",
+    "accent_fg_color": "#292522",
+    "destructive_color": "#d47766",
+    "destructive_bg_color": "#d47766",
+    "destructive_fg_color": "#292522",
+    "success_color": "#85b695",
+    "success_bg_color": "#85b695",
+    "success_fg_color": "#292522",
+    "warning_color": "#ebc06d",
+    "warning_bg_color": "#ebc06d",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#d47766",
+    "error_bg_color": "#d47766",
+    "error_fg_color": "#292522",
+    "window_bg_color": "#292522",
+    "window_fg_color": "#ece1d7",
+    "view_bg_color": "#211d1a",
+    "view_fg_color": "#ece1d7",
+    "headerbar_bg_color": "#34302c",
+    "headerbar_fg_color": "#ece1d7",
+    "headerbar_border_color": "#ece1d7",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#403a36",
+    "card_fg_color": "#ece1d7",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#403a36",
+    "dialog_fg_color": "#ece1d7",
+    "popover_bg_color": "#403a36",
+    "popover_fg_color": "#ece1d7",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#403a36",
+    "thumbnail_fg_color": "#ece1d7",
+    "sidebar_bg_color": "#34302c",
+    "sidebar_fg_color": "#ece1d7",
+    "sidebar_border_color": "#211d1a",
+    "sidebar_backdrop_color": "#292522",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#211d1a",
+    "secondary_sidebar_fg_color": "#ece1d7",
+    "secondary_sidebar_backdrop_color": "#211d1a",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#c8cbe2",
+      "2": "#b5bad8",
+      "3": "#a3a9ce",
+      "4": "#8287a5",
+      "5": "#62657c"
+    },
+    "green_": {
+      "1": "#b6d3bf",
+      "2": "#9dc5aa",
+      "3": "#85b695",
+      "4": "#6a9277",
+      "5": "#506d59"
+    },
+    "yellow_": {
+      "1": "#f3d9a7",
+      "2": "#efcd8a",
+      "3": "#ebc06d",
+      "4": "#bc9a57",
+      "5": "#8d7341"
+    },
+    "orange_": {
+      "1": "#efc39e",
+      "2": "#e9af7d",
+      "3": "#e49b5d",
+      "4": "#b67c4a",
+      "5": "#895d38"
+    },
+    "red_": {
+      "1": "#e5ada3",
+      "2": "#dd9285",
+      "3": "#d47766",
+      "4": "#aa5f52",
+      "5": "#7f473d"
+    },
+    "purple_": {
+      "1": "#e2c3da",
+      "2": "#d9afce",
+      "3": "#cf9bc2",
+      "4": "#a67c9b",
+      "5": "#7c5d74"
+    },
+    "brown_": {
+      "1": "#d7b3b5",
+      "2": "#ca9a9c",
+      "3": "#bd8183",
+      "4": "#976769",
+      "5": "#714d4f"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}
