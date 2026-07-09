@@ -55,6 +55,7 @@ class GradienceMainWindow(Adw.ApplicationWindow):
     errors_list = Gtk.Template.Child("errors-list")
     presets_dropdown = Gtk.Template.Child("presets-dropdown")
     presets_menu = Gtk.Template.Child("presets-menu")
+    presets_box = Gtk.Template.Child()
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
