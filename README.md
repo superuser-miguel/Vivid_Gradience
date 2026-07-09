@@ -42,12 +42,15 @@ some rough edges — issues and pull requests are welcome.
 
 ## Features
 
-- Recolor any part of the Adwaita theme with a color picker or hex values
+- Pick a ready-made theme out of the box — Catppuccin, Gruvbox, Nord, Dracula,
+  Tokyo Night, Adwaita — from a visual preset gallery with color previews
+- Recolor any part of the Adwaita theme with a color picker or hex values, in
+  searchable, collapsible categories
 - Generate a Material 3 color scheme from your wallpaper
 - Apply themes to Libadwaita, GTK 4, and GTK 3 (via adw-gtk3) applications
-- Create, load, and browse presets, including community-shared ones
+- Create, save, and manage your own presets
 - Extend styling with custom CSS
-- Built-in Adwaita and Adwaita Dark presets
+- Adaptive interface that scales from desktop down to narrow/mobile widths
 
 ## Roadmap
 
