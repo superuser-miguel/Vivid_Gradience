@@ -32,10 +32,13 @@ some rough edges — issues and pull requests are welcome.
 - [x] Builds and runs on the current GNOME runtime (**50**) as a Flatpak
 - [x] Stays on the latest runtime automatically — a weekly job bumps the manifest
       and build-tests it before the change lands
+- [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
+      `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
+- [x] Ready-made themes built in — Catppuccin, Gruvbox, Nord, Dracula, Tokyo
+      Night — in a visual preset gallery
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
-- [ ] Codebase cleanup and modernization
-- [ ] Visual enhancements beyond the original scope
+- [ ] Further codebase cleanup and visual enhancements
 
 ## Features
 
