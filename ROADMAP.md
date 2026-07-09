@@ -7,11 +7,13 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [x] Working Flatpak targeting GNOME 48+ / runtime 50 (latest)
 - [x] Automatically track new GNOME runtime releases
 - [ ] Modernize the UI — adopt current libadwaita composition:
-  - [ ] Wrap windows in `Adw.ToolbarView` (modern top/bottom-bar elevation)
-  - [ ] Add `Adw.Breakpoint` for an adaptive, resize-to-narrow layout
-  - [ ] Adopt newer rows: `Adw.SwitchRow`, `Adw.SpinRow`, `Adw.EntryRow`
-  - [ ] Declutter the header bar (e.g. `Adw.SplitButton` for Apply + presets)
-  - [ ] Raise the libadwaita floor (1.4 → 1.6+) to use current widgets
+  - [x] Wrap windows in `Adw.ToolbarView` (modern top/bottom-bar elevation)
+  - [x] Add `Adw.Breakpoint` for an adaptive, resize-to-narrow layout
+  - [x] Adopt newer rows: `Adw.SwitchRow`, `Adw.EntryRow` (no `SpinRow` needed)
+  - [x] Declutter the header bar (now just Apply · Save + view switcher + menu)
+  - [x] Raise the libadwaita floor (1.4 → 1.6)
+  - [x] Searchable, collapsible color categories; reflowing palette swatches
+  - [x] Theming empty-state `StatusPage`; shell warning `Banner`
   - [ ] Align spacing, margins, and icons with the GNOME HIG
 - [ ] Verify all base theming features work with current libadwaita
 - [ ] Clean up and modernize the codebase
