@@ -35,8 +35,12 @@ source over the network, so an unpushed tag cannot be resolved.
 **3. Note the commit the tag points at.**
 
 ```shell
-git rev-parse vX.Y.Z
+git rev-parse vX.Y.Z^{commit}
 ```
+
+The `^{commit}` suffix matters. These are annotated tags, so a bare
+`git rev-parse vX.Y.Z` returns the *tag object's* id, not the commit — and
+flatpak-builder cannot check that out.
 
 **4. Update the pin** in `build-aux/flatpak/…VividGradience.release.json` —
 both `tag` and `commit`:
@@ -49,7 +53,7 @@ p = "build-aux/flatpak/io.github.superuser_miguel.VividGradience.release.json"
 m = json.load(open(p), object_pairs_hook=collections.OrderedDict)
 s = m["modules"][-1]["sources"][0]
 s["tag"] = TAG
-s["commit"] = subprocess.check_output(["git", "rev-parse", TAG]).decode().strip()
+s["commit"] = subprocess.check_output(["git", "rev-parse", TAG + "^{commit}"]).decode().strip()
 json.dump(m, open(p, "w"), indent=4); open(p, "a").write("\n")
 print("pinned", TAG, "->", s["commit"])
 EOF
