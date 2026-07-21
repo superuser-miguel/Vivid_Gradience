@@ -25,9 +25,11 @@ build
 builddir
 build-dir
 build-dir-release
+build-dir-pintest
 export
 repo
 repo-release
+repo-pintest
 
 # Release artifacts (published to GitHub Releases, never committed)
 *.flatpak
