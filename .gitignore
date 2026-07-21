@@ -24,8 +24,13 @@
 build
 builddir
 build-dir
+build-dir-release
 export
 repo
+repo-release
+
+# Release artifacts (published to GitHub Releases, never committed)
+*.flatpak
 
 ### Meson ###
 # subproject directories
