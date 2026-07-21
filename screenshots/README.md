@@ -13,6 +13,6 @@ Tips:
 
 - Use a consistent window size and a clean desktop background.
 - HiDPI (2×) captures look crisp on GitHub; keep widths reasonable (~1400px).
-- For the Flathub/AppStream listing, screenshots must be **hosted URLs** in the
-  appdata file — that's a separate step from these README images (see
-  `FORK_TODO.md` §3).
+- The AppStream `<screenshots>` block needs **hosted URLs**, not repo paths — so
+  those come from the GitHub Pages site once it exists. That's a separate step
+  from these README images.
