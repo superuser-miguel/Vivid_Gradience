@@ -34,7 +34,7 @@ some rough edges — issues and pull requests are welcome.
       and build-tests it before the change lands
 - [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
       `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
-- [x] **30+ ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
+- [x] **39 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
       Rosé Pine, Everforest, Solarized, and more — in a visual preset gallery
       with per-theme color previews
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
@@ -44,20 +44,26 @@ some rough edges — issues and pull requests are welcome.
 ## Screenshots
 
 <p align="center">
-  <img src="screenshots/presets.png" alt="Presets gallery" width="760"/>
+  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped under Adwaita, Dark and Light" width="820"/>
 </p>
 
 <p align="center">
-  <img src="screenshots/colors.png" alt="Colors editor" width="380"/>
+  <img src="docs/screenshots/colors.png" alt="The Colors editor, with a search field and collapsible categories" width="405"/>
   &nbsp;
-  <img src="screenshots/theming.png" alt="Theming engines" width="380"/>
+  <img src="docs/screenshots/theming.png" alt="The Theming tab, with the Shell and Monet engines" width="405"/>
 </p>
 
-<!-- Add images to screenshots/ — see screenshots/README.md for the expected filenames. -->
+<p align="center">
+  <img src="docs/screenshots/advanced.png" alt="The Advanced tab, with a custom CSS editor" width="405"/>
+  &nbsp;
+  <img src="docs/screenshots/preferences.png" alt="The Preferences dialog, with Flatpak theming options" width="405"/>
+</p>
+
+More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.github.io/Vivid_Gradience)**.
 
 ## Features
 
-- Pick from **30+ ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
+- Pick from **39 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
   Rosé Pine, Everforest, Solarized, Tokyo Night, and more — in a visual preset
   gallery, each card previewing the theme's own colors
 - Recolor any part of the Adwaita theme with a color picker or hex values, in
@@ -80,7 +86,7 @@ some rough edges — issues and pull requests are welcome.
 
 **Planned**
 
-- [x] 30+ ready-made themes built in, in a visual gallery with color previews
+- [x] 39 ready-made themes built in, in a visual gallery with color previews
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)

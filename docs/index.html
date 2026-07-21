@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vivid Gradience — change the look of Adwaita, with ease</title>
+<meta name="description" content="A maintained fork of Gradience: recolour Libadwaita and adw-gtk3 from a GTK4 app, with 39 ready-made colour schemes built in.">
+<style>
+  :root {
+    --bg: #f6f7fb; --surface: #ffffff; --text: #1b1c22; --muted: #5a5c68;
+    --border: #e3e5ee; --accent: #3584e4; --accent-2: #1c71d8;
+    --ok: #2e9e5b; --no: #c6c8d4;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #15161c; --surface: #1e1f28; --text: #ecedf2; --muted: #a6a8b6;
+      --border: #2c2e3a; --accent: #78aeed; --accent-2: #3584e4;
+      --ok: #55d98a; --no: #44465a;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 20px; }
+  section { padding: 56px 0; }
+
+  /* Hero */
+  .hero { text-align: center; padding: 72px 0 48px; }
+  .icon {
+    width: 88px; height: 88px; display: block; margin: 0 auto 22px;
+    filter: drop-shadow(0 10px 30px rgba(28,113,216,.35));
+  }
+  h1 { font-size: 2.6rem; margin: 0 0 6px; letter-spacing: -.02em; }
+  .tagline { font-size: 1.25rem; font-weight: 600; margin: 0 auto 14px; max-width: 32ch; }
+  .lede { color: var(--muted); max-width: 58ch; margin: 0 auto 26px; }
+  .btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; padding: 11px 20px; border-radius: 11px; text-decoration: none;
+    font-weight: 600; border: 1px solid var(--border); color: var(--text);
+  }
+  .btn.primary { background: var(--accent-2); color: #fff; border-color: transparent; }
+  .badge {
+    display: inline-block; margin-bottom: 18px; padding: 4px 12px; border-radius: 999px;
+    background: color-mix(in srgb, var(--accent) 14%, transparent);
+    color: var(--accent); font-size: .82rem; font-weight: 600;
+  }
+  .shot {
+    display: block; max-width: 760px; width: 100%; height: auto; margin: 40px auto 0;
+    border: 1px solid var(--border); border-radius: 14px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+  }
+
+  h2 { font-size: 1.6rem; letter-spacing: -.01em; margin: 0 0 8px; }
+  .sub { color: var(--muted); margin: 0 0 26px; }
+
+  .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+  .card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 18px 20px;
+  }
+  .card h3 { margin: 0 0 6px; font-size: 1.02rem; }
+  .card p { margin: 0; color: var(--muted); font-size: .95rem; }
+
+  .shots { display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+  .shots figure { margin: 0; }
+  .shots img {
+    width: 100%; height: auto; display: block;
+    border: 1px solid var(--border); border-radius: 12px;
+    box-shadow: 0 10px 26px rgba(0,0,0,.18);
+  }
+  .shots figcaption { color: var(--muted); font-size: .9rem; margin-top: 8px; }
+
+  .road { padding-left: 1.1rem; margin: 0; }
+  .road li { margin-bottom: 10px; color: var(--muted); }
+  .road li b { color: var(--text); }
+
+  .note {
+    background: var(--surface); border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 10px; padding: 14px 18px; color: var(--muted); font-size: .95rem;
+  }
+
+  code {
+    background: color-mix(in srgb, var(--accent) 10%, transparent);
+    padding: 1px 6px; border-radius: 6px; font-size: .9em;
+  }
+  pre {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 16px; overflow-x: auto;
+  }
+  pre code { background: none; padding: 0; }
+
+  footer { border-top: 1px solid var(--border); color: var(--muted); font-size: .95rem; }
+  footer a { color: var(--accent); }
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <img class="icon" src="icon.svg" alt="">
+  <span class="badge">Early, but working</span>
+  <h1>Vivid Gradience</h1>
+  <p class="tagline">Change the look of Adwaita, with ease.</p>
+  <p class="lede">
+    A maintained fork of <strong>Gradience</strong>, brought back to the current
+    GNOME runtime. Recolour every part of the Adwaita palette, start from one of
+    <strong>39 ready-made colour schemes</strong>, and apply it to Libadwaita,
+    GTK&nbsp;4 and GTK&nbsp;3 apps — without hand-editing a single config file.
+  </p>
+  <div class="btns">
+    <a class="btn primary" href="https://github.com/superuser-miguel/Vivid_Gradience/releases/latest">Download (.flatpak)</a>
+    <a class="btn" href="https://github.com/superuser-miguel/Vivid_Gradience">View on GitHub</a>
+  </div>
+  <img class="shot" src="screenshots/presets.png" alt="The Presets gallery, showing colour-scheme cards grouped under Adwaita, Dark and Light headings">
+</header>
+
+<section class="wrap">
+  <h2>Why this fork exists</h2>
+  <p class="sub">The original was archived in June 2024. This picks it back up.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Current runtime</h3>
+      <p>Builds and runs on GNOME <strong>50</strong>, and a weekly job bumps the manifest and build-tests it before the change lands.</p>
+    </div>
+    <div class="card">
+      <h3>A modern interface</h3>
+      <p>Rebuilt on current libadwaita — <code>ToolbarView</code>, adaptive <code>Breakpoint</code> layout, boxed lists, and the newer row widgets.</p>
+    </div>
+    <div class="card">
+      <h3>Themes you'd actually use</h3>
+      <p>39 community colour schemes built in — Catppuccin, Gruvbox, Nord, Dracula, Rosé&nbsp;Pine, Everforest, Solarized, Tokyo&nbsp;Night and more.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Features</h2>
+  <p class="sub">Everything from upstream, plus the parts it never got round to.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>A visual preset gallery</h3>
+      <p>Every scheme is a card tinted with its own background colour, showing its character hues. Click one to load it.</p>
+    </div>
+    <div class="card">
+      <h3>Searchable colour editing</h3>
+      <p>All 46 named Adwaita colours, in collapsible categories with a search box — picker or hex, whichever you prefer.</p>
+    </div>
+    <div class="card">
+      <h3>A palette from your wallpaper</h3>
+      <p>The Monet engine extracts a Material&nbsp;Design&nbsp;3 palette from any image and turns it into a full scheme.</p>
+    </div>
+    <div class="card">
+      <h3>GNOME Shell theming</h3>
+      <p>Generate a matching Shell theme from the current preset, without leaving the app.</p>
+    </div>
+    <div class="card">
+      <h3>Custom CSS</h3>
+      <p>An escape hatch for anything the colour variables can't express, per toolkit.</p>
+    </div>
+    <div class="card">
+      <h3>Adaptive down to mobile</h3>
+      <p>The window reflows to narrow widths, moving the view switcher to a bottom bar.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>A look around</h2>
+  <p class="sub">Four tabs: pick a scheme, tune it, apply it, then go further.</p>
+  <div class="shots">
+    <figure>
+      <img src="screenshots/colors.png" alt="The Colors tab with a search field and collapsible categories of named Adwaita colours">
+      <figcaption><strong>Colors</strong> — every named colour, searchable and grouped.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/theming.png" alt="The Theming tab showing the Shell Engine and Monet Engine option groups">
+      <figcaption><strong>Theming</strong> — the Shell and Monet engines.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/advanced.png" alt="The Advanced tab with a custom CSS editor for GTK 4">
+      <figcaption><strong>Advanced</strong> — custom CSS, per toolkit.</figcaption>
+    </figure>
+    <figure>
+      <img src="screenshots/preferences.png" alt="The Preferences dialog showing Flatpak application theming options">
+      <figcaption><strong>Preferences</strong> — Flatpak permissions and preset fetching.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Install</h2>
+  <p class="sub">A single-file Flatpak bundle from GitHub Releases.</p>
+<pre><code>flatpak install --user ./VividGradience.flatpak
+flatpak run io.github.superuser_miguel.VividGradience</code></pre>
+  <p class="note">
+    A bundle carries no auto-update — a newer release means downloading and
+    reinstalling it. Vivid Gradience is <strong>not on Flathub</strong> and is
+    distributed independently.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Theming setup</h2>
+  <p class="sub">Native apps need nothing. Sandboxed ones need one permission.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Libadwaita &amp; GTK 4 Flatpaks</h3>
+      <p>Grant access to the GTK&nbsp;4 config: <code>sudo flatpak override --filesystem=xdg-config/gtk-4.0</code>, or the same entry in Flatseal.</p>
+    </div>
+    <div class="card">
+      <h3>GTK 3 apps</h3>
+      <p>Install <a href="https://github.com/lassekongo83/adw-gtk3#readme">adw-gtk3</a>, then grant <code>xdg-config/gtk-3.0</code> the same way.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>Roadmap</h2>
+  <p class="sub">Honest about what's next. (The preset gallery, the modernised UI and runtime tracking already shipped.)</p>
+  <ul class="road">
+    <li><b>Theme installs from GitHub and <code>.zip</code></b> — fetch and install themes from inside the app, managing the stylesheet it shares with them rather than overwriting it.</li>
+    <li><b>Time-of-day theme cycle</b> — assign presets to day, afternoon and night and switch automatically, on a schedule or by sunrise and sunset.</li>
+    <li><b>Light/dark preset pairs</b> — follow the system colour scheme with a matched pair.</li>
+    <li><b>Colour wheel</b> — a proper wheel for picking, alongside the hex fields.</li>
+    <li><b>Your own presets in the gallery</b> — user presets shown as cards, like the built-in schemes.</li>
+    <li><b>Generate a preset from one colour</b>, plus textures and a fuller theme preview.</li>
+  </ul>
+</section>
+
+<footer class="wrap">
+  <section>
+    <p><strong>Vivid Gradience</strong> is free software, <strong>GPL-3.0-or-later</strong>.</p>
+    <p>
+      A fork of <a href="https://github.com/GradienceTeam/Gradience">Gradience</a> by
+      Artyom Fomin and the Gradience Team, by way of
+      <a href="https://github.com/hydroxycarbamide/Gradience">hydroxycarbamide</a>'s fork.
+      Built with GTK&nbsp;4, libadwaita, Blueprint and Meson.
+    </p>
+    <p>
+      A unified Adwaita look matters for app developers — see
+      <a href="https://stopthemingmy.app">stopthemingmy.app</a>. This is a tool for
+      tinkerers, not something distributions should ship by default.
+    </p>
+    <p><a href="https://github.com/superuser-miguel/Vivid_Gradience">github.com/superuser-miguel/Vivid_Gradience</a></p>
+  </section>
+</footer>
+
+</body>
+</html>
