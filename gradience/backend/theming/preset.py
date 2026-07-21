@@ -26,6 +26,7 @@ from gi.repository import GLib, Gio
 from gradience.backend.models.preset import Preset
 
 from gradience.backend.utils.theming import generate_gtk_css
+from gradience.backend.theming.backup import ThemeBackup
 from gradience.backend.globals import user_config_dir, presets_dir, get_gtk_theme_dir, is_sandboxed
 from gradience.backend.utils.gsettings import GSettingsSetting, FlatpakGSettings, GSettingsMissingError
 
@@ -122,6 +123,13 @@ class PresetUtils:
         if not os.path.exists(theme_dir):
             os.makedirs(theme_dir)
 
+        # Versioned backup first — this write replaces the stylesheet wholesale,
+        # and it may be an installed theme rather than something we generated.
+        try:
+            ThemeBackup(app_type).capture(applied_preset=getattr(preset, "display_name", None))
+        except OSError as e:
+            logging.warning(f"Could not back up the current {app_type} stylesheet: {e}")
+
         try:
             with open(gtk_css_path, "r", encoding="utf-8") as css_file:
                 contents = css_file.read()
@@ -156,6 +164,12 @@ class PresetUtils:
     def reset_preset(self, app_type: str) -> None:
         theme_dir = get_gtk_theme_dir(app_type)
         gtk_css_path = os.path.join(theme_dir, "gtk.css")
+
+        # Deleting the stylesheet is as destructive as overwriting it.
+        try:
+            ThemeBackup(app_type).capture(applied_preset=None)
+        except OSError as e:
+            logging.warning(f"Could not back up the current {app_type} stylesheet: {e}")
 
         file = Gio.File.new_for_path(gtk_css_path)
 

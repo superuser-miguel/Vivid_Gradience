@@ -3,7 +3,7 @@ using Adw 1;
 
 template $GradienceResetPresetGroup : Adw.PreferencesGroup {
   title: _("Reset and Restore Theming");
-  description: _("Reset theming to default or restore previously applied preset.");
+  description: _("Reset theming to default, step back to the previous preset, or restore the theme that was installed before Vivid Gradience first ran.");
 
   Adw.ActionRow {
     title: _("GTK 4/Libadwaita Apps");
@@ -42,6 +42,32 @@ template $GradienceResetPresetGroup : Adw.PreferencesGroup {
       tooltip-text: _("Reset Applied Preset");
       clicked => $on_gtk3_reset_button_clicked();
       styles ["destructive-action"]
+    }
+  }
+
+  Adw.ActionRow original_libadw_row {
+    title: _("Original GTK 4 Theme");
+    visible: false;
+
+    Button restore_original_libadw_button {
+      valign: center;
+      label: _("Restore");
+      tooltip-text: _("Restore the stylesheet that was in place before Vivid Gradience first applied a preset");
+      clicked => $on_libadw_restore_original_clicked();
+      styles ["flat"]
+    }
+  }
+
+  Adw.ActionRow original_gtk3_row {
+    title: _("Original GTK 3 Theme");
+    visible: false;
+
+    Button restore_original_gtk3_button {
+      valign: center;
+      label: _("Restore");
+      tooltip-text: _("Restore the stylesheet that was in place before Vivid Gradience first applied a preset");
+      clicked => $on_gtk3_restore_original_clicked();
+      styles ["flat"]
     }
   }
 }

@@ -21,6 +21,7 @@ from gi.repository import GLib, Gtk, Adw
 from gradience.backend.constants import rootdir
 from gradience.backend.logger import Logger
 from gradience.backend.theming.preset import PresetUtils
+from gradience.backend.theming.backup import ThemeBackup
 
 logging = Logger()
 
@@ -28,6 +29,9 @@ logging = Logger()
 @Gtk.Template(resource_path=f"{rootdir}/ui/reset_preset_group.ui")
 class GradienceResetPresetGroup(Adw.PreferencesGroup):
     __gtype_name__ = "GradienceResetPresetGroup"
+
+    original_libadw_row = Gtk.Template.Child()
+    original_gtk3_row = Gtk.Template.Child()
 
     def __init__(self, parent, **kwargs):
         super().__init__(**kwargs)
@@ -44,7 +48,51 @@ class GradienceResetPresetGroup(Adw.PreferencesGroup):
         pass
 
     def setup(self):
-        pass
+        self.refresh_original_rows()
+
+    def refresh_original_rows(self):
+        """Show an original-theme row only when we actually hold a backup."""
+        for app_type, row in (
+            ("gtk4", self.original_libadw_row),
+            ("gtk3", self.original_gtk3_row),
+        ):
+            backup = ThemeBackup(app_type)
+
+            if not backup.has_original():
+                row.set_visible(False)
+                continue
+
+            if backup.original_meta().get("kind") == "foreign":
+                subtitle = _("A theme that was already installed, saved before it was replaced")
+            else:
+                subtitle = _("The stylesheet in place before Vivid Gradience first applied a preset")
+
+            row.set_subtitle(subtitle)
+            row.set_visible(True)
+
+    def _restore_original(self, app_type: str, label: str):
+        try:
+            ThemeBackup(app_type).restore("original")
+        except (OSError, FileNotFoundError) as e:
+            logging.error(f"Unable to restore original {app_type} theme.", exc=e)
+            self.parent.add_toast(
+                Adw.Toast(title=_("Unable to restore the original {} theme").format(label))
+            )
+        else:
+            self.parent.add_toast(
+                Adw.Toast(
+                    title=_("Original {} theme has been restored. Log out to apply changes.").format(label)
+                )
+            )
+            self.refresh_original_rows()
+
+    @Gtk.Template.Callback()
+    def on_libadw_restore_original_clicked(self, *_args):
+        self._restore_original("gtk4", "GTK 4")
+
+    @Gtk.Template.Callback()
+    def on_gtk3_restore_original_clicked(self, *_args):
+        self._restore_original("gtk3", "GTK 3")
 
     @Gtk.Template.Callback()
     def on_libadw_restore_button_clicked(self, *_args):
