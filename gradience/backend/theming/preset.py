@@ -127,7 +127,8 @@ class PresetUtils:
         # and it may be an installed theme rather than something we generated.
         try:
             ThemeBackup(app_type).capture(applied_preset=getattr(preset, "display_name", None))
-        except OSError as e:
+        except Exception as e:
+            # A failed backup must never stop the user applying a preset.
             logging.warning(f"Could not back up the current {app_type} stylesheet: {e}")
 
         try:
@@ -168,7 +169,8 @@ class PresetUtils:
         # Deleting the stylesheet is as destructive as overwriting it.
         try:
             ThemeBackup(app_type).capture(applied_preset=None)
-        except OSError as e:
+        except Exception as e:
+            # A failed backup must never stop the user resetting their theme.
             logging.warning(f"Could not back up the current {app_type} stylesheet: {e}")
 
         file = Gio.File.new_for_path(gtk_css_path)
