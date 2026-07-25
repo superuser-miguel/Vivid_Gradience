@@ -163,6 +163,7 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         name_label = Gtk.Label(label=name, xalign=0)
         name_label.add_css_class("heading")
         name_label.set_ellipsize(Pango.EllipsizeMode.END)
+        name_label.set_margin_start(4)
 
         content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         content.append(preview)
@@ -172,6 +173,8 @@ class GradienceMainWindow(Adw.ApplicationWindow):
             author_label.add_css_class("caption")
             author_label.add_css_class("dim-label")
             author_label.set_ellipsize(Pango.EllipsizeMode.END)
+            # Nested one level under the name, like an indented code block.
+            author_label.set_margin_start(8)
             content.append(author_label)
 
         button = Gtk.Button(child=content)
