@@ -75,6 +75,17 @@
   </recommends>
 
   <releases>
+    <release version="0.1.1" date="2026-07-25" type="stable">
+      <description translate="no">
+        <p>More built-in themes and a refined preset gallery.</p>
+        <ul>
+          <li>New Arc theme family: Arc, Arc Darker, Arc Dark, Arc Gotham, and Arc Grey (light and dark)</li>
+          <li>New Matcha theme family: Sea, Azul, Aliz, and Pueril, each in light and dark</li>
+          <li>53 bundled color schemes, now grouped into family sections in the gallery</li>
+          <li>Taller color chips on preset cards, with indented name and author labels</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.0" date="2026-07-21" type="stable">
       <description translate="no">
         <p>First release of Vivid Gradience, a maintained fork of Gradience.</p>
