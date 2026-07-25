@@ -34,7 +34,7 @@ some rough edges — issues and pull requests are welcome.
       and build-tests it before the change lands
 - [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
       `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
-- [x] **45 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
+- [x] **53 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
       Rosé Pine, Everforest, Solarized, and more — in a visual preset gallery
       with per-theme color previews
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
@@ -63,7 +63,7 @@ More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.
 
 ## Features
 
-- Pick from **45 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
+- Pick from **53 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
   Rosé Pine, Everforest, Solarized, Tokyo Night, and more — in a visual preset
   gallery, each card previewing the theme's own colors
 - Recolor any part of the Adwaita theme with a color picker or hex values, in
@@ -86,7 +86,7 @@ More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.
 
 **Planned**
 
-- [x] 45 ready-made themes built in, in a visual gallery with color previews
+- [x] 53 ready-made themes built in, in a visual gallery with color previews
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)

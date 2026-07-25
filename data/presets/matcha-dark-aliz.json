@@ -1,0 +1,119 @@
+{
+  "name": "Matcha Dark Aliz",
+  "author": "vinceliuice",
+  "source": "https://github.com/vinceliuice/Matcha-gtk-theme",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#f0544c",
+    "accent_bg_color": "#f0544c",
+    "accent_fg_color": "#ffffff",
+    "destructive_color": "#db5b5b",
+    "destructive_bg_color": "#db5b5b",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#2eb398",
+    "success_bg_color": "#2eb398",
+    "success_fg_color": "#ffffff",
+    "warning_color": "#f27835",
+    "warning_bg_color": "#f27835",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#fc4138",
+    "error_bg_color": "#fc4138",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#222222",
+    "window_fg_color": "#cbbfbf",
+    "view_bg_color": "#262626",
+    "view_fg_color": "#cbbfbf",
+    "headerbar_bg_color": "#1a1a1a",
+    "headerbar_fg_color": "#cbbfbf",
+    "headerbar_border_color": "#cbbfbf",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#262626",
+    "card_fg_color": "#cbbfbf",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#262626",
+    "dialog_fg_color": "#cbbfbf",
+    "popover_bg_color": "#262626",
+    "popover_fg_color": "#cbbfbf",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#262626",
+    "thumbnail_fg_color": "#cbbfbf",
+    "sidebar_bg_color": "#363636",
+    "sidebar_fg_color": "#cbbfbf",
+    "sidebar_border_color": "#222222",
+    "sidebar_backdrop_color": "#222222",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#222222",
+    "secondary_sidebar_fg_color": "#cbbfbf",
+    "secondary_sidebar_backdrop_color": "#222222",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#8fc6eb",
+      "2": "#61afe3",
+      "3": "#3498db",
+      "4": "#2977ab",
+      "5": "#1d5478"
+    },
+    "green_": {
+      "1": "#8cd5c6",
+      "2": "#5cc4af",
+      "3": "#2eb398",
+      "4": "#248c77",
+      "5": "#196254"
+    },
+    "yellow_": {
+      "1": "#fade98",
+      "2": "#f8d06d",
+      "3": "#f6c344",
+      "4": "#c09835",
+      "5": "#876b25"
+    },
+    "orange_": {
+      "1": "#f8b590",
+      "2": "#f59661",
+      "3": "#f27835",
+      "4": "#bd5e29",
+      "5": "#85421d"
+    },
+    "red_": {
+      "1": "#f7a19d",
+      "2": "#f37a73",
+      "3": "#f0544c",
+      "4": "#bb423b",
+      "5": "#842e2a"
+    },
+    "purple_": {
+      "1": "#ceaedd",
+      "2": "#b98ccf",
+      "3": "#a56cc1",
+      "4": "#815497",
+      "5": "#5b3b6a"
+    },
+    "brown_": {
+      "1": "#cbad9b",
+      "2": "#b58b72",
+      "3": "#a06a4a",
+      "4": "#7d533a",
+      "5": "#583a29"
+    },
+    "light_": {
+      "1": "#ebebe9",
+      "2": "#e5e4e1",
+      "3": "#deddda",
+      "4": "#b2b1ae",
+      "5": "#858583"
+    },
+    "dark_": {
+      "1": "#7c7983",
+      "2": "#504c5a",
+      "3": "#241f31",
+      "4": "#1d1927",
+      "5": "#16131d"
+    }
+  }
+}

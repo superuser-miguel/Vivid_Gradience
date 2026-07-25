@@ -46,6 +46,14 @@
     <file>presets/arc-gotham.json</file>
     <file>presets/arc-grey.json</file>
     <file>presets/arc-grey-dark.json</file>
+    <file>presets/matcha-sea.json</file>
+    <file>presets/matcha-azul.json</file>
+    <file>presets/matcha-aliz.json</file>
+    <file>presets/matcha-pueril.json</file>
+    <file>presets/matcha-dark-sea.json</file>
+    <file>presets/matcha-dark-azul.json</file>
+    <file>presets/matcha-dark-aliz.json</file>
+    <file>presets/matcha-dark-pueril.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
