@@ -62,6 +62,22 @@ some rough edges — issues and pull requests are welcome.
 
 More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.github.io/Vivid_Gradience)**.
 
+## Install
+
+Vivid Gradience installs from its **signed, auto-updating Flatpak repo** —
+`flatpak update` then keeps it current:
+
+```shell
+flatpak install --user https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref
+flatpak run io.github.superuser_miguel.VividGradience
+```
+
+Prefer a one-off file? A single-file
+[`.flatpak` bundle](https://github.com/superuser-miguel/Vivid_Gradience/releases/latest)
+is attached to each GitHub Release, but it carries no auto-update — a newer
+release means reinstalling it. Vivid Gradience is **not on Flathub** and is
+distributed independently.
+
 ## Features
 
 - Pick from **53 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,

@@ -115,16 +115,39 @@ fork, so `gh` can otherwise resolve to the upstream parent.
 `repo-release/`, `build-dir-release/`, `*.flatpak`, `*.asc` and `SHA256SUMS`
 are all gitignored — release artifacts are published, never committed.
 
-## Installing a bundle
+**7. Update the hosted, auto-updating repo.** The primary install path is the
+signed OSTree repo at `superuser-miguel.github.io/Vivid_Gradience-repo` (users
+track it with `flatpak update`). After the tag is pushed and the manifest pinned
+(steps 2–4), publish it:
 
 ```shell
-flatpak install --user ./VividGradience.flatpak
+build-aux/publish-repo.sh
+```
+
+It rebuilds v-current from the pinned manifest **unsigned**, then signs every
+ref + the summary and force-pushes a squashed commit to the separate
+`Vivid_Gradience-repo`. Signing is deliberately a quick final step: the key has
+a passphrase, and signing *during* the multi-minute build lets the gpg-agent
+cache expire mid-build (`Failure signing commit file: Pinentry: Timeout`). If
+running headless, warm the agent right before the sign step (`gpg --clearsign`
+once to cache the passphrase). Everything builds on `$TMPDIR` (tmpfs) so a
+near-full `$HOME` doesn't trip ostree's min-free-space floor.
+
+## Installing
+
+Primary — the signed, auto-updating repo (tracked by `flatpak update`):
+
+```shell
+flatpak install --user https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref
 flatpak run io.github.superuser_miguel.VividGradience
 ```
 
-A bundle carries **no auto-update**; installing a newer release means
-downloading and reinstalling it. A hosted repo plus a `.flatpakref` would give
-updates, and isn't set up.
+Alternatively the one-off bundle from the GitHub Release — no auto-update, a
+newer version means reinstalling it:
+
+```shell
+flatpak install --user ./VividGradience.flatpak
+```
 
 ## Not Flathub
 
