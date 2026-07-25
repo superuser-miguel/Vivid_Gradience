@@ -447,3 +447,5 @@ gradience/backend/constants.py
 build-dir-dev
 repo-dev
 .flatpak-builder/
+*.asc
+SHA256SUMS

@@ -21,11 +21,14 @@ guarantee only holds if the pin is updated — hence step 4.
 `data/io.github.superuser_miguel.VividGradience.appdata.xml.in.in` must agree.
 Use the real date; `type="stable"` unless it genuinely is a pre-release.
 
-**2. Commit and tag.**
+**2. Commit and tag — both GPG-signed.** Releases are signed with the
+`superuser-miguel (git_keys)` key `D67DB8E03D50A8C0` (it matches the repo's
+commit identity; signing is non-interactive here). Note `-u` is a `git tag`
+flag — for the commit use `--gpg-sign=`.
 
 ```shell
-git commit -am "Release vX.Y.Z"
-git tag vX.Y.Z
+git commit -a --gpg-sign=D67DB8E03D50A8C0 -m "Release vX.Y.Z"
+git tag -u D67DB8E03D50A8C0 -m "Vivid Gradience vX.Y.Z" vX.Y.Z
 git push origin main --tags
 ```
 
@@ -73,15 +76,44 @@ flatpak build-bundle repo-release VividGradience.flatpak \
   --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
 ```
 
-**6. Publish.**
+If `$HOME` is near full, the ostree export fails with `min-free-space-percent
+'3%' would be exceeded`. Build on another filesystem instead — point the state
+dir, build dir and repo at a roomier mount (the `/tmp` tmpfs works, and keeping
+all three together also satisfies the "same filesystem" requirement):
 
 ```shell
-gh release create vX.Y.Z VividGradience.flatpak \
+S=/tmp/rel; flatpak-builder --user --force-clean \
+  --state-dir=$S/fb-state --repo=$S/repo $S/build-dir \
+  build-aux/flatpak/io.github.superuser_miguel.VividGradience.release.json
+flatpak build-bundle $S/repo VividGradience.flatpak \
+  io.github.superuser_miguel.VividGradience \
+  --runtime-repo=https://flathub.org/repo/flathub.flatpakrepo
+```
+
+Confirm the bundle really came from the tag before publishing: the built tree
+should carry the new `<release>` version in its metainfo and include files that
+only exist at that tag (e.g. `backend/theming/backup.py`).
+
+**6. Sign the bundle, then publish.** Detach-sign the bundle and a checksum
+file with the same key, and attach all four to the release.
+
+```shell
+KEY=D67DB8E03D50A8C0
+sha256sum VividGradience.flatpak > SHA256SUMS
+gpg --batch --yes --local-user $KEY --detach-sign --armor VividGradience.flatpak
+gpg --batch --yes --local-user $KEY --detach-sign --armor SHA256SUMS
+
+gh release create vX.Y.Z \
+  VividGradience.flatpak VividGradience.flatpak.asc SHA256SUMS SHA256SUMS.asc \
+  --repo superuser-miguel/Vivid_Gradience --verify-tag \
   --title "Vivid Gradience vX.Y.Z" --notes "…"
 ```
 
-`repo-release/`, `build-dir-release/` and `*.flatpak` are all gitignored —
-release artifacts are published, never committed.
+Always pass `--repo superuser-miguel/Vivid_Gradience` — the repo is a GitHub
+fork, so `gh` can otherwise resolve to the upstream parent.
+
+`repo-release/`, `build-dir-release/`, `*.flatpak`, `*.asc` and `SHA256SUMS`
+are all gitignored — release artifacts are published, never committed.
 
 ## Installing a bundle
 
