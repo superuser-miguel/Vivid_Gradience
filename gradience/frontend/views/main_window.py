@@ -232,20 +232,23 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         if not hues:
             return
 
-        # Draw the theme's character colors as chips over the tinted background.
-        size = 14
-        gap = 9
-        total = len(hues) * size + (len(hues) - 1) * gap
+        # Draw the theme's character colors as tall chips over the tinted
+        # background — vertical swatches read as "a colour scheme" more clearly
+        # than small squares do.
+        chip_w = 18
+        chip_h = 32
+        gap = 8
+        total = len(hues) * chip_w + (len(hues) - 1) * gap
         x = (width - total) / 2
-        y = (height - size) / 2
+        y = (height - chip_h) / 2
         for color in hues:
-            self._rounded_rect(cr, x, y, size, size, 3)
+            self._rounded_rect(cr, x, y, chip_w, chip_h, 3)
             cr.set_source_rgb(color.red, color.green, color.blue)
             cr.fill_preserve()
             cr.set_source_rgba(0, 0, 0, 0.18)
             cr.set_line_width(1)
             cr.stroke()
-            x += size + gap
+            x += chip_w + gap
 
     def on_preset_card_clicked(self, _button, slug):
         self.app.load_preset_from_resource(f"{rootdir}/presets/{slug}.json")
