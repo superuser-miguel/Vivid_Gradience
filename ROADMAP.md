@@ -6,6 +6,8 @@ If you'd like to see a new feature, open an issue or submit a PR.
 
 - [x] Working Flatpak targeting GNOME 48+ / runtime 50 (latest)
 - [x] Automatically track new GNOME runtime releases
+- [x] Signed releases + a hosted, auto-updating Flatpak repo (`flatpak update`),
+      distributed independently of Flathub
 - [ ] Modernize the UI — adopt current libadwaita composition:
   - [x] Wrap windows in `Adw.ToolbarView` (modern top/bottom-bar elevation)
   - [x] Add `Adw.Breakpoint` for an adaptive, resize-to-narrow layout

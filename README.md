@@ -40,12 +40,14 @@ some rough edges — issues and pull requests are welcome.
       grouped into family sections
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
+- [x] Installs and updates from a **signed, auto-updating Flatpak repo** (with a
+      one-off bundle as a fallback), released independently of Flathub
 - [ ] Further codebase cleanup and visual enhancements
 
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped under Adwaita, Dark and Light" width="820"/>
+  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped into sections" width="820"/>
 </p>
 
 <p align="center">
