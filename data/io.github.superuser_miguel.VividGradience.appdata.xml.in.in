@@ -10,6 +10,11 @@
   <update_contact>https://github.com/superuser-miguel</update_contact>
   <content_rating type="oars-1.1"/>
 
+  <branding>
+    <color type="primary" scheme_preference="light">#b9a6f2</color>
+    <color type="primary" scheme_preference="dark">#2d2140</color>
+  </branding>
+
   <description>
     <p>Vivid Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 theme.</p>
     <p>The main features of Gradience include the following:</p>

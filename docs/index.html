@@ -8,13 +8,13 @@
 <style>
   :root {
     --bg: #f6f7fb; --surface: #ffffff; --text: #1b1c22; --muted: #5a5c68;
-    --border: #e3e5ee; --accent: #3584e4; --accent-2: #1c71d8;
+    --border: #e3e5ee; --accent: #6e56cf; --accent-2: #5842a6;
     --ok: #2e9e5b; --no: #c6c8d4;
   }
   @media (prefers-color-scheme: dark) {
     :root {
       --bg: #15161c; --surface: #1e1f28; --text: #ecedf2; --muted: #a6a8b6;
-      --border: #2c2e3a; --accent: #78aeed; --accent-2: #3584e4;
+      --border: #2c2e3a; --accent: #b9a6f2; --accent-2: #8a72e6;
       --ok: #55d98a; --no: #44465a;
     }
   }
@@ -111,9 +111,10 @@
     GTK&nbsp;4 and GTK&nbsp;3 apps — without hand-editing a single config file.
   </p>
   <div class="btns">
-    <a class="btn primary" href="https://github.com/superuser-miguel/Vivid_Gradience/releases/latest">Download (.flatpak)</a>
+    <a class="btn primary" href="https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref">Install (auto-updating)</a>
     <a class="btn" href="https://github.com/superuser-miguel/Vivid_Gradience">View on GitHub</a>
   </div>
+  <p class="sub" style="margin-top:12px">Signed Flatpak repo — new releases arrive with <code>flatpak update</code>. Prefer a one-off file? <a href="https://github.com/superuser-miguel/Vivid_Gradience/releases/latest">Download the .flatpak bundle</a>.</p>
   <img class="shot" src="screenshots/presets.png" alt="The Presets gallery, showing colour-scheme cards grouped under Adwaita, Dark and Light headings">
 </header>
 
@@ -192,13 +193,15 @@
 
 <section class="wrap">
   <h2>Install</h2>
-  <p class="sub">A single-file Flatpak bundle from GitHub Releases.</p>
-<pre><code>flatpak install --user ./VividGradience.flatpak
+  <p class="sub">From the signed Flatpak repo — <code>flatpak update</code> keeps it current.</p>
+<pre><code>flatpak install --user https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref
 flatpak run io.github.superuser_miguel.VividGradience</code></pre>
   <p class="note">
-    A bundle carries no auto-update — a newer release means downloading and
-    reinstalling it. Vivid Gradience is <strong>not on Flathub</strong> and is
-    distributed independently.
+    Prefer a one-off file? A single-file
+    <a href="https://github.com/superuser-miguel/Vivid_Gradience/releases/latest">.flatpak bundle</a>
+    is on GitHub Releases too, but it carries no auto-update — a newer release
+    means reinstalling it. Vivid Gradience is <strong>not on Flathub</strong> and
+    is distributed independently.
   </p>
 </section>
 
