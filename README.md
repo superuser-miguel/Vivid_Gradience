@@ -35,8 +35,9 @@ some rough edges — issues and pull requests are welcome.
 - [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
       `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
 - [x] **53 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
-      Rosé Pine, Everforest, Solarized, and more — in a visual preset gallery
-      with per-theme color previews
+      Rosé Pine, Everforest, Solarized, plus the full **Arc** and **Matcha**
+      families — in a visual preset gallery with per-theme color previews,
+      grouped into family sections
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
 - [ ] Further codebase cleanup and visual enhancements
@@ -64,8 +65,9 @@ More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.
 ## Features
 
 - Pick from **53 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
-  Rosé Pine, Everforest, Solarized, Tokyo Night, and more — in a visual preset
-  gallery, each card previewing the theme's own colors
+  Rosé Pine, Everforest, Solarized, Tokyo Night, and the full **Arc** and
+  **Matcha** families — in a visual preset gallery, each card previewing the
+  theme's own colors
 - Recolor any part of the Adwaita theme with a color picker or hex values, in
   searchable, collapsible categories
 - Generate a Material 3 color scheme from your wallpaper
