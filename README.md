@@ -47,7 +47,7 @@ some rough edges — issues and pull requests are welcome.
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped into sections" width="820"/>
+  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped into family sections — Adwaita, Arc, Matcha, Dark and Light" width="820"/>
 </p>
 
 <p align="center">
