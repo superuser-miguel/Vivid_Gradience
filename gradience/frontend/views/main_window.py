@@ -103,6 +103,8 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
     BUILTIN_PRESET_SECTIONS = [
         ("Adwaita", ["adwaita", "adwaita-dark", "pretty-purple"]),
+        ("Arc", ["arc", "arc-darker", "arc-grey", "arc-dark", "arc-gotham",
+                 "arc-grey-dark"]),
         ("Dark", ["catppuccin-mocha", "catppuccin-frappe", "catppuccin-macchiato",
                   "gruvbox-dark", "gruvbox-material", "nord", "dracula",
                   "tokyo-night", "tokyo-night-storm", "rose-pine", "rose-pine-moon",

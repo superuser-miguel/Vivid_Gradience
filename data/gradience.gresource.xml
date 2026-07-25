@@ -40,6 +40,12 @@
     <file>presets/flexoki-dark.json</file>
     <file>presets/flexoki-light.json</file>
     <file>presets/paper-color-light.json</file>
+    <file>presets/arc.json</file>
+    <file>presets/arc-darker.json</file>
+    <file>presets/arc-dark.json</file>
+    <file>presets/arc-gotham.json</file>
+    <file>presets/arc-grey.json</file>
+    <file>presets/arc-grey-dark.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
