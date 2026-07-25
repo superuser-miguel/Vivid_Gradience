@@ -66,19 +66,33 @@ More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.
 
 ## Install
 
-Vivid Gradience installs from its **signed, auto-updating Flatpak repo** —
-`flatpak update` then keeps it current:
+### Recommended — signed repo, automatic updates
+
+Install from the project's own signed Flatpak repo, and new releases arrive
+with `flatpak update`:
 
 ```shell
 flatpak install --user https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref
 flatpak run io.github.superuser_miguel.VividGradience
 ```
 
-Prefer a one-off file? A single-file
-[`.flatpak` bundle](https://github.com/superuser-miguel/Vivid_Gradience/releases/latest)
-is attached to each GitHub Release, but it carries no auto-update — a newer
-release means reinstalling it. Vivid Gradience is **not on Flathub** and is
-distributed independently.
+> This subscribes you to the repo (like Flathub does), so `flatpak update` — or
+> GNOME Software — pulls new versions automatically. Every release is signed
+> with the project's GPG key.
+
+### Alternative — one-off bundle
+
+Prefer a single file with no remote? Download **`VividGradience.flatpak`** from
+the [latest release](https://github.com/superuser-miguel/Vivid_Gradience/releases/latest):
+
+```shell
+flatpak install --user ./VividGradience.flatpak
+flatpak run io.github.superuser_miguel.VividGradience
+```
+
+> The bundle has **no update path** — to move to a newer version, download it and
+> reinstall (or switch to the signed repo above, which updates itself). Vivid
+> Gradience is **not on Flathub** and is distributed independently.
 
 ## Features
 
