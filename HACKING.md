@@ -1,4 +1,4 @@
-## 🙌 Contribute to Vivid Gradience
+## Contribute to Vivid Gradience
 
 ### Code
 
@@ -11,7 +11,7 @@ discuss the approach.
 Localization is not actively maintained at this time. If you're interested in
 helping, open an issue and we can discuss setting up a translation platform.
 
-## 🏗️ Building from Source
+## Building from Source
 
 ### GNOME Builder (Recommended)
 
@@ -39,7 +39,7 @@ flatpak install org.gnome.Sdk//50 org.gnome.Platform//50
 git clone https://github.com/superuser-miguel/Vivid_Gradience.git
 cd Vivid_Gradience
 flatpak-builder --install --user --force-clean repo/ \
-  build-aux/flatpak/com.github.superuser-miguel.VividGradience.json
+  build-aux/flatpak/io.github.superuser_miguel.VividGradience.json
 ```
 
 #### System installation
@@ -47,7 +47,7 @@ flatpak-builder --install --user --force-clean repo/ \
 git clone https://github.com/superuser-miguel/Vivid_Gradience.git
 cd Vivid_Gradience
 flatpak-builder --install --system --force-clean repo/ \
-  build-aux/flatpak/com.github.superuser-miguel.VividGradience.json
+  build-aux/flatpak/io.github.superuser_miguel.VividGradience.json
 ```
 
 #### Devel build (nightly runtime)
@@ -57,7 +57,7 @@ flatpak remote-add --if-not-exists gnome-nightly \
 flatpak install gnome-nightly org.gnome.Sdk//master org.gnome.Platform//master
 
 flatpak-builder --install --user --force-clean repo/ \
-  build-aux/flatpak/com.github.superuser-miguel.VividGradience.Devel.json
+  build-aux/flatpak/io.github.superuser_miguel.VividGradience.Devel.json
 ```
 
 ### Meson (Local build)
@@ -70,7 +70,7 @@ Use this for fast iteration without the Flatpak layer.
 - PyGObject `python-gobject`
 - Blueprint compiler [`blueprint-compiler`](https://jwestman.pages.gitlab.gnome.org/blueprint-compiler/setup.html)
 - GTK4 `gtk4`
-- Libadwaita >= 1.4 `libadwaita`
+- Libadwaita >= 1.6 `libadwaita`
 - Meson `meson`
 - Ninja `ninja-build`
 ```shell

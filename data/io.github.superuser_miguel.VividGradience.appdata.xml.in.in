@@ -19,11 +19,11 @@
     <p>Vivid Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 theme.</p>
     <p>The main features of Vivid Gradience include the following:</p>
     <ul>
-      <li>🎨️ Changing any color of Adwaita theme</li>
-      <li>🖼️ Generating a Material You color scheme from your wallpaper, with scheme variants and contrast</li>
-      <li>🌈️ 50+ ready-made color schemes in a visual gallery, grouped by family</li>
-      <li>🎁️ Creating, saving and sharing presets</li>
-      <li>⚙️ Changing advanced options with CSS</li>
+      <li>Recolor any part of the Adwaita palette</li>
+      <li>Generate a Material You color scheme from your wallpaper, with scheme variants and contrast</li>
+      <li>Start from 50+ ready-made color schemes in a visual gallery, grouped by family</li>
+      <li>Create, save and share presets</li>
+      <li>Extend styling with custom CSS</li>
     </ul>
   </description>
 
