@@ -54,6 +54,25 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Redesigned splash / welcome page
 - [ ] Further visual enhancements beyond the original scope
 
+### Appearance control center
+
+Own the whole *appearance* surface, so GNOME Tweaks isn't needed to manage how
+the desktop looks. Most of these are `gsettings` selectors on
+`org.gnome.desktop.interface` — a schema Vivid already reads and writes (it
+sets `gtk-theme` on apply) — so it's largely UI over plumbing that exists. Pairs
+with the external-theme importer above: install a theme **and** switch to it from
+one app. Scope stays on *looks* — not the fonts-scaling / startup-apps / keyboard
+parts of Tweaks.
+
+- [ ] GTK 3 / legacy theme picker (`interface.gtk-theme`)
+- [ ] Icon theme picker (`interface.icon-theme`)
+- [ ] Cursor theme + size picker (`interface.cursor-theme`)
+- [ ] Light / dark toggle (`interface.color-scheme`)
+- [ ] Window control button layout (`wm.preferences.button-layout`)
+- [ ] Toggle animations (`interface.enable-animations`)
+- [ ] Activate a generated GNOME Shell theme (`shell.extensions.user-theme`, when
+      the User Themes extension is present)
+
 ### Theme Engines & Integrations
 
 Extend theming to targets beyond GTK / adw-gtk3. The old yapsy-based plugin

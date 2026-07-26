@@ -124,6 +124,8 @@ flatpak run io.github.superuser_miguel.VividGradience
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
+- [ ] Appearance control center — pick icon, cursor, GTK 3 and Shell themes from
+      Vivid itself, so GNOME Tweaks isn't needed for theming
 - [ ] Light/dark preset pairs
 - [ ] Time-of-day theme cycle (day / afternoon / night auto-switching)
 - [ ] Full theme preview
