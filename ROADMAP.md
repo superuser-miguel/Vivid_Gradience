@@ -81,7 +81,9 @@ removed); its capabilities are being rebuilt as first-class, built-in **Theme
 Engines** — like the current Monet and GNOME Shell engines — rather than
 external plugins.
 
-- [x] Monet engine (Material 3 palette from a wallpaper)
+- [x] Monet engine — Material You palette from a wallpaper, with dynamic
+      schemes (nine variants: Vibrant, Tonal Spot, Expressive, … ) and a
+      selectable contrast level
 - [x] GNOME Shell engine
 - [ ] Firefox / browser integration (the Flatpak already grants browser access)
 - [ ] GDM theming

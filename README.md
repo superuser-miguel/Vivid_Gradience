@@ -17,7 +17,7 @@
 Vivid Gradience is a desktop app for customizing the look of **Libadwaita
 applications** and the **adw-gtk3** theme. From a graphical interface — with no
 hand-editing of config files — you can recolor the entire Adwaita palette,
-generate a color scheme from your wallpaper, layer in custom CSS, and save or
+generate a Material You color scheme from your wallpaper, layer in custom CSS, and save or
 share the result as a preset.
 
 It is a maintained fork of [Gradience](https://github.com/GradienceTeam/Gradience),
@@ -102,7 +102,8 @@ flatpak run io.github.superuser_miguel.VividGradience
   theme's own colors
 - Recolor any part of the Adwaita theme with a color picker or hex values, in
   searchable, collapsible categories
-- Generate a Material 3 color scheme from your wallpaper
+- Generate a Material You color scheme from your wallpaper — pick from nine
+  scheme variants (Vibrant, Tonal Spot, Expressive, and more) and a contrast level
 - Apply themes to Libadwaita, GTK 4, and GTK 3 (via adw-gtk3) applications
 - Create, save, and manage your own presets
 - Extend styling with custom CSS
@@ -132,7 +133,7 @@ flatpak run io.github.superuser_miguel.VividGradience
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
 
-The full list, including inherited features and plugins, lives in
+The full list, including inherited features and the theme engines, lives in
 [ROADMAP.md](ROADMAP.md).
 
 ## Theming setup
