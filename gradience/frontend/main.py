@@ -316,26 +316,30 @@ class GradienceApplication(Adw.Application):
 
         self.reload_variables()
 
-    def update_theme_from_monet(self, monet, preset_variant: str, tone=20):
-        palettes = monet["palettes"]
+    def update_theme_from_monet(self, source_color: int, mode: str,
+                                variant="vibrant", contrast=0.0, tone=40):
+        monet = Monet()
 
-        preset_variant = preset_variant.lower()  # dark / light
+        mode = mode.lower()  # auto / light / dark
+        if mode == "auto":
+            is_dark = self.style_manager.get_dark()
+        else:
+            is_dark = mode == "dark"
 
+        scheme = monet.build_scheme(source_color, is_dark, variant, contrast)
+
+        # Palette-shades preview from the six Material You tonal palettes.
+        palettes = [
+            scheme.primary_palette, scheme.secondary_palette, scheme.tertiary_palette,
+            scheme.neutral_palette, scheme.neutral_variant_palette, scheme.error_palette,
+        ]
         palette = {}
-
-        for i, color in zip(range(1, 7), palettes.values()):
-            palette[str(i)] = hexFromArgb(color.tone(int(tone)))
+        for i, tonal in zip(range(1, 7), palettes):
+            palette[str(i)] = hexFromArgb(tonal.tone(int(tone)))
         self.pref_palette_shades["monet"].update_shades(palette)
 
-        if preset_variant == "auto":
-            if self.style_manager.get_dark():
-                preset_variant = "dark"
-            else:
-                preset_variant = "light"
-
         try:
-            preset_object = Monet().new_preset_from_monet(monet_palette=monet,
-                                props=[tone, preset_variant], obj_only=True)
+            preset_object = monet.new_preset_from_scheme(scheme, is_dark, obj_only=True)
         except (OSError, AttributeError) as e:
             logging.error("An error occurred while generating preset from Monet palette.", exc=e)
             raise

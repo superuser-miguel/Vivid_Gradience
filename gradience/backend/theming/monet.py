@@ -16,14 +16,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-import os
+import gi
 
-from PIL import Image
+gi.require_version("GdkPixbuf", "2.0")
+from gi.repository import GdkPixbuf
 
-from svglib.svglib import svg2rlg
-from reportlab.graphics import renderPM
+from materialyoucolor.quantize import QuantizeCelebi
+from materialyoucolor.score.score import Score
+from materialyoucolor.hct import Hct
+from materialyoucolor.dynamiccolor.material_dynamic_colors import MaterialDynamicColors
+from materialyoucolor.scheme.scheme_vibrant import SchemeVibrant
+from materialyoucolor.scheme.scheme_tonal_spot import SchemeTonalSpot
+from materialyoucolor.scheme.scheme_expressive import SchemeExpressive
+from materialyoucolor.scheme.scheme_fidelity import SchemeFidelity
+from materialyoucolor.scheme.scheme_content import SchemeContent
+from materialyoucolor.scheme.scheme_neutral import SchemeNeutral
+from materialyoucolor.scheme.scheme_monochrome import SchemeMonochrome
+from materialyoucolor.scheme.scheme_rainbow import SchemeRainbow
+from materialyoucolor.scheme.scheme_fruit_salad import SchemeFruitSalad
 
-from gradience.material_color_utilities_python.utils import theme_utils
 from gradience.backend.models.preset import Preset
 from gradience.backend.utils.colors import argb_to_color_code, adjust_brightness
 
@@ -32,146 +43,158 @@ from gradience.backend.logger import Logger
 logging = Logger()
 
 
+# Material You scheme variants surfaced in the UI. Insertion order is the order
+# shown in the "Style" combo row; the first entry is the default.
+SCHEME_VARIANTS = {
+    "vibrant": SchemeVibrant,
+    "tonal_spot": SchemeTonalSpot,
+    "expressive": SchemeExpressive,
+    "fidelity": SchemeFidelity,
+    "content": SchemeContent,
+    "neutral": SchemeNeutral,
+    "monochrome": SchemeMonochrome,
+    "rainbow": SchemeRainbow,
+    "fruit_salad": SchemeFruitSalad,
+}
+DEFAULT_VARIANT = "vibrant"
+
+# UI contrast presets -> materialyoucolor contrast_level (spec range -1.0..1.0).
+CONTRAST_LEVELS = {
+    "standard": 0.0,
+    "medium": 0.5,
+    "high": 1.0,
+}
+DEFAULT_CONTRAST = 0.0
+
+
 class Monet:
+    """Generate a Material You (Material 3) scheme from a wallpaper image.
+
+    Uses the maintained ``materialyoucolor`` library (dynamic schemes with a
+    selectable variant and contrast level), and GdkPixbuf to read the image so
+    PNG/JPG/SVG all work through the runtime's own loaders.
+    """
+
     def __init__(self):
-        self.palette = None
+        self.source = None
 
-    def generate_palette_from_image(self, image_path: str) -> dict:
-        if image_path.endswith(".svg"):
-            drawing = svg2rlg(image_path)
-            image_path = os.path.join(
-                os.environ.get("XDG_RUNTIME_DIR"), "gradience_bg.png"
-            )
-            renderPM.drawToFile(drawing, image_path, fmt="PNG")
-
+    def generate_source_color(self, image_path: str) -> int:
+        """Quantize a wallpaper and score it down to a single seed color (ARGB)."""
         if image_path.endswith(".xml"):
-            # TODO: Use custom exception in future
-            raise ValueError("XML files are unsupported by Gradience's Monet implementation")
+            # GNOME time-of-day wallpapers are XML definitions, not images.
+            raise ValueError("XML wallpapers are not supported by the Monet engine")
 
         try:
-            monet_img = Image.open(image_path)
-        except Exception as e:
-            logging.error("An error occurred while generating a Monet palette.", exc=e)
-            raise
-        else:
-            basewidth = 64
-            wpercent = basewidth / float(monet_img.size[0])
-            hsize = int((float(monet_img.size[1]) * float(wpercent)))
-
-            monet_img = monet_img.resize(
-                (basewidth, hsize), Image.Resampling.LANCZOS
+            pixbuf = GdkPixbuf.Pixbuf.new_from_file_at_scale(
+                image_path, 128, 128, True
             )
+        except Exception as e:
+            logging.error("An error occurred while loading the Monet image.", exc=e)
+            raise
 
-            self.palette = theme_utils.themeFromImage(monet_img)
+        pixels = self._pixbuf_to_rgb_pixels(pixbuf)
+        self.source = Score.score(QuantizeCelebi(pixels, 128))[0]
+        return self.source
 
-        return self.palette
+    @staticmethod
+    def _pixbuf_to_rgb_pixels(pixbuf) -> list:
+        """Flatten a GdkPixbuf into the list of (r, g, b) tuples QuantizeCelebi wants."""
+        width = pixbuf.get_width()
+        height = pixbuf.get_height()
+        channels = pixbuf.get_n_channels()
+        rowstride = pixbuf.get_rowstride()
+        data = pixbuf.get_pixels()
 
-    def new_preset_from_monet(self, name=None, monet_palette=None, props=None, obj_only=False) -> Preset or None:
+        pixels = []
+        for y in range(height):
+            row = y * rowstride
+            for x in range(width):
+                i = row + x * channels
+                pixels.append((data[i], data[i + 1], data[i + 2]))
+        return pixels
+
+    @staticmethod
+    def build_scheme(source: int, is_dark: bool, variant: str = DEFAULT_VARIANT,
+                     contrast: float = DEFAULT_CONTRAST):
+        scheme_class = SCHEME_VARIANTS.get(variant, SCHEME_VARIANTS[DEFAULT_VARIANT])
+        return scheme_class(Hct.from_int(source), is_dark, contrast)
+
+    def new_preset_from_scheme(self, scheme, is_dark: bool, name=None,
+                               obj_only=False) -> Preset or None:
         preset = Preset()
 
-        if props:
-            tone = props[0]
-            theme = props[1]
-        else:
-            raise AttributeError("Properties 'tone' and/or 'theme' missing")
+        def role(role_name: str) -> int:
+            return getattr(MaterialDynamicColors, role_name).get_argb(scheme)
 
-        if not monet_palette:
-            raise AttributeError("Property 'monet_palette' missing")
+        primary = role("primary")
+        on_primary = role("onPrimary")
+        secondary = role("secondary")
+        secondary_container = role("secondaryContainer")
+        on_secondary_container = role("onSecondaryContainer")
+        tertiary = role("tertiary")
+        tertiary_container = role("tertiaryContainer")
+        on_tertiary_container = role("onTertiaryContainer")
+        error = role("error")
+        error_container = role("errorContainer")
+        on_error_container = role("onErrorContainer")
+        surface = role("surface")
+        on_surface = role("onSurface")
+        outline = role("outline")
+        shadow = role("shadow")
 
-        if theme == "light":
-            light_theme = monet_palette["schemes"]["light"]
-            variable = {
-                "accent_color": argb_to_color_code(light_theme.primary),
-                "accent_bg_color": argb_to_color_code(light_theme.primary),
-                "accent_fg_color": argb_to_color_code(light_theme.onPrimary),
-                "destructive_color": argb_to_color_code(light_theme.error),
-                "destructive_bg_color": argb_to_color_code(light_theme.errorContainer),
-                # Avoid using .onError as it causes contrast issues
-                "destructive_fg_color": argb_to_color_code(light_theme.onErrorContainer),
-                "success_color": argb_to_color_code(light_theme.tertiary),
-                "success_bg_color": argb_to_color_code(light_theme.tertiaryContainer),
-                "success_fg_color": argb_to_color_code(light_theme.onTertiaryContainer),
-                "warning_color": argb_to_color_code(light_theme.secondary),
-                "warning_bg_color": argb_to_color_code(light_theme.secondaryContainer),
-                "warning_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "error_color": argb_to_color_code(light_theme.error),
-                "error_bg_color": argb_to_color_code(light_theme.errorContainer),
-                # Avoid using .onError as it causes contrast issues
-                "error_fg_color": argb_to_color_code(light_theme.onErrorContainer),
-                "window_bg_color": argb_to_color_code(light_theme.surface),
-                "window_fg_color": argb_to_color_code(light_theme.onSurface),
-                "view_bg_color": argb_to_color_code(adjust_brightness(light_theme.secondaryContainer, 1.5)),
-                "view_fg_color": argb_to_color_code(light_theme.onSurface),
-                "headerbar_bg_color": argb_to_color_code(light_theme.secondaryContainer),
-                "headerbar_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "headerbar_border_color": argb_to_color_code(light_theme.onSurface, "0.8"),
-                "headerbar_backdrop_color": "@window_bg_color",
-                "headerbar_shade_color": argb_to_color_code(light_theme.onSurface, "0.07"),
-                "sidebar_bg_color": argb_to_color_code(adjust_brightness(light_theme.secondaryContainer, 1.1)),
-                "sidebar_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "sidebar_border_color": "@view_bg_color",
-                "sidebar_backdrop_color": "@window_bg_color",
-                "sidebar_shade_color": argb_to_color_code(light_theme.onSurface, "0.07"),
-                "card_bg_color": argb_to_color_code(light_theme.primary, "0.05"),
-                "card_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "card_shade_color": argb_to_color_code(light_theme.shadow, "0.07"),
-                "thumbnail_bg_color": argb_to_color_code(light_theme.secondaryContainer),
-                "thumbnail_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "dialog_bg_color": argb_to_color_code(light_theme.secondaryContainer),
-                "dialog_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "popover_bg_color": argb_to_color_code(light_theme.secondaryContainer),
-                "popover_fg_color": argb_to_color_code(light_theme.onSecondaryContainer),
-                "shade_color": argb_to_color_code(light_theme.shadow, "0.07"),
-                "scrollbar_outline_color": argb_to_color_code(light_theme.outline),
-            }
-        elif theme == "dark":
-            dark_theme = monet_palette["schemes"]["dark"]
-            variable = {
-                "accent_color": argb_to_color_code(dark_theme.primary),
-                "accent_bg_color": argb_to_color_code(dark_theme.primary),
-                "accent_fg_color": argb_to_color_code(dark_theme.onPrimary),
-                "destructive_color": argb_to_color_code(dark_theme.error),
-                "destructive_bg_color": argb_to_color_code(dark_theme.errorContainer),
-                # Avoid using .onError as it causes contrast issues
-                "destructive_fg_color": argb_to_color_code(dark_theme.onErrorContainer),
-                "success_color": argb_to_color_code(dark_theme.tertiary),
-                "success_bg_color": argb_to_color_code(dark_theme.tertiaryContainer),
-                "success_fg_color": argb_to_color_code(dark_theme.onTertiaryContainer),
-                "warning_color": argb_to_color_code(dark_theme.secondary),
-                "warning_bg_color": argb_to_color_code(dark_theme.secondaryContainer),
-                "warning_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "error_color": argb_to_color_code(dark_theme.error),
-                "error_bg_color": argb_to_color_code(dark_theme.errorContainer),
-                # Avoid using .onError as it causes contrast issues
-                "error_fg_color": argb_to_color_code(dark_theme.onErrorContainer),
-                "window_bg_color": argb_to_color_code(dark_theme.surface),
-                "window_fg_color": argb_to_color_code(dark_theme.onSurface),
-                "view_bg_color": argb_to_color_code(adjust_brightness(dark_theme.secondaryContainer, 0.5)),
-                "view_fg_color": argb_to_color_code(dark_theme.onSurface),
-                "headerbar_bg_color": argb_to_color_code(dark_theme.secondaryContainer),
-                "headerbar_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "headerbar_border_color": argb_to_color_code(dark_theme.onSurface, "0.8"),
-                "headerbar_backdrop_color": "@window_bg_color",
-                "headerbar_shade_color": argb_to_color_code(dark_theme.onSurface, "0.07"),
-                "sidebar_bg_color": argb_to_color_code(adjust_brightness(dark_theme.secondaryContainer, 0.8)),
-                "sidebar_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "sidebar_border_color": "@view_bg_color",
-                "sidebar_backdrop_color": "@window_bg_color",
-                "sidebar_shade_color": argb_to_color_code(dark_theme.onSurface, "0.07"),
-                "card_bg_color": argb_to_color_code(dark_theme.primary, "0.05"),
-                "card_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "card_shade_color": argb_to_color_code(dark_theme.shadow, "0.07"),
-                "thumbnail_bg_color": argb_to_color_code(dark_theme.secondaryContainer),
-                "thumbnail_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "dialog_bg_color": argb_to_color_code(dark_theme.secondaryContainer),
-                "dialog_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "popover_bg_color": argb_to_color_code(dark_theme.secondaryContainer),
-                "popover_fg_color": argb_to_color_code(dark_theme.onSecondaryContainer),
-                "shade_color": argb_to_color_code(dark_theme.shadow, "0.36"),
-                "scrollbar_outline_color": argb_to_color_code(dark_theme.outline, "0.5"),
-            }
+        # A few derived tones are nudged differently for light vs dark, matching
+        # the original Monet mapping.
+        if not is_dark:
+            view_factor, sidebar_factor = 1.5, 1.1
+            shade_alpha, scrollbar = "0.07", argb_to_color_code(outline)
         else:
-            raise AttributeError("Unknown theme variant selected")
+            view_factor, sidebar_factor = 0.5, 0.8
+            shade_alpha, scrollbar = "0.36", argb_to_color_code(outline, "0.5")
+
+        variable = {
+            "accent_color": argb_to_color_code(primary),
+            "accent_bg_color": argb_to_color_code(primary),
+            "accent_fg_color": argb_to_color_code(on_primary),
+            "destructive_color": argb_to_color_code(error),
+            "destructive_bg_color": argb_to_color_code(error_container),
+            # Avoid using .onError as it causes contrast issues
+            "destructive_fg_color": argb_to_color_code(on_error_container),
+            "success_color": argb_to_color_code(tertiary),
+            "success_bg_color": argb_to_color_code(tertiary_container),
+            "success_fg_color": argb_to_color_code(on_tertiary_container),
+            "warning_color": argb_to_color_code(secondary),
+            "warning_bg_color": argb_to_color_code(secondary_container),
+            "warning_fg_color": argb_to_color_code(on_secondary_container),
+            "error_color": argb_to_color_code(error),
+            "error_bg_color": argb_to_color_code(error_container),
+            # Avoid using .onError as it causes contrast issues
+            "error_fg_color": argb_to_color_code(on_error_container),
+            "window_bg_color": argb_to_color_code(surface),
+            "window_fg_color": argb_to_color_code(on_surface),
+            "view_bg_color": argb_to_color_code(adjust_brightness(secondary_container, view_factor)),
+            "view_fg_color": argb_to_color_code(on_surface),
+            "headerbar_bg_color": argb_to_color_code(secondary_container),
+            "headerbar_fg_color": argb_to_color_code(on_secondary_container),
+            "headerbar_border_color": argb_to_color_code(on_surface, "0.8"),
+            "headerbar_backdrop_color": "@window_bg_color",
+            "headerbar_shade_color": argb_to_color_code(on_surface, "0.07"),
+            "sidebar_bg_color": argb_to_color_code(adjust_brightness(secondary_container, sidebar_factor)),
+            "sidebar_fg_color": argb_to_color_code(on_secondary_container),
+            "sidebar_border_color": "@view_bg_color",
+            "sidebar_backdrop_color": "@window_bg_color",
+            "sidebar_shade_color": argb_to_color_code(on_surface, "0.07"),
+            "card_bg_color": argb_to_color_code(primary, "0.05"),
+            "card_fg_color": argb_to_color_code(on_secondary_container),
+            "card_shade_color": argb_to_color_code(shadow, "0.07"),
+            "thumbnail_bg_color": argb_to_color_code(secondary_container),
+            "thumbnail_fg_color": argb_to_color_code(on_secondary_container),
+            "dialog_bg_color": argb_to_color_code(secondary_container),
+            "dialog_fg_color": argb_to_color_code(on_secondary_container),
+            "popover_bg_color": argb_to_color_code(secondary_container),
+            "popover_fg_color": argb_to_color_code(on_secondary_container),
+            "shade_color": argb_to_color_code(shadow, shade_alpha),
+            "scrollbar_outline_color": scrollbar,
+        }
 
         if obj_only == False and not name:
             raise AttributeError("You either need to set 'obj_only' property to True, or add value to 'name' property")

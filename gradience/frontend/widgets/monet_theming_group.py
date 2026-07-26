@@ -16,11 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-from enum import Enum
-
 from gi.repository import Gtk, Adw
 
-from gradience.backend.theming.monet import Monet
+from gradience.backend.theming.monet import Monet, SCHEME_VARIANTS, CONTRAST_LEVELS
 from gradience.backend.constants import rootdir
 
 from gradience.frontend.widgets.palette_shades import GradiencePaletteShades
@@ -50,8 +48,14 @@ class GradienceMonetThemingGroup(Adw.PreferencesGroup):
 
     def setup(self):
         self.setup_palette_shades()
-        #self.setup_tone_row()
+        self.setup_variant_row()
+        self.setup_contrast_row()
         self.setup_theme_row()
+
+        # Re-apply live when any option changes — but only once a wallpaper has
+        # been picked, so tweaking a combo before that stays a no-op.
+        for row in (self.variant_row, self.contrast_row, self.theme_row):
+            row.connect("notify::selected", self._on_option_changed)
 
     def setup_palette_shades(self):
         self.monet_palette_shades = GradiencePaletteShades(
@@ -61,27 +65,54 @@ class GradienceMonetThemingGroup(Adw.PreferencesGroup):
 
         self.monet_theming_expander.add_row(self.monet_palette_shades)
 
-    # TODO: Rethink how it should be implemented
-    '''def setup_tone_row(self):
-        self.tone_row = Adw.ComboRow()
-        self.tone_row.set_title(_("Tone"))
+    def setup_variant_row(self):
+        self.variant_row = Adw.ComboRow()
+        self.variant_row.set_title(_("Style"))
+        self.variant_row.set_subtitle(_("Material You scheme variant"))
 
-        tone_store = Gtk.StringList()
-        tone_store_values = []
+        labels = {
+            "vibrant": _("Vibrant"),
+            "tonal_spot": _("Tonal Spot"),
+            "expressive": _("Expressive"),
+            "fidelity": _("Fidelity"),
+            "content": _("Content"),
+            "neutral": _("Neutral"),
+            "monochrome": _("Monochrome"),
+            "rainbow": _("Rainbow"),
+            "fruit_salad": _("Fruit Salad"),
+        }
+        self._variant_keys = list(SCHEME_VARIANTS.keys())
 
-        for i in range(20, 80, 5):
-            tone_store_values.append(str(i))
+        store = Gtk.StringList()
+        for key in self._variant_keys:
+            store.append(labels.get(key, key))
+        self.variant_row.set_model(store)
+        self.variant_row.set_selected(0)  # DEFAULT_VARIANT is the first entry
 
-        for v in tone_store_values:
-            tone_store.append(v)
+        self.monet_theming_expander.add_row(self.variant_row)
 
-        self.tone_row.set_model(tone_store)
+    def setup_contrast_row(self):
+        self.contrast_row = Adw.ComboRow()
+        self.contrast_row.set_title(_("Contrast"))
 
-        self.monet_theming_expander.add_row(self.tone_row)'''
+        labels = {
+            "standard": _("Standard"),
+            "medium": _("Medium"),
+            "high": _("High"),
+        }
+        self._contrast_keys = list(CONTRAST_LEVELS.keys())
+
+        store = Gtk.StringList()
+        for key in self._contrast_keys:
+            store.append(labels.get(key, key))
+        self.contrast_row.set_model(store)
+        self.contrast_row.set_selected(0)
+
+        self.monet_theming_expander.add_row(self.contrast_row)
 
     def setup_theme_row(self):
         self.theme_row = Adw.ComboRow()
-        self.theme_row.set_title(_("Style"))
+        self.theme_row.set_title(_("Mode"))
 
         theme_store = Gtk.StringList()
         theme_store.append(_("Auto"))
@@ -92,32 +123,30 @@ class GradienceMonetThemingGroup(Adw.PreferencesGroup):
 
         self.monet_theming_expander.add_row(self.theme_row)
 
+    def _on_option_changed(self, *_args):
+        # Live-refresh only when there is already a wallpaper to work from.
+        if self.monet_image_file:
+            self.on_apply_button_clicked()
+
     @Gtk.Template.Callback()
     def on_apply_button_clicked(self, *_args):
         if self.monet_image_file:
             try:
-                monet_theme = Monet().generate_palette_from_image(self.monet_image_file)
-                #tone = self.tone_row.get_selected_item().get_string() # TODO: Remove tone requirement from Monet Engine
-                variant_pos = self.theme_row.props.selected
+                source_color = Monet().generate_source_color(self.monet_image_file)
 
-                class variantEnum(Enum):
-                    AUTO = 0
-                    LIGHT = 1
-                    DARK = 2
-
-                def __get_variant_string():
-                    if variant_pos == variantEnum.AUTO.value:
-                        return "auto"
-                    elif variant_pos == variantEnum.DARK.value:
-                        return "dark"
-                    elif variant_pos == variantEnum.LIGHT.value:
-                        return "light"
-
-                variant_str = __get_variant_string()
+                mode = {0: "auto", 1: "light", 2: "dark"}.get(
+                    self.theme_row.props.selected, "auto"
+                )
+                variant = self._variant_keys[self.variant_row.props.selected]
+                contrast = CONTRAST_LEVELS[
+                    self._contrast_keys[self.contrast_row.props.selected]
+                ]
 
                 self.app.custom_css_group.reset_buffer()
 
-                self.app.update_theme_from_monet(monet_theme, variant_str)
+                self.app.update_theme_from_monet(
+                    source_color, mode, variant, contrast
+                )
             except (OSError, AttributeError, ValueError) as e:
                 logging.error("Failed to generate Monet palette", exc=e)
                 self.parent.toast_overlay.add_toast(
