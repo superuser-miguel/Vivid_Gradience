@@ -149,6 +149,24 @@ newer version means reinstalling it:
 flatpak install --user ./VividGradience.flatpak
 ```
 
+## Gotchas seen in practice
+
+**Deps built from a GitHub archive tarball have unstable checksums.** A module
+that sources `github.com/<x>/archive/refs/tags/<tag>.tar.gz` will fail its
+`sha256` on a fresh (uncached) build, because GitHub re-generates those archives
+with different compression over time. Local dev builds hide this by reusing the
+flatpak-builder cache; the from-tag release build on a clean tmpfs state dir does
+not. Prefer PyPI sdists/wheels with pinned hashes, and delete orphaned modules
+(v0.2.0 tripped on a leftover `python-lxml` that only `svglib` had needed).
+
+**GitHub Pages lags after `publish-repo.sh`.** The force-push lands on git
+immediately, but the Pages CDN can serve the *previous* OSTree repo for a few
+minutes, so the first `flatpak update` may pull the old version. Worse, updating
+against a summary that changed underneath can spawn a `<name>1-origin`
+`no-gpg-verify` remote. To verify a release cleanly: uninstall the app, delete
+the local remote(s), then do a fresh `flatpak install` from the `.flatpakref`
+and confirm the version — that re-establishes a single gpg-verified origin.
+
 ## Not Flathub
 
 Flathub's requirements categorically prohibit AI-generated or AI-assisted code
