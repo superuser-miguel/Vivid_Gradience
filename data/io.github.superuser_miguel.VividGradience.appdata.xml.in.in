@@ -80,6 +80,17 @@
   </recommends>
 
   <releases>
+    <release version="0.2.0" date="2026-07-27" type="stable">
+      <description translate="no">
+        <p>A Material You wallpaper engine and a fresh look.</p>
+        <ul>
+          <li>Monet now generates dynamic Material You schemes, with nine style variants (Vibrant, Tonal Spot, Expressive, and more) and a contrast control</li>
+          <li>New Chip Cascade application icon</li>
+          <li>Install and stay current from a signed, auto-updating Flatpak repo</li>
+          <li>Lighter dependencies: wallpaper loading moved to GdkPixbuf, dropping svglib and reportlab</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.1.1" date="2026-07-25" type="stable">
       <description translate="no">
         <p>More built-in themes and a refined preset gallery.</p>
