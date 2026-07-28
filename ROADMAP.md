@@ -52,7 +52,13 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Time-of-day theme cycle — assign presets to **day / afternoon / night** and
       auto-switch on a schedule (or by sunrise/sunset), with an optional smooth
       transition **(important)**
-- [ ] Full theme preview
+- [x] Live preview — a schematic window in the Colors tab, redrawn on every
+      edit, marking any pair below WCAG AA. Drawn rather than built from real
+      widgets because libadwaita only reads named-colour overrides from the
+      stylesheet loaded at startup; a CSS provider added at runtime does not
+      restyle them, so real widgets would show the launch-time theme
+- [ ] Preview with real widgets — would need rendering in a separate process
+      that starts with the generated stylesheet already in place
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
 - [ ] Redesigned splash / welcome page

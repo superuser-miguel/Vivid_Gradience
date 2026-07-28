@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Findings — Vivid Gradience</title>
+<meta name="description" content="Notes from building Vivid Gradience: libadwaita ignores runtime colour overrides, a WCAG audit of 76 bundled schemes, and extracting palettes from game screenshots.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero wrap">
+  <span class="badge">Development notes</span>
+  <h1>Findings</h1>
+  <p class="tagline">Things that turned out not to work the way they read.</p>
+  <p class="lede">
+    Notes from building the preset and preview work. Written down because each
+    one cost real time to discover, and none of them is obvious from the
+    documentation.
+  </p>
+  <div class="btns">
+    <a class="btn" href="index.html">Back to Vivid Gradience</a>
+  </div>
+</header>
+
+<section class="wrap">
+  <h2>libadwaita ignores colour overrides applied at runtime</h2>
+  <p class="sub">The one that changed a feature's design mid-build.</p>
+  <p>
+    The plan for the live preview was a strip of real GTK widgets. The app
+    already installs a CSS provider on every colour edit, so the widgets should
+    have restyled for free. They did not — and neither does anything else in
+    the process.
+  </p>
+  <p>
+    On <strong>libadwaita 1.9 / GTK 4.22</strong>, named-colour overrides are
+    honoured <em>only</em> from the stylesheet loaded at startup. A provider
+    added to the display afterwards has no effect on them. Each of these was
+    tested by rendering the result and sampling the pixels:
+  </p>
+  <ul class="road">
+    <li><b>A plain rule</b> — <code>button.suggested-action { background-color: … }</code> — <b>applies.</b> So the provider is installed and the mechanism works.</li>
+    <li><b><code>@define-color accent_bg_color</code></b> at runtime — no effect.</li>
+    <li><b>CSS custom properties</b> — <code>:root</code>, <code>window</code> and <code>*</code> selectors — no effect.</li>
+    <li><b>Priority 10000</b> instead of <code>USER + 1</code> — no effect.</li>
+    <li><b>Forcing a stylesheet rebuild</b> through <code>AdwStyleManager</code> — no effect.</li>
+    <li><b>The same colours written to <code>gtk.css</code></b>, read by a fresh process — <b>works.</b> Accent and window background both correct.</li>
+  </ul>
+  <p class="note">
+    The practical consequences: <strong>applying a theme is unaffected</strong>,
+    because that path writes <code>gtk.css</code> and starts from there. But
+    nothing can restyle itself in-process, so a live preview has to be drawn —
+    or rendered by a separate process that starts with the generated stylesheet
+    already in place. Vivid Gradience draws it.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Half the bundled schemes had unreadable labels</h2>
+  <p class="sub">76 schemes, 1064 foreground/background pairs, scored against WCAG.</p>
+  <p>
+    The schemes written for this fork were checked as they were built. The ones
+    inherited from upstream never had been. Auditing all of them found
+    <strong>36 with at least one pair below AA</strong> — white text on Nord's
+    light green scored <strong>1.77:1</strong>, and the whole Arc family sat at
+    1.92:1.
+  </p>
+  <p>
+    Almost every failure was a <em>label on a coloured fill</em> rather than body
+    text: you could read those themes fine, but not the text on a success
+    button. Every one of the 125 failing pairs could be brought to AA by
+    changing only the label colour, so no fill was touched. Nord's green is
+    still Nord's green.
+  </p>
+  <p class="note">
+    <strong>One scheme is deliberately left failing.</strong> Solarized Light is
+    the only case where ordinary reading text falls short, and its low contrast
+    is the defining characteristic of the scheme rather than a mistake — the
+    Solarized specification itself puts body text at 4.13:1 on the light
+    background. Raising it would mean shipping something that is no longer
+    Solarized.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Reading a palette out of a screenshot</h2>
+  <p class="sub">Where the Casts schemes came from.</p>
+  <p>
+    The Casts family was built from in-game palette screenshots — the only form
+    the colours were available in. Picking 630 swatches by hand with an
+    eyedropper was not realistic, so the tooling reads them directly.
+  </p>
+  <p>
+    Finding the grid is the interesting part, and the first version broke on the
+    fifth palette. Gridlines cannot be located by absolute brightness: in a dark
+    palette the <em>cells</em> are darker than the <em>gridlines</em> — one cast
+    had cells at luminance ~50 against gridlines at ~28, while a light cast's
+    cells sit at ~170. No fixed threshold separates those. What is invariant is
+    that a separator is much darker than its immediate neighbours, and thin. So
+    detection works on local contrast, treating narrow dark runs as gridlines and
+    wide ones as the outer frame.
+  </p>
+  <p>
+    Where two near-black swatches meet there is no visible gridline at all, so
+    bands measuring a clean multiple of the cell pitch get subdivided. With that,
+    every cast resolved to the same layout.
+  </p>
+  <p class="note">
+    A useful coincidence: those palettes are laid out five columns wide, and a
+    preset's colour ramp is exactly five shades. Every row drops into a ramp with
+    no rescaling — and libadwaita's surfaces are themselves an elevation ladder,
+    so a single row can fill the window, header bar, sidebar and card in order.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Deriving a theme is not the same as designing one</h2>
+  <p class="sub">What the generator gets right, and what it cannot know.</p>
+  <p>
+    Turning a 90-colour palette into a scheme means assigning roles — surfaces,
+    foreground, accent, status colours — and letting the other forty-odd
+    variables follow. Three rules only became apparent from looking at rendered
+    output:
+  </p>
+  <ul class="road">
+    <li><b>Pick surfaces by what text can sit on</b>, not by position in the ramp. A row spans its whole hue family, so the far end of a light row is a mid-tone that dark text cannot meet AA against.</li>
+    <li><b>Surface saturation wants a band, not a minimum.</b> Ignoring it produced a bright pink window; minimising it flattened a warm oxblood scheme into a neutral near-black.</li>
+    <li><b>Accents fall back to lightness</b> when a palette has no saturated colour anywhere, or the button is indistinguishable from the surfaces behind it.</li>
+  </ul>
+  <p class="note">
+    The limit is intent. An algorithm optimising contrast reliably produces
+    something <em>readable</em> and reliably misses something <em>meant</em> — a
+    scheme named for decay is supposed to look muted, and a generator has no way
+    to know that. Hence the palette editor on the roadmap: the machine proposes,
+    and a person decides which reading of a palette was wanted.
+  </p>
+</section>
+
+<footer class="wrap">
+  <section>
+    <p><strong>Vivid Gradience</strong> is free software, <strong>GPL-3.0-or-later</strong>.</p>
+    <p><a href="index.html">Back to the project</a> &middot; <a href="https://github.com/superuser-miguel/Vivid_Gradience">github.com/superuser-miguel/Vivid_Gradience</a></p>
+  </section>
+</footer>
+
+</body>
+</html>

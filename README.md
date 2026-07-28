@@ -34,10 +34,13 @@ some rough edges — issues and pull requests are welcome.
       and build-tests it before the change lands
 - [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
       `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
-- [x] **53 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
-      Rosé Pine, Everforest, Solarized, plus the full **Arc** and **Matcha**
-      families — in a visual preset gallery with per-theme color previews,
-      grouped into family sections
+- [x] **76 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
+      Rosé Pine, Everforest, Solarized and the full **Arc** and **Matcha**
+      families, plus three original sets (**Pastel**, **Neon**, **Casts**) — in
+      a visual preset gallery with per-theme color previews, grouped into
+      family sections
+- [x] **Live preview with contrast warnings** — a schematic window at the top of
+      the Colors tab redraws as you edit and flags text below WCAG AA
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
 - [x] Installs and updates from a **signed, auto-updating Flatpak repo** (with a
@@ -47,7 +50,7 @@ some rough edges — issues and pull requests are welcome.
 ## Screenshots
 
 <p align="center">
-  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped into family sections — Adwaita, Arc, Matcha, Dark and Light" width="820"/>
+  <img src="docs/screenshots/presets.png" alt="The Presets gallery, with colour-scheme cards grouped into family sections — Casts, Pastel, Neon, Adwaita, Arc, Matcha, Dark and Light" width="820"/>
 </p>
 
 <p align="center">
@@ -96,12 +99,14 @@ flatpak run io.github.superuser_miguel.VividGradience
 
 ## Features
 
-- Pick from **53 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
-  Rosé Pine, Everforest, Solarized, Tokyo Night, and the full **Arc** and
-  **Matcha** families — in a visual preset gallery, each card previewing the
-  theme's own colors
+- Pick from **76 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
+  Rosé Pine, Everforest, Solarized, Tokyo Night and the full **Arc** and
+  **Matcha** families, plus the original **Pastel**, **Neon** and **Casts**
+  sets — in a visual preset gallery, each card previewing the theme's own colors
 - Recolor any part of the Adwaita theme with a color picker or hex values, in
   searchable, collapsible categories
+- Watch a **live preview** as you edit, before applying anything — it marks any
+  text that falls below the WCAG AA contrast minimum
 - Generate a Material You color scheme from your wallpaper — pick from nine
   scheme variants (Vibrant, Tonal Spot, Expressive, and more) and a contrast level
 - Apply themes to Libadwaita, GTK 4, and GTK 3 (via adw-gtk3) applications
@@ -121,7 +126,8 @@ flatpak run io.github.superuser_miguel.VividGradience
 
 **Planned**
 
-- [x] 53 ready-made themes built in, in a visual gallery with color previews
+- [x] 76 ready-made themes built in, in a visual gallery with color previews
+- [x] Live preview with WCAG AA contrast warnings
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
@@ -129,7 +135,7 @@ flatpak run io.github.superuser_miguel.VividGradience
       Vivid itself, so GNOME Tweaks isn't needed for theming
 - [ ] Light/dark preset pairs
 - [ ] Time-of-day theme cycle (day / afternoon / night auto-switching)
-- [ ] Full theme preview
+- [ ] Preview with real widgets (see [findings](https://superuser-miguel.github.io/Vivid_Gradience/findings.html))
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
 
