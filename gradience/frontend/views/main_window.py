@@ -101,7 +101,10 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
     # --- Presets gallery -------------------------------------------------
 
+    # Declaration order is gallery order. Casts leads as the featured family.
     BUILTIN_PRESET_SECTIONS = [
+        ("Casts", ["eminence", "hatred", "daybreak", "fear", "conquest",
+                   "agony", "rot"]),
         ("Adwaita", ["adwaita", "adwaita-dark", "pretty-purple"]),
         ("Arc", ["arc", "arc-darker", "arc-grey", "arc-dark", "arc-gotham",
                  "arc-grey-dark"]),
@@ -122,8 +125,6 @@ class GradienceMainWindow(Adw.ApplicationWindow):
                     "peach-fizz", "buttercream", "sage-linen", "bluebell"]),
         ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",
                   "neon-tangerine", "voltage", "ultraviolet", "infrared"]),
-        ("Casts", ["eminence", "hatred", "daybreak", "fear", "conquest",
-                   "agony", "rot"]),
     ]
 
     def setup_presets_gallery(self):
