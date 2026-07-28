@@ -419,6 +419,13 @@ class GradienceApplication(Adw.Application):
         )
         self.current_css_provider = css_provider
 
+        # This provider does not restyle libadwaita's named colours in-process
+        # — those are only picked up from the stylesheet loaded at startup —
+        # so the Colors tab preview is redrawn explicitly instead.
+        window = self.props.active_window
+        if window is not None and hasattr(window, "refresh_preview"):
+            window.refresh_preview()
+
         self.emit("preset-reload", object())
         self.is_ready = True
 

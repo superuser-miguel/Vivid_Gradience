@@ -29,6 +29,8 @@ from gradience.frontend.widgets.monet_theming_group import GradienceMonetTheming
 from gradience.frontend.widgets.palette_shades import GradiencePaletteShades
 from gradience.frontend.widgets.error_list_row import GradienceErrorListRow
 from gradience.frontend.widgets.option_row import GradienceOptionRow
+from gradience.frontend.widgets.theme_preview import (
+    GradienceThemePreview, failing_pairs)
 from gradience.frontend.schemas.preset_schema import preset_schema
 
 from gradience.backend.logger import Logger
@@ -342,7 +344,59 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         self.setup_monet_group()
         self.update_theming_view()
 
+    # --- Live preview ------------------------------------------------------
+
+    def setup_colors_preview(self):
+        """Schematic preview at the top of the Colors tab.
+
+        It is drawn rather than built from real widgets because libadwaita
+        only reads named-colour overrides from the stylesheet loaded at
+        startup — a CSS provider added at runtime does not restyle them at any
+        priority, so real widgets here would show the theme the app launched
+        with instead of the one being edited. See theme_preview.py.
+        """
+        group = Adw.PreferencesGroup()
+        group.set_title(_("Preview"))
+        group.set_description(
+            _("Updates as you edit, before Apply. Amber markers flag text "
+              "that falls below the WCAG AA contrast minimum.")
+        )
+
+        self.theme_preview = GradienceThemePreview(self._preview_variables)
+        group.add(self.theme_preview)
+
+        # The badges say where; this says what, and is readable by a screen
+        # reader, which a drawing is not.
+        self.preview_warnings = Gtk.Label(xalign=0, wrap=True)
+        self.preview_warnings.add_css_class("caption")
+        self.preview_warnings.add_css_class("warning")
+        self.preview_warnings.set_visible(False)
+        group.add(self.preview_warnings)
+
+        self.content_colors.add(group)
+
+    def _preview_variables(self):
+        preset = getattr(self.app, "preset", None)
+        return getattr(preset, "variables", None) or {}
+
+    def refresh_preview(self):
+        """Called whenever a colour changes."""
+        preview = getattr(self, "theme_preview", None)
+        if preview is None:
+            return
+        preview.refresh()
+
+        failing = failing_pairs(self._preview_variables())
+        if not failing:
+            self.preview_warnings.set_visible(False)
+            return
+        parts = [f"{label} {ratio:.1f}:1" for ratio, label in failing]
+        self.preview_warnings.set_label(
+            _("Below AA (4.5:1): ") + ", ".join(parts))
+        self.preview_warnings.set_visible(True)
+
     def setup_colors_group(self):
+        self.setup_colors_preview()
         self.color_categories = []
 
         # Search field to filter the (many) named colors.
