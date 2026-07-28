@@ -247,7 +247,33 @@ def assign_ramps(rows, stats):
     return out
 
 
-def build(cast_path, name, mode):
+def resolve_swatch(rows, spec):
+    """A swatch given as '#rrggbb' or as 'row,col' (both 1-based)."""
+    spec = spec.strip()
+    if spec.startswith("#"):
+        return spec
+    try:
+        r, c = (int(p) for p in spec.split(","))
+    except ValueError:
+        sys.exit(f"bad swatch '{spec}': use '#rrggbb' or 'row,col'")
+    if not (1 <= r <= len(rows) and 1 <= c <= len(rows[0])):
+        sys.exit(f"swatch {spec} outside this cast "
+                 f"(1-{len(rows)}, 1-{len(rows[0])})")
+    return rows[r - 1][c - 1]
+
+
+def list_rows(rows, stats):
+    """Show the cast as the generator sees it, so a row can be chosen by eye."""
+    print(f"{'row':>3}  {'swatches (light -> dark)':<40}  {'hue':>5} "
+          f"{'sat':>5} {'lum':>5}")
+    for i, (row, st) in enumerate(zip(rows, stats), 1):
+        print(f"{i:>3}  " + " ".join(row) + f"  {st['hue']:>5.0f} "
+              f"{st['sat']:>5.2f} {st['lum']:>5.2f}")
+    print("\nsurface rows are picked from sat 0.08-0.38; "
+          "accent prefers the highest sat")
+
+
+def build(cast_path, name, mode, surface_row=None, accent_spec=None):
     rows = load_cast(cast_path)
     flat = [c for r in rows for c in r]
     stats = [row_stats(r) for r in rows]
@@ -265,7 +291,17 @@ def build(cast_path, name, mode):
     # Taken from the cast: the lightest swatch for a dark theme, darkest for
     # a light one.
     fg = light_tone if dark else dark_tone
-    surfaces = pick_surfaces(rows, stats, fg, dark)
+    if surface_row is not None:
+        if not 1 <= surface_row <= len(rows):
+            sys.exit(f"--surface-row {surface_row} outside this cast "
+                     f"(1-{len(rows)})")
+        surfaces = pick_surfaces([rows[surface_row - 1]],
+                                 [stats[surface_row - 1]], fg, dark)
+        if surfaces is None:
+            sys.exit(f"--surface-row {surface_row}: no shade in that row can "
+                     f"carry the foreground at AA (try --mode light/dark)")
+    else:
+        surfaces = pick_surfaces(rows, stats, fg, dark)
     if surfaces is None:
         # Nothing in the cast can carry its own extreme; fall back to plain
         # white/black text rather than shipping an unreadable preset.
@@ -275,7 +311,16 @@ def build(cast_path, name, mode):
         sys.exit(f"{name}: no surface family in this cast can meet AA")
     view, window, header, card, sidebar = surfaces
 
-    accent, accent_fg = pick_accent(rows, stats, window, card, dark_tone, light_tone)
+    if accent_spec:
+        accent = resolve_swatch(rows, accent_spec)
+        accent_fg = best_fg(accent, dark_tone, light_tone)
+        fgc = composite_black80(accent) if accent_fg == BLACK_80 else accent_fg
+        if contrast(fgc, accent) < AA:
+            print(f"  warning: accent {accent} cannot carry a label at AA "
+                  f"(best is {contrast(fgc, accent):.2f})", file=sys.stderr)
+    else:
+        accent, accent_fg = pick_accent(rows, stats, window, card,
+                                        dark_tone, light_tone)
     if accent is None:
         accent = max(flat, key=lambda c: hls(c)[2])
         accent_fg = best_fg(accent, dark_tone, light_tone)
@@ -370,12 +415,26 @@ def audit(v):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("cast")
-    ap.add_argument("--name", required=True)
+    ap.add_argument("--name")
     ap.add_argument("--mode", choices=("auto", "dark", "light"), default="auto")
     ap.add_argument("--out", default=".")
+    ap.add_argument("--list-rows", action="store_true",
+                    help="show the cast's rows and their stats, then exit")
+    ap.add_argument("--surface-row", type=int, metavar="N",
+                    help="force which row (1-based) supplies the surfaces")
+    ap.add_argument("--accent", metavar="SPEC",
+                    help="force the accent: '#rrggbb' or 'row,col' (1-based)")
     args = ap.parse_args()
 
-    preset, dark = build(args.cast, args.name, args.mode)
+    if args.list_rows:
+        rows = load_cast(args.cast)
+        list_rows(rows, [row_stats(r) for r in rows])
+        return 0
+    if not args.name:
+        ap.error("--name is required (or use --list-rows)")
+
+    preset, dark = build(args.cast, args.name, args.mode,
+                         args.surface_row, args.accent)
     worst, fails = audit(preset["variables"])
     slug = args.name.lower().replace(" ", "-")
     path = os.path.join(args.out, slug + ".json")

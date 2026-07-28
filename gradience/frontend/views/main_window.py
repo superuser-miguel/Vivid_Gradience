@@ -101,10 +101,15 @@ class GradienceMainWindow(Adw.ApplicationWindow):
 
     # --- Presets gallery -------------------------------------------------
 
-    # Declaration order is gallery order. Casts leads as the featured family.
+    # Declaration order is gallery order: this project's own families lead,
+    # the families inherited from upstream follow.
     BUILTIN_PRESET_SECTIONS = [
         ("Casts", ["eminence", "hatred", "daybreak", "fear", "conquest",
                    "agony", "rot"]),
+        ("Pastel", ["cotton-candy", "sea-glass", "powder-puff", "lilac-mist",
+                    "peach-fizz", "buttercream", "sage-linen", "bluebell"]),
+        ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",
+                  "neon-tangerine", "voltage", "ultraviolet", "infrared"]),
         ("Adwaita", ["adwaita", "adwaita-dark", "pretty-purple"]),
         ("Arc", ["arc", "arc-darker", "arc-grey", "arc-dark", "arc-gotham",
                  "arc-grey-dark"]),
@@ -121,10 +126,6 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         ("Light", ["catppuccin-latte", "rose-pine-dawn", "everforest-light",
                    "solarized-light", "gruvbox-light", "one-light", "ayu-light",
                    "melange-light", "flexoki-light", "paper-color-light"]),
-        ("Pastel", ["cotton-candy", "sea-glass", "powder-puff", "lilac-mist",
-                    "peach-fizz", "buttercream", "sage-linen", "bluebell"]),
-        ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",
-                  "neon-tangerine", "voltage", "ultraviolet", "infrared"]),
     ]
 
     def setup_presets_gallery(self):
