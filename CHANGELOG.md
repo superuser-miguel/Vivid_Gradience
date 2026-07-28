@@ -7,32 +7,47 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-07-28
+
 ### Added
 
-- Two original preset families in the gallery, 16 presets in total (bringing
-  the bundled count to 69):
+- Three original preset families, 23 schemes in all, taking the bundled count
+  from 53 to **76**. They lead the gallery, ahead of the families inherited
+  from upstream.
+  - **Casts** — Eminence, Hatred, Daybreak, Fear, Conquest, Agony, Rot.
+    Derived from source colour palettes: every surface, accent and foreground
+    is an unmodified swatch from the palette it came from, with contrast met
+    by choosing a different swatch rather than altering one.
   - **Pastel** — Cotton Candy, Sea Glass, Powder Puff, Lilac Mist, Peach Fizz,
-    Buttercream, Sage Linen, Bluebell
+    Buttercream, Sage Linen, Bluebell.
   - **Neon** — Neon Tokyo, Vaporwave, Acid Rave, Cyberlime, Neon Tangerine,
-    Voltage, Ultraviolet, Infrared
+    Voltage, Ultraviolet, Infrared.
 
-  Every foreground/background pair in the sixteen clears WCAG AA (4.5:1); the
-  lowest pair sits at 4.61.
+  Every foreground/background pair in all 23 clears WCAG AA (4.5:1); the
+  lowest sits at 4.61.
 
-- **Casts** — seven presets derived from in-game colour palettes: Eminence,
-  Hatred, Daybreak, Fear, Conquest, Agony, Rot. Bundled count is now 76.
-
-  Every surface, accent and foreground is an unmodified swatch from its
-  source palette; contrast is met by choosing a different swatch rather than
-  altering one. All seven clear WCAG AA.
+- **Live preview** in the Colors tab — a schematic window that redraws on every
+  edit, before Apply, marking any text that falls below WCAG AA. Drawn rather
+  than built from real widgets because libadwaita only reads named-colour
+  overrides from the stylesheet loaded at startup.
 
 - `tools/palette-from-image.py` — extract a palette from a swatch-grid
   screenshot
 - `tools/preset-from-cast.py` — build a preset from an extracted palette
+- `tools/audit-contrast.py` — score every bundled preset against WCAG
+
+### Changed
+
+- Every status and accent label across the bundled schemes now meets WCAG AA.
+  Only label colours changed — no scheme's own fills were touched, so each
+  keeps the colours it is recognised by. Solarized Light is deliberately left
+  below AA: its low contrast is the defining characteristic of that scheme.
 
 ### Fixed
 
 - Stop the greeting on the first-run Welcome screen from wrapping mid-name
+
+## [Unfiled — shipped in 0.1.0-0.2.0, never recorded under a version]
 
 ### Changed
 

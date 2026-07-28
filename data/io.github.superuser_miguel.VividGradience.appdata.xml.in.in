@@ -80,6 +80,20 @@
   </recommends>
 
   <releases>
+    <release version="0.3.0" date="2026-07-28" type="stable">
+      <description translate="no">
+        <p>Twenty-three new color schemes, and a live preview that checks contrast.</p>
+        <ul>
+          <li>New Pastel family: Cotton Candy, Sea Glass, Powder Puff, Lilac Mist, Peach Fizz, Buttercream, Sage Linen, and Bluebell</li>
+          <li>New Neon family: Neon Tokyo, Vaporwave, Acid Rave, Cyberlime, Neon Tangerine, Voltage, Ultraviolet, and Infrared</li>
+          <li>New Casts family: Eminence, Hatred, Daybreak, Fear, Conquest, Agony, and Rot, derived from source color palettes</li>
+          <li>76 bundled color schemes in total, with the original families leading the gallery</li>
+          <li>A live preview in the Colors tab that redraws as you edit and flags any text below the WCAG AA contrast minimum</li>
+          <li>Every status and accent label across the bundled schemes now meets WCAG AA, without altering any scheme's own colors</li>
+          <li>Fixed the first-run welcome greeting wrapping in the middle of the app name</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.2.0" date="2026-07-27" type="stable">
       <description translate="no">
         <p>A Material You wallpaper engine and a fresh look.</p>
