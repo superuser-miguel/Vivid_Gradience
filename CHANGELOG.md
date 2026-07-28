@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Two original preset families in the gallery, 10 presets in total (bringing
+  the bundled count to 63):
+  - **Pastel** — Cotton Candy, Sea Glass, Powder Puff, Lilac Mist, Peach Fizz
+  - **Neon** — Neon Tokyo, Vaporwave, Acid Rave, Cyberlime, Neon Tangerine
+
+  Every foreground/background pair in the ten clears WCAG AA (4.5:1); the
+  lowest pair sits at 4.61.
+
 ### Changed
 
 - Update runtime to GNOME 50 (latest stable)

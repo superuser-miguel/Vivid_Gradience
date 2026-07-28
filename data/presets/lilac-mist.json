@@ -1,0 +1,118 @@
+{
+  "name": "Lilac Mist",
+  "author": "Vivid Gradience",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#5b60bd",
+    "accent_bg_color": "#5b60bd",
+    "accent_fg_color": "#ffffff",
+    "destructive_color": "#bd4f6b",
+    "destructive_bg_color": "#bd4f6b",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#46806a",
+    "success_bg_color": "#46806a",
+    "success_fg_color": "#ffffff",
+    "warning_color": "#b07c3e",
+    "warning_bg_color": "#b07c3e",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#bd4f6b",
+    "error_bg_color": "#bd4f6b",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#f0f0f8",
+    "window_fg_color": "#3e3e56",
+    "view_bg_color": "#fbfbff",
+    "view_fg_color": "#3e3e56",
+    "headerbar_bg_color": "#e4e4f0",
+    "headerbar_fg_color": "#3e3e56",
+    "headerbar_border_color": "#3e3e56",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.12)",
+    "card_bg_color": "#dedeec",
+    "card_fg_color": "#3e3e56",
+    "card_shade_color": "rgba(0, 0, 0, 0.07)",
+    "dialog_bg_color": "#dedeec",
+    "dialog_fg_color": "#3e3e56",
+    "popover_bg_color": "#dedeec",
+    "popover_fg_color": "#3e3e56",
+    "popover_shade_color": "rgba(0, 0, 0, 0.07)",
+    "shade_color": "rgba(0, 0, 0, 0.07)",
+    "scrollbar_outline_color": "#ffffff",
+    "thumbnail_bg_color": "#dedeec",
+    "thumbnail_fg_color": "#3e3e56",
+    "sidebar_bg_color": "#e4e4f0",
+    "sidebar_fg_color": "#3e3e56",
+    "sidebar_border_color": "#ffffff",
+    "sidebar_backdrop_color": "#f0f0f8",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "secondary_sidebar_bg_color": "#fbfbff",
+    "secondary_sidebar_fg_color": "#3e3e56",
+    "secondary_sidebar_backdrop_color": "#fbfbff",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.07)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#bac1ea",
+      "2": "#a3ade3",
+      "3": "#8c98dc",
+      "4": "#707ab0",
+      "5": "#545b84"
+    },
+    "green_": {
+      "1": "#bcd1da",
+      "2": "#a5c1cd",
+      "3": "#8fb2c1",
+      "4": "#728e9a",
+      "5": "#566b74"
+    },
+    "yellow_": {
+      "1": "#dcd4cb",
+      "2": "#d1c6ba",
+      "3": "#c5b8a9",
+      "4": "#9e9387",
+      "5": "#766e65"
+    },
+    "orange_": {
+      "1": "#d9c4ca",
+      "2": "#ccb0b9",
+      "3": "#bf9ca7",
+      "4": "#997d86",
+      "5": "#735e64"
+    },
+    "red_": {
+      "1": "#d7bad1",
+      "2": "#caa3c1",
+      "3": "#bd8cb2",
+      "4": "#97708e",
+      "5": "#71546b"
+    },
+    "purple_": {
+      "1": "#c4bfea",
+      "2": "#b1aae3",
+      "3": "#9d95dc",
+      "4": "#7e77b0",
+      "5": "#5e5984"
+    },
+    "brown_": {
+      "1": "#cbc4d7",
+      "2": "#b9b0c9",
+      "3": "#a89cbc",
+      "4": "#867d96",
+      "5": "#655e71"
+    },
+    "light_": {
+      "1": "#f3f3f9",
+      "2": "#efeff7",
+      "3": "#ebebf5",
+      "4": "#bcbcc4",
+      "5": "#8d8d93"
+    },
+    "dark_": {
+      "1": "#8b8b9a",
+      "2": "#656578",
+      "3": "#3e3e56",
+      "4": "#323245",
+      "5": "#252534"
+    }
+  }
+}

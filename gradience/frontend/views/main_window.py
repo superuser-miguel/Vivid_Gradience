@@ -118,6 +118,10 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         ("Light", ["catppuccin-latte", "rose-pine-dawn", "everforest-light",
                    "solarized-light", "gruvbox-light", "one-light", "ayu-light",
                    "melange-light", "flexoki-light", "paper-color-light"]),
+        ("Pastel", ["cotton-candy", "sea-glass", "powder-puff", "lilac-mist",
+                    "peach-fizz"]),
+        ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",
+                  "neon-tangerine"]),
     ]
 
     def setup_presets_gallery(self):

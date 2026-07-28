@@ -54,6 +54,16 @@
     <file>presets/matcha-dark-azul.json</file>
     <file>presets/matcha-dark-aliz.json</file>
     <file>presets/matcha-dark-pueril.json</file>
+    <file>presets/cotton-candy.json</file>
+    <file>presets/sea-glass.json</file>
+    <file>presets/powder-puff.json</file>
+    <file>presets/lilac-mist.json</file>
+    <file>presets/peach-fizz.json</file>
+    <file>presets/neon-tokyo.json</file>
+    <file>presets/vaporwave.json</file>
+    <file>presets/acid-rave.json</file>
+    <file>presets/cyberlime.json</file>
+    <file>presets/neon-tangerine.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>

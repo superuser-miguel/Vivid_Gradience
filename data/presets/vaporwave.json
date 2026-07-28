@@ -1,0 +1,118 @@
+{
+  "name": "Vaporwave",
+  "author": "Vivid Gradience",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#ff6ad5",
+    "accent_bg_color": "#ff6ad5",
+    "accent_fg_color": "#1b1032",
+    "destructive_color": "#ff5f7e",
+    "destructive_bg_color": "#ff5f7e",
+    "destructive_fg_color": "#1b1032",
+    "success_color": "#6affc8",
+    "success_bg_color": "#6affc8",
+    "success_fg_color": "#1b1032",
+    "warning_color": "#ffd36a",
+    "warning_bg_color": "#ffd36a",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#ff5f7e",
+    "error_bg_color": "#ff5f7e",
+    "error_fg_color": "#1b1032",
+    "window_bg_color": "#1b1032",
+    "window_fg_color": "#eddcf8",
+    "view_bg_color": "#130a26",
+    "view_fg_color": "#eddcf8",
+    "headerbar_bg_color": "#241546",
+    "headerbar_fg_color": "#eddcf8",
+    "headerbar_border_color": "#eddcf8",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#2f1c58",
+    "card_fg_color": "#eddcf8",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#2f1c58",
+    "dialog_fg_color": "#eddcf8",
+    "popover_bg_color": "#2f1c58",
+    "popover_fg_color": "#eddcf8",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#2f1c58",
+    "thumbnail_fg_color": "#eddcf8",
+    "sidebar_bg_color": "#241546",
+    "sidebar_fg_color": "#eddcf8",
+    "sidebar_border_color": "#130a26",
+    "sidebar_backdrop_color": "#1b1032",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#130a26",
+    "secondary_sidebar_fg_color": "#eddcf8",
+    "secondary_sidebar_backdrop_color": "#130a26",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#a6e6ff",
+      "2": "#88ddff",
+      "3": "#6ad5ff",
+      "4": "#55aacc",
+      "5": "#408099"
+    },
+    "green_": {
+      "1": "#a6ffde",
+      "2": "#88ffd3",
+      "3": "#6affc8",
+      "4": "#55cca0",
+      "5": "#409978"
+    },
+    "yellow_": {
+      "1": "#fff2b9",
+      "2": "#ffeda1",
+      "3": "#ffe98a",
+      "4": "#ccba6e",
+      "5": "#998c53"
+    },
+    "orange_": {
+      "1": "#ffc4a6",
+      "2": "#ffb188",
+      "3": "#ff9d6a",
+      "4": "#cc7e55",
+      "5": "#995e40"
+    },
+    "red_": {
+      "1": "#ff9fb2",
+      "2": "#ff7f98",
+      "3": "#ff5f7e",
+      "4": "#cc4c65",
+      "5": "#99394c"
+    },
+    "purple_": {
+      "1": "#d9a6ff",
+      "2": "#cd88ff",
+      "3": "#c06aff",
+      "4": "#9a55cc",
+      "5": "#734099"
+    },
+    "brown_": {
+      "1": "#ddc3ba",
+      "2": "#d2afa3",
+      "3": "#c79b8c",
+      "4": "#9f7c70",
+      "5": "#775d54"
+    },
+    "light_": {
+      "1": "#f4eafb",
+      "2": "#f1e3f9",
+      "3": "#eddcf8",
+      "4": "#beb0c6",
+      "5": "#8e8495"
+    },
+    "dark_": {
+      "1": "#767084",
+      "2": "#49405b",
+      "3": "#1b1032",
+      "4": "#160d28",
+      "5": "#100a1e"
+    }
+  }
+}

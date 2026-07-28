@@ -1,0 +1,118 @@
+{
+  "name": "Cotton Candy",
+  "author": "Vivid Gradience",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#ba4d8e",
+    "accent_bg_color": "#ba4d8e",
+    "accent_fg_color": "#ffffff",
+    "destructive_color": "#c8455e",
+    "destructive_bg_color": "#c8455e",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#398261",
+    "success_bg_color": "#398261",
+    "success_fg_color": "#ffffff",
+    "warning_color": "#c07a2e",
+    "warning_bg_color": "#c07a2e",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#c8455e",
+    "error_bg_color": "#c8455e",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#f7eef5",
+    "window_fg_color": "#4a3a46",
+    "view_bg_color": "#fffbfe",
+    "view_fg_color": "#4a3a46",
+    "headerbar_bg_color": "#f0e2ec",
+    "headerbar_fg_color": "#4a3a46",
+    "headerbar_border_color": "#4a3a46",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.12)",
+    "card_bg_color": "#ecdfe8",
+    "card_fg_color": "#4a3a46",
+    "card_shade_color": "rgba(0, 0, 0, 0.07)",
+    "dialog_bg_color": "#ecdfe8",
+    "dialog_fg_color": "#4a3a46",
+    "popover_bg_color": "#ecdfe8",
+    "popover_fg_color": "#4a3a46",
+    "popover_shade_color": "rgba(0, 0, 0, 0.07)",
+    "shade_color": "rgba(0, 0, 0, 0.07)",
+    "scrollbar_outline_color": "#ffffff",
+    "thumbnail_bg_color": "#ecdfe8",
+    "thumbnail_fg_color": "#4a3a46",
+    "sidebar_bg_color": "#f0e2ec",
+    "sidebar_fg_color": "#4a3a46",
+    "sidebar_border_color": "#ffffff",
+    "sidebar_backdrop_color": "#f7eef5",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "secondary_sidebar_bg_color": "#fffbfe",
+    "secondary_sidebar_fg_color": "#4a3a46",
+    "secondary_sidebar_backdrop_color": "#fffbfe",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.07)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#c5c5e0",
+      "2": "#b1b2d6",
+      "3": "#9e9fcc",
+      "4": "#7e7fa3",
+      "5": "#5f5f7a"
+    },
+    "green_": {
+      "1": "#cbd3cd",
+      "2": "#b9c5bd",
+      "3": "#a8b6ac",
+      "4": "#86928a",
+      "5": "#656d67"
+    },
+    "yellow_": {
+      "1": "#f1d6c1",
+      "2": "#edc9ad",
+      "3": "#e8bb98",
+      "4": "#ba967a",
+      "5": "#8b705b"
+    },
+    "orange_": {
+      "1": "#f2c6be",
+      "2": "#edb3a8",
+      "3": "#e9a092",
+      "4": "#ba8075",
+      "5": "#8c6058"
+    },
+    "red_": {
+      "1": "#f1b9ca",
+      "2": "#eda2b9",
+      "3": "#e88ba7",
+      "4": "#ba6f86",
+      "5": "#8b5364"
+    },
+    "purple_": {
+      "1": "#e2c0e2",
+      "2": "#d8abd8",
+      "3": "#ce96ce",
+      "4": "#a578a5",
+      "5": "#7c5a7c"
+    },
+    "brown_": {
+      "1": "#e2c2c5",
+      "2": "#d9aeb2",
+      "3": "#cf9a9f",
+      "4": "#a67b7f",
+      "5": "#7c5c5f"
+    },
+    "light_": {
+      "1": "#f8f2f5",
+      "2": "#f5edf2",
+      "3": "#f3e9ef",
+      "4": "#c2babf",
+      "5": "#928c8f"
+    },
+    "dark_": {
+      "1": "#928990",
+      "2": "#6e616b",
+      "3": "#4a3a46",
+      "4": "#3b2e38",
+      "5": "#2c232a"
+    }
+  }
+}
