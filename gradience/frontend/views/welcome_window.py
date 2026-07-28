@@ -74,7 +74,10 @@ class GradienceWelcomeWindow(Adw.Window):
         self.connect("close-request", self.quit)
 
         if self.update:
-            self.page_welcome.set_title(_("Thanks for updating Vivid Gradience!"))
+            # Non-breaking space inside the app name, matching the greeting in
+            # welcome_window.blp — this title replaces it and would otherwise
+            # wrap as "... updating Vivid / Gradience!".
+            self.page_welcome.set_title(_("Thanks for updating Vivid Gradience!"))
 
         self.page_changed()
 
