@@ -19,6 +19,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Every foreground/background pair in the sixteen clears WCAG AA (4.5:1); the
   lowest pair sits at 4.61.
 
+- **Casts** — seven presets derived from in-game colour palettes: Eminence,
+  Hatred, Daybreak, Fear, Conquest, Agony, Rot. Bundled count is now 76.
+
+  Every surface, accent and foreground is an unmodified swatch from its
+  source palette; contrast is met by choosing a different swatch rather than
+  altering one. All seven clear WCAG AA.
+
+- `tools/palette-from-image.py` — extract a palette from a swatch-grid
+  screenshot
+- `tools/preset-from-cast.py` — build a preset from an extracted palette
+
 ### Fixed
 
 - Stop the greeting on the first-run Welcome screen from wrapping mid-name

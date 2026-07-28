@@ -122,6 +122,8 @@ class GradienceMainWindow(Adw.ApplicationWindow):
                     "peach-fizz", "buttercream", "sage-linen", "bluebell"]),
         ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",
                   "neon-tangerine", "voltage", "ultraviolet", "infrared"]),
+        ("Casts", ["eminence", "hatred", "daybreak", "fear", "conquest",
+                   "agony", "rot"]),
     ]
 
     def setup_presets_gallery(self):

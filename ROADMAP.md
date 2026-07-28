@@ -38,10 +38,13 @@ If you'd like to see a new feature, open an issue or submit a PR.
 ### Planned Features
 
 - [x] Visual preset gallery — a dedicated Presets tab with color previews
-- [x] Curated built-in themes — 60+ color schemes (Catppuccin, Gruvbox, Nord,
+- [x] Curated built-in themes — 75+ color schemes (Catppuccin, Gruvbox, Nord,
       Dracula, Rosé Pine, Everforest, Solarized, Tokyo Night, and the full Arc
-      and Matcha families), plus the original Pastel and Neon sets, grouped
-      into family sections in the gallery
+      and Matcha families), plus the original Pastel, Neon and Cast sets,
+      grouped into family sections in the gallery
+- [ ] Palette editor — browse a colour cast and assign its swatches to theme
+      roles (surfaces, accent) directly, with live preview and contrast
+      warnings; `tools/preset-from-cast.py` does this non-interactively today
 - [ ] Show user presets in the gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)

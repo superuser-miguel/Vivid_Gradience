@@ -1,0 +1,118 @@
+{
+  "name": "Conquest",
+  "author": "Vivid Gradience",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#599a95",
+    "accent_bg_color": "#599a95",
+    "accent_fg_color": "rgba(0, 0, 0, 0.8)",
+    "destructive_color": "#d16867",
+    "destructive_bg_color": "#d16867",
+    "destructive_fg_color": "rgba(0, 0, 0, 0.8)",
+    "success_color": "#bbdbcc",
+    "success_bg_color": "#bbdbcc",
+    "success_fg_color": "rgba(0, 0, 0, 0.8)",
+    "warning_color": "#decc5c",
+    "warning_bg_color": "#decc5c",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#d16867",
+    "error_bg_color": "#d16867",
+    "error_fg_color": "rgba(0, 0, 0, 0.8)",
+    "window_bg_color": "#a7ccbc",
+    "window_fg_color": "#303938",
+    "view_bg_color": "#b5d6c8",
+    "view_fg_color": "#303938",
+    "headerbar_bg_color": "#96c0af",
+    "headerbar_fg_color": "#303938",
+    "headerbar_border_color": "#303938",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.12)",
+    "card_bg_color": "#b5d6c8",
+    "card_fg_color": "#303938",
+    "card_shade_color": "rgba(0, 0, 0, 0.07)",
+    "dialog_bg_color": "#b5d6c8",
+    "dialog_fg_color": "#303938",
+    "popover_bg_color": "#b5d6c8",
+    "popover_fg_color": "#303938",
+    "popover_shade_color": "rgba(0, 0, 0, 0.07)",
+    "shade_color": "rgba(0, 0, 0, 0.07)",
+    "scrollbar_outline_color": "#ffffff",
+    "thumbnail_bg_color": "#b5d6c8",
+    "thumbnail_fg_color": "#303938",
+    "sidebar_bg_color": "#96c0af",
+    "sidebar_fg_color": "#303938",
+    "sidebar_border_color": "#b5d6c8",
+    "sidebar_backdrop_color": "#a7ccbc",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.07)",
+    "secondary_sidebar_bg_color": "#b5d6c8",
+    "secondary_sidebar_fg_color": "#303938",
+    "secondary_sidebar_backdrop_color": "#b5d6c8",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.07)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#579590",
+      "2": "#518a86",
+      "3": "#497b77",
+      "4": "#416c69",
+      "5": "#385c5a"
+    },
+    "green_": {
+      "1": "#9faea3",
+      "2": "#97a49a",
+      "3": "#8b978e",
+      "4": "#7f8981",
+      "5": "#707973"
+    },
+    "yellow_": {
+      "1": "#7e6c67",
+      "2": "#74635f",
+      "3": "#685a56",
+      "4": "#5b504d",
+      "5": "#504845"
+    },
+    "orange_": {
+      "1": "#87736d",
+      "2": "#816f69",
+      "3": "#776661",
+      "4": "#6b5c58",
+      "5": "#5f5350"
+    },
+    "red_": {
+      "1": "#84706b",
+      "2": "#7b6964",
+      "3": "#6f605b",
+      "4": "#645754",
+      "5": "#584e4b"
+    },
+    "purple_": {
+      "1": "#548f8a",
+      "2": "#4d827e",
+      "3": "#44726f",
+      "4": "#3c625f",
+      "5": "#335351"
+    },
+    "brown_": {
+      "1": "#bbdbcc",
+      "2": "#afd2c3",
+      "3": "#a1c8b7",
+      "4": "#8ebaa8",
+      "5": "#7cad99"
+    },
+    "light_": {
+      "1": "#bbdbcc",
+      "2": "#afd2c3",
+      "3": "#a1c8b7",
+      "4": "#8ebaa8",
+      "5": "#7cad99"
+    },
+    "dark_": {
+      "1": "#7e6c67",
+      "2": "#74635f",
+      "3": "#685a56",
+      "4": "#5b504d",
+      "5": "#504845"
+    }
+  }
+}

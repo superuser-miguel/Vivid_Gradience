@@ -70,6 +70,13 @@
     <file>presets/voltage.json</file>
     <file>presets/ultraviolet.json</file>
     <file>presets/infrared.json</file>
+    <file>presets/rot.json</file>
+    <file>presets/agony.json</file>
+    <file>presets/conquest.json</file>
+    <file>presets/daybreak.json</file>
+    <file>presets/hatred.json</file>
+    <file>presets/eminence.json</file>
+    <file>presets/fear.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
