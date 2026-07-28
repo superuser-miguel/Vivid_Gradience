@@ -12,7 +12,7 @@
     "destructive_fg_color": "#ffffff",
     "success_color": "#40a02b",
     "success_bg_color": "#40a02b",
-    "success_fg_color": "#ffffff",
+    "success_fg_color": "rgba(0, 0, 0, 0.8)",
     "warning_color": "#df8e1d",
     "warning_bg_color": "#df8e1d",
     "warning_fg_color": "rgba(0, 0, 0, 0.8)",

@@ -6,7 +6,7 @@
   "variables": {
     "accent_color": "#0087af",
     "accent_bg_color": "#0087af",
-    "accent_fg_color": "#ffffff",
+    "accent_fg_color": "#000000",
     "destructive_color": "#af0000",
     "destructive_bg_color": "#af0000",
     "destructive_fg_color": "#ffffff",
@@ -15,7 +15,7 @@
     "success_fg_color": "#ffffff",
     "warning_color": "#5f8700",
     "warning_bg_color": "#5f8700",
-    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "warning_fg_color": "#000000",
     "error_color": "#af0000",
     "error_bg_color": "#af0000",
     "error_fg_color": "#ffffff",
