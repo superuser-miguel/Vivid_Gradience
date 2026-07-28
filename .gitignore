@@ -449,3 +449,6 @@ repo-dev
 .flatpak-builder/
 *.asc
 SHA256SUMS
+
+# Internal design notes; symlink to the Obsidian vault copy
+Concepts.md
