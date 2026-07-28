@@ -59,11 +59,17 @@
     <file>presets/powder-puff.json</file>
     <file>presets/lilac-mist.json</file>
     <file>presets/peach-fizz.json</file>
+    <file>presets/buttercream.json</file>
+    <file>presets/sage-linen.json</file>
+    <file>presets/bluebell.json</file>
     <file>presets/neon-tokyo.json</file>
     <file>presets/vaporwave.json</file>
     <file>presets/acid-rave.json</file>
     <file>presets/cyberlime.json</file>
     <file>presets/neon-tangerine.json</file>
+    <file>presets/voltage.json</file>
+    <file>presets/ultraviolet.json</file>
+    <file>presets/infrared.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>

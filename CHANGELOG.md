@@ -9,13 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Two original preset families in the gallery, 10 presets in total (bringing
-  the bundled count to 63):
-  - **Pastel** — Cotton Candy, Sea Glass, Powder Puff, Lilac Mist, Peach Fizz
-  - **Neon** — Neon Tokyo, Vaporwave, Acid Rave, Cyberlime, Neon Tangerine
+- Two original preset families in the gallery, 16 presets in total (bringing
+  the bundled count to 69):
+  - **Pastel** — Cotton Candy, Sea Glass, Powder Puff, Lilac Mist, Peach Fizz,
+    Buttercream, Sage Linen, Bluebell
+  - **Neon** — Neon Tokyo, Vaporwave, Acid Rave, Cyberlime, Neon Tangerine,
+    Voltage, Ultraviolet, Infrared
 
-  Every foreground/background pair in the ten clears WCAG AA (4.5:1); the
+  Every foreground/background pair in the sixteen clears WCAG AA (4.5:1); the
   lowest pair sits at 4.61.
+
+### Fixed
+
+- Stop the greeting on the first-run Welcome screen from wrapping mid-name
 
 ### Changed
 
