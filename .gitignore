@@ -452,3 +452,7 @@ SHA256SUMS
 
 # Internal design notes; symlink to the Obsidian vault copy
 Concepts.md
+
+# Source screenshots for the Cast presets — internal reference, not shipped.
+# The colours they were extracted from are recorded in the Obsidian vault.
+Custom_Color/
