@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Findings — Vivid Gradience</title>
-<meta name="description" content="Notes from building Vivid Gradience: libadwaita ignores runtime colour overrides, a WCAG audit of 76 bundled schemes, and extracting palettes from game screenshots.">
+<meta name="description" content="Notes from building Vivid Gradience: libadwaita ignores runtime colour overrides, GNOME Shell can be rethemed live, X11 titlebars answer to CSS rules rather than the colours named for them, and a WCAG audit of 76 bundled schemes.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -52,6 +52,92 @@
     nothing can restyle itself in-process, so a live preview has to be drawn —
     or rendered by a separate process that starts with the generated stylesheet
     already in place. Vivid Gradience draws it.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>GNOME Shell can be recoloured, and it applies instantly</h2>
+  <p class="sub">Upstream dropped Shell support after 44. It was the method that aged, not the capability.</p>
+  <p>
+    The old implementation vendored a copy of GNOME's Shell stylesheet sources
+    for every release — 42, 43, 44, 45 — and compiled them with libsass. That
+    caps at whatever version was vendored last, and every Shell release means
+    porting a new SCSS tree. It is not a bug that it stopped at 44; it was
+    always going to stop somewhere.
+  </p>
+  <p>
+    The alternative is to retheme the stylesheet the installed Shell already
+    ships. Extract <code>gnome-shell-dark.css</code> from
+    <code>gnome-shell-theme.gresource</code>, remap its greys onto the preset's
+    surfaces by luminance, write the result out as a user theme. On
+    <strong>GNOME Shell 50</strong> that file is 3,325 lines containing
+    <strong>51 unique colours</strong> — all 51 remapped, clean parse, no
+    warnings. Nothing in the process knows which Shell version it is running
+    against, which is the point.
+  </p>
+  <ul class="road">
+    <li><b>It applies live.</b> The User Themes extension calls <code>Main.setThemeStylesheet()</code> and <code>Main.loadTheme()</code>, which restyle a running Shell. Write the file, set one key, and the panel, overview and quick settings repaint. No logout.</li>
+    <li><b>The accent keywords are read-only.</b> <code>-st-accent-color</code> and <code>-st-accent-fg-color</code> resolve from the nine-value <code>accent-color</code> setting. You can use them; you cannot assign them.</li>
+    <li><b>But a generated theme can substitute literals for them</b> — and the Shell's own <code>st-mix()</code>, <code>st-lighten()</code> and <code>st-transparentize()</code> derivations keep working on the substituted value. That escapes the nine-colour enum entirely.</li>
+    <li><b>One stylesheet only.</b> A user theme has no light/dark variant, so following the system colour scheme means regenerating on change.</li>
+  </ul>
+  <p class="note">
+    Worth stating plainly, because the two halves point in opposite directions:
+    an application cannot restyle <em>itself</em> at runtime, but it can restyle
+    the <em>Shell</em> at runtime. The constraint above is libadwaita's, not the
+    desktop's.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>X11 titlebars are reachable — just not through the colours named for them</h2>
+  <p class="sub">And a warning about assuming which applications those are.</p>
+  <p>
+    An X11 application that draws no decorations of its own gets a titlebar
+    from <code>mutter-x11-frames</code>. Under a themed desktop it stays stock,
+    which is exactly the seam you notice — a dark scheme everywhere and one
+    application wearing a titlebar from somewhere else.
+  </p>
+  <p>
+    GTK4 still ships twelve named colours that look like the answer:
+    <code>wm_bg_a</code>, <code>wm_bg_b</code>, <code>wm_title</code>,
+    <code>wm_border</code>, <code>wm_button_*</code>. Overriding all twelve in
+    <code>gtk-4.0/gtk.css</code> does <strong>nothing</strong>. They are
+    vestigial. The helper calls <code>gtk_window_set_titlebar()</code>, so the
+    titlebar is an ordinary GTK4 widget and wants an ordinary rule:
+  </p>
+  <pre><code>headerbar, .titlebar {
+  background-image: none;
+  background-color: @headerbar_bg_color;
+  color: @headerbar_fg_color;
+}</code></pre>
+  <p>
+    That recoloured a live titlebar on the first try. Two details explain why
+    the named colours were the wrong instinct:
+    <code>mutter-x11-frames</code> does not link libadwaita at all — it is a
+    plain GTK4 client — and it runs with a bare environment, <code>HOME</code>
+    and little else.
+  </p>
+  <ul class="road">
+    <li><b>Startup-only, like everything else here.</b> Editing the stylesheet while the helper runs changes nothing. Tested by flipping the colour with no restart and watching the titlebar hold its old value.</li>
+    <li><b>Nothing respawns it.</b> It starts alongside Xwayland and only then. Killing it leaves new X11 windows undecorated until the session restarts.</li>
+    <li><b>It is a plain X11 client, so it can simply be relaunched</b> — which is a great deal cheaper than logging out.</li>
+  </ul>
+  <p class="note">
+    The warning is about scope, and it cost an hour to learn. The application
+    that prompted this investigation — a mismatched titlebar on Spotify —
+    turned out not to be an X11 client at all. It runs on Wayland and draws its
+    own frame in Electron, so none of the above touches it. The list of windows
+    actually decorated this way is short and shrinking, and it is worth checking
+    <code>_NET_CLIENT_LIST</code> before assuming a given application is on it.
+    The fix is real; the application it was reached for was not on the list.
+  </p>
+  <p class="note">
+    Taken together with the Shell result, applying a theme has three tiers, and
+    only one of them is expensive: the Shell updates instantly, X11 titlebars
+    need one small helper restarted, and libadwaita applications need to be
+    restarted themselves. The logout that used to be the standard advice is
+    required for none of it.
   </p>
 </section>
 

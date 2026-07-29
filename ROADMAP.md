@@ -83,6 +83,32 @@ parts of Tweaks.
 - [ ] Activate a generated GNOME Shell theme (`shell.extensions.user-theme`, when
       the User Themes extension is present)
 
+### Environment checks — tell the user what's missing
+
+A preset can be correct and still land on an inconsistent desktop, because
+`gtk.css` is applied *on top of* whatever base theme resolves underneath — and
+host applications and Flatpak applications resolve that base separately. The
+same preset then renders two ways depending only on how an app was packaged.
+
+The decision here is deliberate: **report, don't install.** Vivid has the
+permissions to install things on the user's behalf and shouldn't. Say what is
+missing and what command fixes it, the way the missing-User-Themes-extension
+dialog already does.
+
+- [ ] Warn when `interface.gtk-theme` names a theme that sandboxed apps can't
+      resolve. Flatpaks read `org.gtk.Gtk3theme.<name>` from
+      `/usr/share/runtime/share/themes/`, *not* `/usr/share/themes` — so a
+      distro-packaged theme with no matching extension leaves every Flatpak
+      falling back to stock Adwaita, silently.
+- [ ] Warn when the base theme is not colour-parameterised. GTK 3's built-in
+      Adwaita is compiled — 36 `@define-color` against 1,230 baked literals — so
+      our colours cannot reach it. adw-gtk3 is the inverse (125 defines, 1,189
+      named references, using our exact variable names) and is effectively the
+      GTK 3 substrate this app is written for.
+- [ ] Warn when the User Themes extension is absent or disabled (partly built)
+- [ ] A single "is my desktop consistent?" view — host theme, sandbox theme,
+      Shell theme and `gtk.css` either agreeing or not
+
 ### Theme Engines & Integrations
 
 Extend theming to targets beyond GTK / adw-gtk3. The old yapsy-based plugin
@@ -94,7 +120,13 @@ external plugins.
 - [x] Monet engine — Material You palette from a wallpaper, with dynamic
       schemes (nine variants: Vibrant, Tonal Spot, Expressive, … ) and a
       selectable contrast level
-- [x] GNOME Shell engine
+- [ ] GNOME Shell engine — **needs rewriting, not reviving.** The existing code
+      vendors GNOME's Shell SCSS per release (42-45) and compiles it, which is
+      why it stops at 45. Retheming the stylesheet the installed Shell already
+      ships is version-agnostic: 3,325 lines and 51 unique colours on Shell 50,
+      remapped onto the preset's surfaces by luminance. Verified to apply to a
+      **running** Shell with no logout, and to escape the nine-value accent enum
+      by substituting literals for `-st-accent-color`.
 - [ ] Firefox / browser integration (the Flatpak already grants browser access)
 - [ ] GDM theming
 - [ ] Kvantum / Qt (KvLibadwaita)

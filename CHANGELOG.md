@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `tools/shift-preset-hue.py` — lean a preset's colour family onto a different
+  hue. Rotates the signature fully, the named palette ramps partway, and the
+  status colours not at all (a warning that rotates off amber stops reading as
+  a warning).
+
+### Changed
+
+- **Bluebell** leans to a deeper cyan and **Lilac Mist** to a carbazole violet.
+  They sat 6.2 dE apart and read as the same pastel; they are now 25.4 apart.
+  Both still clear WCAG AA. The families inherited from upstream are
+  deliberately left alone — their near-twins are the point once a scheme can be
+  cycled within one family.
+
+### Documentation
+
+- Two findings added to the site: GNOME Shell can be rethemed on a running
+  session with no logout, and X11 titlebars answer to ordinary `headerbar` CSS
+  rather than the twelve `wm_*` colours named for them — including the
+  application that prompted the investigation turning out not to be an X11
+  client at all.
+- Roadmap: environment checks that report a broken base-theme setup rather than
+  silently rendering onto it; GNOME Shell engine reclassified as needing a
+  rewrite rather than a revival.
+
 ## [0.3.0] - 2026-07-28
 
 ### Added
