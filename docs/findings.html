@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Findings — Vivid Gradience</title>
-<meta name="description" content="Notes from building Vivid Gradience: libadwaita ignores runtime colour overrides, GNOME Shell can be rethemed live, X11 titlebars answer to CSS rules rather than the colours named for them, and a WCAG audit of 76 bundled schemes.">
+<meta name="description" content="Measured notes on theming a GNOME desktop: what actually needs restarting, why libadwaita ignores runtime colour overrides, how GNOME Shell can be rethemed live, why Flatpaks resolve themes separately from the host, recolouring Adwaita icons, and which colour distinctions survive other people's screens.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,16 +12,64 @@
 <header class="hero wrap">
   <span class="badge">Development notes</span>
   <h1>Findings</h1>
-  <p class="tagline">Things that turned out not to work the way they read.</p>
+  <p class="tagline">Measured notes on theming a GNOME desktop.</p>
   <p class="lede">
-    Notes from building the preset and preview work. Written down because each
-    one cost real time to discover, and none of them is obvious from the
-    documentation.
+    Notes from building Vivid Gradience, written for anyone else theming a
+    GNOME desktop. Each one cost real time to find, each was checked by
+    measurement rather than inference, and none of them is obvious from the
+    documentation. Where something turned out to be wrong, the wrong version is
+    left in — the mistake is usually the useful part.
   </p>
   <div class="btns">
     <a class="btn" href="index.html">Back to Vivid Gradience</a>
   </div>
 </header>
+
+<section class="wrap">
+  <h2>What actually needs restarting</h2>
+  <p class="sub">The short answer that the rest of this page is the long answer to.</p>
+  <p>
+    "Log out and back in" is the standard advice for applying a theme, and on
+    GNOME&nbsp;50 it is wrong for almost everything. The surface people cannot
+    reload by hand — the Shell — is the one that updates for free. What needs
+    restarting is the individual application you happen to be looking at.
+  </p>
+  <div class="tablewrap">
+  <table>
+    <thead>
+      <tr><th>Surface</th><th>To see a change</th><th>Why</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Panel, overview, app grid, <kbd>Super</kbd>+<kbd>Tab</kbd>, quick settings, notifications, lock screen</td>
+        <td><b>Nothing</b></td>
+        <td><code>Main.setThemeStylesheet()</code> restyles a running Shell</td>
+      </tr>
+      <tr>
+        <td>A GTK or libadwaita application</td>
+        <td>Restart <i>that application</i></td>
+        <td>Named colours are read once, from the stylesheet loaded at startup</td>
+      </tr>
+      <tr>
+        <td>X11 titlebars on apps that draw no decorations</td>
+        <td>Restart <code>mutter-x11-frames</code></td>
+        <td>Same startup-only rule; it is a plain GTK4 client</td>
+      </tr>
+      <tr>
+        <td>GDM (the login screen)</td>
+        <td>Not covered here</td>
+        <td>Separate stylesheet, owned by a different user</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">
+    The one thing that genuinely cannot restyle itself in place is the
+    application doing the theming. Everything else on this page follows from
+    that asymmetry: a program can restyle the desktop around it far more
+    readily than it can restyle its own window.
+  </p>
+</section>
 
 <section class="wrap">
   <h2>libadwaita ignores colour overrides applied at runtime</h2>
@@ -142,6 +190,74 @@
 </section>
 
 <section class="wrap">
+  <h2>Your theme and a Flatpak's theme are resolved separately</h2>
+  <p class="sub">The one that silently splits a desktop in two.</p>
+  <p>
+    A Flatpak cannot see <code>/usr/share/themes</code>. Flatpak reserves
+    <code>/usr</code>, and a <code>--filesystem=/usr/share/themes</code>
+    permission is refused outright. Sandboxed applications resolve GTK themes
+    from <code>org.gtk.Gtk3theme.&lt;name&gt;</code> runtime extensions, mounted
+    somewhere else entirely:
+  </p>
+  <pre><code>/usr/share/runtime/share/themes/&lt;name&gt;    <span>&lt;- the real mount point</span></code></pre>
+  <p>
+    So a theme installed by your distribution works for host applications and is
+    invisible to every Flatpak. There is no error. The sandboxed apps quietly
+    fall back to stock Adwaita, and the desktop splits along a line that has
+    nothing to do with the theme and everything to do with how each application
+    was packaged.
+  </p>
+  <ul class="road">
+    <li><b>Every installed Gtk3theme extension is mounted</b>, not only the one matching <code>gtk-theme</code>. So "is the extension installed?" is the whole test.</li>
+    <li><b><code>~/.themes</code> and <code>~/.local/share/themes</code> are default Flatpak grants</b> — every app has them, including ones with no connection to GNOME. A theme placed there resolves everywhere, with no extension needed.</li>
+    <li><b>This is easy to cause and hard to notice.</b> Setting <code>gtk-theme</code> to a distro-packaged theme with no matching extension is enough, and the symptom — "some of my apps look wrong" — does not point at the cause.</li>
+  </ul>
+  <p class="note">
+    The wider point for anything that generates a theme: a generated
+    <code>gtk.css</code> is applied <em>on top of</em> whatever base theme
+    resolves underneath it. If the host and the sandbox disagree about that
+    base, one scheme renders two ways. Colours are only ever as consistent as
+    the substrate beneath them, and that substrate is worth checking before
+    blaming the colours.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>A theme cannot recolour GTK 3's built-in Adwaita</h2>
+  <p class="sub">Why adw-gtk3 is not a preference.</p>
+  <p>
+    Overriding named colours only works if the stylesheet underneath refers to
+    those names. GTK 3's built-in Adwaita mostly does not — it is compiled, with
+    its colours written directly into the rules:
+  </p>
+  <div class="tablewrap">
+  <table>
+    <thead>
+      <tr><th>Stylesheet</th><th class="num">@define-color</th><th class="num">Named references</th><th class="num">Baked literals</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>GTK 3 built-in Adwaita</td><td class="num">36</td><td class="num">—</td><td class="num"><b>1,230</b></td></tr>
+      <tr><td>adw-gtk3</td><td class="num"><b>125</b></td><td class="num"><b>1,189</b></td><td class="num">318</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    Redefining a colour cannot reach a literal, so on stock GTK 3 most overrides
+    do nothing at all. adw-gtk3 is the inverse, and its variable names are the
+    same ones libadwaita uses — <code>window_bg_color</code>,
+    <code>headerbar_bg_color</code>, <code>blue_1</code> through
+    <code>blue_5</code>. It is not merely compatible; it is the substrate GTK 3
+    theming is written against.
+  </p>
+  <p class="note">
+    Which makes it a dependency rather than a suggestion, and one that has to be
+    satisfied twice — once on the host, once as a Gtk3theme extension for
+    sandboxed applications. Vivid Gradience reports when either is missing
+    rather than installing anything on your behalf.
+  </p>
+</section>
+
+<section class="wrap">
   <h2>Half the bundled schemes had unreadable labels</h2>
   <p class="sub">76 schemes, 1064 foreground/background pairs, scored against WCAG.</p>
   <p>
@@ -219,6 +335,86 @@
     scheme named for decay is supposed to look muted, and a generator has no way
     to know that. Hence the palette editor on the roadmap: the machine proposes,
     and a person decides which reading of a palette was wanted.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Adwaita's folders are blue because the blue is in the file</h2>
+  <p class="sub">Recolouring an icon set without forking it.</p>
+  <p>
+    No colour variable reaches an icon. Adwaita's folders carry their blue as
+    literal values inside the SVGs, which is why a fully themed desktop still
+    opens a file manager full of stock-blue folders. The set that has to change
+    is small — of roughly seventy full-colour icons, about twenty are blue at
+    all, and the rest are greys that are meant to stay grey.
+  </p>
+  <p>
+    Two things about those blues were not what they looked like:
+  </p>
+  <ul class="road">
+    <li><b>They are not a five-value palette.</b> They are 29 distinct colours spanning luminance 0.05 to 0.98, all within a few degrees of hue 213 — a continuous shading family covering folder flaps, gradient stops, monitor glow and network globes. Substituting a fixed list positionally themes the folder and leaves the monitor beside it still glowing Adwaita blue.</li>
+    <li><b>Mapping them through a luminance curve preserves the shading</b> that made the icon read as an object rather than a silhouette. The curve has to be extended past the palette's own range, or highlights and shadows compress into a flat patch.</li>
+  </ul>
+  <p>
+    The harder problem is <em>which</em> colours to map onto. Choosing by name
+    fails: a red scheme's red ramp against its own near-black file-manager
+    background gives a contrast ratio of 1.22, which is a folder-shaped hole.
+    Scoring for visibility against <code>view_bg_color</code> first, and only
+    then for closeness to the accent, fixes it.
+  </p>
+  <p class="note">
+    And score the <em>output</em>, not the input. A palette ramp derived from a
+    source image can run cyan to purple across its own five shades, so the
+    middle shade says very little about where the folder body will land — one
+    scheme scored well on a ramp whose midpoint was periwinkle and rendered
+    folders that were still blue. Measuring what the icon actually becomes is
+    the only reliable test. Inheriting from Adwaita for everything untouched
+    keeps this a twenty-file theme rather than a fork.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Colour nuance does not survive other people's screens</h2>
+  <p class="sub">The finding that changes which colour work is worth doing.</p>
+  <p>
+    Schemes get authored on one display, by one pair of eyes, often a calibrated
+    display and a trained pair. They get used on uncalibrated panels, wide-gamut
+    panels showing sRGB raw, and with Night Light on. About one man in twelve has
+    some red-green colour deficiency.
+  </p>
+  <p>
+    Running the bundled schemes through simulations of each shows a clear split.
+    Numbers are mean ΔE across window, accent, view and header bar; below about
+    10 two schemes read as the same theme.
+  </p>
+  <div class="tablewrap">
+  <table>
+    <thead>
+      <tr><th>Scheme pair</th><th class="num">As authored</th><th class="num">Deuteranopia</th><th class="num">Night Light</th><th class="num">Wide gamut</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Hatred / Agony</td><td class="num">31.9</td><td class="num">29.3</td><td class="num">23.8</td><td class="num">36.5</td></tr>
+      <tr><td>Bluebell / Lilac Mist</td><td class="num">25.4</td><td class="num">11.9</td><td class="num">23.5</td><td class="num">30.2</td></tr>
+      <tr><td>Rot / Conquest</td><td class="num">19.9</td><td class="num">21.8</td><td class="num">19.7</td><td class="num">23.0</td></tr>
+      <tr><td>Cotton Candy / Powder Puff</td><td class="num">9.1</td><td class="num"><b>2.9</b></td><td class="num">5.9</td><td class="num">10.8</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    The pattern is consistent: <strong>separations built on lightness survive
+    everything; separations built on hue or tint do not.</strong> Deuteranopia
+    and Night Light both attack hue and leave lightness alone. Two pastels a few
+    degrees apart can be obviously different to their author and identical to a
+    good fraction of their audience.
+  </p>
+  <p class="note">
+    The uncomfortable corollary is that a calibrated display and a practised eye
+    make you <em>less</em> able to judge this, not more — you resolve
+    distinctions that sit below the noise floor of an ordinary panel. So carry
+    meaning in lightness and hue distance, treat fine saturation nuance as
+    decoration, and be suspicious of any difference that disappears under
+    simulation. If it only exists on the screen it was authored on, it is not a
+    distinction.
   </p>
 </section>
 

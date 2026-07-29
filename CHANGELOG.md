@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Documentation
+
+- The Findings page is rewritten as notes for anyone theming a GNOME desktop,
+  not just a log of this project's surprises. Five new sections: what actually
+  needs restarting (and what does not), why a Flatpak resolves themes separately
+  from the host, why GTK 3's built-in Adwaita cannot be recoloured at all,
+  recolouring Adwaita's icons without forking them, and which colour
+  distinctions survive being seen on someone else's screen.
+
 ## [0.4.0] - 2026-07-29
 
 ### Added
