@@ -99,14 +99,35 @@ with the external-theme importer above: install a theme **and** switch to it fro
 one app. Scope stays on *looks* — not the fonts-scaling / startup-apps / keyboard
 parts of Tweaks.
 
-- [ ] GTK 3 / legacy theme picker (`interface.gtk-theme`)
-- [ ] Icon theme picker (`interface.icon-theme`)
-- [ ] Cursor theme + size picker (`interface.cursor-theme`)
-- [ ] Light / dark toggle (`interface.color-scheme`)
+Finish these before starting the light/dark pair or the time-of-day cycle. They
+are bounded, individually small, and none of them is blocked on a decision that
+hasn't been made — which is the opposite of the two large features.
+
+Everything here applies to a running session; `gtk-theme`, `icon-theme`,
+`cursor-theme`, `cursor-size` and `color-scheme` were each verified to notify
+live-running applications.
+
+- [ ] GTK 3 / legacy theme picker (`interface.gtk-theme`) — **the valuable one.**
+      Not for the dropdown, but because it is where the app can warn that a
+      chosen theme is unresolvable by sandboxed applications. Vivid currently
+      *sets* `gtk-theme` to `adw-gtk3` unconditionally, so it can create that
+      split without saying so. See the environment checks below.
+- [ ] Icon theme picker (`interface.icon-theme`) — pairs naturally with the
+      generated icon theme, which needs somewhere to be selected from anyway
+- [ ] Pointer (`interface.cursor-theme`, `cursor-size`, `locate-pointer`)
+      — a picker only. Adwaita's cursors are Xcursor binaries, 63 files with no
+      SVG sources shipped, so a cursor cannot be recoloured to match a scheme
+      the way icons can. Rebuilding one would need upstream's sources and
+      `xcursorgen`, which is a separate project, not a feature of this one.
+- [ ] Light / dark toggle (`interface.color-scheme`) — trivial as a switch.
+      Distinct from the light/dark *pair* feature, which is not.
 - [ ] Window control button layout (`wm.preferences.button-layout`)
 - [ ] Toggle animations (`interface.enable-animations`)
-- [ ] Activate a generated GNOME Shell theme (`shell.extensions.user-theme`, when
-      the User Themes extension is present)
+- [x] Activate a generated GNOME Shell theme (`shell.extensions.user-theme`) —
+      done by the Shell engine
+
+Deliberately out of scope, as above: fonts, scaling, startup applications and
+keyboard — the parts of Tweaks that are not about how the desktop *looks*.
 
 ### Environment checks — tell the user what's missing
 
