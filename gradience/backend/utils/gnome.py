@@ -91,9 +91,10 @@ def get_shell_colors(preset_variables: Preset.variables) -> dict:
         shell_colors[variable["name"]] = variable["var_name"]
 
     for shell_key, var_name in shell_colors.items():
-        if shell_key == "panel_bg_color":
-            shell_colors[shell_key] = shell_schema["variables"][5]["default_value"]
-            continue
-        shell_colors[shell_key] = preset_variables[var_name]
+        # `shell_schema` has no `panel_bg_color` entry, so the special case that
+        # used to sit here could never fire -- and it read a default off index 5,
+        # which is `osd_fg_color`. A missing preset variable now yields None
+        # rather than raising, and the caller falls back.
+        shell_colors[shell_key] = preset_variables.get(var_name)
 
     return shell_colors

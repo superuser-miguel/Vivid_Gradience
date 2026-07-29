@@ -125,13 +125,18 @@ external plugins.
       `tools/icons-from-preset.py`: 35 icons, 29 blues mapped through a
       luminance curve, inheriting from Adwaita for everything else. What remains
       is the UI and the in-app generate/apply path.
-- [ ] GNOME Shell engine — **needs rewriting, not reviving.** The existing code
-      vendors GNOME's Shell SCSS per release (42-45) and compiles it, which is
-      why it stops at 45. Retheming the stylesheet the installed Shell already
-      ships is version-agnostic: 3,325 lines and 51 unique colours on Shell 50,
-      remapped onto the preset's surfaces by luminance. Verified to apply to a
-      **running** Shell with no logout, and to escape the nine-value accent enum
-      by substituting literals for `-st-accent-color`.
+- [x] GNOME Shell engine — rewritten to retheme the stylesheet the installed
+      Shell already ships, rather than vendoring GNOME's SCSS per release (the
+      approach that capped it at 45). Version-agnostic, and applies to a
+      **running** Shell with no logout. Escapes the nine-value accent enum by
+      substituting literals for `-st-accent-color`.
+  - [ ] Drop the now-dead machinery: `data/shell/templates/{42,43,44,45}`, the
+        `data/submodules/gnome-shell` submodule (2.6 MB of vendored SCSS), and
+        the `sassc` / `libsass` modules in the three Flatpak manifests. Left for
+        a commit that lands alongside a build, since none of it can be verified
+        without one.
+  - [ ] Follow `interface.color-scheme` and regenerate — a user theme has only
+        one `gnome-shell.css`, so light/dark does not switch by itself.
 - [ ] Firefox / browser integration (the Flatpak already grants browser access)
 - [ ] GDM theming
 - [ ] Kvantum / Qt (KvLibadwaita)

@@ -24,6 +24,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- **GNOME Shell theming works again**, on any Shell version, and applies to a
+  running session without logging out. The engine no longer vendors GNOME's
+  stylesheet sources per release and compiles them with libsass — the approach
+  that capped it at GNOME 45. It now rethemes the stylesheet the installed
+  Shell already ships, remapping its colours onto the preset's surfaces by
+  luminance. On GNOME 50 that is ~3,300 lines and 51 distinct colours, none of
+  which have to be known in advance.
+
+  Shell accents are no longer restricted to the nine values of
+  `org.gnome.desktop.interface accent-color`: `-st-accent-color` is read-only,
+  but a generated stylesheet can substitute a literal for it, and the Shell's
+  own colour functions keep working on the substitution.
+
 - **Bluebell** leans to a deeper cyan and **Lilac Mist** to a carbazole violet.
   They sat 6.2 dE apart and read as the same pastel; they are now 25.4 apart.
   Both still clear WCAG AA. The families inherited from upstream are
@@ -78,6 +91,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   below AA: its low contrast is the defining characteristic of that scheme.
 
 ### Fixed
+
+- `get_shell_colors()` no longer raises on a preset missing a variable, and
+  drops a dead special case for `panel_bg_color` — a key that does not exist in
+  the Shell schema, reading a default from an index that holds `osd_fg_color`.
+- Shell surface colours that are `rgba()` or `@references` now resolve properly.
+  Treating them as unusable made light schemes take white as their foreground
+  and render the whole Shell mid-grey.
 
 - Stop the greeting on the first-run Welcome screen from wrapping mid-name
 
