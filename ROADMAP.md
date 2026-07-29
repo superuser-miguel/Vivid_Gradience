@@ -120,6 +120,11 @@ external plugins.
 - [x] Monet engine — Material You palette from a wallpaper, with dynamic
       schemes (nine variants: Vibrant, Tonal Spot, Expressive, … ) and a
       selectable contrast level
+- [ ] Icon engine — a recoloured "pseudo-Adwaita" icon theme generated per
+      preset, so folders stop being blue under a themed desktop. Prototyped in
+      `tools/icons-from-preset.py`: 35 icons, 29 blues mapped through a
+      luminance curve, inheriting from Adwaita for everything else. What remains
+      is the UI and the in-app generate/apply path.
 - [ ] GNOME Shell engine — **needs rewriting, not reviving.** The existing code
       vendors GNOME's Shell SCSS per release (42-45) and compiles it, which is
       why it stops at 45. Retheming the stylesheet the installed Shell already

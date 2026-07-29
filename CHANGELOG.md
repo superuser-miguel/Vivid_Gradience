@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `tools/icons-from-preset.py` — generate a recoloured "pseudo-Adwaita" icon
+  theme from a preset, so folders stop being Adwaita blue under a themed
+  desktop. 35 icons, 29 blues mapped through a luminance curve built from a
+  palette ramp; everything else inherits from Adwaita untouched. The ramp is
+  chosen by what the folder *becomes* — scored for visibility against
+  `view_bg_color` first, then for closeness to the accent. Nothing is applied
+  unless you pass `--apply`.
+
 - `tools/shift-preset-hue.py` — lean a preset's colour family onto a different
   hue. Rotates the signature fully, the named palette ramps partway, and the
   status colours not at all (a warning that rotates off amber stops reading as
