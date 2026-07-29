@@ -80,6 +80,18 @@
   </recommends>
 
   <releases>
+    <release version="0.4.0" date="2026-07-29" type="stable">
+      <description translate="no">
+        <p>GNOME Shell theming works again, on any Shell version, and applies without logging out.</p>
+        <ul>
+          <li>The Shell engine no longer ships a copy of GNOME's stylesheet sources per release, which is what limited it to GNOME 44. It recolors the stylesheet your installed Shell already has, so it follows your system rather than a list of known versions</li>
+          <li>Applying a Shell theme takes effect on the running session immediately</li>
+          <li>Shell accent colors are no longer limited to the nine the system offers</li>
+          <li>Bluebell and Lilac Mist were close enough to read as the same scheme; Bluebell now leans to a deeper cyan and Lilac Mist to a carbazole violet</li>
+          <li>Fixed light color schemes rendering the Shell in flat grey</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.3.0" date="2026-07-28" type="stable">
       <description translate="no">
         <p>Twenty-three new color schemes, and a live preview that checks contrast.</p>
