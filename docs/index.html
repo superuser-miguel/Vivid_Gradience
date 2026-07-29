@@ -134,9 +134,20 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
     </div>
     <div class="card">
       <h3>GTK 3 apps</h3>
-      <p>Install <a href="https://github.com/lassekongo83/adw-gtk3#readme">adw-gtk3</a>, then grant <code>xdg-config/gtk-3.0</code> the same way.</p>
+      <p>Install <a href="https://github.com/lassekongo83/adw-gtk3#readme">adw-gtk3</a>, then grant <code>xdg-config/gtk-3.0</code> the same way. <b>And install the Flatpak theme extension</b> — <code>flatpak install flathub org.gtk.Gtk3theme.adw-gtk3</code>. Without it your host apps get adw-gtk3 and every Flatpak silently falls back to stock Adwaita, because a sandbox cannot see <code>/usr/share/themes</code>. <a href="findings.html">Why</a>.</p>
+    </div>
+    <div class="card">
+      <h3>GNOME Shell</h3>
+      <p>Install the <a href="https://extensions.gnome.org/extension/19/user-themes/">User Themes</a> extension, then use the Shell engine in the Theming tab. It repaints your running session — no logout.</p>
     </div>
   </div>
+  <p class="note">
+    Nothing here needs you to log out. Named colours are read once when an
+    application starts, so the app you are looking at needs reopening — but the
+    panel, overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher and quick settings
+    all update immediately. <a href="findings.html">The full table is on the
+    findings page.</a>
+  </p>
 </section>
 
 <section class="wrap">
@@ -145,7 +156,8 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
   <ul class="road">
     <li><b>Theme installs from GitHub and <code>.zip</code></b> — fetch and install themes from inside the app, managing the stylesheet it shares with them rather than overwriting it.</li>
     <li><b>An appearance control center</b> — pick icon, cursor, GTK&nbsp;3 and Shell themes right here, so GNOME Tweaks isn't needed to manage how the desktop looks.</li>
-    <li><b>Time-of-day theme cycle</b> — assign presets to day, afternoon and night and switch automatically, on a schedule or by sunrise and sunset.</li>
+    <li><b>Time-of-day theme cycle</b> — rotate two to four presets across the day, by clock or by real sunrise and sunset. On its own storage, so an automatic switch never overwrites your own theme history.</li>
+    <li><b>A recoloured icon theme per scheme</b> — so folders match the theme instead of staying Adwaita blue. Working as a script; not yet in the app.</li>
     <li><b>A palette editor</b> — open a colour cast, assign its swatches to theme roles by hand, and watch the preview and contrast warnings follow.</li>
     <li><b>Light/dark preset pairs</b> — follow the system colour scheme with a matched pair.</li>
     <li><b>Colour wheel</b> — a proper wheel for picking, alongside the hex fields.</li>

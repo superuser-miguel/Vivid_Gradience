@@ -15,10 +15,10 @@
 ## What is Vivid Gradience?
 
 Vivid Gradience is a desktop app for customizing the look of **Libadwaita
-applications** and the **adw-gtk3** theme. From a graphical interface — with no
-hand-editing of config files — you can recolor the entire Adwaita palette,
-generate a Material You color scheme from your wallpaper, layer in custom CSS, and save or
-share the result as a preset.
+applications**, the **adw-gtk3** theme, and **GNOME Shell**. From a graphical
+interface — with no hand-editing of config files — you can recolor the entire
+Adwaita palette, generate a Material You color scheme from your wallpaper, theme
+the Shell to match, layer in custom CSS, and save or share the result as a preset.
 
 It is a maintained fork of [Gradience](https://github.com/GradienceTeam/Gradience),
 whose original was archived in June 2024. This fork exists to keep the tool
@@ -41,6 +41,11 @@ some rough edges — issues and pull requests are welcome.
       family sections
 - [x] **Live preview with contrast warnings** — a schematic window at the top of
       the Colors tab redraws as you edit and flags text below WCAG AA
+- [x] **GNOME Shell theming works again, on any Shell version, and applies
+      without logging out** — upstream dropped it after GNOME 44 because the old
+      engine carried a copy of GNOME's stylesheet sources per release. It now
+      recolors the stylesheet your installed Shell already ships, so it follows
+      whatever GNOME you run
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
 - [x] Installs and updates from a **signed, auto-updating Flatpak repo** (with a
@@ -109,6 +114,10 @@ flatpak run io.github.superuser_miguel.VividGradience
   text that falls below the WCAG AA contrast minimum
 - Generate a Material You color scheme from your wallpaper — pick from nine
   scheme variants (Vibrant, Tonal Spot, Expressive, and more) and a contrast level
+- **Theme GNOME Shell to match, applied to your running session** — the panel,
+  overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher, quick settings and
+  notifications repaint immediately, with no logout. Requires the
+  [User Themes](https://extensions.gnome.org/extension/19/user-themes/) extension
 - Apply themes to Libadwaita, GTK 4, and GTK 3 (via adw-gtk3) applications
 - Create, save, and manage your own presets
 - Extend styling with custom CSS
@@ -128,13 +137,20 @@ flatpak run io.github.superuser_miguel.VividGradience
 
 - [x] 76 ready-made themes built in, in a visual gallery with color previews
 - [x] Live preview with WCAG AA contrast warnings
+- [x] GNOME Shell theming, version-independent and applied live
+- [ ] Recolored icon theme per preset, so folders match the scheme instead of
+      staying Adwaita blue (working as `tools/icons-from-preset.py`; not yet in
+      the app)
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
 - [ ] Appearance control center — pick icon, cursor, GTK 3 and Shell themes from
       Vivid itself, so GNOME Tweaks isn't needed for theming
+- [ ] Tell you when your setup can't work — e.g. a GTK 3 theme that Flatpak
+      apps cannot resolve, which splits a desktop silently
 - [ ] Light/dark preset pairs
-- [ ] Time-of-day theme cycle (day / afternoon / night auto-switching)
+- [ ] Time-of-day theme cycle — rotate 2–4 presets across the day, on its own
+      storage so it never overwrites your theme history
 - [ ] Preview with real widgets (see [findings](https://superuser-miguel.github.io/Vivid_Gradience/findings.html))
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
@@ -157,6 +173,40 @@ the GTK 4 config:
 
 - Install the [adw-gtk3](https://github.com/lassekongo83/adw-gtk3#readme) theme.
 - For Flatpak apps, grant `xdg-config/gtk-3.0` the same way as above.
+- **Install the Flatpak theme extension too** — this one is easy to miss:
+
+  ```shell
+  flatpak install flathub org.gtk.Gtk3theme.adw-gtk3
+  ```
+
+  A Flatpak cannot see `/usr/share/themes`, so a distribution-packaged theme is
+  invisible to sandboxed applications. Without the extension your host apps get
+  adw-gtk3 and every Flatpak silently falls back to stock Adwaita — a desktop
+  split along packaging lines, with no error to tell you why. If some of your
+  apps look right and others don't, this is usually the reason.
+
+  adw-gtk3 is not optional for GTK 3 theming, incidentally: GTK 3's built-in
+  Adwaita has its colors compiled into its rules, so overriding color names
+  cannot reach it at all. [The measurements are here.](https://superuser-miguel.github.io/Vivid_Gradience/findings.html)
+
+### GNOME Shell
+
+Install the [User Themes](https://extensions.gnome.org/extension/19/user-themes/)
+extension, then use the Shell engine in the **Theming** tab. The Shell repaints
+on your running session — no logout.
+
+### What needs restarting
+
+Short version: **not your session.**
+
+| Surface | To see a change |
+| --- | --- |
+| Panel, overview, app grid, <kbd>Super</kbd>+<kbd>Tab</kbd>, quick settings, notifications, lock screen | Nothing |
+| A GTK or Libadwaita app | Reopen that app |
+| X11 titlebars on apps that draw no decorations | Restart `mutter-x11-frames` |
+
+Named colors are read once, when an application starts — so the app you're
+looking at needs reopening, but the desktop around it does not.
 
 ## Reverting
 

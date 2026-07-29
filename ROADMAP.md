@@ -49,9 +49,34 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
 - [ ] Light/dark preset pairs **(high priority)**
-- [ ] Time-of-day theme cycle — assign presets to **day / afternoon / night** and
-      auto-switch on a schedule (or by sunrise/sunset), with an optional smooth
-      transition **(important)**
+- [ ] Time-of-day theme cycle — rotate 2–4 presets across the day **(important)**
+
+  Design notes, from measuring what a running desktop will actually accept:
+
+  - **Four of five channels update live.** `accent-color`, `color-scheme`,
+    `icon-theme` and the Shell theme all reach running applications. Only
+    `gtk.css` — our own 46 colors — does not; those are read once at startup.
+  - **One stylesheet cannot hold both light and dark.** GTK 4 parses
+    `@media (prefers-color-scheme: dark)` without complaint and then ignores it.
+    Verified by rendering: the widget keeps its light color in both schemes.
+  - **Crossing light↔dark mid-session is the dangerous transition.** Within a
+    mode, an app that has not been reopened is merely wearing the wrong valid
+    theme. Across modes it gets dark widgetry over light surfaces, because our
+    `gtk.css` still asserts the old colors at higher priority.
+  - **Its own storage, never `ThemeBackup`.** That store keeps ten rotating
+    snapshots sized for human Applies; four automated switches a day would evict
+    a user's real history in under three days. History and rotation config are
+    different things with different lifecycles.
+  - **Ride Night Light's schedule rather than adding a second clock.** GNOME
+    already computes real sunset/sunrise from cached coordinates. Worth knowing
+    that Night Light warms the display and flattens blues, so an evening preset
+    that also warms will be double-counted.
+  - Slots come from picking 2–4 presets outright (no failure mode, ship first),
+    or from inverting one preset — which means flipping lightness in a
+    perceptual space while holding hue and chroma, not inverting RGB channels.
+
+  Open: whether the cycle crosses light/dark at all, whether a manual Apply
+  pauses it, and whether it rides Night Light's clock or keeps its own.
 - [x] Live preview — a schematic window in the Colors tab, redrawn on every
       edit, marking any pair below WCAG AA. Drawn rather than built from real
       widgets because libadwaita only reads named-colour overrides from the

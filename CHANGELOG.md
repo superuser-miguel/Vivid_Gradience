@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Documentation
 
+- README, roadmap and site brought in line with what actually shipped: GNOME
+  Shell theming as a working feature rather than a plan, the recoloured icon
+  theme as a script that is not yet in the app, and setup instructions that name
+  the Flatpak theme extension — the missing piece that silently splits a desktop
+  between host and sandboxed applications.
+- The time-of-day cycle entry now records what a running desktop will accept:
+  which settings reach live applications, that GTK 4 parses
+  `@media (prefers-color-scheme)` and ignores it, and that the cycle needs its
+  own storage rather than the backup store.
 - The Findings page is rewritten as notes for anyone theming a GNOME desktop,
   not just a log of this project's surprises. Five new sections: what actually
   needs restarting (and what does not), why a Flatpak resolves themes separately
