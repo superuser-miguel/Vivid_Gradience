@@ -28,29 +28,24 @@
   </description>
 
   <screenshots>
-    <screenshot type="default" width="1122" height="822">
-      <caption>Screenshot of "Colors" Tab of Main UI</caption>
-      <image type="source">https://raw.githubusercontent.com/GradienceTeam/Design/main/Screenshots/Appdata/main-ui-colors.png</image>
+    <screenshot type="default" width="1920" height="3272">
+      <caption>The preset gallery</caption>
+      <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/presets.png</image>
     </screenshot>
 
-    <screenshot width="1122" height="822">
-      <caption>Screenshot of "Monet" Tab of Main UI</caption>
-      <image type="source">https://raw.githubusercontent.com/GradienceTeam/Design/main/Screenshots/Appdata/main-ui-monet.png</image>
+    <screenshot width="1920" height="1051">
+      <caption>Editing named colors with live preview and contrast warnings</caption>
+      <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/colors.png</image>
     </screenshot>
 
-    <screenshot width="1122" height="822">
-      <caption>Screenshot of "Advanced" Tab of Main UI</caption>
-      <image type="source">https://raw.githubusercontent.com/GradienceTeam/Design/main/Screenshots/Appdata/main-ui-advanced.png</image>
+    <screenshot width="1920" height="1080">
+      <caption>The theme engines: GNOME Shell, Monet, Firefox and icons</caption>
+      <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/theming.png</image>
     </screenshot>
 
-    <screenshot width="772" height="622">
-      <caption>Screenshot of "Installed" Tab of Preset Manager</caption>
-      <image type="source">https://raw.githubusercontent.com/GradienceTeam/Design/main/Screenshots/Appdata/preset-manager-installed.png</image>
-    </screenshot>
-
-    <screenshot width="772" height="622">
-      <caption>Screenshot of "Explore" Tab of Preset Manager</caption>
-      <image type="source">https://raw.githubusercontent.com/GradienceTeam/Design/main/Screenshots/Appdata/preset-manager-explore.png</image>
+    <screenshot width="1920" height="1051">
+      <caption>Custom styles on the Advanced page</caption>
+      <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/advanced.png</image>
     </screenshot>
   </screenshots>
 

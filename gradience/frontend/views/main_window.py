@@ -183,6 +183,10 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         content = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=6)
         content.append(preview)
         content.append(name_label)
+        # Crediting ourselves on every first-party card is noise; the byline
+        # is for schemes that came from somewhere else.
+        if author == "Vivid Gradience":
+            author = ""
         if author:
             author_label = Gtk.Label(label=author, xalign=0)
             author_label.add_css_class("caption")

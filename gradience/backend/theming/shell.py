@@ -52,6 +52,7 @@ already uses. No additional sandbox permission is required.
 import os
 import re
 import os.path
+import shutil
 
 from gi.repository import GObject, Gio, GLib
 
@@ -373,6 +374,17 @@ class ShellTheme:
 
         # Set default theme
         self.settings.reset(key)
+
+        # Also delete what we generated — resetting only the key leaves a
+        # stale stylesheet under ~/.local/share/themes that the next session
+        # of the User Themes extension could still pick from its list.
+        if os.path.isdir(self.output_dir):
+            shutil.rmtree(self.output_dir, ignore_errors=True)
+            parent = os.path.dirname(self.output_dir)
+            try:
+                os.rmdir(parent)  # only removes it when nothing else is left
+            except OSError:
+                pass
 
     def _reset_theme_thread(self, task:Gio.Task, source_object:GObject.Object,
                 task_data:object, cancellable:Gio.Cancellable):

@@ -113,12 +113,56 @@ class PresetUtils:
         else:
             raise AttributeError("You either need to set 'repo' property, or change 'full_list' property to True")
 
+    # The nine values org.gnome.desktop.interface accent-color accepts, with
+    # the hue each one represents on screen. Desktop chrome that follows the
+    # system accent (Shell dialogs, unthemed GTK apps) stops fighting the
+    # preset when this key leans the same way.
+    ACCENT_CHOICES = {
+        "blue": 216, "teal": 189, "green": 132, "yellow": 44,
+        "orange": 22, "red": 351, "pink": 324, "purple": 285,
+    }
+
+    def set_accent_color(self, preset) -> None:
+        import colorsys
+
+        accent = str(preset.variables.get("accent_bg_color", "")).strip()
+        if not accent.startswith("#") or len(accent) not in (4, 7):
+            return
+
+        h = accent.lstrip("#")
+        if len(h) == 3:
+            h = "".join(c * 2 for c in h)
+        r, g, b = (int(h[i:i + 2], 16) / 255 for i in (0, 2, 4))
+
+        if max(r, g, b) - min(r, g, b) < 0.05:
+            nearest = "slate"       # no hue to match; the neutral value
+        else:
+            hue = colorsys.rgb_to_hls(r, g, b)[0] * 360
+            def gap(target):
+                d = abs(hue - target) % 360
+                return min(d, 360 - d)
+            nearest = min(self.ACCENT_CHOICES, key=lambda k: gap(self.ACCENT_CHOICES[k]))
+
+        settings_retriever = FlatpakGSettings if is_sandboxed() else GSettingsSetting
+        settings = settings_retriever(self.THEME_GSETTINGS_SCHEMA_ID, schema_dir=None)
+        try:
+            settings.set("accent-color", nearest)
+        except AttributeError:
+            settings.set_string("accent-color", nearest)
+        logging.debug(f"accent-color set to {nearest} for {accent}")
+
     def apply_preset(self, app_type: str, preset: Preset) -> None:
         theme_dir = get_gtk_theme_dir(app_type)
         gtk_css_path = os.path.join(theme_dir, "gtk.css")
 
         if app_type == "gtk3":
             self.set_gtk3_theme()
+        else:
+            try:
+                self.set_accent_color(preset)
+            except Exception as e:
+                # Cosmetic alignment only — never block an Apply over it.
+                logging.warning(f"Could not map the system accent colour: {e}")
 
         if not os.path.exists(theme_dir):
             os.makedirs(theme_dir)
