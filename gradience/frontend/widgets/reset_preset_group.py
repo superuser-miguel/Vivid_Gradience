@@ -98,7 +98,7 @@ class GradienceResetPresetGroup(Adw.PreferencesGroup):
     def on_libadw_restore_button_clicked(self, *_args):
         try:
             PresetUtils().restore_preset("gtk4")
-        except GLib.GError:
+        except (OSError, GLib.GError):
             self.parent.add_toast(
                 Adw.Toast(title=_("Unable to restore GTK 4 backup"))
             )
@@ -127,7 +127,7 @@ class GradienceResetPresetGroup(Adw.PreferencesGroup):
     def on_gtk3_restore_button_clicked(self, *_args):
         try:
             PresetUtils().restore_preset("gtk3")
-        except GLib.GError:
+        except (OSError, GLib.GError):
             self.parent.add_toast(
                 Adw.Toast(title=_("Unable to restore GTK 3 backup"))
             )

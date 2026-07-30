@@ -30,6 +30,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   button. Gtk.ColorDialog has no palette API, so the swatches sit one click
   before it rather than inside it.
 
+### Changed
+
+- "Restore previous preset" now reads the same snapshot store as "Restore
+  original". Apply used to maintain two parallel backups — the versioned
+  store and a single-slot `gtk.css.bak` — and the restore button read only
+  the latter. The `.bak` file is no longer written; a leftover one is still
+  honoured when the store is empty, so the first restore after upgrading
+  keeps working. A failed restore also shows its error toast again — the
+  handler was catching the wrong exception type.
+
 ### Fixed
 
 - One cast row no longer serves two palette ramps. Five of the seven cast

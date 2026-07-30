@@ -131,33 +131,34 @@ class PresetUtils:
             # A failed backup must never stop the user applying a preset.
             logging.warning(f"Could not back up the current {app_type} stylesheet: {e}")
 
-        try:
-            with open(gtk_css_path, "r", encoding="utf-8") as css_file:
-                contents = css_file.read()
-                css_file.close()
-        except FileNotFoundError:
-            logging.warning(f"gtk.css file not found in {gtk_css_path}. Generating new stylesheet.")
-        else:
-            with open(gtk_css_path + ".bak", "w", encoding="utf-8") as backup:
-                backup.write(contents)
-                backup.close()
-        finally:
-            with open(gtk_css_path, "w", encoding="utf-8") as css_file:
-                css_file.write(generate_gtk_css(app_type, preset))
-                css_file.close()
+        with open(gtk_css_path, "w", encoding="utf-8") as css_file:
+            css_file.write(generate_gtk_css(app_type, preset))
 
     def restore_preset(self, app_type: str) -> None:
+        """Put back the stylesheet captured before the last Apply.
+
+        Restores the newest ThemeBackup snapshot — the same store Restore
+        Original reads, so the round trip is one mechanism, not two. A
+        leftover ``gtk.css.bak`` from the versions that wrote one is read
+        only when the store holds no snapshots yet, so the first restore
+        after an upgrade still finds something.
+        """
+        backup = ThemeBackup(app_type)
+        snapshot = backup.previous()
+
+        if snapshot is not None:
+            backup.restore(snapshot["path"])
+            return
+
         theme_dir = get_gtk_theme_dir(app_type)
         gtk_css_path = os.path.join(theme_dir, "gtk.css")
 
         try:
-            with open(gtk_css_path + ".bak", "r", encoding="utf-8") as backup:
-                contents = backup.read()
-                backup.close()
+            with open(gtk_css_path + ".bak", "r", encoding="utf-8") as legacy:
+                contents = legacy.read()
 
             with open(gtk_css_path, "w", encoding="utf-8") as css_file:
                 css_file.write(contents)
-                css_file.close()
         except OSError as e:
             logging.error(f"Unable to restore {app_type.capitalize()} preset backup.", exc=e)
             raise
