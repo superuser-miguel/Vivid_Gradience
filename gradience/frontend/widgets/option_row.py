@@ -21,6 +21,10 @@ from gi.repository import Gtk, Gdk, Adw
 from gradience.backend.utils.colors import rgb_to_hash
 from gradience.backend.constants import rootdir
 
+# Imported for its side effect: registers the GradienceColorButton GType the
+# template below refers to.
+from gradience.frontend.widgets.color_button import GradienceColorButton  # noqa: F401
+
 
 @Gtk.Template(resource_path=f"{rootdir}/ui/option_row.ui")
 class GradienceOptionRow(Adw.ActionRow):

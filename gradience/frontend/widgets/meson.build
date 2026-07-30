@@ -3,6 +3,7 @@ widgetsdir = 'gradience/frontend/widgets'
 gradience_sources = [
     '__init__.py',
     'builtin_preset_row.py',
+    'color_button.py',
     'custom_css_group.py',
     'error_list_row.py',
     'explore_preset_row.py',

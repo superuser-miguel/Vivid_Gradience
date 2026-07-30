@@ -19,6 +19,7 @@
 from gi.repository import Gtk, Gdk, Adw
 
 from gradience.backend.constants import rootdir
+from gradience.frontend.widgets.color_button import GradienceColorButton
 
 
 @Gtk.Template(resource_path=f"{rootdir}/ui/palette_shades.ui")
@@ -37,7 +38,7 @@ class GradiencePaletteShades(Adw.ExpanderRow):
 
         self.color_pickers = {}
         for i in range(1, n_shades + 1):
-            picker = Gtk.ColorDialogButton()
+            picker = GradienceColorButton()
             dialog_standard = Gtk.ColorDialog(
                 title="Select a color",
                 modal=True,
