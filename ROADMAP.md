@@ -139,6 +139,43 @@ keyboard — the parts of Tweaks that are not about how the desktop *looks*.
 
 ### Choose colours by measurement, not by lookup table
 
+**Two requests from testing, and they are the same feature seen from both sides.**
+The engine should choose a readable foreground automatically; the colour picker
+should show the user the same measured information so they can choose
+differently. One body of work, two surfaces.
+
+- [ ] **Foreground text follows its background.** Black on light surfaces, white
+      on dark ones — but chosen by measurement, not by eye. There are **14
+      foreground variables**, each paired with exactly one background:
+
+      accent · destructive · success · warning · error
+      window · view · headerbar · card · dialog · popover · thumbnail
+      sidebar · secondary_sidebar
+
+      For each pair, if the foreground does not clear the floor on its own
+      background, pick or derive one that does. Note the crossover between
+      wanting white and wanting black sits at **luminance 0.179**, not at
+      lightness 0.5 — getting that wrong is what made the first attempt at this
+      push a mid-dark accent toward white and still fail.
+
+- [ ] **Put the preset's own palette in the colour picker.** Today clicking a
+      colour opens a bare `Gtk.ColorDialog` with no reference to the scheme being
+      edited, so "change it in Colors" means matching hex by hand.
+
+      Blocked by the GTK API, so it needs building: `Gtk.ColorDialog` exposes
+      only `title`, `modal` and `with-alpha` — there is no way to add swatches.
+      `Gtk.ColorChooserWidget.add_palette()` can, but is deprecated in GTK 4.10+
+      and should not be adopted now. So: a small `Adw.Dialog` holding the
+      scheme's 45 palette shades and 46 variables as labelled swatches, with
+      `Gtk.ColorDialog` kept behind a "Custom…" button as the escape hatch.
+
+      Worth more than parity with GTK: because the dialog knows *which* variable
+      is being edited, it can mark the swatches that actually clear contrast
+      against that variable's background — turning a colour picker into a
+      readable-colour picker. This is also most of the palette editor already on
+      the list.
+
+
 The accent-foreground bug is the argument for this. A static table said "the text
 on an accent comes from `window_fg_color`", which was wrong for 70 of 76 bundled
 presets — and the contrast audit reported all 76 passing, because it scores pairs
