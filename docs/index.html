@@ -77,6 +77,26 @@
       <p>Generate a matching Shell theme from the current preset — the panel, overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher and quick settings repaint on a running session. <strong>No logging out.</strong> It recolours the stylesheet your installed Shell already ships, so it follows whatever GNOME you run rather than a list of known versions.</p>
     </div>
     <div class="card">
+      <h3>Firefox, themed to match</h3>
+      <p>The Firefox engine writes the preset into every profile using <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a> — toolbar, tabs and the new-tab page, for Firefox, LibreWolf and Waterfox alike.</p>
+    </div>
+    <div class="card">
+      <h3>Icons that follow the scheme</h3>
+      <p>The icon engine recolours Adwaita's blue icons — folders, drives, mimetypes — through the preset's own palette, chosen by measured contrast so the folder never vanishes against its background. One click applies it, one removes it.</p>
+    </div>
+    <div class="card">
+      <h3>Desktop settings without Tweaks</h3>
+      <p>GTK&nbsp;3 theme, cursor, dark style and window buttons, right in the Theming tab — with a warning Tweaks never had, when a chosen GTK&nbsp;3 theme is one your Flatpak apps cannot resolve.</p>
+    </div>
+    <div class="card">
+      <h3>Your old theme survives</h3>
+      <p>Apply recognises a stylesheet it didn't write and offers to move it into your theme library instead of overwriting it — and every Apply is snapshotted, so Restore means restore.</p>
+    </div>
+    <div class="card">
+      <h3>Pick colours from the preset itself</h3>
+      <p>Every colour button opens the preset's own palette first — nine ramps, named on hover — with the system dialog one click behind it.</p>
+    </div>
+    <div class="card">
       <h3>Custom CSS</h3>
       <p>An escape hatch for anything the colour variables can't express, per toolkit.</p>
     </div>
@@ -97,11 +117,11 @@
     </figure>
     <figure>
       <img src="screenshots/theming.png" alt="The Theming tab showing the Shell Engine and Monet Engine option groups">
-      <figcaption><strong>Theming</strong> — the Shell and Monet engines.</figcaption>
+      <figcaption><strong>Theming</strong> — the Shell, Monet, Firefox and icon engines, and the Desktop settings.</figcaption>
     </figure>
     <figure>
       <img src="screenshots/advanced.png" alt="The Advanced tab with a custom CSS editor for GTK 4">
-      <figcaption><strong>Advanced</strong> — custom CSS, per toolkit.</figcaption>
+      <figcaption><strong>Advanced</strong> — custom CSS and your theme library.</figcaption>
     </figure>
     <figure>
       <img src="screenshots/preferences.png" alt="The Preferences dialog showing Flatpak application theming options">
@@ -152,14 +172,11 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
 
 <section class="wrap">
   <h2>Roadmap</h2>
-  <p class="sub">Honest about what's next. (The preset gallery, the modernised UI, runtime tracking and signed auto-updating installs already shipped.)</p>
+  <p class="sub">Honest about what's next. (The preset gallery, the modernised UI, the five theme engines, the theme library and signed auto-updating installs already shipped.)</p>
   <ul class="road">
-    <li><b>Theme installs from GitHub and <code>.zip</code></b> — fetch and install themes from inside the app, managing the stylesheet it shares with them rather than overwriting it.</li>
-    <li><b>An appearance control center</b> — pick icon, pointer, GTK&nbsp;3 and Shell themes right here, so GNOME Tweaks isn't needed to manage how the desktop looks. Including a warning when the theme you picked is one your Flatpak apps cannot actually resolve.</li>
+    <li><b>A palette editor</b> — open a colour cast, assign its swatches to theme roles by hand, and watch the preview and contrast warnings follow. The palette-first colour picker that shipped in 0.5.0 is its seed.</li>
+    <li><b>Theme installs from GitHub and <code>.zip</code></b> — fetch themes from inside the app, straight into the theme library the Advanced tab now manages.</li>
     <li><b>Time-of-day theme cycle</b> — rotate two to four presets across the day, by clock or by real sunrise and sunset. On its own storage, so an automatic switch never overwrites your own theme history.</li>
-    <li><b>A recoloured icon theme per scheme</b> — so folders match the theme instead of staying Adwaita blue. The generation works already; the in-app path is what's left.</li>
-    <li><b>Firefox theming</b> — recolour Firefox's own chrome to match your scheme, on top of <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a>.</li>
-    <li><b>A palette editor</b> — open a colour cast, assign its swatches to theme roles by hand, and watch the preview and contrast warnings follow.</li>
     <li><b>Light/dark preset pairs</b> — follow the system colour scheme with a matched pair.</li>
     <li><b>Colour wheel</b> — a proper wheel for picking, alongside the hex fields.</li>
     <li><b>Your own presets in the gallery</b> — user presets shown as cards, like the built-in schemes.</li>

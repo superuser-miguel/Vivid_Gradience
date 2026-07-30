@@ -75,6 +75,20 @@
   </recommends>
 
   <releases>
+    <release version="0.5.0" date="2026-07-30" type="stable">
+      <description translate="no">
+        <p>Three new engines, a safer Apply, and the first big step of the Tweaks absorption.</p>
+        <ul>
+          <li>Firefox engine: the preset recolors Firefox's chrome and new-tab page in every profile with firefox-gnome-theme installed (LibreWolf and Waterfox too)</li>
+          <li>Icon engine: Adwaita's blue icons — folders, drives, mimetypes — recolored through the preset's palette and selected with one click, removed as easily</li>
+          <li>Desktop settings: GTK 3 theme, cursor, dark style and window-button pickers, with a warning when a chosen GTK 3 theme cannot be resolved by Flatpak applications</li>
+          <li>Apply recognizes a stylesheet it did not write and offers to move it into your theme library instead of overwriting it; the Advanced tab manages that library</li>
+          <li>The color picker offers the preset's own palette first; the system dialog sits one click behind it</li>
+          <li>Restore is one mechanism: both restore buttons read the same snapshot store, and restoring is itself undoable</li>
+          <li>The system accent color leans toward the preset on Apply</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.4.0" date="2026-07-29" type="stable">
       <description translate="no">
         <p>GNOME Shell theming works again, on any Shell version, and applies without logging out.</p>

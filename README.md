@@ -46,6 +46,14 @@ some rough edges — issues and pull requests are welcome.
       engine carried a copy of GNOME's stylesheet sources per release. It now
       recolors the stylesheet your installed Shell already ships, so it follows
       whatever GNOME you run
+- [x] **Five theme engines** — Shell, Monet (wallpaper), **Firefox**, a
+      **recolored icon theme** (folders stop staying Adwaita blue), and the
+      **Desktop** pickers inherited from GNOME Tweaks, including the warning
+      Tweaks never had: choosing a GTK 3 theme your Flatpak apps can't resolve
+      says so, instead of silently splitting the desktop
+- [x] **Your existing theme is never destroyed** — applying over a stylesheet
+      Vivid Gradience didn't write offers to import it into your theme library
+      first, and every Apply snapshots the previous state for restore
 - [x] Core theming from upstream is intact (colors, wallpaper-based schemes,
       presets, custom CSS)
 - [x] Installs and updates from a **signed, auto-updating Flatpak repo** (with a
@@ -118,8 +126,24 @@ flatpak run io.github.superuser_miguel.VividGradience
   overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher, quick settings and
   notifications repaint immediately, with no logout. Requires the
   [User Themes](https://extensions.gnome.org/extension/19/user-themes/) extension
-- Apply themes to Libadwaita, GTK 4, and GTK 3 (via adw-gtk3) applications
-- Create, save, and manage your own presets
+- **Theme Firefox's own chrome** to match the preset — toolbar, tabs and the
+  new-tab page, in every profile that has
+  [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
+  installed (LibreWolf and Waterfox too)
+- **Recolor Adwaita's icons to the preset** — folders, drives and mimetypes
+  follow the scheme instead of staying stock blue; one click applies it, one
+  click removes it
+- **Pick your colors from the preset itself** — every color button opens the
+  preset's own palette first, with the system dialog one click behind it
+- **Desktop settings without Tweaks** — GTK 3 theme, cursor, dark style and
+  window-button layout, with a warning when a chosen GTK 3 theme is one your
+  Flatpak apps cannot resolve
+- Apply themes to Libadwaita, GTK 4, and GTK 3 (via adw-gtk3) applications —
+  **non-destructively**: a stylesheet Vivid Gradience didn't write is offered a
+  place in your theme library instead of being overwritten, and every Apply is
+  snapshotted for restore
+- Create, save, and manage your own presets; manage your theme library from
+  the Advanced tab
 - Extend styling with custom CSS
 - Adaptive interface that scales from desktop down to narrow/mobile widths
 
@@ -138,18 +162,20 @@ flatpak run io.github.superuser_miguel.VividGradience
 - [x] 76 ready-made themes built in, in a visual gallery with color previews
 - [x] Live preview with WCAG AA contrast warnings
 - [x] GNOME Shell theming, version-independent and applied live
-- [ ] **Next up** — recolored icon theme per preset, so folders match the scheme
-      instead of staying Adwaita blue (generation works as
-      `tools/icons-from-preset.py`; the in-app path is what's left)
-- [ ] **Next up** — theme Firefox's own chrome to match the preset, on top of
+- [x] Recolored icon theme per preset, generated and applied from the app
+- [x] Firefox chrome theming, on top of
       [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
+- [x] Desktop pickers (GTK 3 theme, cursor, dark style, window buttons) — the
+      start of the appearance control center, so GNOME Tweaks isn't needed
+- [x] Warn when a chosen GTK 3 theme is one Flatpak apps cannot resolve —
+      the split that otherwise happens silently
+- [x] Never destroy an existing theme — Apply offers to import a foreign
+      stylesheet into the theme library it now manages (Advanced tab)
+- [ ] **Next up** — a palette editor: open a preset's color family and assign
+      swatches to roles yourself, with contrast measured as you choose
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
-- [ ] Appearance control center — pick icon, pointer, GTK 3 and Shell themes
-      from Vivid itself, so GNOME Tweaks isn't needed for theming
-- [ ] Tell you when your setup can't work — e.g. a GTK 3 theme that Flatpak
-      apps cannot resolve, which splits a desktop silently
 - [ ] Light/dark preset pairs *(deferred — shares one unresolved design question
       with the cycle below)*
 - [ ] Time-of-day theme cycle — rotate 2–4 presets across the day, on its own
