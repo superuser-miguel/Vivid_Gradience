@@ -37,6 +37,12 @@ If you'd like to see a new feature, open an issue or submit a PR.
 
 ### Planned Features
 
+**Current order of work.** Firefox chrome theming and the in-app icon engine are
+next — both are concrete, and neither waits on a decision. The inherited Tweaks
+pickers follow. The light/dark pair and the time-of-day cycle are deferred: they
+share one unresolved question (is the unit a preset, or a *state*?), and guessing
+at it would mean building the wrong storage twice.
+
 - [x] Visual preset gallery — a dedicated Presets tab with color previews
 - [x] Curated built-in themes — 75+ color schemes (Catppuccin, Gruvbox, Nord,
       Dracula, Rosé Pine, Everforest, Solarized, Tokyo Night, and the full Arc
@@ -48,8 +54,10 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [ ] Show user presets in the gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
-- [ ] Light/dark preset pairs **(high priority)**
-- [ ] Time-of-day theme cycle — rotate 2–4 presets across the day **(important)**
+- [ ] Light/dark preset pairs — **deferred**, needs the state-model conversation
+      first (see the cycle notes below; the two share one mechanism)
+- [ ] Time-of-day theme cycle — rotate 2–4 presets across the day.
+      **Deferred**: a concept in progress, and three questions below are still open
 
   Design notes, from measuring what a running desktop will actually accept:
 
@@ -131,6 +139,19 @@ keyboard — the parts of Tweaks that are not about how the desktop *looks*.
 
 ### Environment checks — tell the user what's missing
 
+**Build this mechanism once, generically.** There are now three separate
+dependencies that have to be detected and reported, and writing a bespoke dialog
+for each is how they drift apart:
+
+| Feature | Needs | Currently |
+|---|---|---|
+| GTK 3 theming | `adw-gtk3` on the host **and** `org.gtk.Gtk3theme.adw-gtk3` for sandboxed apps | neither checked |
+| GNOME Shell | the User Themes extension | partly checked |
+| Firefox | `firefox-gnome-theme` in the profile | not checked |
+
+In every case the answer is the same shape: say what is missing, say what
+installs it, do not install it.
+
 A preset can be correct and still land on an inconsistent desktop, because
 `gtk.css` is applied *on top of* whatever base theme resolves underneath — and
 host applications and Flatpak applications resolve that base separately. The
@@ -166,11 +187,14 @@ external plugins.
 - [x] Monet engine — Material You palette from a wallpaper, with dynamic
       schemes (nine variants: Vibrant, Tonal Spot, Expressive, … ) and a
       selectable contrast level
-- [ ] Icon engine — a recoloured "pseudo-Adwaita" icon theme generated per
-      preset, so folders stop being blue under a themed desktop. Prototyped in
-      `tools/icons-from-preset.py`: 35 icons, 29 blues mapped through a
-      luminance curve, inheriting from Adwaita for everything else. What remains
-      is the UI and the in-app generate/apply path.
+- [ ] Icon engine **(next up)** — a recoloured "pseudo-Adwaita" icon theme
+      generated per preset, so folders stop being blue under a themed desktop.
+      The generation is done and working in `tools/icons-from-preset.py`: 35
+      icons, 29 blues mapped through a luminance curve, ramp chosen by measured
+      visibility against the view background, inheriting from Adwaita for
+      everything else. What remains is the UI and the in-app generate/apply
+      path — and somewhere to select it from, which is the icon theme picker
+      above.
 - [x] GNOME Shell engine — rewritten to retheme the stylesheet the installed
       Shell already ships, rather than vendoring GNOME's SCSS per release (the
       approach that capped it at 45). Version-agnostic, and applies to a
@@ -183,7 +207,26 @@ external plugins.
         without one.
   - [ ] Follow `interface.color-scheme` and regenerate — a user theme has only
         one `gnome-shell.css`, so light/dark does not switch by itself.
-- [ ] Firefox / browser integration (the Flatpak already grants browser access)
+- [ ] Firefox / browser integration **(next up)** — theme Firefox's own chrome to
+      match the preset. Most of this already exists: the retired yapsy plugin
+      (`data/submodules/plugins/firefox_gnome_theme.py`, 152 lines) walks
+      `profiles.ini` and writes ~25 `--gnome-*` CSS variables into
+      `<profile>/chrome/firefox-gnome-theme/customChrome.css`. It is template
+      substitution, so it ports to a built-in engine without the plugin
+      machinery, and the Flatpak already grants Firefox, LibreWolf and Waterfox
+      profile paths.
+
+      Two things to fix while porting rather than carry over:
+  - [ ] **It assumes a dark theme.** Tab backgrounds are hardcoded
+        `rgba(255,255,255,0.025)` and similar, which are invisible on a light
+        preset. They should derive from the preset's own surfaces.
+  - [ ] **The `about:newtab` block ignores the preset entirely** — `#2A2A2E`,
+        `#0060DF` and a dozen more are written as literals, so the new-tab page
+        stays Firefox-default whatever scheme is applied.
+  - [ ] Depends on
+        [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
+        being installed in the profile; the `--gnome-*` variables are its API.
+        Detect and report, do not install.
 - [ ] GDM theming
 - [ ] Kvantum / Qt (KvLibadwaita)
 - [ ] Retire the remaining mock plugin plumbing (save/apply no-ops in `main.py`)

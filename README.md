@@ -138,9 +138,11 @@ flatpak run io.github.superuser_miguel.VividGradience
 - [x] 76 ready-made themes built in, in a visual gallery with color previews
 - [x] Live preview with WCAG AA contrast warnings
 - [x] GNOME Shell theming, version-independent and applied live
-- [ ] Recolored icon theme per preset, so folders match the scheme instead of
-      staying Adwaita blue (working as `tools/icons-from-preset.py`; not yet in
-      the app)
+- [ ] **Next up** — recolored icon theme per preset, so folders match the scheme
+      instead of staying Adwaita blue (generation works as
+      `tools/icons-from-preset.py`; the in-app path is what's left)
+- [ ] **Next up** — theme Firefox's own chrome to match the preset, on top of
+      [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
@@ -148,9 +150,10 @@ flatpak run io.github.superuser_miguel.VividGradience
       from Vivid itself, so GNOME Tweaks isn't needed for theming
 - [ ] Tell you when your setup can't work — e.g. a GTK 3 theme that Flatpak
       apps cannot resolve, which splits a desktop silently
-- [ ] Light/dark preset pairs
+- [ ] Light/dark preset pairs *(deferred — shares one unresolved design question
+      with the cycle below)*
 - [ ] Time-of-day theme cycle — rotate 2–4 presets across the day, on its own
-      storage so it never overwrites your theme history
+      storage so it never overwrites your theme history *(deferred)*
 - [ ] Preview with real widgets (see [findings](https://superuser-miguel.github.io/Vivid_Gradience/findings.html))
 - [ ] Generate a preset from a single color
 - [ ] Textures (carbon fibre, gloss, and more)
