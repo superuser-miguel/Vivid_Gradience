@@ -64,6 +64,13 @@ class GradienceColorButton(Gtk.MenuButton):
         return self.dialog
 
     def set_rgba(self, rgba):
+        # ColorDialogButton swallows same-value sets before notifying, and the
+        # call sites lean on that: update_shades reacts to notify::rgba by
+        # setting every shade again, which is a same-value cycle. A property
+        # that notifies unconditionally turns startup into a 100% CPU spin.
+        current = self.props.rgba
+        if current is not None and rgba is not None and current.equal(rgba):
+            return
         self.props.rgba = rgba
 
     def get_rgba(self):
@@ -129,7 +136,7 @@ class GradienceColorButton(Gtk.MenuButton):
 
     def _on_swatch_clicked(self, _button, rgba):
         self.popdown()
-        self.props.rgba = rgba
+        self.set_rgba(rgba)
 
     def _on_custom_clicked(self, _button):
         self.popdown()
@@ -144,7 +151,7 @@ class GradienceColorButton(Gtk.MenuButton):
         except GLib.Error:  # dismissed
             return
         if rgba is not None:
-            self.props.rgba = rgba
+            self.set_rgba(rgba)
 
     # -- drawing
 
