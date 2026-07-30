@@ -49,6 +49,7 @@ class GradiencePreferencesDialog(Adw.PreferencesDialog):
     monet_engine_switch = Gtk.Template.Child()
     gnome_shell_engine_switch = Gtk.Template.Child()
     firefox_engine_switch = Gtk.Template.Child()
+    icon_engine_switch = Gtk.Template.Child()
 
     def __init__(self, parent, **kwargs):
         super().__init__(**kwargs)
@@ -85,6 +86,7 @@ class GradiencePreferencesDialog(Adw.PreferencesDialog):
         self.gnome_shell_engine_switch.set_active("shell" in self.win.enabled_theme_engines)
         self.monet_engine_switch.set_active("monet" in self.win.enabled_theme_engines)
         self.firefox_engine_switch.set_active("firefox" in self.win.enabled_theme_engines)
+        self.icon_engine_switch.set_active("icons" in self.win.enabled_theme_engines)
 
         self.gnome_shell_engine_switch.connect(
             "notify::active", self.on_gnome_shell_engine_switch_toggled
@@ -96,6 +98,10 @@ class GradiencePreferencesDialog(Adw.PreferencesDialog):
 
         self.firefox_engine_switch.connect(
             "notify::active", self.on_firefox_engine_switch_toggled
+        )
+
+        self.icon_engine_switch.connect(
+            "notify::active", self.on_icon_engine_switch_toggled
         )
 
     def setup_flatpak_group(self):
@@ -202,6 +208,21 @@ class GradiencePreferencesDialog(Adw.PreferencesDialog):
             self.win.enabled_theme_engines.add("firefox")
         else:
             self.win.enabled_theme_engines.remove("firefox")
+
+        enabled_engines = GLib.Variant.new_strv(list(self.win.enabled_theme_engines))
+        self.settings.set_value("enabled-theme-engines", enabled_engines)
+
+        self.win.reload_theming_page()
+
+        logging.debug(
+                f"enabled-theme-engines: {self.settings.get_value('enabled-theme-engines')}"
+        )
+
+    def on_icon_engine_switch_toggled(self, widget, *args):
+        if widget.get_active():
+            self.win.enabled_theme_engines.add("icons")
+        else:
+            self.win.enabled_theme_engines.remove("icons")
 
         enabled_engines = GLib.Variant.new_strv(list(self.win.enabled_theme_engines))
         self.settings.set_value("enabled-theme-engines", enabled_engines)

@@ -30,6 +30,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   button. Gtk.ColorDialog has no palette API, so the swatches sit one click
   before it rather than inside it.
 
+### Added (continued)
+
+- An Icon Engine on the Theming tab — the recoloured "pseudo-Adwaita" icon
+  theme, previously a script, is now a click. Apply generates the theme from
+  the preset's best-scoring palette ramp (contrast against the view first,
+  then nearest the accent), writes it to `~/.local/share/icons`, ships the
+  Adwaita attribution alongside, and selects it; Remove selects the default
+  again and deletes the generated directory — unless the user has since
+  chosen a different icon theme, which is left alone. The group shows which
+  ramp would be used and why before anything is applied.
+
 ### Changed
 
 - "Restore previous preset" now reads the same snapshot store as "Restore

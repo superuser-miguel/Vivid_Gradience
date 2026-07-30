@@ -120,8 +120,11 @@ live-running applications.
       chosen theme is unresolvable by sandboxed applications. Vivid currently
       *sets* `gtk-theme` to `adw-gtk3` unconditionally, so it can create that
       split without saying so. See the environment checks below.
-- [ ] Icon theme picker (`interface.icon-theme`) — pairs naturally with the
-      generated icon theme, which needs somewhere to be selected from anyway
+- [x] Icon Engine — the generated icon theme is in the app: a Theming-tab
+      group that scores the ramps, generates the theme with attribution, and
+      sets `interface.icon-theme` on Apply. Remove resets the key unless the
+      user has since selected a different theme. (A general icon *picker* for
+      arbitrary installed themes remains future control-centre work.)
 - [ ] Pointer (`interface.cursor-theme`, `cursor-size`, `locate-pointer`)
       — a picker only. Adwaita's cursors are Xcursor binaries, 63 files with no
       SVG sources shipped, so a cursor cannot be recoloured to match a scheme

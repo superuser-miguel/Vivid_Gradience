@@ -1,0 +1,44 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GradienceIconThemingGroup: Adw.PreferencesGroup {
+  title: _("Icon Engine");
+  description: _("Recolours Adwaita's blue icons — folders, drives, mimetypes — to match the current preset.");
+
+  Adw.ExpanderRow icon-theming-expander {
+    title: _("Icon Engine Options");
+    subtitle: _("Generate and select a recoloured icon theme");
+    expanded: true;
+
+    [action]
+    Button icon-apply-button {
+      valign: center;
+      label: _("Apply");
+      tooltip-text: _("Generate the icon theme and select it");
+      clicked => $on_apply_button_clicked();
+
+      styles [
+        "suggested-action"
+      ]
+    }
+
+    Adw.ActionRow ramp-row {
+      title: _("Chosen Ramp");
+      subtitle: _("Scored when a preset is loaded");
+    }
+  }
+}
+
+Adw.ActionRow reset-options-row {
+  [suffix]
+  Button reset_theme_button {
+    valign: center;
+    label: _("Remove Theme");
+    tooltip-text: _("Select the default icon theme again and delete the generated one");
+    clicked => $on_reset_theme_clicked();
+
+    styles [
+      "destructive-action"
+    ]
+  }
+}

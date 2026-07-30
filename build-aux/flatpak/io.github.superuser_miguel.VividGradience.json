@@ -15,6 +15,7 @@
         "--filesystem=xdg-data/flatpak/overrides:create",
         "--filesystem=xdg-cache/gradience:create",
         "--filesystem=xdg-data/themes:create",
+        "--filesystem=xdg-data/icons:create",
         "--filesystem=xdg-config/gtk-3.0",
         "--filesystem=xdg-config/gtk-4.0",
         "--filesystem=xdg-config/qt5ct",
