@@ -203,6 +203,16 @@ and hopes.
 - [ ] Extend `tools/audit-contrast.py` to cover generated output, and add the
       colour-vision and Night Light simulations while it is being touched.
 
+### Stylesheet ownership — done
+
+- [x] Warn on Apply when `gtk.css` exists without the Vivid header, naming
+      its size and offering import-as-theme / back-up-and-replace / cancel.
+- [x] "Rescue, don't just back up" — the foreign stylesheet moves into
+      `~/.local/share/themes` as a selectable theme instead of dying.
+- [x] A Custom Themes group on Advanced manages that library (list, import
+      a folder, remove). The GitHub/.zip installer will feed the same group.
+- [x] Map the preset accent onto `interface.accent-color` on Apply.
+
 ### Environment checks — tell the user what's missing
 
 **Build this mechanism once, generically.** There are now three separate

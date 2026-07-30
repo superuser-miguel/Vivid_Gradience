@@ -41,6 +41,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   chosen a different icon theme, which is left alone. The group shows which
   ramp would be used and why before anything is applied.
 
+### Added (safety)
+
+- Apply now recognises a stylesheet it did not write. When
+  `~/.config/gtk-{3.0,4.0}/gtk.css` exists without the Vivid Gradience
+  marker — most likely an installed theme — a dialog names the file and its
+  size and offers three ways out: move it into the theme library and then
+  apply, back it up and replace it, or cancel. This closes the one silent
+  data-loss path in the app.
+
+- A Custom Themes group on the Advanced page: the user's theme library in
+  `~/.local/share/themes`, showing what each theme provides
+  (gtk-3.0 / gtk-4.0 / gnome-shell), with folder import and removal.
+  Stylesheets rescued by the Apply dialog land here, named
+  `imported-<toolkit>-<date>`, with a README recording where they came from.
+
+- Applying a preset also leans `org.gnome.desktop.interface accent-color`
+  (GNOME's nine-value system accent) toward the preset's accent by hue, so
+  desktop chrome that follows the system accent stops fighting the theme.
+
 ### Changed
 
 - "Restore previous preset" now reads the same snapshot store as "Restore

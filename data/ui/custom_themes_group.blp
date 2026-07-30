@@ -1,0 +1,19 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GradienceCustomThemesGroup: Adw.PreferencesGroup {
+  title: _("Custom Themes");
+  description: _("Your theme library in ~/.local/share/themes — imported and rescued themes land here.");
+
+  [header-suffix]
+  Button import-button {
+    valign: center;
+    clicked => $on_import_button_clicked();
+
+    Adw.ButtonContent {
+      icon-name: "folder-download-symbolic";
+      label: _("Import…");
+      use-underline: true;
+    }
+  }
+}

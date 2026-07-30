@@ -5,6 +5,7 @@ gradience_sources = [
     'builtin_preset_row.py',
     'color_button.py',
     'custom_css_group.py',
+    'custom_themes_group.py',
     'error_list_row.py',
     'explore_preset_row.py',
     'firefox_theming_group.py',

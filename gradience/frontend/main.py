@@ -28,6 +28,8 @@ from gradience.backend.css_parser import parse_css
 from gradience.backend.models.preset import Preset
 from gradience.backend.theming.preset import PresetUtils
 from gradience.backend.theming.monet import Monet
+from gradience.backend.theming.backup import ThemeBackup
+from gradience.backend.theming import custom_themes
 from gradience.backend.utils.common import to_slug_case
 from gradience.backend.utils.theming import generate_gtk_css
 from gradience.backend.constants import rootdir, app_id, rel_ver
@@ -42,6 +44,7 @@ from gradience.frontend.views.preferences_dialog import GradiencePreferencesDial
 from gradience.frontend.dialogs.app_type_dialog import GradienceAppTypeDialog
 from gradience.frontend.dialogs.save_dialog import GradienceSaveDialog
 from gradience.frontend.widgets.custom_css_group import GradienceCustomCSSGroup
+from gradience.frontend.widgets.custom_themes_group import GradienceCustomThemesGroup
 
 from gradience.backend.utils.colors import hexFromArgb
 from gradience.frontend.utils.actions import ActionHelpers
@@ -78,6 +81,7 @@ class GradienceApplication(Adw.Application):
 
         self.custom_css = {}
         self.custom_css_group = None
+        self.custom_themes_group = None
 
         self.custom_presets = {}
         self.global_errors = []
@@ -555,19 +559,92 @@ class GradienceApplication(Adw.Application):
             self.win.close()
 
     def apply_color_scheme(self, widget, response):
-        if response == "apply":
-            if widget.get_app_types()["gtk4"]:
-                PresetUtils().apply_preset("gtk4", self.preset)
+        if response != "apply":
+            return
 
-            if widget.get_app_types()["gtk3"]:
-                PresetUtils().apply_preset("gtk3", self.preset)
+        app_types = [t for t in ("gtk4", "gtk3")
+                     if widget.get_app_types()[t]]
 
-            self.reload_plugins()
-            self.plugins_list.apply()
+        # A gtk.css without our marker is someone else's data — most likely
+        # an installed theme, and this write would destroy it. Offer to turn
+        # it into a library theme instead of a casualty.
+        foreign = []
+        for app_type in app_types:
+            try:
+                if ThemeBackup(app_type).describe_current()["kind"] == "foreign":
+                    foreign.append(app_type)
+            except Exception as e:
+                logging.warning(f"Could not inspect the {app_type} stylesheet: {e}")
 
+        if foreign:
+            self.present_foreign_stylesheet_dialog(foreign, app_types)
+        else:
+            self._do_apply(app_types)
+
+    def present_foreign_stylesheet_dialog(self, foreign, app_types):
+        names = []
+        for app_type in foreign:
+            css_path = os.path.join(get_gtk_theme_dir(app_type), "gtk.css")
+            try:
+                size = GLib.format_size(os.path.getsize(css_path))
+            except OSError:
+                size = "?"
+            names.append(f"{css_path} ({size})")
+
+        dialog = Adw.MessageDialog(
+            transient_for=self.win,
+            heading=_("An Existing Theme Was Found"),
+            body=_("{0} was not written by Vivid Gradience — it may be an "
+                   "installed theme. Applying replaces it. It can be moved "
+                   "into your theme library first, where it stays "
+                   "selectable.").format("\n".join(names)))
+
+        dialog.add_response("import", _("Import as Theme, Then Apply"))
+        dialog.add_response("replace", _("Back Up and Replace"))
+        dialog.add_response("cancel", _("Cancel"))
+        dialog.set_response_appearance("import", Adw.ResponseAppearance.SUGGESTED)
+        dialog.set_response_appearance("replace", Adw.ResponseAppearance.DESTRUCTIVE)
+        dialog.set_default_response("import")
+        dialog.set_close_response("cancel")
+
+        dialog.connect("response", self._on_foreign_stylesheet_response,
+                       foreign, app_types)
+        dialog.present()
+
+    def _on_foreign_stylesheet_response(self, _dialog, response, foreign, app_types):
+        if response == "cancel":
+            return
+
+        if response == "import":
+            rescued = []
+            for app_type in foreign:
+                try:
+                    rescued.append(custom_themes.rescue_stylesheet(app_type))
+                except OSError as e:
+                    logging.error(
+                        f"Could not import the {app_type} stylesheet as a theme.", exc=e)
+                    self.win.toast_overlay.add_toast(Adw.Toast(title=_(
+                        "Could not import the existing stylesheet — nothing was applied.")))
+                    return
+            if self.custom_themes_group is not None:
+                self.custom_themes_group.refresh()
             self.win.toast_overlay.add_toast(
-                Adw.Toast(title=_("Preset has been set. Log out to apply changes."))
-            )
+                Adw.Toast(title=_("Imported as {0}.").format(", ".join(rescued))))
+
+        # "replace" falls through: apply_preset captures a ThemeBackup
+        # snapshot before the write, which is the backup half of the promise.
+        self._do_apply(app_types)
+
+    def _do_apply(self, app_types):
+        for app_type in app_types:
+            PresetUtils().apply_preset(app_type, self.preset)
+
+        self.reload_plugins()
+        self.plugins_list.apply()
+
+        self.win.toast_overlay.add_toast(
+            Adw.Toast(title=_("Preset has been set. Log out to apply changes."))
+        )
 
     def show_preferences(self, *_args):
         prefs = GradiencePreferencesDialog(self.win)
@@ -592,11 +669,16 @@ class GradienceApplication(Adw.Application):
         self.custom_css_group.load_custom_css(self.custom_css)
         self.win.content_plugins.add(self.custom_css_group)
 
+        self.custom_themes_group = GradienceCustomThemesGroup(self.win)
+        self.win.content_plugins.add(self.custom_themes_group)
+
         self.props.active_window.update_errors(self.global_errors)
 
     def reload_plugins(self):
         # Plugins are retired; reload only the Custom CSS group.
         self.win.content_plugins.remove(self.custom_css_group)
+        if self.custom_themes_group is not None:
+            self.win.content_plugins.remove(self.custom_themes_group)
 
         self.custom_css_group = GradienceCustomCSSGroup(self.win)
 
@@ -605,6 +687,9 @@ class GradienceApplication(Adw.Application):
 
         self.custom_css_group.load_custom_css(self.custom_css)
         self.win.content_plugins.add(self.custom_css_group)
+
+        self.custom_themes_group = GradienceCustomThemesGroup(self.win)
+        self.win.content_plugins.add(self.custom_themes_group)
 
         self.props.active_window.update_errors(self.global_errors)
 
