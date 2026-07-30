@@ -137,6 +137,32 @@ live-running applications.
 Deliberately out of scope, as above: fonts, scaling, startup applications and
 keyboard — the parts of Tweaks that are not about how the desktop *looks*.
 
+### Choose colours by measurement, not by lookup table
+
+The accent-foreground bug is the argument for this. A static table said "the text
+on an accent comes from `window_fg_color`", which was wrong for 70 of 76 bundled
+presets — and the contrast audit reported all 76 passing, because it scores pairs
+as they appear in a *preset* while the Shell composes different pairs from the
+same variables. Two self-consistent views of the same data, disagreeing by a
+factor of two.
+
+This is the lesson the icon engine already learned and this one did not: **score
+the output, not the input.** `tools/icons-from-preset.py` picks a palette ramp by
+measuring what the folder actually becomes. The Shell engine substitutes values
+and hopes.
+
+- [ ] **Pick foregrounds by contrast, not by name.** Given a background, choose
+      whichever candidate actually reads on it, rather than trusting one mapping
+      to be right for every scheme. Self-correcting: a preset with a poor
+      `accent_fg_color` gets a better one instead of an unreadable toggle.
+      (Peach Fizz passes at 4.62 today — correct, but thin.)
+- [ ] **Audit the generated stylesheet, not just the preset.** Every engine
+      emits its own foreground/background pairings — Shell, GTK, Firefox chrome.
+      Scoring the artefact would catch this whole class of bug, including the
+      ones not yet found, and would have caught this one immediately.
+- [ ] Extend `tools/audit-contrast.py` to cover generated output, and add the
+      colour-vision and Night Light simulations while it is being touched.
+
 ### Environment checks — tell the user what's missing
 
 **Build this mechanism once, generically.** There are now three separate
