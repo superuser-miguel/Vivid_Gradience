@@ -40,7 +40,12 @@ shell_schema = {
         },
         {
             "name": "selected_fg_color",
-            "var_name": "window_fg_color",
+            # This is the text drawn ON the accent, so it has to come from
+            # accent_fg_color -- it used to read window_fg_color, which on any
+            # dark scheme is a near-white and lands unreadable on a mid-tone
+            # accent. It is also the pair the WCAG audit scores, so the audit
+            # and the Shell now agree about what they are measuring.
+            "var_name": "accent_fg_color",
             "title": _("Accent Foreground Color")
         },
         # TODO: Fix panel background color injection code
