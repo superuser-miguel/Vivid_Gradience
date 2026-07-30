@@ -1,0 +1,44 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GradienceFirefoxThemingGroup: Adw.PreferencesGroup {
+  title: _("Firefox Engine");
+  description: _("Themes Firefox's interface to match the current preset.");
+
+  Adw.ExpanderRow firefox-theming-expander {
+    title: _("Firefox Engine Options");
+    subtitle: _("Write the preset into every profile using the Firefox GNOME Theme");
+    expanded: true;
+
+    [action]
+    Button firefox-apply-button {
+      valign: center;
+      label: _("Apply");
+      tooltip-text: _("Apply the preset to Firefox");
+      clicked => $on_apply_button_clicked();
+
+      styles [
+        "suggested-action"
+      ]
+    }
+
+    Adw.ActionRow profiles-row {
+      title: _("Detected Profiles");
+      subtitle: _("Searching…");
+    }
+  }
+}
+
+Adw.ActionRow reset-options-row {
+  [suffix]
+  Button reset_theme_button {
+    valign: center;
+    label: _("Remove Theme");
+    tooltip-text: _("Remove the generated colours from every profile");
+    clicked => $on_reset_theme_clicked();
+
+    styles [
+      "destructive-action"
+    ]
+  }
+}

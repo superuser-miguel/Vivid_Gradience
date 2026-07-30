@@ -26,6 +26,7 @@ from gradience.backend.constants import rootdir, app_id, build_type
 
 from gradience.frontend.widgets.shell_theming_group import GradienceShellThemingGroup
 from gradience.frontend.widgets.monet_theming_group import GradienceMonetThemingGroup
+from gradience.frontend.widgets.firefox_theming_group import GradienceFirefoxThemingGroup
 from gradience.frontend.widgets.palette_shades import GradiencePaletteShades
 from gradience.frontend.widgets.error_list_row import GradienceErrorListRow
 from gradience.frontend.widgets.option_row import GradienceOptionRow
@@ -313,6 +314,7 @@ class GradienceMainWindow(Adw.ApplicationWindow):
     def setup_theming_page(self):
         self.setup_shell_group()
         self.setup_monet_group()
+        self.setup_firefox_group()
         self.update_theming_view()
 
     def update_theming_view(self):
@@ -333,6 +335,12 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         if "monet" in self.enabled_theme_engines:
             self.content_theming.add(self.monet_group)
 
+    def setup_firefox_group(self):
+        self.firefox_group = GradienceFirefoxThemingGroup(self)
+
+        if "firefox" in self.enabled_theme_engines:
+            self.content_theming.add(self.firefox_group)
+
     def reload_theming_page(self):
         if self.shell_group.is_ancestor(self.content_theming):
             self.content_theming.remove(self.shell_group)
@@ -340,8 +348,12 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         if self.monet_group.is_ancestor(self.content_theming):
             self.content_theming.remove(self.monet_group)
 
+        if self.firefox_group.is_ancestor(self.content_theming):
+            self.content_theming.remove(self.firefox_group)
+
         self.setup_shell_group()
         self.setup_monet_group()
+        self.setup_firefox_group()
         self.update_theming_view()
 
     # --- Live preview ------------------------------------------------------

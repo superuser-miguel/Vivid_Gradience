@@ -3,6 +3,7 @@ themingdir = 'gradience/backend/theming'
 gradience_sources = [
     '__init__.py',
     'backup.py',
+    'firefox.py',
     'monet.py',
     'preset.py',
     'shell.py'

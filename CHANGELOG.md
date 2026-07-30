@@ -7,6 +7,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A Firefox Engine on the Theming tab. It writes the preset's colours into
+  every browser profile that has
+  [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
+  installed — Firefox, LibreWolf and Waterfox, packaged natively, as Flatpak
+  or as Snap. When no profile has the theme, the app says what is missing and
+  links to the project page rather than installing anything.
+
+  The port fixes what the retired plugin got wrong: tab backgrounds were
+  hardcoded white overlays (invisible on light presets) and now derive from
+  the preset's foreground; the `about:home` / `about:newtab` page was
+  Firefox's stock dark palette written as literals and now follows the preset;
+  profiles with absolute paths in `profiles.ini` were silently mishandled; and
+  a `customChrome.css` not written by Vivid Gradience is left untouched — it
+  is the user's customisation hook, not ours.
+
+- The colour picker now offers the palette of the preset being edited: the
+  colour button on every row opens a swatch grid of the preset's nine ramps
+  under the preset's name, with the system colour dialog behind a Custom…
+  button. Gtk.ColorDialog has no palette API, so the swatches sit one click
+  before it rather than inside it.
+
+### Fixed
+
+- One cast row no longer serves two palette ramps. Five of the seven cast
+  presets had a duplicated ramp (Rot's purple_ was byte-identical to its
+  light_, and friends): the generator assigned the lightness extremes to
+  light_/dark_ without checking what the hue matching had already claimed.
+  The named variables — surfaces, accent, status colours — are unchanged in
+  all seven; only ramp assignments moved, always to another row of the same
+  cast.
+
 ### Documentation
 
 - README, roadmap and site brought in line with what actually shipped: GNOME

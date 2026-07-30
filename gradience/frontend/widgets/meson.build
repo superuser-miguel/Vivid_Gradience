@@ -7,6 +7,7 @@ gradience_sources = [
     'custom_css_group.py',
     'error_list_row.py',
     'explore_preset_row.py',
+    'firefox_theming_group.py',
     'monet_theming_group.py',
     'option_row.py',
     'palette_shades.py',

@@ -270,26 +270,28 @@ external plugins.
         without one.
   - [ ] Follow `interface.color-scheme` and regenerate — a user theme has only
         one `gnome-shell.css`, so light/dark does not switch by itself.
-- [ ] Firefox / browser integration **(next up)** — theme Firefox's own chrome to
-      match the preset. Most of this already exists: the retired yapsy plugin
-      (`data/submodules/plugins/firefox_gnome_theme.py`, 152 lines) walks
-      `profiles.ini` and writes ~25 `--gnome-*` CSS variables into
-      `<profile>/chrome/firefox-gnome-theme/customChrome.css`. It is template
-      substitution, so it ports to a built-in engine without the plugin
-      machinery, and the Flatpak already grants Firefox, LibreWolf and Waterfox
-      profile paths.
+- [x] Firefox / browser integration — a built-in Firefox Engine on the Theming
+      tab, ported from the retired yapsy plugin. Walks `profiles.ini` for
+      Firefox, LibreWolf and Waterfox (host, Flatpak and Snap) and writes the
+      preset's `--gnome-*` variables into
+      `<profile>/chrome/firefox-gnome-theme/customChrome.css`.
 
-      Two things to fix while porting rather than carry over:
-  - [ ] **It assumes a dark theme.** Tab backgrounds are hardcoded
-        `rgba(255,255,255,0.025)` and similar, which are invisible on a light
-        preset. They should derive from the preset's own surfaces.
-  - [ ] **The `about:newtab` block ignores the preset entirely** — `#2A2A2E`,
-        `#0060DF` and a dozen more are written as literals, so the new-tab page
-        stays Firefox-default whatever scheme is applied.
-  - [ ] Depends on
+      Fixed while porting rather than carried over:
+  - [x] **The dark-theme assumption.** Tab backgrounds were hardcoded white
+        overlays, invisible on a light preset; they now derive from the
+        preset's own foreground, so they darken light schemes and lighten dark
+        ones.
+  - [x] **The `about:newtab` block ignored the preset entirely** — Firefox's
+        stock dark palette was written as literals. It now derives from the
+        same preset roles as everything else.
+  - [x] Depends on
         [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
         being installed in the profile; the `--gnome-*` variables are its API.
-        Detect and report, do not install.
+        Detected and reported with a link to the project page — never installed.
+  - [x] Also fixed in the port: `IsRelative` was compared as an integer against
+        a string, so absolute-path profiles never resolved; and a
+        `customChrome.css` we did not write is skipped, not overwritten —
+        firefox-gnome-theme documents it as the *user's* customisation hook.
 - [ ] GDM theming
 - [ ] Kvantum / Qt (KvLibadwaita)
 - [ ] Retire the remaining mock plugin plumbing (save/apply no-ops in `main.py`)
