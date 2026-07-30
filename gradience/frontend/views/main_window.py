@@ -28,6 +28,7 @@ from gradience.frontend.widgets.shell_theming_group import GradienceShellTheming
 from gradience.frontend.widgets.monet_theming_group import GradienceMonetThemingGroup
 from gradience.frontend.widgets.firefox_theming_group import GradienceFirefoxThemingGroup
 from gradience.frontend.widgets.icon_theming_group import GradienceIconThemingGroup
+from gradience.frontend.widgets.desktop_group import GradienceDesktopGroup
 from gradience.frontend.widgets.palette_shades import GradiencePaletteShades
 from gradience.frontend.widgets.error_list_row import GradienceErrorListRow
 from gradience.frontend.widgets.option_row import GradienceOptionRow
@@ -321,6 +322,7 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         self.setup_monet_group()
         self.setup_firefox_group()
         self.setup_icon_group()
+        self.setup_desktop_group()
         self.update_theming_view()
 
     def update_theming_view(self):
@@ -353,6 +355,12 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         if "icons" in self.enabled_theme_engines:
             self.content_theming.add(self.icon_group)
 
+    def setup_desktop_group(self):
+        self.desktop_group = GradienceDesktopGroup(self)
+
+        if "desktop" in self.enabled_theme_engines:
+            self.content_theming.add(self.desktop_group)
+
     def reload_theming_page(self):
         if self.shell_group.is_ancestor(self.content_theming):
             self.content_theming.remove(self.shell_group)
@@ -366,10 +374,14 @@ class GradienceMainWindow(Adw.ApplicationWindow):
         if self.icon_group.is_ancestor(self.content_theming):
             self.content_theming.remove(self.icon_group)
 
+        if self.desktop_group.is_ancestor(self.content_theming):
+            self.content_theming.remove(self.desktop_group)
+
         self.setup_shell_group()
         self.setup_monet_group()
         self.setup_firefox_group()
         self.setup_icon_group()
+        self.setup_desktop_group()
         self.update_theming_view()
 
     # --- Live preview ------------------------------------------------------

@@ -4,6 +4,7 @@ gradience_sources = [
     '__init__.py',
     'backup.py',
     'custom_themes.py',
+    'desktop.py',
     'firefox.py',
     'icons.py',
     'monet.py',

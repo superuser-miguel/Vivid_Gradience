@@ -115,24 +115,24 @@ Everything here applies to a running session; `gtk-theme`, `icon-theme`,
 `cursor-theme`, `cursor-size` and `color-scheme` were each verified to notify
 live-running applications.
 
-- [ ] GTK 3 / legacy theme picker (`interface.gtk-theme`) — **the valuable one.**
-      Not for the dropdown, but because it is where the app can warn that a
-      chosen theme is unresolvable by sandboxed applications. Vivid currently
-      *sets* `gtk-theme` to `adw-gtk3` unconditionally, so it can create that
-      split without saying so. See the environment checks below.
+- [x] GTK 3 / legacy theme picker (`interface.gtk-theme`) — with the warning
+      that made it the valuable one: choosing a theme with no
+      `org.gtk.Gtk3theme` extension flags the Flatpak split and names the
+      install command. (Apply still sets `gtk-theme` to `adw-gtk3`
+      unconditionally — surfacing that in the same warning is follow-up.)
 - [x] Icon Engine — the generated icon theme is in the app: a Theming-tab
       group that scores the ramps, generates the theme with attribution, and
       sets `interface.icon-theme` on Apply. Remove resets the key unless the
       user has since selected a different theme. (A general icon *picker* for
       arbitrary installed themes remains future control-centre work.)
-- [ ] Pointer (`interface.cursor-theme`, `cursor-size`, `locate-pointer`)
-      — a picker only. Adwaita's cursors are Xcursor binaries, 63 files with no
-      SVG sources shipped, so a cursor cannot be recoloured to match a scheme
-      the way icons can. Rebuilding one would need upstream's sources and
-      `xcursorgen`, which is a separate project, not a feature of this one.
-- [ ] Light / dark toggle (`interface.color-scheme`) — trivial as a switch.
-      Distinct from the light/dark *pair* feature, which is not.
-- [ ] Window control button layout (`wm.preferences.button-layout`)
+- [x] Pointer (`interface.cursor-theme`) — a picker in the Desktop group.
+      (`cursor-size` / `locate-pointer` still open; and a cursor cannot be
+      recoloured the way icons can — Adwaita's are Xcursor binaries with no
+      shipped SVG sources, so recolouring would be a separate project.)
+- [x] Light / dark toggle (`interface.color-scheme`) — the Dark Style switch
+      in the Desktop group. Distinct from the light/dark *pair* feature.
+- [x] Window control button layout (`wm.preferences.button-layout`) — four
+      common arrangements in the Desktop group.
 - [ ] Toggle animations (`interface.enable-animations`)
 - [x] Activate a generated GNOME Shell theme (`shell.extensions.user-theme`) —
       done by the Shell engine

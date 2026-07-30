@@ -41,6 +41,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   chosen a different icon theme, which is left alone. The group shows which
   ramp would be used and why before anything is applied.
 
+### Added (Tweaks absorption)
+
+- A Desktop group on the Theming tab with the pickers inherited from GNOME
+  Tweaks: legacy GTK 3 theme, cursor theme, a Dark Style switch and the
+  window-button layout. Every one is a plain gsettings key — instantly
+  reversible. The GTK 3 picker carries the check Tweaks never had: when the
+  chosen theme has no `org.gtk.Gtk3theme` Flatpak extension, a warning
+  explains that sandboxed applications will silently fall back to Adwaita
+  while host applications use the theme, and names the install command.
+
 ### Added (safety)
 
 - Apply now recognises a stylesheet it did not write. When

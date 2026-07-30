@@ -1,0 +1,50 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GradienceDesktopGroup: Adw.PreferencesGroup {
+  title: _("Desktop");
+  description: _("Desktop-wide appearance settings — every one is reversible instantly.");
+
+  Adw.ComboRow gtk3-theme-row {
+    title: _("Legacy Applications (GTK 3) Theme");
+    subtitle: _("Applies live to newly started GTK 3 applications");
+
+    [suffix]
+    MenuButton split-warning-button {
+      valign: center;
+      icon-name: "dialog-warning-symbolic";
+      popover: split-warning-popover;
+      tooltip-text: _("Flatpak applications cannot resolve this theme");
+      visible: false;
+
+      styles ["flat", "warning"]
+    }
+  }
+
+  Adw.ComboRow cursor-theme-row {
+    title: _("Cursor Theme");
+    subtitle: _("Takes effect for newly started applications");
+  }
+
+  Adw.SwitchRow dark-style-row {
+    title: _("Dark Style");
+    subtitle: _("Ask applications to prefer their dark variant");
+  }
+
+  Adw.ComboRow button-layout-row {
+    title: _("Window Buttons");
+    subtitle: _("Titlebar button set and placement");
+  }
+}
+
+Popover split-warning-popover {
+  autohide: true;
+  Label split-warning-label {
+    margin-top: 6;
+    margin-bottom: 6;
+    margin-start: 6;
+    margin-end: 6;
+    max-width-chars: 42;
+    wrap: true;
+  }
+}
