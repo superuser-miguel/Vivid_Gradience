@@ -453,6 +453,9 @@ SHA256SUMS
 # Internal design notes; symlink to the Obsidian vault copy
 Concepts.md
 
+# Operational handoff for whoever works next — internal, never shipped
+HANDOFF.md
+
 # Test-drive screenshots — internal, for reviewing soak results. Not shipped.
 # (docs/screenshots/ is the published set and stays tracked.)
 testing/
