@@ -222,9 +222,19 @@ def pick_status(rows, target_hue, canon, dark_tone, light_tone):
 
 
 def assign_ramps(rows, stats):
-    """One cast row per named ramp, greedily by hue, then lightness extremes."""
+    """One cast row per named ramp: lightness extremes first, then by hue."""
+    # light_ and dark_ are claims on the extremes themselves; a chromatic ramp
+    # only ever reaches an extreme row through the hue fallback. Reserving the
+    # extremes first keeps one row from serving two ramps — in five of the
+    # seven original casts the fallback grabbed an extreme and light_/dark_
+    # then silently duplicated it (purple_ == light_ in Rot, and friends).
     used = set()
     out = {}
+    light = max(range(len(rows)), key=lambda i: stats[i]["lum"])
+    dark = min(range(len(rows)), key=lambda i: stats[i]["lum"])
+    out["light_"] = rows[light]
+    out["dark_"] = rows[dark]
+    used.update((light, dark))
     order = sorted(RAMP_HUES.items(), key=lambda kv: -max(
         s["chroma"] for s in stats))
     for name, target in order:
@@ -240,10 +250,6 @@ def assign_ramps(rows, stats):
                        key=lambda i: abs(stats[i]["lum"] - 0.4), default=0)
         used.add(best)
         out[name] = rows[best]
-    light = max(range(len(rows)), key=lambda i: stats[i]["lum"])
-    dark = min(range(len(rows)), key=lambda i: stats[i]["lum"])
-    out["light_"] = rows[light]
-    out["dark_"] = rows[dark]
     return out
 
 
