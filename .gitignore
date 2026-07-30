@@ -453,6 +453,10 @@ SHA256SUMS
 # Internal design notes; symlink to the Obsidian vault copy
 Concepts.md
 
+# Test-drive screenshots — internal, for reviewing soak results. Not shipped.
+# (docs/screenshots/ is the published set and stays tracked.)
+Test_Shots/
+
 # Source screenshots for the Cast presets — internal reference, not shipped.
 # The colours they were extracted from are recorded in the Obsidian vault.
 Custom_Color/
