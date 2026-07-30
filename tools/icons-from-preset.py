@@ -159,11 +159,17 @@ def score_ramps(preset):
     chromatic = [r for r in rows if not r["neutral"]]
     pool_is_chromatic = bool(visible(chromatic)) and not monochrome
 
+    # Decided before sorting: list.sort() empties the list while it runs, so
+    # any check against `rows` inside the key sees [] and silently flips the
+    # tie-break to contrast-only — which is how a teal-accented scheme got
+    # red folders while claiming "nearest accent".
+    rank_by_contrast = monochrome or not visible(rows)
+
     def key(r):
         return (
             r["neutral"] if pool_is_chromatic else False,
             r["contrast"] < MIN_VISIBLE,
-            -r["contrast"] if (monochrome or not visible(rows)) else r["hue_gap"],
+            -r["contrast"] if rank_by_contrast else r["hue_gap"],
         )
 
     rows.sort(key=key)

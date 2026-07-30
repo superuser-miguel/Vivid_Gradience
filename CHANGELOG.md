@@ -42,6 +42,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The icon engine's ramp choice now actually honours "nearest the accent".
+  The tie-break checked ramp visibility against a list that CPython empties
+  for the duration of the sort, so it silently ranked by raw contrast alone —
+  a teal-accented scheme got red folders because red cleared the view by an
+  extra 0.04, while the output claimed "nearest accent". The condition is
+  now decided before sorting.
+
 - One cast row no longer serves two palette ramps. Five of the seven cast
   presets had a duplicated ramp (Rot's purple_ was byte-identical to its
   light_, and friends): the generator assigned the lightness extremes to
