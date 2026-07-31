@@ -223,7 +223,7 @@ for each is how they drift apart:
 |---|---|---|
 | GTK 3 theming | `adw-gtk3` on the host **and** `org.gtk.Gtk3theme.adw-gtk3` for sandboxed apps | neither checked |
 | GNOME Shell | the User Themes extension | partly checked |
-| Firefox | `firefox-gnome-theme` in the profile | not checked |
+| Firefox | `firefox-gnome-theme` in the profile | checked; installable in-app |
 
 In every case the answer is the same shape: say what is missing, say what
 installs it, do not install it.
@@ -237,6 +237,17 @@ The decision here is deliberate: **report, don't install.** Vivid has the
 permissions to install things on the user's behalf and shouldn't. Say what is
 missing and what command fixes it, the way the missing-User-Themes-extension
 dialog already does.
+
+One deliberate exception (2026-07-31): **firefox-gnome-theme**. It is not a
+system component — it is plain files inside the user's Firefox profile, a
+directory the Firefox engine already writes to. The app offers to install a
+*pinned, tested* release (never latest; the pin moves at our release cadence)
+into the profiles that lack it, stamps every install it makes, and can
+uninstall exactly those installs again — theme tree, `@import` lines and
+`user.js` prefs block. A copy the user installed themselves carries no stamp
+and is never updated, uninstalled or otherwise touched. The rule stands for
+everything system-level: the User Themes extension and the Gtk3theme Flatpak
+remain report-only.
 
 - [ ] Warn when `interface.gtk-theme` names a theme that sandboxed apps can't
       resolve. Flatpaks read `org.gtk.Gtk3theme.<name>` from
@@ -300,7 +311,10 @@ external plugins.
   - [x] Depends on
         [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
         being installed in the profile; the `--gnome-*` variables are its API.
-        Detected and reported with a link to the project page — never installed.
+        Detected — and since 2026-07-31 installable from inside the app (the
+        sanctioned exception to report-don't-install above): a pinned release,
+        stamp-guarded, fully uninstallable, with the user's own installs never
+        touched.
   - [x] Also fixed in the port: `IsRelative` was compared as an integer against
         a string, so absolute-path profiles never resolved; and a
         `customChrome.css` we did not write is skipped, not overwritten —

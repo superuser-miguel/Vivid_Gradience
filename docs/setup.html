@@ -62,10 +62,14 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
     <div class="card">
       <h3>firefox-gnome-theme → Firefox</h3>
       <p>The Firefox engine writes your scheme through
-      <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a>,
-      which must be installed in each profile you want themed (its README has a
-      one-line install script). Works for LibreWolf and Waterfox too. The
-      engine's "Detected Profiles" row shows what it can see.</p>
+      <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a>
+      — and this is the one prerequisite <b>the app can set up for you</b>:
+      it offers to install a tested release into your profiles the first time
+      you press Apply, and can uninstall it just as cleanly. It isn't a system
+      component, just files in your Firefox profile. A copy you installed
+      yourself works too and is never touched. Works for LibreWolf and
+      Waterfox alike; the engine's "Detected Profiles" row shows what it can
+      see.</p>
     </div>
   </div>
 </section>
@@ -123,9 +127,11 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
     </div>
     <div class="card">
       <h3>Firefox</h3>
-      <p>Writes the preset into every profile that has firefox-gnome-theme.
-      Restart Firefox to see it. Remove Theme takes the colours back out —
-      and a customChrome.css the engine didn't write is never touched.</p>
+      <p>Writes the preset into every profile that has firefox-gnome-theme —
+      and installs the theme itself if no profile does, from a release the
+      project has tested. Restart Firefox to see it. Remove Theme takes the
+      colours back out; Uninstall removes the theme the app installed —
+      and anything the engine didn't write is never touched.</p>
     </div>
     <div class="card">
       <h3>Icons</h3>
@@ -162,6 +168,10 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
       <tr>
         <td>The Shell, Firefox or icon theming</td>
         <td>Each engine's own Reset / Remove button. They only ever remove what the engine generated.</td>
+      </tr>
+      <tr>
+        <td>The Firefox GNOME Theme itself, if the app installed it</td>
+        <td>Firefox engine → Uninstall. Removes the theme, its stylesheet imports and its preferences from exactly the profiles the app installed it into — copies you installed yourself are not touched.</td>
       </tr>
       <tr>
         <td>A Desktop-group setting</td>

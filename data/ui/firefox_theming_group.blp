@@ -25,6 +25,15 @@ template $GradienceFirefoxThemingGroup: Adw.PreferencesGroup {
     Adw.ActionRow profiles-row {
       title: _("Detected Profiles");
       subtitle: _("Searching…");
+
+      [suffix]
+      Button install-theme-button {
+        valign: center;
+        visible: false;
+        label: _("Install Theme");
+        tooltip-text: _("Install the Firefox GNOME Theme into your profiles");
+        clicked => $on_install_theme_clicked();
+      }
     }
   }
 }
@@ -36,6 +45,23 @@ Adw.ActionRow reset-options-row {
     label: _("Remove Theme");
     tooltip-text: _("Remove the generated colours from every profile");
     clicked => $on_reset_theme_clicked();
+
+    styles [
+      "destructive-action"
+    ]
+  }
+}
+
+Adw.ActionRow uninstall-row {
+  title: _("Installed by Vivid Gradience");
+  visible: false;
+
+  [suffix]
+  Button uninstall_theme_button {
+    valign: center;
+    label: _("Uninstall");
+    tooltip-text: _("Uninstall the Firefox GNOME Theme from the profiles Vivid Gradience installed it into");
+    clicked => $on_uninstall_theme_clicked();
 
     styles [
       "destructive-action"

@@ -7,6 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- The Firefox engine can now install
+  [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
+  itself — the manual prerequisite is gone. When no profile has the theme,
+  Apply offers to install a pinned, project-tested release (v149.1) into
+  every detected profile and apply the preset in one go; a button on the
+  Detected Profiles row installs into remaining profiles or updates the
+  app's own installs when the pin moves. Installs are wired exactly as
+  upstream's script does it: the theme tree in `chrome/firefox-gnome-theme`,
+  `@import` lines first in `userChrome.css` / `userContent.css`, and the
+  required prefs appended to `user.js` inside fenced comments.
+
+  Every install the app makes carries a stamp file; uninstalling removes
+  precisely those installs — tree, imports and prefs block — and nothing
+  else. A copy you installed yourself has no stamp and is never updated,
+  uninstalled or touched, and your own `userChrome.css` rules and `user.js`
+  prefs survive both install and uninstall. The release is cached after the
+  first download, so later installs work offline. This is the one deliberate
+  exception to the report-don't-install rule: not a system component, just
+  files in a profile directory the engine already writes to.
+
 ## [0.5.0] - 2026-07-30
 
 ### Added

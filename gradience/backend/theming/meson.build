@@ -6,6 +6,7 @@ gradience_sources = [
     'custom_themes.py',
     'desktop.py',
     'firefox.py',
+    'firefox_installer.py',
     'icons.py',
     'monet.py',
     'preset.py',
