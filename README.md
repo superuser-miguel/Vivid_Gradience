@@ -78,7 +78,9 @@ some rough edges — issues and pull requests are welcome.
   <img src="docs/screenshots/preferences.png" alt="The Preferences dialog, with Flatpak theming options" width="405"/>
 </p>
 
-More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.github.io/Vivid_Gradience)**.
+More at **[superuser-miguel.github.io/Vivid_Gradience](https://superuser-miguel.github.io/Vivid_Gradience)** —
+including the **[Get Set Up guide](https://superuser-miguel.github.io/Vivid_Gradience/setup.html)**,
+a first-run walkthrough from install to a fully themed desktop and back.
 
 ## Install
 

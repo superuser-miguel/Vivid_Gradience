@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Get Set Up — Vivid Gradience</title>
+<meta name="description" content="A first-run guide to Vivid Gradience: install it, set up the three optional prerequisites, apply your first preset safely, and use the five theme engines — with a way back out at every step.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="hero wrap">
+  <span class="badge">User guide</span>
+  <h1>Get Set Up</h1>
+  <p class="tagline">From a fresh install to a fully themed desktop.</p>
+  <p class="lede">
+    Vivid Gradience works out of the box, and goes further with three optional
+    pieces installed. This page walks the whole first run in the order it
+    actually happens — including the one dialog that may surprise you, and how
+    to undo everything.
+  </p>
+  <div class="btns">
+    <a class="btn" href="index.html">Back to Vivid Gradience</a>
+    <a class="btn" href="findings.html">Findings — the "why" behind these steps</a>
+  </div>
+</header>
+
+<section class="wrap">
+  <h2>1 — Install</h2>
+  <p class="sub">One command, from the signed repo. New releases arrive with <code>flatpak update</code>.</p>
+<pre><code>flatpak install --user https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref
+flatpak run io.github.superuser_miguel.VividGradience</code></pre>
+  <p class="note">
+    Prefer a single file with no remote? The
+    <a href="https://github.com/superuser-miguel/Vivid_Gradience/releases/latest">.flatpak bundle</a>
+    works too, but carries no update path. Both are signed with the project's
+    GPG key. Vivid Gradience is not on Flathub and is distributed independently.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>2 — The three optional prerequisites</h2>
+  <p class="sub">Each one unlocks an engine. Skip any of them — the app tells you what's missing when you try the feature, and never installs anything behind your back.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>User Themes extension → Shell theming</h3>
+      <p>Lets the Shell engine restyle your panel, overview and quick settings, live. Install the
+      <a href="https://extensions.gnome.org/extension/19/user-themes/">User Themes</a>
+      extension from extensions.gnome.org and enable it. Without it you can still generate a Shell theme — you just can't switch to it.</p>
+    </div>
+    <div class="card">
+      <h3>adw-gtk3 → GTK 3 apps</h3>
+      <p>Older GTK 3 applications follow your scheme through
+      <a href="https://github.com/lassekongo83/adw-gtk3#readme">adw-gtk3</a>.
+      Install it from your distribution, <b>and</b> install the Flatpak
+      extension so sandboxed apps resolve it too:</p>
+      <p><code>flatpak install flathub org.gtk.Gtk3theme.adw-gtk3</code></p>
+      <p>Without the extension, host apps get the theme while every Flatpak
+      silently falls back to stock Adwaita — the Desktop group's GTK 3 picker
+      warns you if you're in that state.</p>
+    </div>
+    <div class="card">
+      <h3>firefox-gnome-theme → Firefox</h3>
+      <p>The Firefox engine writes your scheme through
+      <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a>,
+      which must be installed in each profile you want themed (its README has a
+      one-line install script). Works for LibreWolf and Waterfox too. The
+      engine's "Detected Profiles" row shows what it can see.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>3 — Your first Apply</h2>
+  <p class="sub">Pick, tweak, apply. Nothing touches your desktop until the Apply button.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Pick a preset</h3>
+      <p>The Presets tab is a gallery of 76 schemes — click a card and it loads
+      into the editor. Nothing is applied yet; browse freely.</p>
+    </div>
+    <div class="card">
+      <h3>Tune it (optional)</h3>
+      <p>The Colors tab edits all 46 named colours. Every colour button opens
+      the <b>preset's own palette</b> first — the system picker is behind the
+      Custom… button. The preview at the top redraws as you edit and flags any
+      text that falls below WCAG&nbsp;AA contrast.</p>
+    </div>
+    <div class="card">
+      <h3>Press Apply</h3>
+      <p>Choose which toolkits to theme (GTK 4 / GTK 3). Applied colours are
+      read by each app at startup — so <b>restart an app to see it themed</b>.
+      The Shell, once themed, updates with no logout at all.</p>
+    </div>
+  </div>
+  <p class="note">
+    <b>If a dialog says "An Existing Theme Was Found":</b> you already had a
+    theme's stylesheet in <code>~/.config/gtk-4.0</code> (or gtk-3.0), and
+    Vivid Gradience refuses to silently overwrite what it didn't write.
+    <b>Import as Theme</b> is the recommended answer — your file moves into
+    your theme library (Advanced tab), where it stays selectable, and the
+    preset applies afterwards. "Back Up and Replace" snapshots it instead;
+    Cancel walks away. Nothing is lost on any of the three.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>4 — Go further: the engines</h2>
+  <p class="sub">All on the Theming tab. Each one is separate — use what you like, ignore the rest.</p>
+  <div class="grid">
+    <div class="card">
+      <h3>Shell</h3>
+      <p>Generates a GNOME Shell theme from the current preset and applies it to
+      the <b>running session</b> — panel, overview, quick settings, no logout.
+      Reset Theme puts the stock Shell styling back and deletes what was
+      generated.</p>
+    </div>
+    <div class="card">
+      <h3>Monet</h3>
+      <p>Builds a Material You scheme from any image — usually your wallpaper.
+      Choose a variant and contrast, apply, then fine-tune in Colors like any
+      other scheme.</p>
+    </div>
+    <div class="card">
+      <h3>Firefox</h3>
+      <p>Writes the preset into every profile that has firefox-gnome-theme.
+      Restart Firefox to see it. Remove Theme takes the colours back out —
+      and a customChrome.css the engine didn't write is never touched.</p>
+    </div>
+    <div class="card">
+      <h3>Icons</h3>
+      <p>Recolours Adwaita's blue icons — folders, drives, mimetypes — through
+      the preset's palette, and selects the generated theme. Applies live to
+      open windows. Remove selects your previous icon theme again.</p>
+    </div>
+    <div class="card">
+      <h3>Desktop</h3>
+      <p>The settings that used to need GNOME Tweaks: GTK 3 theme, cursor,
+      dark style, window buttons. Every one is a plain system setting —
+      instantly reversible by picking the old value again.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <h2>5 — Changing your mind</h2>
+  <p class="sub">Everything Apply touches is recorded first. The way back is always shorter than the way in.</p>
+  <div class="tablewrap">
+  <table>
+    <thead>
+      <tr><th>To undo…</th><th>Do this</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>The last preset you applied</td>
+        <td>Advanced tab → restore the previous preset. Every Apply snapshots the state before it, ten deep.</td>
+      </tr>
+      <tr>
+        <td>Everything, back to before Vivid Gradience</td>
+        <td>Advanced tab → restore the <b>original</b> theme — the stylesheet captured once, on first Apply, and never overwritten since.</td>
+      </tr>
+      <tr>
+        <td>The Shell, Firefox or icon theming</td>
+        <td>Each engine's own Reset / Remove button. They only ever remove what the engine generated.</td>
+      </tr>
+      <tr>
+        <td>A Desktop-group setting</td>
+        <td>Pick the previous value — they're live system settings, nothing is written anywhere else.</td>
+      </tr>
+      <tr>
+        <td>A theme you imported or rescued</td>
+        <td>Advanced tab → Custom Themes → Remove. Deletion asks first and can't reach outside the library.</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p class="note">
+    Applied colours are read at application startup, so after a restore the
+    same rule applies in reverse: restart an app to see it un-themed. The
+    <a href="findings.html">findings page</a> has the full table of what
+    updates live and what needs reopening.
+  </p>
+</section>
+
+<footer class="wrap">
+  <section>
+    <p><strong>Vivid Gradience</strong> is free software, <strong>GPL-3.0-or-later</strong>.</p>
+    <p><a href="index.html">Back to the project</a> &middot; <a href="https://github.com/superuser-miguel/Vivid_Gradience/issues">Stuck? Open an issue</a></p>
+  </section>
+</footer>
+
+</body>
+</html>
