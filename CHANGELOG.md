@@ -43,6 +43,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   theme update and your own lines outside the fences are never rewritten.
   Options apply to every profile that has the theme.
 
+### Changed
+
+- The Firefox GNOME Theme pin moves from v149.1 to v150, which is where
+  upstream fixed the tab group colours themselves — along with two dozen
+  other fixes for the misalignments that show up on current Firefox. The
+  app offers to update installs it made; copies you installed yourself are
+  still never touched.
+
+- The Firefox engine no longer writes eleven colours the theme does not
+  read. `--gnome-toolbar-color`, the four `--gnome-inactive-toolbar-*` and
+  `--gnome-inactive-tabbar-*` variables, both `--gnome-switch-*-slider-*`,
+  `--gnome-tabbar-tab-background`, `--gnome-browser-before-load-background`
+  and `--gnome-button-destructive-action-background` were inherited from
+  the plugin the engine replaced and had already stopped landing anywhere.
+  Nothing changes in the browser; the generated stylesheet is just honest
+  about what it reaches now.
+
 ### Fixed
 
 - Tab groups in Firefox's all-tabs menu lost their colours: every group's

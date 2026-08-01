@@ -39,31 +39,24 @@ TEMPLATE = """/* {marker}
  * https://github.com/rafaelmardojai/firefox-gnome-theme in this profile.
  */
 
+/* Only variables the pinned release actually reads. The theme drops and
+ * renames these between versions, and one it no longer reads is a colour
+ * the preset silently stops reaching — so when the pin moves, check this
+ * list against the release rather than assuming it still lands. */
 :root {{
     --gnome-window-background:                     {window_bg_color};
-    --gnome-browser-before-load-background:        {window_bg_color};
     --gnome-accent-bg:                             {accent_bg_color};
     --gnome-accent:                                {accent_color};
     --gnome-toolbar-background:                    {window_bg_color};
-    --gnome-toolbar-color:                         {window_fg_color};
     --gnome-toolbar-icon-fill:                     {window_fg_color};
-    --gnome-inactive-toolbar-color:                {window_bg_color};
-    --gnome-inactive-toolbar-border-color:         {headerbar_border_color};
-    --gnome-inactive-toolbar-icon-fill:            {window_fg_color};
     --gnome-menu-background:                       {popover_bg_color};
     --gnome-headerbar-background:                  {headerbar_bg_color};
-    --gnome-button-destructive-action-background:  {destructive_bg_color};
     --gnome-entry-color:                           {view_fg_color};
     --gnome-inactive-entry-color:                  {view_fg_color};
-    --gnome-switch-slider-background:              {view_bg_color};
-    --gnome-switch-active-slider-background:       {accent_color};
 
     /* Tab overlays derive from the preset's own foreground, so they darken a
      * light scheme and lighten a dark one. The plugin this replaces wrote
      * white literals here, which vanished on light presets. */
-    --gnome-inactive-tabbar-tab-background:        {window_bg_color};
-    --gnome-inactive-tabbar-tab-active-background: {fg_025};
-    --gnome-tabbar-tab-background:                 {window_bg_color};
     --gnome-tabbar-tab-hover-background:           {fg_025};
     --gnome-tabbar-tab-active-background:          {fg_075};
     --gnome-tabbar-tab-active-hover-background:    {fg_100};
@@ -92,7 +85,7 @@ TEMPLATE = """/* {marker}
   --newtab-text-primary-color: {window_fg_color}!important;
   --newtab-text-secondary-color: {fg_80}!important;
   --newtab-textbox-background-color: var(--gnome-toolbar-background)!important;
-  --newtab-textbox-border: var(--gnome-inactive-toolbar-border-color)!important;
+  --newtab-textbox-border: {headerbar_border_color}!important;
   --newtab-textbox-focus-color: {accent_bg_color}!important;
   --newtab-textbox-focus-boxshadow: 0 0 0 1px {accent_bg_color}, 0 0 0 4px {accent_30}!important;
   --newtab-feed-button-background: {card_bg_color}!important;
