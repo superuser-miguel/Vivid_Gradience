@@ -38,6 +38,19 @@ template $GradienceFirefoxThemingGroup: Adw.PreferencesGroup {
   }
 }
 
+Adw.ActionRow theme-options-row {
+  title: _("Theme Options");
+  subtitle: _("Optional features of the Firefox GNOME Theme");
+
+  [suffix]
+  Button theme_options_button {
+    valign: center;
+    label: _("Options");
+    tooltip-text: _("Turn the Firefox GNOME Theme's optional features on and off");
+    clicked => $on_theme_options_clicked();
+  }
+}
+
 Adw.ActionRow reset-options-row {
   [suffix]
   Button reset_theme_button {

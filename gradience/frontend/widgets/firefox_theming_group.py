@@ -30,6 +30,9 @@ from gradience.backend.theming.firefox import FirefoxTheme
 from gradience.backend.theming.firefox_installer import (
     FirefoxThemeInstaller, PINNED_TAG)
 
+from gradience.frontend.views.firefox_prefs_window import (
+    GradienceFirefoxPrefsWindow)
+
 logging = Logger()
 
 THEME_HOMEPAGE = "https://github.com/rafaelmardojai/firefox-gnome-theme"
@@ -42,6 +45,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
     firefox_theming_expander = Gtk.Template.Child("firefox-theming-expander")
     profiles_row = Gtk.Template.Child("profiles-row")
     install_theme_button = Gtk.Template.Child("install-theme-button")
+    theme_options_row = Gtk.Template.Child("theme-options-row")
     reset_options_row = Gtk.Template.Child("reset-options-row")
     uninstall_row = Gtk.Template.Child("uninstall-row")
 
@@ -56,6 +60,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
         self.firefox = FirefoxTheme()
         self.installer = FirefoxThemeInstaller()
 
+        self.firefox_theming_expander.add_row(self.theme_options_row)
         self.firefox_theming_expander.add_row(self.reset_options_row)
         self.firefox_theming_expander.add_row(self.uninstall_row)
         self.refresh_profiles_row()
@@ -81,6 +86,13 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
             self.install_theme_button.set_visible(True)
         else:
             self.install_theme_button.set_visible(False)
+
+        # The options are the theme's own, so they are only reachable once a
+        # profile actually has the theme to read them.
+        self.theme_options_row.set_sensitive(bool(themed))
+        self.theme_options_row.set_subtitle(
+            _("Optional features of the Firefox GNOME Theme") if themed
+            else _("Install the Firefox GNOME Theme to reach its options"))
 
         self.uninstall_row.set_visible(bool(managed))
         if managed:
@@ -237,6 +249,20 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
         if apply_after and (installed or updated):
             self.apply_firefox_theme()
         return GLib.SOURCE_REMOVE
+
+    @Gtk.Template.Callback()
+    def on_theme_options_clicked(self, *_args):
+        themed = self.firefox.themed_profiles()
+        if not themed:
+            self.refresh_profiles_row()
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=_("No profile has the Firefox GNOME Theme "
+                                  "yet."))
+            )
+            return
+
+        GradienceFirefoxPrefsWindow(
+            self, self.installer, themed).present(self.win)
 
     @Gtk.Template.Callback()
     def on_uninstall_theme_clicked(self, *_args):

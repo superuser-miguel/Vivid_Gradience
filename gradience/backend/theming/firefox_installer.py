@@ -18,6 +18,7 @@
 
 import io
 import os
+import re
 import shutil
 import tarfile
 
@@ -62,6 +63,16 @@ CSS_MARKER = "Generated with Vivid Gradience"
 USERJS_BEGIN = ("// >>> Vivid Gradience: firefox-gnome-theme preferences. "
                 "Do not edit inside this block.")
 USERJS_END = "// <<< Vivid Gradience: end of firefox-gnome-theme preferences."
+
+# The theme's optional features get a fence of their own, after the required
+# prefs. Two blocks rather than one because they answer to different things:
+# the required prefs come from the release we install and change when the pin
+# moves, these come from the user and must survive an update.
+OPTIONS_BEGIN = ("// >>> Vivid Gradience: firefox-gnome-theme options. "
+                 "Change these in the app rather than here.")
+OPTIONS_END = "// <<< Vivid Gradience: end of firefox-gnome-theme options."
+
+PREF_RE = re.compile(r'user_pref\(\s*"([^"]+)"\s*,\s*(true|false)\s*\)')
 
 
 class FirefoxThemeInstaller:
@@ -216,6 +227,45 @@ class FirefoxThemeInstaller:
             content += "\n"
         userjs.write_text(content + block + "\n")
 
+    # -- options -------------------------------------------------------------
+
+    def read_options(self, profile, prefs):
+        """What each of `prefs` currently evaluates to in a profile. Firefox
+        reads user.js top to bottom and the last assignment wins, so that is
+        what we report — including lines the user wrote themselves outside
+        our fences. Anything unset is off, which is the theme's default."""
+        try:
+            content = (Path(profile) / "user.js").read_text()
+        except OSError:
+            content = ""
+        values = {pref: False for pref in prefs}
+        for name, value in PREF_RE.findall(content):
+            if name in values:
+                values[name] = value == "true"
+        return values
+
+    def write_options(self, profile, options):
+        """Write every managed option into the options fence, replacing only
+        a previous block of ours.
+
+        The block is written whole, including the options that are off, so
+        that turning one off actually overrides an earlier line rather than
+        silently deferring to it. That only stays honest because the app
+        seeds its switches from read_options() first: what we write back is
+        what the profile already said, plus the one thing that changed."""
+        userjs = Path(profile) / "user.js"
+        try:
+            content = userjs.read_text()
+        except OSError:
+            content = ""
+        content = self._strip_block(content, OPTIONS_BEGIN, OPTIONS_END)
+        lines = [f'user_pref("{pref}", {"true" if on else "false"});'
+                 for pref, on in options.items()]
+        block = "\n".join([OPTIONS_BEGIN, *lines, OPTIONS_END])
+        if content and not content.endswith("\n"):
+            content += "\n"
+        userjs.write_text(content + block + "\n")
+
     # -- uninstall -----------------------------------------------------------
 
     def uninstall(self, profile):
@@ -242,6 +292,7 @@ class FirefoxThemeInstaller:
         userjs = profile / "user.js"
         try:
             content = self._strip_block(userjs.read_text())
+            content = self._strip_block(content, OPTIONS_BEGIN, OPTIONS_END)
         except OSError:
             content = None
         if content is not None:
@@ -254,13 +305,13 @@ class FirefoxThemeInstaller:
         return True
 
     @staticmethod
-    def _strip_block(content):
+    def _strip_block(content, begin=USERJS_BEGIN, end=USERJS_END):
         lines, keeping = [], True
         for line in content.splitlines():
-            if line.strip() == USERJS_BEGIN.strip():
+            if line.strip() == begin.strip():
                 keeping = False
                 continue
-            if line.strip() == USERJS_END.strip():
+            if line.strip() == end.strip():
                 keeping = True
                 continue
             if keeping:

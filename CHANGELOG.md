@@ -29,6 +29,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   exception to the report-don't-install rule: not a system component, just
   files in a profile directory the engine already writes to.
 
+- A Theme Options row on the Firefox Engine, opening the Firefox GNOME
+  Theme's own optional features as switches — all 19 of them, from showing
+  the List All Tabs button to OLED black, tabs as headerbar and system
+  icons. The theme ships every one of them off and reads them straight out
+  of `user.js`, so until now they were only reachable by hand-editing a file
+  the app also writes to; the List All Tabs button being off by default is
+  why Firefox's tab groups had no way in at all.
+
+  The switches are seeded from the profiles themselves, so a pref you set by
+  hand shows up already on, and they are written back into a fenced block of
+  their own — separate from the required prefs, so your options survive a
+  theme update and your own lines outside the fences are never rewritten.
+  Options apply to every profile that has the theme.
+
 ### Fixed
 
 - Tab groups in Firefox's all-tabs menu lost their colours: every group's

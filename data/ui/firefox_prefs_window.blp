@@ -1,0 +1,13 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GradienceFirefoxPrefsWindow : Adw.PreferencesDialog {
+  title: _("Firefox Theme Options");
+  search-enabled: true;
+  content-width: 560;
+  content-height: 680;
+
+  Adw.PreferencesPage options-page {
+    description: _("Optional features of the Firefox GNOME Theme. These are written to every themed profile in a block of their own — your own preferences are left alone. Restart Firefox to see changes.");
+  }
+}
