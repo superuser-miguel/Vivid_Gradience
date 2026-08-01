@@ -130,6 +130,24 @@ TEMPLATE = """/* {marker}
   --trailhead-card-button-background-active-color: rgba(12, 12, 13, 0.7)!important;
  }}
 }}
+
+/* Tab group swatches.
+ *
+ * Firefox draws a group's chicklet as the icon of a .subviewbutton-iconic —
+ * an ordinary .toolbarbutton-icon — and colours it per group through
+ * --menuitem-icon-fill, with the outline coming from the parent's stroke.
+ * firefox-gnome-theme tints every .toolbarbutton-icon with
+ * --gnome-toolbar-icon-fill !important and narrows -moz-context-properties
+ * to fill alone, so from a user sheet it outranks Firefox's own colour: all
+ * groups flatten to the toolbar icon colour and the outline disappears,
+ * which hides saved groups entirely. Firefox still hands us the right value,
+ * so give the swatch its context properties back and defer to it. */
+.tab-group-icon.tab-group-icon.tab-group-icon > .toolbarbutton-icon {{
+    -moz-context-properties: fill, stroke !important;
+    fill: var(--menuitem-icon-fill,
+              light-dark(var(--tab-group-color),
+                         var(--tab-group-color-invert))) !important;
+}}
 """
 
 

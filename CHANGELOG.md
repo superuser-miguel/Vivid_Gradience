@@ -29,6 +29,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   exception to the report-don't-install rule: not a system component, just
   files in a profile directory the engine already writes to.
 
+### Fixed
+
+- Tab groups in Firefox's all-tabs menu lost their colours: every group's
+  swatch came out in the preset's toolbar icon colour and saved groups
+  vanished altogether, because firefox-gnome-theme tints every toolbar icon
+  and the group swatch is one. The Firefox engine now hands the swatch back
+  the colour Firefox picked for that group, outline included.
+
 ## [0.5.0] - 2026-07-30
 
 ### Added
