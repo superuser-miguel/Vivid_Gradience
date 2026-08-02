@@ -37,6 +37,9 @@ logging = Logger()
 
 THEME_HOMEPAGE = "https://github.com/rafaelmardojai/firefox-gnome-theme"
 
+SKIPPED_KEY = "firefox-skipped-profiles"
+KNOWN_KEY = "firefox-known-profiles"
+
 
 @Gtk.Template(resource_path=f"{rootdir}/ui/firefox_theming_group.ui")
 class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
@@ -56,26 +59,79 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
         self.app = parent.get_application()
         self.win = self.app.get_active_window()
         self.toast_overlay = parent.toast_overlay
+        self.settings = parent.settings
 
         self.firefox = FirefoxTheme()
         self.installer = FirefoxThemeInstaller()
 
-        self.firefox_theming_expander.add_row(self.theme_options_row)
-        self.firefox_theming_expander.add_row(self.reset_options_row)
-        self.firefox_theming_expander.add_row(self.uninstall_row)
+        self.profile_rows = []
         self.refresh_profiles_row()
 
-    def refresh_profiles_row(self):
+    # -- which profiles the engine is allowed to touch ------------------------
+
+    def skipped_keys(self):
+        return set(self.settings.get_strv(SKIPPED_KEY))
+
+    def seed_choices(self, profiles):
+        """Decide once per profile whether the engine may write to it.
+
+        A profile whose user has picked a Firefox theme of its own is opted
+        out on sight — that theme is how they tell one window from another,
+        and one preset across every profile would flatten exactly the thing
+        profiles are for. Recording the decision separately from the answer
+        means turning a profile back on sticks: we never look at it again."""
+        known = self.settings.get_strv(KNOWN_KEY)
+        skipped = self.settings.get_strv(SKIPPED_KEY)
+        unseen = [p for p in profiles if p.key not in known]
+        if not unseen:
+            return []
+
+        newly_skipped = []
+        for profile in unseen:
+            known.append(profile.key)
+            if self.firefox.has_own_theme(profile):
+                skipped.append(profile.key)
+                newly_skipped.append(profile)
+        self.settings.set_strv(KNOWN_KEY, known)
+        if newly_skipped:
+            self.settings.set_strv(SKIPPED_KEY, skipped)
+        return newly_skipped
+
+    def selected_profiles(self, profiles=None):
+        """The profiles the user has left switched on."""
+        if profiles is None:
+            profiles = self.firefox.find_profiles()
+        skipped = self.skipped_keys()
+        return [p for p in profiles if p.key not in skipped]
+
+    # -- rows ----------------------------------------------------------------
+
+    def refresh_profiles_row(self, rebuild=True):
         profiles = self.firefox.find_profiles()
-        themed = self.firefox.themed_profiles(profiles)
+        newly_skipped = self.seed_choices(profiles)
+        selected = self.selected_profiles(profiles)
+        themed = self.firefox.themed_profiles(selected)
+
         if not profiles:
             subtitle = _("No Firefox profiles found")
-        else:
+        elif len(selected) == len(profiles):
             subtitle = _("{0} profiles, {1} with the Firefox GNOME Theme").format(
                 len(profiles), len(themed))
+        else:
+            subtitle = _("{0} of {1} profiles selected, {2} with the Firefox "
+                         "GNOME Theme").format(
+                             len(selected), len(profiles), len(themed))
         self.profiles_row.set_subtitle(subtitle)
 
-        missing, stale, _foreign = self.installer.plan(profiles)
+        # Never while a switch is emitting: rebuilding the list from inside a
+        # row's own handler would destroy the widget mid-signal.
+        if rebuild:
+            self.rebuild_rows(profiles)
+        else:
+            for row in self.profile_rows:
+                row.set_subtitle(self.profile_subtitle(row._profile))
+
+        missing, stale, _foreign = self.installer.plan(selected)
         managed = [p for p in profiles if self.installer.is_managed(p)]
 
         if missing:
@@ -100,14 +156,103 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
                 _("The Firefox GNOME Theme {0} is installed in {1} "
                   "profiles").format(PINNED_TAG, len(managed)))
 
+        if newly_skipped:
+            # Switching them off stops the engine writing to them again, but
+            # a profile themed before this existed still has our stylesheets
+            # in it — so offer to take them back out rather than leaving the
+            # switch saying one thing and the profile showing another.
+            toast = Adw.Toast(
+                title=_("Left {0} alone — a Firefox theme of its own is "
+                        "already selected there.").format(
+                            ", ".join(p.name for p in newly_skipped)))
+            if self.firefox.themed_profiles(newly_skipped):
+                toast.set_button_label(_("Remove Colours"))
+                toast.connect(
+                    "button-clicked",
+                    lambda *_a, profiles=newly_skipped:
+                        self.remove_colours_from(profiles))
+            self.toast_overlay.add_toast(toast)
+
+    def remove_colours_from(self, profiles):
+        removed = self.firefox.reset(profiles)
+        self.refresh_profiles_row()
+        self.toast_overlay.add_toast(Adw.Toast(
+            title=_("Removed the generated colours from {0} profiles. "
+                    "Restart Firefox to see it go.").format(removed)))
+
+    def rebuild_rows(self, profiles):
+        """One switch per profile, rebuilt whole so the order stays: the
+        profiles first, then what can be done to them."""
+        for row in self.profile_rows:
+            self.firefox_theming_expander.remove(row)
+        self.profile_rows = []
+
+        for row in (self.theme_options_row, self.reset_options_row,
+                    self.uninstall_row):
+            if row.get_parent() is not None:
+                self.firefox_theming_expander.remove(row)
+
+        skipped = self.skipped_keys()
+        for profile in profiles:
+            row = Adw.SwitchRow(title=profile.name,
+                                subtitle=self.profile_subtitle(profile),
+                                active=profile.key not in skipped)
+            row._profile = profile
+            row.connect("notify::active", self.on_profile_toggled)
+            self.firefox_theming_expander.add_row(row)
+            self.profile_rows.append(row)
+
+        self.firefox_theming_expander.add_row(self.theme_options_row)
+        self.firefox_theming_expander.add_row(self.reset_options_row)
+        self.firefox_theming_expander.add_row(self.uninstall_row)
+
+    def profile_subtitle(self, profile):
+        own_theme = self.firefox.has_own_theme(profile)
+        themed = bool(self.firefox.themed_profiles([profile]))
+        if own_theme and themed:
+            return _("Has its own Firefox theme; the GNOME Theme will "
+                     "override parts of it")
+        if own_theme:
+            return _("Has its own Firefox theme")
+        if themed:
+            return _("Firefox GNOME Theme installed")
+        return _("No Firefox GNOME Theme yet")
+
+    def on_profile_toggled(self, row, *_args):
+        profile = row._profile
+        skipped = set(self.settings.get_strv(SKIPPED_KEY))
+        if row.get_active():
+            skipped.discard(profile.key)
+        else:
+            skipped.add(profile.key)
+            # The switch has to mean the same thing in the profile as it does
+            # in the list: off leaves the profile on firefox-gnome-theme's own
+            # colours, so whatever the engine wrote there comes back out. The
+            # theme itself stays — that is what Uninstall is for.
+            if self.firefox.reset([profile]):
+                self.toast_overlay.add_toast(Adw.Toast(
+                    title=_("Took the preset's colours back out of {0}. "
+                            "Restart Firefox to see it go.").format(
+                                profile.name)))
+        self.settings.set_strv(SKIPPED_KEY, sorted(skipped))
+        self.refresh_profiles_row(rebuild=False)
+
     @Gtk.Template.Callback()
     def on_apply_button_clicked(self, *_args):
-        profiles = self.firefox.find_profiles()
+        all_profiles = self.firefox.find_profiles()
 
-        if not profiles:
+        if not all_profiles:
             self.refresh_profiles_row()
             self.toast_overlay.add_toast(
                 Adw.Toast(title=_("No Firefox profiles found."))
+            )
+            return
+
+        profiles = self.selected_profiles(all_profiles)
+        if not profiles:
+            self.toast_overlay.add_toast(
+                Adw.Toast(title=_("Every profile is switched off — turn at "
+                                  "least one on to theme it."))
             )
             return
 
@@ -119,10 +264,11 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
                 transient_for=self.win,
                 heading=_("Firefox GNOME Theme Missing"),
                 body=_("The engine writes its colours through the Firefox "
-                       "GNOME Theme, which is not installed in any profile. "
-                       "Vivid Gradience can install a tested release ({0}) "
-                       "into all {1} profiles and apply the preset — or "
-                       "install it yourself from the project page.").format(
+                       "GNOME Theme, which is not installed in any of the "
+                       "profiles you have switched on. Vivid Gradience can "
+                       "install a tested release ({0}) into those {1} "
+                       "profiles and apply the preset — or install it "
+                       "yourself from the project page.").format(
                            PINNED_TAG, len(profiles)))
 
             dialog.add_response("install", _("Install and Apply"))
@@ -141,7 +287,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
     def apply_firefox_theme(self):
         try:
             applied, skipped, _themed, _total = self.firefox.apply(
-                self.app.preset)
+                self.app.preset, self.selected_profiles())
         except (OSError, GLib.GError, KeyError) as e:
             logging.error(
                 "An error occurred while generating the Firefox theme.", exc=e)
@@ -155,7 +301,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
         if skipped:
             title = _("Firefox theme applied to {0} profiles; {1} skipped "
-                      "(customChrome.css not written by us).").format(
+                      "(their stylesheets were not written by us).").format(
                           applied, skipped)
         else:
             title = _("Firefox theme applied to {0} profiles. "
@@ -181,18 +327,19 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
     def install_theme(self, apply_after=False):
         """Fetch the pinned release (from cache after the first time) and
-        install it into every profile without the theme, updating any of our
-        own installs that fall behind the pin. Runs off the main loop; the
-        user's own installs are never touched."""
+        install it into every switched-on profile without the theme, updating
+        any of our own installs that fall behind the pin. Runs off the main
+        loop; the user's own installs are never touched, and neither are the
+        profiles they have switched off."""
         self.install_theme_button.set_sensitive(False)
         self.toast_overlay.add_toast(
             Adw.Toast(title=_("Installing the Firefox GNOME Theme…")))
+        selected = self.selected_profiles()
 
         def worker():
             installed, updated, failed = 0, 0, 0
             try:
-                profiles = self.firefox.find_profiles()
-                missing, stale, _foreign = self.installer.plan(profiles)
+                missing, stale, _foreign = self.installer.plan(selected)
                 tree = self.installer.fetch()
                 for profile in missing:
                     try:
@@ -252,12 +399,15 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
     @Gtk.Template.Callback()
     def on_theme_options_clicked(self, *_args):
-        themed = self.firefox.themed_profiles()
+        # Switched-off profiles are left out here too: these options are
+        # written into each profile's user.js, and a profile the user has
+        # excluded should not have its preferences rewritten either.
+        themed = self.firefox.themed_profiles(self.selected_profiles())
         if not themed:
             self.refresh_profiles_row()
             self.toast_overlay.add_toast(
-                Adw.Toast(title=_("No profile has the Firefox GNOME Theme "
-                                  "yet."))
+                Adw.Toast(title=_("No switched-on profile has the Firefox "
+                                  "GNOME Theme yet."))
             )
             return
 
@@ -301,9 +451,13 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
     @Gtk.Template.Callback()
     def on_reset_theme_clicked(self, *_args):
+        # Every profile, not just the switched-on ones: this is the way back
+        # out, and a profile that was themed before it was switched off still
+        # has our stylesheets sitting in it.
         removed = self.firefox.reset()
         self.refresh_profiles_row()
         self.toast_overlay.add_toast(
             Adw.Toast(title=_("Removed the generated colours from {0} "
-                              "profiles.").format(removed))
+                              "profiles. Restart Firefox to see it "
+                              "go.").format(removed))
         )

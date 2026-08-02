@@ -58,7 +58,37 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and the engine had never set — window text and sidebars were falling back
   to the theme's own colours rather than the preset's.
 
+- The Firefox engine now writes the preset into Firefox's own about: pages
+  as well as its windows. Settings, Add-ons, Passwords, Downloads, the print
+  dialog and the rest resolve their colours from GTK system colours, which
+  libadwaita answers with stock Adwaita — so they sat in Firefox's default
+  palette next to a fully themed browser. The engine now writes a second
+  stylesheet, `customContent.css`, through the hook firefox-gnome-theme
+  provides for exactly this, and names those pages one by one rather than
+  at `:root`, so no rule of ours can reach an ordinary website.
+
+- The Firefox engine also writes `--gnome-view-background`,
+  `--gnome-card-background` and `--gnome-secondary-sidebar-background`,
+  which the theme reads for content areas, cards and secondary sidebars and
+  the engine had never set.
+
 ### Changed
+
+- The Firefox engine now themes the profiles you choose, one switch each,
+  instead of every profile it can find. A profile that already has a Firefox
+  theme of its own is switched off the first time the engine sees it, with a
+  one-click way to take colours it wrote earlier back out — people theme
+  profiles apart so they can tell one window from another at a glance, and
+  one preset across all of them flattened exactly that. Switching a profile
+  off removes the engine's stylesheets from it and leaves the Firefox GNOME
+  Theme in place. Install, Apply, Options and the summary all follow the
+  switches; Remove Colours and Uninstall still cover every profile, because
+  they are the way back out.
+
+- The Firefox engine's two destructive buttons say what they do. The first
+  was an unlabelled row holding a "Remove Theme" button that removed only
+  the generated colours; it is now "Preset Colours → Remove Colours", next
+  to "Firefox GNOME Theme → Uninstall".
 
 - The Firefox GNOME Theme pin moves from v149.1 to v150, which is where
   upstream fixed the tab group colours themselves — along with two dozen
@@ -82,6 +112,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   vanished altogether, because firefox-gnome-theme tints every toolbar icon
   and the group swatch is one. The Firefox engine now hands the swatch back
   the colour Firefox picked for that group, outline included.
+
+- Firefox's new tab page had never taken the preset's colours. The engine
+  wrote a block of forty-eight new-tab variables into `customChrome.css`,
+  which is a stylesheet for *chrome* documents — the new tab is content, so
+  the rules could not apply and the page kept firefox-gnome-theme's own
+  dark background whichever preset was loaded. The block now lives in
+  `customContent.css`, where the theme keeps its own new-tab rules.
 
 ## [0.5.0] - 2026-07-30
 

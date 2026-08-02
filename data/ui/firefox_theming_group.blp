@@ -7,7 +7,7 @@ template $GradienceFirefoxThemingGroup: Adw.PreferencesGroup {
 
   Adw.ExpanderRow firefox-theming-expander {
     title: _("Firefox Engine Options");
-    subtitle: _("Write the preset into every profile using the Firefox GNOME Theme");
+    subtitle: _("Choose which profiles the preset is written into");
     expanded: true;
 
     [action]
@@ -52,11 +52,14 @@ Adw.ActionRow theme-options-row {
 }
 
 Adw.ActionRow reset-options-row {
+  title: _("Preset Colours");
+  subtitle: _("The stylesheets the engine writes into each profile");
+
   [suffix]
   Button reset_theme_button {
     valign: center;
-    label: _("Remove Theme");
-    tooltip-text: _("Remove the generated colours from every profile");
+    label: _("Remove Colours");
+    tooltip-text: _("Remove the generated stylesheets, keeping the Firefox GNOME Theme installed");
     clicked => $on_reset_theme_clicked();
 
     styles [
@@ -66,14 +69,15 @@ Adw.ActionRow reset-options-row {
 }
 
 Adw.ActionRow uninstall-row {
-  title: _("Installed by Vivid Gradience");
+  title: _("Firefox GNOME Theme");
+  subtitle: _("Installed by Vivid Gradience");
   visible: false;
 
   [suffix]
   Button uninstall_theme_button {
     valign: center;
     label: _("Uninstall");
-    tooltip-text: _("Uninstall the Firefox GNOME Theme from the profiles Vivid Gradience installed it into");
+    tooltip-text: _("Remove the Firefox GNOME Theme itself from the profiles Vivid Gradience installed it into");
     clicked => $on_uninstall_theme_clicked();
 
     styles [

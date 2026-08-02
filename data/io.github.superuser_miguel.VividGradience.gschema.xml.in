@@ -49,5 +49,17 @@
 		<key name="use-jsdelivr" type="b">
 			<default>false</default>
 		</key>
+		<!-- Firefox profiles the engine leaves alone, by directory path.
+		     People theme profiles apart on purpose so they can tell one
+		     window from another; a preset should not walk over that. -->
+		<key name="firefox-skipped-profiles" type="as">
+			<default>[]</default>
+		</key>
+		<!-- Profiles the engine has already made up its mind about, so a
+		     profile the user deliberately switched back on is not skipped
+		     again the next time its add-on theme is noticed. -->
+		<key name="firefox-known-profiles" type="as">
+			<default>[]</default>
+		</key>
 	</schema>
 </schemalist>
