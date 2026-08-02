@@ -46,6 +46,7 @@ h1 { font-size: 2.6rem; margin: 0 0 6px; letter-spacing: -.02em; }
 }
 
 h2 { font-size: 1.6rem; letter-spacing: -.01em; margin: 0 0 8px; }
+h3 { font-size: 1.12rem; letter-spacing: -.005em; margin: 26px 0 8px; }
 .sub { color: var(--muted); margin: 0 0 26px; }
 
 .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }

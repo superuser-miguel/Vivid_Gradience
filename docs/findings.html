@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Findings — Vivid Gradience</title>
-<meta name="description" content="Measured notes on theming a GNOME desktop: what actually needs restarting, why libadwaita ignores runtime colour overrides, how GNOME Shell can be rethemed live, why Flatpaks resolve themes separately from the host, recolouring Adwaita icons, and which colour distinctions survive other people's screens.">
+<meta name="description" content="Measured notes on theming a GNOME desktop: what actually needs restarting, why libadwaita ignores runtime colour overrides, how GNOME Shell can be rethemed live, why Flatpaks resolve themes separately from the host, recolouring Adwaita icons, Firefox's two user stylesheets and which one an about: page belongs to, and which colour distinctions survive other people's screens.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -371,6 +371,143 @@
     folders that were still blue. Measuring what the icon actually becomes is
     the only reliable test. Inheriting from Adwaita for everything untouched
     keeps this a twenty-file theme rather than a fork.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>Firefox has two user stylesheets, and an <code>about:</code> URL will not tell you which</h2>
+  <p class="sub">The one where 48 lines of CSS had never run, and I had already explained why with the wrong reason.</p>
+  <p>
+    Vivid Gradience writes the preset into Firefox through
+    <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a>.
+    The browser window came out right — toolbar, tabs, menus, the Library, the
+    profile manager. Next to it, in the same window: <b>Settings</b>,
+    <b>Add-ons</b> and the <b>print dialog</b> in Firefox's stock palette, cyan
+    accents and all. And a <b>New Tab</b> page in a grey that matched no preset.
+  </p>
+  <p>
+    Firefox has two user stylesheets. They are not two halves of one thing —
+    they apply to different <em>document types</em>, and the address bar gives
+    you no clue which is which:
+  </p>
+  <div class="tablewrap">
+  <table>
+    <thead>
+      <tr><th>File</th><th>Applies to</th><th>Which is</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>userChrome.css</code></td>
+        <td><b>chrome</b> documents</td>
+        <td>the browser window, the Library, <code>about:profilemanager</code>, <code>about:editprofile</code></td>
+      </tr>
+      <tr>
+        <td><code>userContent.css</code></td>
+        <td><b>content</b> documents</td>
+        <td><code>about:newtab</code>, <code>about:preferences</code>, <code>about:addons</code>, <code>about:config</code> — and every website</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+  <p>
+    <code>about:profilemanager</code> is chrome. <code>about:preferences</code>
+    is content. The engine had been writing only the chrome hook, for its whole
+    existence — so the 48 <code>--newtab-*</code> declarations it generated for
+    the new tab page had <strong>never applied once</strong>, on any profile,
+    under any preset.
+  </p>
+  <p class="note">
+    <b>The wrong turn, kept in because it is the useful part.</b> A previous
+    session had already noticed the new tab ignoring presets, found that the
+    profile had <code>newtabWallpapers.wallpaper</code> set to a built-in
+    wallpaper — which does paint an image over the background — and concluded
+    the block was being buried by it. Plausible, adjacent to the real code, and
+    wrong. The wallpaper was set on <em>one</em> profile; the bug was on all of
+    them. A real thing found near a bug is not the cause of the bug.
+  </p>
+  <p>
+    The answer had been sitting in the theme's own source the entire time.
+    Upstream's <code>userContent.css</code> contains
+    <code>@import "theme/pages/newtab.css";</code> — they put their new-tab
+    rules on the content side. Asking <em>where does the project I am extending
+    put this same kind of rule</em> would have settled it in half a minute.
+  </p>
+  <h3>Why those pages were unthemed in the first place</h3>
+  <p>
+    Not a bug in Firefox, and not one in the theme — nobody was painting them.
+    Firefox's in-content design tokens resolve to <b>GTK system colours</b>:
+  </p>
+  <ul class="road">
+    <li><code>--background-color-canvas: Canvas;</code></li>
+    <li><code>--color-accent-primary: AccentColor;</code></li>
+    <li><code>--input-text-background-color: Field;</code></li>
+    <li><code>--sidebar-background-color: -moz-sidebar;</code></li>
+  </ul>
+  <p>
+    So the page asks GTK, and libadwaita answers with stock Adwaita no matter
+    which preset is loaded — the same constraint the rest of this page keeps
+    running into. Those pages were never ignoring the theme. The colour had no
+    route in.
+  </p>
+  <p>
+    Two things make the fix cheap. The tokens sit inside a
+    <code>@layer</code>, but <strong>cascade layers only order declarations
+    within an origin</strong> — a user-origin declaration outranks any
+    author-origin layer, so naming the surface is enough and no specificity
+    games are needed. And most of the remaining token set is
+    <code>color-mix(in srgb, currentColor N%, transparent)</code>, so setting
+    the canvas, the text colour and the accent carries buttons, borders,
+    dividers and hover states along with it.
+  </p>
+  <h3>The trap in the fix</h3>
+  <p>
+    <code>userContent.css</code> applies to <em>every website you visit</em>.
+    That splits what you may write there in two:
+  </p>
+  <ul class="road">
+    <li><b>A bare <code>:root { --gnome-window-background: … }</code> is fine.</b> Custom properties are inert unless something reads them, and no website reads <code>--gnome-*</code>. Upstream does exactly this.</li>
+    <li><b>A bare <code>:root { color: … }</code> is not.</b> Neither is any of Firefox's <em>generic</em> token names — <code>--background-color-canvas</code>, <code>--link-color</code>, <code>--panel-background-color</code>. Every one of those has to sit inside an <code>@-moz-document url-prefix(about:…)</code> list naming the pages one at a time.</li>
+  </ul>
+  <p class="note">
+    The palette also has to be <strong>restated in both files</strong>. The
+    theme imports its own colour definitions from <em>both</em> entry sheets, so
+    a content document that only ever saw <code>customChrome.css</code> was
+    reading the theme's stock <code>#222226</code>. Overriding a variable in one
+    origin does not reach a document served by the other.
+  </p>
+  <p>
+    If you are ever unsure which origin a surface belongs to, do not reason
+    about it. Put <code>:root { outline: 4px solid magenta !important; }</code>
+    in one file, restart, and look. Five minutes settles it permanently.
+  </p>
+</section>
+
+<section class="wrap">
+  <h2>A theme add-on and a userChrome theme fight, and both lose</h2>
+  <p class="sub">Why Vivid Gradience asks which Firefox profiles it may touch.</p>
+  <p>
+    People give Firefox profiles different themes on purpose — it is how you
+    tell which session a window belongs to when four are open. Apply a
+    userChrome-based theme on top of that and you do not get one theme or the
+    other. You get patches of both: purple menus above a grey toolbar.
+  </p>
+  <p>
+    The mechanism is ordinary cascade. A theme add-on sets its colours through
+    <code>--lwt-*</code> variables in the <b>author</b> origin.
+    <code>userChrome.css</code> is a <b>user</b> sheet, and a user-origin
+    <code>!important</code> outranks an author-origin one — but only on the
+    surfaces the userChrome theme actually names. Everything it does not name
+    keeps the add-on's colour. Nothing is broken; two systems are each
+    correctly winning half an argument.
+  </p>
+  <p class="note">
+    The engineering answer is not to win the cascade harder. It is to not enter
+    it. Vivid Gradience gives every Firefox profile its own switch and switches
+    off, on sight, any profile whose <code>extensions.activeThemeID</code> is
+    something other than one of the three neutral built-ins — the ones that only
+    choose between light and dark and carry no colour of their own. Alpenglow is
+    a real colour scheme and counts as the user's choice. A profile you themed
+    deliberately is yours, and a preset should ask before walking over it.
   </p>
 </section>
 
