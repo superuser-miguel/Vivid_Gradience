@@ -43,6 +43,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   theme update and your own lines outside the fences are never rewritten.
   Options apply to every profile that has the theme.
 
+- The Library window (Bookmarks and History) and Firefox's profile windows
+  now follow the preset. Neither has ever been themeable: the Library paints
+  its surfaces with system colours and draws some widgets natively, and the
+  profile pages resolve their design tokens to `Canvas`, `Field` and
+  `AccentColor` on Linux — so both asked GTK, and libadwaita answered with
+  stock Adwaita regardless of the preset. Naming those surfaces directly
+  outranks the system default, which is all it took. Covers the Library's
+  toolbar, sidebar, list and details pane including tree selection, and
+  `about:profilemanager` along with the new, edit and delete profile pages.
+
+- The engine now also writes `--gnome-window-color` and
+  `--gnome-sidebar-background`, which the theme reads in twenty-four places
+  and the engine had never set — window text and sidebars were falling back
+  to the theme's own colours rather than the preset's.
+
 ### Changed
 
 - The Firefox GNOME Theme pin moves from v149.1 to v150, which is where

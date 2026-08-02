@@ -45,6 +45,8 @@ TEMPLATE = """/* {marker}
  * list against the release rather than assuming it still lands. */
 :root {{
     --gnome-window-background:                     {window_bg_color};
+    --gnome-window-color:                          {window_fg_color};
+    --gnome-sidebar-background:                    {sidebar_bg_color};
     --gnome-accent-bg:                             {accent_bg_color};
     --gnome-accent:                                {accent_color};
     --gnome-toolbar-background:                    {window_bg_color};
@@ -140,6 +142,75 @@ TEMPLATE = """/* {marker}
     fill: var(--menuitem-icon-fill,
               light-dark(var(--tab-group-color),
                          var(--tab-group-color-invert))) !important;
+}}
+
+/* The Library (Bookmarks, History) and the profile windows.
+ *
+ * Neither Firefox nor firefox-gnome-theme paints these from a theme colour.
+ * The Library takes system colours — organizer.css sets `background-color:
+ * Window` on its root view, and several of its widgets are drawn natively
+ * through `appearance: auto`. The profile pages resolve their design tokens
+ * to Canvas, Field and AccentColor on Linux. So both ask GTK, and libadwaita
+ * answers with stock Adwaita no matter which preset is loaded — the same
+ * constraint this whole app exists to work around. They were never ignoring
+ * the theme; the colour simply had no route in.
+ *
+ * A declaration outranks a system-colour default, so naming the surfaces is
+ * enough. The Library's ids belong to places.xhtml alone and need no
+ * scoping; the profile pages are keyed by URL because their token names are
+ * global. Most other in-content tokens are color-mix() over currentColor, so
+ * setting the canvas and the text colour carries buttons, borders and hover
+ * states along with it. */
+
+#placesView,
+#detailsPane {{
+    background-color: {window_bg_color} !important;
+    color: {window_fg_color} !important;
+}}
+#placesToolbar {{
+    background-color: {headerbar_bg_color} !important;
+    color: {headerbar_fg_color} !important;
+}}
+#placesList {{
+    background-color: {sidebar_bg_color} !important;
+    color: {sidebar_fg_color} !important;
+}}
+#contentView,
+#placesContent {{
+    background-color: {view_bg_color} !important;
+    color: {view_fg_color} !important;
+}}
+treechildren::-moz-tree-row {{
+    background-color: transparent !important;
+}}
+treechildren::-moz-tree-cell-text {{
+    color: {view_fg_color} !important;
+}}
+treechildren::-moz-tree-row(selected) {{
+    background-color: {accent_bg_color} !important;
+}}
+treechildren::-moz-tree-cell-text(selected) {{
+    color: {accent_fg_color} !important;
+}}
+
+@-moz-document url("about:profilemanager"), url("about:newprofile"),
+               url("about:editprofile"), url("about:deleteprofile") {{
+    :root {{
+        color: {window_fg_color} !important;
+        --text-color: {window_fg_color} !important;
+        --background-color-canvas: {window_bg_color} !important;
+        --panel-background-color: {popover_bg_color} !important;
+        --input-text-background-color: {view_bg_color} !important;
+        --input-text-color: {view_fg_color} !important;
+        --color-accent-primary: {accent_bg_color} !important;
+        --color-accent-primary-selected: {accent_bg_color} !important;
+        --button-text-color-primary: {accent_fg_color} !important;
+        --link-color: {accent_color} !important;
+    }}
+    body {{
+        background-color: {window_bg_color} !important;
+        color: {window_fg_color} !important;
+    }}
 }}
 """
 
@@ -248,6 +319,15 @@ class FirefoxTheme:
             "window_95": _alpha(v.get("window_bg_color", "#242424"), 0.95),
         }
         subst.update(v)
+        # Sidebar roles arrived in libadwaita 1.4, so a preset imported from
+        # an older Gradience may not carry them. Falling back keeps the whole
+        # stylesheet from failing over one absent colour.
+        for role, fallback in (("sidebar_bg_color", "window_bg_color"),
+                               ("sidebar_fg_color", "window_fg_color"),
+                               ("headerbar_fg_color", "window_fg_color"),
+                               ("accent_fg_color", "window_bg_color")):
+            if not subst.get(role):
+                subst[role] = subst.get(fallback, "#ffffff")
         return TEMPLATE.format(**subst)
 
     def apply(self, preset):
