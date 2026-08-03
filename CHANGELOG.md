@@ -11,11 +11,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - The Firefox engine can now install
   [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
-  itself — the manual prerequisite is gone. When no profile has the theme,
-  Apply offers to install a pinned, project-tested release (v149.1) into
-  every detected profile and apply the preset in one go; a button on the
-  Detected Profiles row installs into remaining profiles or updates the
-  app's own installs when the pin moves. Installs are wired exactly as
+  itself — the manual prerequisite is gone. When none of the profiles you
+  have switched on has the theme, Apply offers to install a pinned,
+  project-tested release (v150) into them and apply the preset in one go; a
+  button on the Detected Profiles row installs into the remaining ones, or
+  updates the app's own installs when the pin moves. Installs are wired
+  exactly as
   upstream's script does it: the theme tree in `chrome/firefox-gnome-theme`,
   `@import` lines first in `userChrome.css` / `userContent.css`, and the
   required prefs appended to `user.js` inside fenced comments.
@@ -41,7 +42,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   hand shows up already on, and they are written back into a fenced block of
   their own — separate from the required prefs, so your options survive a
   theme update and your own lines outside the fences are never rewritten.
-  Options apply to every profile that has the theme.
+  Options apply to every switched-on profile that has the theme.
 
 - The Library window (Bookmarks and History) and Firefox's profile windows
   now follow the preset. Neither has ever been themeable: the Library paints
@@ -124,6 +125,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   about what it reaches now.
 
 ### Fixed
+
+- Whole sections of the interface could not be translated in any of the 27
+  languages. The list of files gettext reads had drifted out of date, so
+  every string in the Firefox engine, the icon engine, the desktop settings
+  and the custom-themes group was shipped untranslated regardless of your
+  locale. The list is now generated from what the source actually contains.
+
+- The application's metainfo failed validation because of an empty
+  translation URL — this fork has no translation platform, so the entry has
+  been removed rather than left blank. The developer entry was also moved to
+  the form current AppStream expects.
 
 - Tab groups in Firefox's all-tabs menu lost their colours: every group's
   swatch came out in the preset's toolbar icon colour and saved groups
