@@ -128,10 +128,11 @@ flatpak run io.github.superuser_miguel.VividGradience
   overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher, quick settings and
   notifications repaint immediately, with no logout. Requires the
   [User Themes](https://extensions.gnome.org/extension/19/user-themes/) extension
-- **Theme Firefox's own chrome** to match the preset — toolbar, tabs and the
-  new-tab page, in every profile that has
+- **Theme Firefox's own chrome** to match the preset — toolbar, tabs, menus
+  and the Library, through
   [firefox-gnome-theme](https://github.com/rafaelmardojai/firefox-gnome-theme)
-  installed (LibreWolf and Waterfox too)
+  (LibreWolf and Waterfox too). Every profile gets its own switch, and one you
+  have already themed yourself is left alone rather than painted over
 - **Recolor Adwaita's icons to the preset** — folders, drives and mimetypes
   follow the scheme instead of staying stock blue; one click applies it, one
   click removes it
