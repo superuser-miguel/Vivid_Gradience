@@ -318,14 +318,40 @@ def _alpha(color, alpha, fallback="#808080"):
     return f"rgba({rgb[0]}, {rgb[1]}, {rgb[2]}, {alpha})"
 
 
+# Display names for the browsers the engine knows. Not derived from the
+# directory name: `.librewolf` would title-case to "Librewolf", and a name a
+# project chose for itself is not ours to guess at.
+BROWSER_NAMES = {
+    "firefox": "Firefox",
+    "librewolf": "LibreWolf",
+    "waterfox": "Waterfox",
+}
+
+
 class FirefoxProfile:
     """One Firefox profile, as the app needs to talk about it: a path, the
-    name the user gave it, and which browser it belongs to."""
+    name the user gave it, and where it came from.
 
-    def __init__(self, path, name, browser):
+    `browser` and `packaging` are separate because the directory name cannot
+    tell them apart — `~/.mozilla/firefox` and
+    `~/.var/app/org.mozilla.firefox/.mozilla/firefox` both end in `firefox`,
+    so a native and a Flatpak install of the same browser would be
+    indistinguishable exactly when telling them apart matters most."""
+
+    def __init__(self, path, name, browser, packaging):
         self.path = Path(path)
         self.name = name
         self.browser = browser
+        self.packaging = packaging
+
+    @property
+    def source(self):
+        """What the profile came from, as a groupable key."""
+        return (self.browser, self.packaging)
+
+    @property
+    def browser_name(self):
+        return BROWSER_NAMES.get(self.browser, self.browser.title())
 
     @property
     def key(self):
@@ -358,14 +384,20 @@ class FirefoxTheme:
     and customContent.css hooks, per profile, for every browser the Flatpak
     is granted."""
 
+    # (directory, browser, packaging). Carrying the last two rather than
+    # reading them back off the path keeps a native and a Flatpak install of
+    # the same browser distinguishable — see FirefoxProfile.
     BROWSER_DIRS = [
-        "~/.mozilla/firefox",
-        "~/.librewolf",
-        "~/.waterfox",
-        "~/.var/app/org.mozilla.firefox/.mozilla/firefox",
-        "~/.var/app/io.gitlab.librewolf-community/.librewolf",
-        "~/.var/app/net.waterfox.waterfox/.waterfox",
-        "~/snap/firefox/common/.mozilla/firefox",
+        ("~/.mozilla/firefox", "firefox", "native"),
+        ("~/.librewolf", "librewolf", "native"),
+        ("~/.waterfox", "waterfox", "native"),
+        ("~/.var/app/org.mozilla.firefox/.mozilla/firefox",
+         "firefox", "flatpak"),
+        ("~/.var/app/io.gitlab.librewolf-community/.librewolf",
+         "librewolf", "flatpak"),
+        ("~/.var/app/net.waterfox.waterfox/.waterfox",
+         "waterfox", "flatpak"),
+        ("~/snap/firefox/common/.mozilla/firefox", "firefox", "snap"),
     ]
 
     THEME_DIR_NAME = "firefox-gnome-theme"
@@ -386,7 +418,7 @@ class FirefoxTheme:
     def find_profiles(self):
         """Every profile listed by an existing profiles.ini."""
         profiles = []
-        for browser_dir in self.BROWSER_DIRS:
+        for browser_dir, browser, packaging in self.BROWSER_DIRS:
             directory = Path(browser_dir).expanduser()
             ini = directory / "profiles.ini"
             if not ini.is_file():
@@ -414,8 +446,17 @@ class FirefoxTheme:
                     profiles.append(FirefoxProfile(
                         path,
                         cp[section].get("Name", path.name),
-                        directory.name.lstrip(".")))
+                        browser, packaging))
         return profiles
+
+    @staticmethod
+    def ambiguous_browsers(profiles):
+        """Browsers found in more than one place. Their labels need the
+        packaging spelled out; everyone else's would only be noise."""
+        sources = {}
+        for profile in profiles:
+            sources.setdefault(profile.browser, set()).add(profile.packaging)
+        return {browser for browser, seen in sources.items() if len(seen) > 1}
 
     def themed_profiles(self, profiles=None):
         """The subset of profiles with firefox-gnome-theme installed."""

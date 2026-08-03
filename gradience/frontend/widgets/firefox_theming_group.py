@@ -65,6 +65,11 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
         self.installer = FirefoxThemeInstaller()
 
         self.profile_rows = []
+        self.browser_groups = []
+
+        self.firefox_theming_expander.add_row(self.theme_options_row)
+        self.firefox_theming_expander.add_row(self.reset_options_row)
+        self.firefox_theming_expander.add_row(self.uninstall_row)
         self.refresh_profiles_row()
 
     # -- which profiles the engine is allowed to touch ------------------------
@@ -194,31 +199,53 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
             title=_("Removed the Firefox GNOME Theme from {0} profiles. "
                     "Restart Firefox to see it go.").format(removed)))
 
+    def browser_label(self, profile, ambiguous):
+        """What to call the browser a profile came from. The packaging is
+        spelled out only when the same browser was found in two places —
+        until then it carries no information and only adds noise."""
+        if profile.browser not in ambiguous:
+            return profile.browser_name
+        packaging = {
+            "flatpak": _("Flatpak"),
+            "snap": _("Snap"),
+            "native": _("native"),
+        }.get(profile.packaging, profile.packaging)
+        return _("{0} ({1})").format(profile.browser_name, packaging)
+
     def rebuild_rows(self, profiles):
-        """One switch per profile, rebuilt whole so the order stays: the
-        profiles first, then what can be done to them."""
-        for row in self.profile_rows:
-            self.firefox_theming_expander.remove(row)
+        """A group per browser, each holding one switch per profile.
+
+        The browser lives in the group's heading rather than on every row:
+        two profiles called "default" from different browsers were the thing
+        that made this list unreadable, and repeating the brand seven times
+        would only trade one kind of noise for another."""
+        for group in self.browser_groups:
+            self.remove(group)
+        self.browser_groups = []
         self.profile_rows = []
 
-        for row in (self.theme_options_row, self.reset_options_row,
-                    self.uninstall_row):
-            if row.get_parent() is not None:
-                self.firefox_theming_expander.remove(row)
-
         skipped = self.skipped_keys()
+        ambiguous = self.firefox.ambiguous_browsers(profiles)
+        groups = {}
         for profile in profiles:
+            group = groups.get(profile.source)
+            if group is None:
+                group = Adw.PreferencesGroup(
+                    title=self.browser_label(profile, ambiguous))
+                groups[profile.source] = group
+                self.browser_groups.append(group)
+                self.add(group)
+
             row = Adw.SwitchRow(title=profile.name,
                                 subtitle=self.profile_subtitle(profile),
                                 active=profile.key not in skipped)
+            # The last-resort tiebreaker: two profiles of one browser may
+            # legitimately share a name, and then only the path separates them.
+            row.set_tooltip_text(str(profile.path))
             row._profile = profile
             row.connect("notify::active", self.on_profile_toggled)
-            self.firefox_theming_expander.add_row(row)
+            group.add(row)
             self.profile_rows.append(row)
-
-        self.firefox_theming_expander.add_row(self.theme_options_row)
-        self.firefox_theming_expander.add_row(self.reset_options_row)
-        self.firefox_theming_expander.add_row(self.uninstall_row)
 
     def profile_subtitle(self, profile):
         own_theme = self.firefox.has_own_theme(profile)

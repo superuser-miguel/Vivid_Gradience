@@ -93,6 +93,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   Colours and Uninstall still cover every profile, because they are the way
   back out.
 
+  Profiles are listed under a heading per browser rather than in one flat
+  list, because Firefox and LibreWolf both call their first profile
+  "default" and two identical rows are unreadable. The heading names the
+  browser properly — LibreWolf, not Librewolf — and spells out the
+  packaging only when the same browser is found in more than one place, so
+  "LibreWolf (Flatpak)" appears exactly when it distinguishes something.
+  Every row carries its profile's full path as a tooltip, for the case where
+  two profiles of one browser share a name and nothing else can tell them
+  apart.
+
 - The Firefox engine's two destructive buttons say what they do. The first
   was an unlabelled row holding a "Remove Theme" button that removed only
   the generated colours; it is now "Preset Colours → Remove Colours", next
