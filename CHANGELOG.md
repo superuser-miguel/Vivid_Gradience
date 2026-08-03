@@ -75,15 +75,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - The Firefox engine now themes the profiles you choose, one switch each,
-  instead of every profile it can find. A profile that already has a Firefox
-  theme of its own is switched off the first time the engine sees it, with a
-  one-click way to take colours it wrote earlier back out — people theme
-  profiles apart so they can tell one window from another at a glance, and
-  one preset across all of them flattened exactly that. Switching a profile
-  off removes the engine's stylesheets from it and leaves the Firefox GNOME
-  Theme in place. Install, Apply, Options and the summary all follow the
-  switches; Remove Colours and Uninstall still cover every profile, because
-  they are the way back out.
+  instead of every profile it can find. People theme profiles apart so they
+  can tell one window from another at a glance, and one preset across all of
+  them flattened exactly that — so a profile that already has a Firefox theme
+  of its own is switched off the first time the engine sees it.
+
+  The switch is the whole engine, not just its colours. Switching a profile
+  off takes the generated stylesheets out and uninstalls the Firefox GNOME
+  Theme with them; switching it back on installs from the cached release and
+  writes the preset, so the switch is its own undo and no download is needed
+  either way. A copy of the theme you installed yourself carries no stamp and
+  is never installed over or removed — only the colours go in, through the
+  hook the theme sets aside for them. Your own `userChrome.css` rules and any
+  `user.js` prefs outside the app's fences survive both directions.
+
+  Install, Apply, Options and the summary all follow the switches. Remove
+  Colours and Uninstall still cover every profile, because they are the way
+  back out.
 
 - The Firefox engine's two destructive buttons say what they do. The first
   was an unlabelled row holding a "Remove Theme" button that removed only
