@@ -3,7 +3,9 @@
   <id>@APP_ID@</id>
   <name>Vivid Gradience</name>
   <summary>Change the look of Adwaita, with ease</summary>
-  <developer_name>superuser-miguel</developer_name>
+  <developer id="io.github.superuser_miguel">
+    <name>superuser-miguel</name>
+  </developer>
   <launchable type="desktop-id">@APP_ID@.desktop</launchable>
   <metadata_license>CC-BY-SA-4.0</metadata_license>
   <project_license>GPL-3.0-or-later</project_license>
@@ -52,7 +54,6 @@
   <url type="homepage">@PROJECT_URL@</url>
   <url type="bugtracker">@BUGTRACKER_URL@</url>
   <url type="help">@HELP_URL@</url>
-  <url type="translate">@TRANSLATE_URL@</url>
   <url type="vcs-browser">@PROJECT_URL@</url>
 
   <kudos>

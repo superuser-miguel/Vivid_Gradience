@@ -39,8 +39,7 @@ appstream_file = i18n.merge_file(
       'APP_ID': APPLICATION_ID,
       'PROJECT_URL': PROJECT_URL,
       'BUGTRACKER_URL': BUGTRACKER_URL,
-      'HELP_URL': HELP_URL,
-      'TRANSLATE_URL': TRANSLATE_URL
+      'HELP_URL': HELP_URL
     })
   ),
   output: '@0@.appdata.xml'.format(APPLICATION_ID),
