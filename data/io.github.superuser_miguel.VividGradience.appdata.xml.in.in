@@ -76,6 +76,18 @@
   </recommends>
 
   <releases>
+    <release version="0.6.0" date="2026-08-13" type="stable">
+      <description translate="no">
+        <p>The Firefox engine grows up, and nine new Casts join the gallery.</p>
+        <ul>
+          <li>Firefox: the engine installs firefox-gnome-theme itself when a profile needs it — a pinned, tested release, cached for offline reuse, and uninstalled exactly as installed</li>
+          <li>Firefox: profiles are themed one switch each, listed under the browser they belong to; the switch carries the whole theme in both directions, so switching off is its own undo</li>
+          <li>Firefox: the theme's nineteen optional features are switches in the app, and Firefox's own pages — Library, Settings, the profile windows — now follow the preset too</li>
+          <li>Nine new Casts presets derived from game palettes — Lotus, Potentia, Valentines, Undying, Easter, Hallows Eve, Gamma, Rhino Heirloom and Storm — every foreground/background pair clearing WCAG AA</li>
+          <li>Interface translations restored: whole sections had dropped out of the translation catalogue and shipped in English in all 27 languages</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.5.0" date="2026-07-30" type="stable">
       <description translate="no">
         <p>Three new engines, a safer Apply, and the first big step of the Tweaks absorption.</p>

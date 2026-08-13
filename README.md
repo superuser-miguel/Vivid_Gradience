@@ -34,7 +34,7 @@ some rough edges — issues and pull requests are welcome.
       and build-tests it before the change lands
 - [x] Modernized, adaptive UI built on current libadwaita (`ToolbarView`,
       `Breakpoint`, boxed lists, `SwitchRow`/`EntryRow`)
-- [x] **76 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
+- [x] **85 ready-made themes** built in — Catppuccin, Gruvbox, Nord, Dracula,
       Rosé Pine, Everforest, Solarized and the full **Arc** and **Matcha**
       families, plus three original sets (**Pastel**, **Neon**, **Casts**) — in
       a visual preset gallery with per-theme color previews, grouped into
@@ -114,7 +114,7 @@ flatpak run io.github.superuser_miguel.VividGradience
 
 ## Features
 
-- Pick from **76 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
+- Pick from **85 ready-made themes** — Catppuccin, Gruvbox, Nord, Dracula,
   Rosé Pine, Everforest, Solarized, Tokyo Night and the full **Arc** and
   **Matcha** families, plus the original **Pastel**, **Neon** and **Casts**
   sets — in a visual preset gallery, each card previewing the theme's own colors
@@ -162,7 +162,7 @@ flatpak run io.github.superuser_miguel.VividGradience
 
 **Planned**
 
-- [x] 76 ready-made themes built in, in a visual gallery with color previews
+- [x] 85 ready-made themes built in, in a visual gallery with color previews
 - [x] Live preview with WCAG AA contrast warnings
 - [x] GNOME Shell theming, version-independent and applied live
 - [x] Recolored icon theme per preset, generated and applied from the app
