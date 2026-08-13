@@ -111,7 +111,8 @@ class GradienceMainWindow(Adw.ApplicationWindow):
     BUILTIN_PRESET_SECTIONS = [
         ("Casts", ["eminence", "hatred", "daybreak", "fear", "conquest",
                    "agony", "rot", "undying", "valentines", "potentia",
-                   "lotus"]),
+                   "lotus", "easter", "hallows-eve", "gamma",
+                   "rhino-heirloom", "storm"]),
         ("Pastel", ["cotton-candy", "sea-glass", "powder-puff", "lilac-mist",
                     "peach-fizz", "buttercream", "sage-linen", "bluebell"]),
         ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",

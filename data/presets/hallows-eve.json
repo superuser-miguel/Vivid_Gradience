@@ -1,0 +1,118 @@
+{
+  "name": "Hallows Eve",
+  "author": "Vivid Gradience",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#ee8f13",
+    "accent_bg_color": "#ee8f13",
+    "accent_fg_color": "#1f0b1f",
+    "destructive_color": "#3a2b2b",
+    "destructive_bg_color": "#3a2b2b",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#509248",
+    "success_bg_color": "#509248",
+    "success_fg_color": "#1f0b1f",
+    "warning_color": "#cfad48",
+    "warning_bg_color": "#cfad48",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#3a2b2b",
+    "error_bg_color": "#3a2b2b",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#37202d",
+    "window_fg_color": "#c1d576",
+    "view_bg_color": "#331230",
+    "view_fg_color": "#c1d576",
+    "headerbar_bg_color": "#3b3128",
+    "headerbar_fg_color": "#c1d576",
+    "headerbar_border_color": "#c1d576",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#3b3128",
+    "card_fg_color": "#c1d576",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#3b3128",
+    "dialog_fg_color": "#c1d576",
+    "popover_bg_color": "#3b3128",
+    "popover_fg_color": "#c1d576",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#3b3128",
+    "thumbnail_fg_color": "#c1d576",
+    "sidebar_bg_color": "#3b3128",
+    "sidebar_fg_color": "#c1d576",
+    "sidebar_border_color": "#331230",
+    "sidebar_backdrop_color": "#37202d",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#331230",
+    "secondary_sidebar_fg_color": "#c1d576",
+    "secondary_sidebar_backdrop_color": "#331230",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#522b9d",
+      "2": "#482484",
+      "3": "#3c1c67",
+      "4": "#31154b",
+      "5": "#281034"
+    },
+    "green_": {
+      "1": "#a3c060",
+      "2": "#92af54",
+      "3": "#7f9d47",
+      "4": "#6d8c3b",
+      "5": "#5e7e31"
+    },
+    "yellow_": {
+      "1": "#c3cf6f",
+      "2": "#c8c260",
+      "3": "#cdb34f",
+      "4": "#d3a43e",
+      "5": "#d7962e"
+    },
+    "orange_": {
+      "1": "#465820",
+      "2": "#414524",
+      "3": "#3b3128",
+      "4": "#37202d",
+      "5": "#331230"
+    },
+    "red_": {
+      "1": "#e08623",
+      "2": "#c57542",
+      "3": "#a86264",
+      "4": "#8c4f85",
+      "5": "#733fa3"
+    },
+    "purple_": {
+      "1": "#4c278e",
+      "2": "#412073",
+      "3": "#351956",
+      "4": "#2b123d",
+      "5": "#220d28"
+    },
+    "brown_": {
+      "1": "#ee8f13",
+      "2": "#d57f2f",
+      "3": "#ba6d50",
+      "4": "#9d5b72",
+      "5": "#814992"
+    },
+    "light_": {
+      "1": "#c1d576",
+      "2": "#c5ca6a",
+      "3": "#c9bc59",
+      "4": "#cfad48",
+      "5": "#d49e38"
+    },
+    "dark_": {
+      "1": "#45227e",
+      "2": "#391b62",
+      "3": "#2f1546",
+      "4": "#260f2f",
+      "5": "#1f0b1f"
+    }
+  }
+}

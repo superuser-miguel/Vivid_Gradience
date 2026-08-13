@@ -1,0 +1,118 @@
+{
+  "name": "Rhino Heirloom",
+  "author": "Vivid Gradience",
+  "license": "GPL-3.0-or-later",
+  "variables": {
+    "accent_color": "#05ffe6",
+    "accent_bg_color": "#05ffe6",
+    "accent_fg_color": "#171211",
+    "destructive_color": "#362a28",
+    "destructive_bg_color": "#362a28",
+    "destructive_fg_color": "#ffffff",
+    "success_color": "#01ff58",
+    "success_bg_color": "#01ff58",
+    "success_fg_color": "#171211",
+    "warning_color": "#cd9a1f",
+    "warning_bg_color": "#cd9a1f",
+    "warning_fg_color": "rgba(0, 0, 0, 0.8)",
+    "error_color": "#362a28",
+    "error_bg_color": "#362a28",
+    "error_fg_color": "#ffffff",
+    "window_bg_color": "#4d4036",
+    "window_fg_color": "#05ffe6",
+    "view_bg_color": "#443930",
+    "view_fg_color": "#05ffe6",
+    "headerbar_bg_color": "#54473c",
+    "headerbar_fg_color": "#05ffe6",
+    "headerbar_border_color": "#05ffe6",
+    "headerbar_backdrop_color": "@window_bg_color",
+    "headerbar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "headerbar_darker_shade_color": "rgba(0, 0, 0, 0.9)",
+    "card_bg_color": "#54473c",
+    "card_fg_color": "#05ffe6",
+    "card_shade_color": "rgba(0, 0, 0, 0.36)",
+    "dialog_bg_color": "#54473c",
+    "dialog_fg_color": "#05ffe6",
+    "popover_bg_color": "#54473c",
+    "popover_fg_color": "#05ffe6",
+    "popover_shade_color": "rgba(0, 0, 0, 0.36)",
+    "shade_color": "rgba(0, 0, 0, 0.36)",
+    "scrollbar_outline_color": "rgba(0, 0, 0, 0.5)",
+    "thumbnail_bg_color": "#54473c",
+    "thumbnail_fg_color": "#05ffe6",
+    "sidebar_bg_color": "#54473c",
+    "sidebar_fg_color": "#05ffe6",
+    "sidebar_border_color": "#443930",
+    "sidebar_backdrop_color": "#4d4036",
+    "sidebar_shade_color": "rgba(0, 0, 0, 0.36)",
+    "secondary_sidebar_bg_color": "#443930",
+    "secondary_sidebar_fg_color": "#05ffe6",
+    "secondary_sidebar_backdrop_color": "#443930",
+    "secondary_sidebar_shade_color": "rgba(0, 0, 0, 0.36)"
+  },
+  "palette": {
+    "blue_": {
+      "1": "#04d9c4",
+      "2": "#04d1bd",
+      "3": "#04c9b6",
+      "4": "#04c2af",
+      "5": "#04baa8"
+    },
+    "green_": {
+      "1": "#01ff58",
+      "2": "#02f758",
+      "3": "#02f055",
+      "4": "#02e853",
+      "5": "#02e050"
+    },
+    "yellow_": {
+      "1": "#cc9d2f",
+      "2": "#cc9c2b",
+      "3": "#cd9a1f",
+      "4": "#cc9a27",
+      "5": "#cc9923"
+    },
+    "orange_": {
+      "1": "#635447",
+      "2": "#5c4d41",
+      "3": "#54473c",
+      "4": "#4d4036",
+      "5": "#443930"
+    },
+    "red_": {
+      "1": "#5c4844",
+      "2": "#54423e",
+      "3": "#4d3c39",
+      "4": "#453633",
+      "5": "#3d302d"
+    },
+    "purple_": {
+      "1": "#d6b3a5",
+      "2": "#d6ae9f",
+      "3": "#d6aa98",
+      "4": "#d6a592",
+      "5": "#d6a08b"
+    },
+    "brown_": {
+      "1": "#8a7462",
+      "2": "#826d5c",
+      "3": "#7a6757",
+      "4": "#736051",
+      "5": "#6b5a4c"
+    },
+    "light_": {
+      "1": "#05ffe6",
+      "2": "#05f7df",
+      "3": "#05f0d8",
+      "4": "#05e8d1",
+      "5": "#04e0ca"
+    },
+    "dark_": {
+      "1": "#362a28",
+      "2": "#2e2422",
+      "3": "#261e1c",
+      "4": "#1f1817",
+      "5": "#171211"
+    }
+  }
+}

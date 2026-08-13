@@ -81,6 +81,11 @@
     <file>presets/potentia.json</file>
     <file>presets/valentines.json</file>
     <file>presets/undying.json</file>
+    <file>presets/easter.json</file>
+    <file>presets/hallows-eve.json</file>
+    <file>presets/gamma.json</file>
+    <file>presets/rhino-heirloom.json</file>
+    <file>presets/storm.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>
