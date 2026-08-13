@@ -42,6 +42,9 @@ logging = Logger()
 # Pinned, not chased: upstream occasionally changes required prefs between
 # Firefox versions, so the app installs a release we have tried, and the pin
 # moves at our own release cadence — never silently at the user's expense.
+# Before moving it, run tools/check-firefox-pin.py --tag <new> — it diffs the
+# engine's variables and the options schema against that release and fails on
+# any seam that would break in silence.
 PINNED_TAG = "v150"
 ARCHIVE_URL = ("https://github.com/rafaelmardojai/firefox-gnome-theme"
                "/archive/refs/tags/{tag}.tar.gz")

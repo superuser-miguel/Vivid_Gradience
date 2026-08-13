@@ -5,6 +5,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+
+- The variables-vs-pin cross-check is a command now:
+  `tools/check-firefox-pin.py` diffs the Firefox engine's `--gnome-*`
+  variables and the Theme Options schema against the pinned
+  firefox-gnome-theme release (from the app's own cache, a stamped
+  profile, or `--fetch`), and fails on any seam that would break in
+  silence — a written variable the release never reads, a `var()` with no
+  definition, a feature pref without a switch, or a switch without a
+  feature. `--tag` tries a candidate release before the pin moves.
+
+### Fixed
+
+- The Firefox engine no longer writes `--gnome-view-background`: v150
+  defines it in its palette files but no rule reads it, so the value never
+  landed anywhere. Found by the new cross-check on its first run — the
+  hand-done prune of eleven dead variables had missed this twelfth.
+
 ## [0.6.0] - 2026-08-13
 
 ### Added

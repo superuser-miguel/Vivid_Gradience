@@ -43,12 +43,11 @@ MARKER = "Generated with Vivid Gradience"
 #
 # Only variables the pinned release actually reads. The theme drops and
 # renames these between versions, and one it no longer reads is a colour the
-# preset silently stops reaching — so when the pin moves, check this list
-# against the release rather than assuming it still lands.
+# preset silently stops reaching — tools/check-firefox-pin.py diffs this
+# list against the release; run it whenever the pin moves.
 PALETTE = """:root {{
     --gnome-window-background:                     {window_bg_color};
     --gnome-window-color:                          {window_fg_color};
-    --gnome-view-background:                       {view_bg_color};
     --gnome-sidebar-background:                    {sidebar_bg_color};
     --gnome-secondary-sidebar-background:          {sidebar_bg_color};
     --gnome-card-background:                       {card_bg_color};
