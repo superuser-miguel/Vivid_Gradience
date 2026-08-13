@@ -77,6 +77,10 @@
     <file>presets/hatred.json</file>
     <file>presets/eminence.json</file>
     <file>presets/fear.json</file>
+    <file>presets/lotus.json</file>
+    <file>presets/potentia.json</file>
+    <file>presets/valentines.json</file>
+    <file>presets/undying.json</file>
     <file preprocess="xml-stripblanks">ui/app_type_dialog.ui</file>
     <file preprocess="xml-stripblanks">ui/builtin_preset_row.ui</file>
     <file preprocess="xml-stripblanks">ui/custom_css_group.ui</file>

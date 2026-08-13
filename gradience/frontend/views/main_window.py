@@ -110,7 +110,8 @@ class GradienceMainWindow(Adw.ApplicationWindow):
     # the families inherited from upstream follow.
     BUILTIN_PRESET_SECTIONS = [
         ("Casts", ["eminence", "hatred", "daybreak", "fear", "conquest",
-                   "agony", "rot"]),
+                   "agony", "rot", "undying", "valentines", "potentia",
+                   "lotus"]),
         ("Pastel", ["cotton-candy", "sea-glass", "powder-puff", "lilac-mist",
                     "peach-fizz", "buttercream", "sage-linen", "bluebell"]),
         ("Neon", ["neon-tokyo", "vaporwave", "acid-rave", "cyberlime",

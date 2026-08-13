@@ -73,6 +73,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   which the theme reads for content areas, cards and secondary sidebars and
   the engine had never set.
 
+- Four more Casts, taking the family to eleven: Undying (muted taupe with a
+  teal accent), Valentines (deep maroon under hot pink), Potentia (a light
+  theme of pale blue and amber) and Lotus (navy with aqua). Each is derived
+  from its source palette the same way the first seven were, and every
+  foreground/background pair clears WCAG AA.
+
 ### Changed
 
 - The Firefox engine now themes the profiles you choose, one switch each,
