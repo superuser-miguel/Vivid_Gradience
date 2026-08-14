@@ -76,6 +76,17 @@
   </recommends>
 
   <releases>
+    <release version="0.6.1" date="2026-08-14" type="stable">
+      <description translate="no">
+        <p>Housekeeping: correct attribution, and a check that keeps the Firefox pin honest.</p>
+        <ul>
+          <li>The About dialog no longer claims the project's inherited years under the fork's name — the Gradience Team is credited for the work it did, and this fork for its own</li>
+          <li>Three more files carried the same mistake from the original rebrand: the project metadata announced the wrong name, the maintainer history named the wrong party, and the code-owners file was not valid syntax</li>
+          <li>The Firefox engine stops writing a variable the pinned theme defines but never reads, so every colour it writes now lands somewhere</li>
+          <li>Moving the theme pin is now a single checked command rather than a manual comparison, which is what caught that dead variable</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.0" date="2026-08-13" type="stable">
       <description translate="no">
         <p>The Firefox engine grows up, and nine new Casts join the gallery.</p>
