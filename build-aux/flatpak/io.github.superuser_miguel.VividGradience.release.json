@@ -123,8 +123,8 @@
                 {
                     "type": "git",
                     "url": "https://github.com/superuser-miguel/Vivid_Gradience.git",
-                    "tag": "v0.6.0",
-                    "commit": "535627ce8b3e4d3c112cb8cb3d65030d355f732f"
+                    "tag": "v0.6.1",
+                    "commit": "7174786a910936b1dfd41c48f3f0bc615aeff6a2"
                 }
             ]
         }
