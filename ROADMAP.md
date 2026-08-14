@@ -251,11 +251,13 @@ and is never updated, uninstalled or otherwise touched. The rule stands for
 everything system-level: the User Themes extension and the Gtk3theme Flatpak
 remain report-only.
 
-- [ ] Warn when `interface.gtk-theme` names a theme that sandboxed apps can't
+- [x] Warn when `interface.gtk-theme` names a theme that sandboxed apps can't
       resolve. Flatpaks read `org.gtk.Gtk3theme.<name>` from
       `/usr/share/runtime/share/themes/`, *not* `/usr/share/themes` — so a
       distro-packaged theme with no matching extension leaves every Flatpak
-      falling back to stock Adwaita, silently.
+      falling back to stock Adwaita, silently. Shipped with the Desktop group:
+      the GTK3 theme picker checks for the extension via the host's
+      `flatpak list` and warns only on a confirmed miss.
 - [ ] Warn when the base theme is not colour-parameterised. GTK 3's built-in
       Adwaita is compiled — 36 `@define-color` against 1,230 baked literals — so
       our colours cannot reach it. adw-gtk3 is the inverse (125 defines, 1,189
@@ -276,14 +278,13 @@ external plugins.
 - [x] Monet engine — Material You palette from a wallpaper, with dynamic
       schemes (nine variants: Vibrant, Tonal Spot, Expressive, … ) and a
       selectable contrast level
-- [ ] Icon engine **(next up)** — a recoloured "pseudo-Adwaita" icon theme
-      generated per preset, so folders stop being blue under a themed desktop.
-      The generation is done and working in `tools/icons-from-preset.py`: 35
-      icons, 29 blues mapped through a luminance curve, ramp chosen by measured
-      visibility against the view background, inheriting from Adwaita for
-      everything else. What remains is the UI and the in-app generate/apply
-      path — and somewhere to select it from, which is the icon theme picker
-      above.
+- [x] Icon engine — a recoloured "pseudo-Adwaita" icon theme generated per
+      preset, so folders stop being blue under a themed desktop. 35 icons, 29
+      blues mapped through a luminance curve, ramp chosen by measured visibility
+      against the view background, inheriting from Adwaita for everything else.
+      Now an in-app engine (`backend/theming/icons.py`) with generate, apply and
+      remove; `tools/icons-from-preset.py` remains the scriptable form and the
+      two are kept in sync.
 - [x] GNOME Shell engine — rewritten to retheme the stylesheet the installed
       Shell already ships, rather than vendoring GNOME's SCSS per release (the
       approach that capped it at 45). Version-agnostic, and applies to a

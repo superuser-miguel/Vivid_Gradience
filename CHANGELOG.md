@@ -20,6 +20,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 
+- The About dialog no longer claims the project's inherited years under the
+  fork's name. It credited "Copyright © 2022-2026 superuser-miguel", covering
+  years that were the Gradience Team's work; it now credits both, matching the
+  convention already used in the source headers. Three more files carried the
+  same mistake from the original rebrand — the DOAP announced the project as
+  "Gradience", `MAINTAINERS.md` named the wrong maintainer for the upstream it
+  forked from, and `CODEOWNERS` was not valid syntax and matched nothing.
+
 - The Firefox engine no longer writes `--gnome-view-background`: v150
   defines it in its palette files but no rule reads it, so the value never
   landed anywhere. Found by the new cross-check on its first run — the

@@ -174,8 +174,12 @@ flatpak run io.github.superuser_miguel.VividGradience
       the split that otherwise happens silently
 - [x] Never destroy an existing theme — Apply offers to import a foreign
       stylesheet into the theme library it now manages (Advanced tab)
-- [ ] **Next up** — a palette editor: open a preset's color family and assign
-      swatches to roles yourself, with contrast measured as you choose
+- [ ] **Next up** — foregrounds chosen by measurement: pick the text color that
+      actually reads on its own background, from the scheme's own palette,
+      instead of trusting one mapping to suit every preset
+- [ ] A palette editor: open a preset's color family and assign swatches to
+      roles yourself, with contrast measured as you choose — the same
+      measurement, shown while you pick
 - [ ] Show your own presets in the visual gallery (built-in schemes done)
 - [ ] Color wheel for picking colors
 - [ ] Import GTK 3/4 themes from external sources (OpenDesktop, GitHub, and others)
