@@ -1,27 +1,40 @@
 # Fork Cleanup TODO
 
-Changes needed to replace upstream (`superuser-miguel/Vivid_Gradience`) identity
-with your own. Work through each section before publishing.
+Changes needed to replace upstream (`GradienceTeam/Gradience`) identity with your
+own. Work through each section before publishing.
+
+Note: the original rebrand sweep replaced the string `Gradience` with
+`superuser-miguel` indiscriminately, so several "wrong owner" bugs below are that
+sweep overshooting — including in this file's own header, fixed 2026-08-14.
 
 ---
 
-## 1. Identity / Authorship
+## 1. Identity / Authorship — ✅ DONE (2026-08-14)
 
-- [ ] `gradience.doap`
-  - Change `<name>Gradience</name>` → `Vivid Gradience`
-  - Update/replace the `ng.eric@ik.me` email if it is not yours
+- [x] `gradience.doap`
+  - `<name>` and the description now say `Vivid Gradience`
+  - Maintainer email moved to the GitHub noreply address already used for
+    commits (`16271056+superuser-miguel@users.noreply.github.com`), rather than
+    upstream's `ng.eric@ik.me`
 
-- [ ] `gradience/frontend/views/about_dialog.py`
-  - Replace `superuser-miguel` in `developer_name`, `developers` list, and `copyright`
+- [x] `gradience/frontend/views/about_dialog.py`
+  - `developer_name` and `developers` are correct as-is — that really is the
+    fork's developer.
+  - `copyright` was claiming `© 2022-2026 superuser-miguel`, i.e. upstream's
+    years under the fork's name. Now credits both, matching the per-file header
+    convention already used in the tree (`Gradience Team` for inherited files,
+    `Vivid Gradience contributors` for new ones).
 
-- [ ] `.github/CODEOWNERS`
-  - Remove `@GradienceTeam/Core`
-  - Replace `superuser-miguel` with your GitHub username
+- [x] `.github/CODEOWNERS`
+  - Was `@GradienceTeam/Core` plus a bare `superuser-miguel` and no path
+    pattern, which is not valid CODEOWNERS syntax — the file did nothing.
+    Now `* @superuser-miguel`.
 
-- [ ] `MAINTAINERS.md`
-  - Fix "Previously maintained as" link — it currently points to
-    `superuser-miguel/Vivid_Gradience` but should point to
-    `https://github.com/GradienceTeam/Gradience` (the actual upstream)
+- [x] `MAINTAINERS.md`
+  - The History line claimed the project was "previously maintained as
+    Gradience" by @superuser-miguel, linking to this repo. Both halves were the
+    sweep's doing; it now names the Gradience Team and links
+    `GradienceTeam/Gradience`.
 
 ---
 

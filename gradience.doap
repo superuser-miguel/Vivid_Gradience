@@ -5,10 +5,10 @@
          xmlns:gnome="http://api.gnome.org/doap-extensions#"
          xmlns="http://usefulinc.com/ns/doap#">
 
-  <name>Gradience</name>
+  <name>Vivid Gradience</name>
   <shortdesc xml:lang="en">Change the look of Adwaita, with ease</shortdesc>
   <description xml:lang="en">
-     Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 theme.
+     Vivid Gradience is a tool for customizing Libadwaita applications and the adw-gtk3 theme.
   </description>
 
   <homepage rdf:resource="https://github.com/superuser-miguel/Vivid_Gradience" />
@@ -20,7 +20,7 @@
   <maintainer>
     <foaf:Person>
       <foaf:name>superuser-miguel</foaf:name>
-      <foaf:mbox rdf:resource="mailto:ng.eric@ik.me" />
+      <foaf:mbox rdf:resource="mailto:16271056+superuser-miguel@users.noreply.github.com" />
       <gnome:userid>superuser-miguel</gnome:userid>
     </foaf:Person>
   </maintainer>

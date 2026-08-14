@@ -6,8 +6,8 @@ Vivid Gradience is currently maintained by [@superuser-miguel](https://github.co
 
 ## History
 
-Previously maintained as [Gradience](https://github.com/superuser-miguel/Vivid_Gradience)
-by [@superuser-miguel](https://github.com/superuser-miguel).
+Vivid Gradience is a fork of [Gradience](https://github.com/GradienceTeam/Gradience),
+which was maintained by the [Gradience Team](https://github.com/GradienceTeam).
 
 ## Special thanks to the Gradience Team
 
