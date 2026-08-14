@@ -161,9 +161,11 @@ differently. One body of work, two surfaces.
       lightness 0.5 — getting that wrong is what made the first attempt at this
       push a mid-dark accent toward white and still fail.
 
-- [ ] **Put the preset's own palette in the colour picker.** Today clicking a
-      colour opens a bare `Gtk.ColorDialog` with no reference to the scheme being
-      edited, so "change it in Colors" means matching hex by hand.
+- [x] **Put the preset's own palette in the colour picker.** Built: clicking a
+      colour opens the scheme's own shades as labelled swatches, with `Custom…`
+      falling through to `Gtk.ColorDialog`. What remains is the contrast-aware
+      half described below — marking which swatches actually clear the floor
+      against the variable being edited.
 
       Blocked by the GTK API, so it needs building: `Gtk.ColorDialog` exposes
       only `title`, `modal` and `with-alpha` — there is no way to add swatches.
