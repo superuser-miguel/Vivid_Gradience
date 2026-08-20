@@ -46,7 +46,7 @@ dependency('pygobject-3.0', version: '>= 3.42.0')
 dependency('libsoup-3.0', version: '>= 3.2.0')
 
 # Python installation directory
-PY_INSTALLDIR = python.find_installation('python3', required: true, modules: ['lxml'])
+PY_INSTALLDIR = python.find_installation('python3', required: true)
 
 # Check if python3 is installed
 if not PY_INSTALLDIR.found()
