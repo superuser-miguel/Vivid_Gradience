@@ -30,8 +30,9 @@ jobs:
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
       options: --privileged
-    # x86_64 only: materialyoucolor publishes no linux aarch64 wheel and no
-    # sdist at all, so there is nothing for that leg to install.
+    # x86_64 only, because that is what we ship. The arm leg produced bundles
+    # nobody installed, and materialyoucolor publishes no aarch64 wheel, so it
+    # would have to compile the sdist on an emulated-slow runner to get there.
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout

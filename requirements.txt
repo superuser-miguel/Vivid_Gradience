@@ -32,8 +32,16 @@
 # this in .github/workflows/pypi-dependencies.yml).
 #
 # This list feeds the Flatpak bundle only. Host-side helpers under tools/ are
-# not installed by meson and so are deliberately absent -- palette-from-image.py
-# needs pillow, which you install on the host yourself.
+# not installed by meson, so their dependencies do not belong here.
 
 anyascii
+
+# Build-time only, and it must be listed before materialyoucolor. That sdist
+# names pybind11 in its build-system requires, and the generated pip call
+# passes --no-build-isolation, so pip will not fetch it for us.
+pybind11
+
+# Pulls in pillow transitively: materialyoucolor declares it in install_requires
+# even though nothing in the package imports it (image loading is done in the
+# bundled C extension). Listing pillow here as well would only duplicate it.
 materialyoucolor
