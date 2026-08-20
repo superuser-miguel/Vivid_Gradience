@@ -17,8 +17,10 @@
 
 name: Typos
 
+# Manual only. The sole PRs this repo sees are from its own dependency bot,
+# and those land as action_required rather than running, so a pull_request
+# trigger buys nothing here.
 on:
-  pull_request:
   workflow_dispatch:
 
 jobs:
