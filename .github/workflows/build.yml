@@ -17,14 +17,12 @@
 
 name: Build
 
+# Deliberately manual. This builds the Devel manifest against GNOME master, so
+# it is an early warning that the runtime is moving under us -- not a gate on
+# anything we ship. The real gate is the clean-room build from the pinned
+# release manifest in RELEASING.md, which runs on a fresh tmpfs state dir.
 on:
-  workflow_dispatch:        # run manually when you've made significant progress
-  push:
-    tags:
-      - 'v*'                # and automatically on release tags
-  pull_request:
-    paths-ignore:
-      - '**/*.md'
+  workflow_dispatch:
 
 jobs:
   flatpak:
@@ -32,16 +30,9 @@ jobs:
     container:
       image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
       options: --privileged
-    strategy:
-      # Don't fail the whole workflow if one architecture fails
-      fail-fast: false
-      matrix:
-        variant:
-          - arch: x86_64
-            runner: ubuntu-24.04
-          - arch: aarch64
-            runner: ubuntu-24.04-arm
-    runs-on: ${{ matrix.variant.runner }}
+    # x86_64 only: materialyoucolor publishes no linux aarch64 wheel and no
+    # sdist at all, so there is nothing for that leg to install.
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v6
@@ -53,6 +44,6 @@ jobs:
           repository-name: gnome-nightly
           bundle: gradience-devel.flatpak
           manifest-path: build-aux/flatpak/io.github.superuser_miguel.VividGradience.Devel.json
-          cache-key: flatpak-builder-${{ github.sha }}-${{ matrix.variant.arch }}
-          arch: ${{ matrix.variant.arch }}
+          cache-key: flatpak-builder-${{ github.sha }}-x86_64
+          arch: x86_64
           verbose: true
