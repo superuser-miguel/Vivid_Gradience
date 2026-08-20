@@ -25,10 +25,15 @@
 # mv pypi-dependencies.json build-aux/flatpak/
 #
 # or more simply, just push and the bot will do this for you.
+#
+# The Python version used to generate matters: pip resolves ABI-specific
+# wheels, so generating on the wrong version pins a wheel the runtime cannot
+# load. Generate on the same Python as the target GNOME runtime (the bot pins
+# this in .github/workflows/pypi-dependencies.yml).
+#
+# This list feeds the Flatpak bundle only. Host-side helpers under tools/ are
+# not installed by meson and so are deliberately absent -- palette-from-image.py
+# needs pillow, which you install on the host yourself.
 
 anyascii
-pybind11
-svglib
-Jinja2
-pillow
-libsass
+materialyoucolor
