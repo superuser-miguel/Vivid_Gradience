@@ -98,6 +98,44 @@ CHROME_TEMPLATE = """/* {marker}
                          var(--tab-group-color-invert))) !important;
 }}
 
+/* Menus and popovers.
+ *
+ * Firefox 154 renamed the popup colour tokens: --panel-background and
+ * --panel-color became --panel-background-color and --panel-text-color, and
+ * --arrowpanel-background/--arrowpanel-color stopped being read at all.
+ * firefox-gnome-theme still writes the old names, so from that release on
+ * every context menu and popover falls back to the GTK Menu/MenuText system
+ * colours — while the theme goes on painting the menu *items* with
+ * var(--gnome-window-color) !important. The pair splits, and a preset whose
+ * foreground sits on the same side as the system menu background (a light
+ * preset under a dark GTK theme, or the reverse) leaves the text unreadable
+ * on its own menus.
+ *
+ * Naming the tokens ourselves puts the surface back under the preset. The
+ * old names are worth writing too: on a Firefox that still reads them the
+ * value is the one the theme would have derived anyway, and on a profile
+ * without the theme they are the only route in.
+ *
+ * tools/check-firefox-pin.py diffs the --gnome-* seam between the engine and
+ * the theme; this is the other seam, between the theme and Firefox, and it
+ * moves on Firefox's release schedule rather than the pin's.
+ *
+ * Three panels are left alone. The urlbar dropdown takes Firefox's view
+ * colours rather than the menu ones, and the theme paints its rows to match;
+ * the autoscroll puck and the UITour highlight are shaped overlays that pack
+ * an image or a deliberate transparency into the same token.
+ */
+menupopup,
+panel:not([type="autocomplete-richlistbox"], .autoscroller,
+          #UITourHighlightContainer) {{
+    --panel-background-color: {popover_bg_color} !important;
+    --panel-text-color: {popover_fg_color} !important;
+    --panel-background: {popover_bg_color} !important;
+    --panel-color: {popover_fg_color} !important;
+    --arrowpanel-background: {popover_bg_color} !important;
+    --arrowpanel-color: {popover_fg_color} !important;
+}}
+
 /* The Library (Bookmarks, History) and the profile windows.
  *
  * Neither Firefox nor firefox-gnome-theme paints these from a theme colour.
