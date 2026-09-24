@@ -205,10 +205,21 @@ treechildren::-moz-tree-cell-text(selected) {{
 # the print dialog stayed stock Firefox next to a themed chrome. The rest of
 # the token set is color-mix() over currentColor, so naming the canvas, the
 # text colour and the accent carries buttons, borders and hover states along.
+#
+# Most of it, not all. tokens-shared.css writes a good share of the set as
+# light-dark() pairs, and those follow the page's color-scheme, which follows
+# Firefox's Website appearance setting — not the preset. With that set to
+# Dark under a light preset, every card in about:addons kept Firefox's
+# gray-80 box (--background-color-box) behind the preset's dark text, and the
+# native checkboxes and radios drew their dark-scheme selves. Pinning
+# color-scheme to the preset's own side settles every light-dark() pair at
+# once; the box is named as well because it is the card role outright.
 IN_CONTENT_TOKENS = """    :root {{
+        color-scheme: {color_scheme} !important;
         color: {window_fg_color} !important;
         --text-color: {window_fg_color} !important;
         --background-color-canvas: {window_bg_color} !important;
+        --background-color-box: {card_bg_color} !important;
         --panel-background-color: {popover_bg_color} !important;
         --panel-text-color: {popover_fg_color} !important;
         --input-text-background-color: {view_bg_color} !important;
@@ -348,6 +359,18 @@ def _parse_rgb(color):
     if len(hexpart) == 3:
         hexpart = "".join(c * 2 for c in hexpart)
     return tuple(int(hexpart[i:i + 2], 16) for i in (0, 2, 4))
+
+
+def _color_scheme(color):
+    """'light' or 'dark', for the side of the preset `color` sits on.
+
+    Split at the luminance where white and black text contrast equally, so
+    the answer agrees with which foreground the preset would have chosen."""
+    rgb = _parse_rgb(color) or (0, 0, 0)
+    lin = [c / 255 / 12.92 if c <= 10 else ((c / 255 + 0.055) / 1.055) ** 2.4
+           for c in rgb]
+    luminance = 0.2126 * lin[0] + 0.7152 * lin[1] + 0.0722 * lin[2]
+    return "dark" if luminance < 0.179 else "light"
 
 
 def _alpha(color, alpha, fallback="#808080"):
@@ -556,6 +579,7 @@ class FirefoxTheme:
             "accent_30": _alpha(v.get("accent_bg_color", "#3584e4"), 0.3),
             "card_60": _alpha(v.get("card_bg_color", "#303030"), 0.6),
             "window_95": _alpha(v.get("window_bg_color", "#242424"), 0.95),
+            "color_scheme": _color_scheme(v.get("window_bg_color", "#242424")),
         }
         subst.update(v)
         # Sidebar roles arrived in libadwaita 1.4, so a preset imported from
