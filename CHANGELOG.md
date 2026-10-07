@@ -7,6 +7,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.2] - 2026-10-07
+
+### Fixed
+
+- Firefox context menus follow the preset again on Firefox 154 and later.
+  Firefox 154 renamed `--panel-background`/`--panel-color` to
+  `--panel-background-color`/`--panel-text-color` and stopped reading
+  `--arrowpanel-*`. firefox-gnome-theme v150 still writes the old names, so
+  the menu surface fell back to the GTK Menu system colour while the items kept
+  the preset's text colour. A light preset under a dark GTK theme then gave
+  about 1.2:1 contrast. The engine now writes both generations of names.
+- about: pages that use the preset stay on it when Firefox's Website
+  appearance is set to Dark. Those pages resolve `light-dark()` tokens from the
+  page colour scheme, so about:addons cards kept Firefox's dark card
+  colour behind the preset's dark text, and native checkboxes and radio buttons
+  drew as blank white squares. `color-scheme` is now pinned to the preset's own
+  side on those pages, and `--background-color-box` is set explicitly. Websites
+  are untouched.
+
+### Changed
+
+- Build: lxml is no longer required at configure time or bundled, and
+  `requirements.txt` now lists only the dependencies that actually ship.
+
 ## [0.6.1] - 2026-08-14
 
 ### Added

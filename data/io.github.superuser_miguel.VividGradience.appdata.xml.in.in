@@ -76,6 +76,15 @@
   </recommends>
 
   <releases>
+    <release version="0.6.2" date="2026-10-07" type="stable">
+      <description translate="no">
+        <p>Firefox fixes: menus and add-on cards follow the preset again.</p>
+        <ul>
+          <li>Context menus in Firefox 154 and later show the preset's colours again. Firefox renamed the tokens that colour menus, so the menu background had fallen back to the system colour while the text kept the preset's, which could leave dark text on a dark menu</li>
+          <li>The cards on the Add-ons page stay on the preset when Firefox's website appearance is set to Dark, and the checkboxes and radio buttons on those pages no longer show up as blank white squares</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.1" date="2026-08-14" type="stable">
       <description translate="no">
         <p>Housekeeping: correct attribution, and a check that keeps the Firefox pin honest.</p>
