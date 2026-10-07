@@ -32,189 +32,49 @@ Usage:
   tools/pick-foreground.py                       # summary, all presets
   tools/pick-foreground.py --floor 5.0 --mode highest-contrast
   tools/pick-foreground.py --json out.json       # every variant, for review
+  tools/pick-foreground.py --verify              # check what Apply writes
 """
 import argparse
 import glob
 import importlib.util
 import json
-import math
 import os
 import sys
 
 _here = os.path.dirname(os.path.abspath(__file__))
+# The engine's own module, loaded by path: it has no GTK imports, so the tool
+# measures exactly what an Apply would write.
 _spec = importlib.util.spec_from_file_location(
-    "audit_contrast", os.path.join(_here, "audit-contrast.py"))
-_audit = importlib.util.module_from_spec(_spec)
-_spec.loader.exec_module(_audit)
-resolve, contrast = _audit.resolve, _audit.contrast
+    "contrast", os.path.join(_here, "..", "gradience", "backend", "utils",
+                             "contrast.py"))
+_c = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(_c)
 
 FLOORS = (4.5, 5.0)
 MODES = ("nearest-hue", "highest-contrast")
-
-# Fills: a foreground drawn on a coloured surface.
-FILLS = ("accent", "destructive", "success", "warning", "error")
-# Coloured text: the role colour drawn as a label on the neutral surfaces.
-TEXT_SURFACES = ("window_bg_color", "view_bg_color", "card_bg_color")
-
-NAMED_FG = ("window_fg_color", "view_fg_color", "card_fg_color",
-            "headerbar_fg_color", "popover_fg_color", "dialog_fg_color",
-            "sidebar_fg_color", "accent_fg_color")
-
-# Hue distances inside one band count as equal, and contrast breaks the tie:
-# two greens 1 and 4 degrees off a green accent are both "in family", and the
-# more readable one should win.
-HUE_BAND = 15.0
-# Below this OKLCH chroma a colour has no meaningful hue.
-ACHROMATIC = 0.02
-# Hue distance charged when exactly one side is achromatic: worse than a
-# near neighbour, better than the opposite side of the wheel.
-NEUTRAL_HUE_PENALTY = 60.0
+FILLS = _c.FILL_ROLES
+TEXT_SURFACES = _c.TEXT_SURFACES
+contrast, hexs, push = _c.contrast, _c.to_hex, _c.push
 
 
-# --- OKLab / OKLCH -----------------------------------------------------------
-
-def _lin(c):
-    c /= 255
-    return c / 12.92 if c <= 0.04045 else ((c + 0.055) / 1.055) ** 2.4
-
-
-def _gam(c):
-    c = 12.92 * c if c <= 0.0031308 else 1.055 * c ** (1 / 2.4) - 0.055
-    return c * 255
-
-
-def to_oklch(rgb):
-    r, g, b = (_lin(c) for c in rgb)
-    l_ = (0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b) ** (1 / 3)
-    m_ = (0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b) ** (1 / 3)
-    s_ = (0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b) ** (1 / 3)
-    L = 0.2104542553 * l_ + 0.7936177850 * m_ - 0.0040720468 * s_
-    a = 1.9779984951 * l_ - 2.4285922050 * m_ + 0.4505937099 * s_
-    bb = 0.0259040371 * l_ + 0.7827717662 * m_ - 0.8086757660 * s_
-    return L, math.hypot(a, bb), math.degrees(math.atan2(bb, a)) % 360
-
-
-def _from_oklab(L, a, b):
-    l_ = (L + 0.3963377774 * a + 0.2158037573 * b) ** 3
-    m_ = (L - 0.1055613458 * a - 0.0638541728 * b) ** 3
-    s_ = (L - 0.0894841775 * a - 1.2914855480 * b) ** 3
-    return (4.0767416621 * l_ - 3.3077115913 * m_ + 0.2309699292 * s_,
-            -1.2684380046 * l_ + 2.6097574011 * m_ - 0.3413193965 * s_,
-            -0.0041960863 * l_ - 0.7034186147 * m_ + 1.7076147010 * s_)
-
-
-def from_oklch(L, C, h):
-    """sRGB for an OKLCH colour, shedding chroma until it fits the gamut."""
-    hr = math.radians(h)
-    for _ in range(40):
-        lin = _from_oklab(L, C * math.cos(hr), C * math.sin(hr))
-        if all(-1e-6 <= c <= 1 + 1e-6 for c in lin):
-            break
-        C *= 0.9
-    return tuple(round(min(255, max(0, _gam(max(0.0, min(1.0, c))))))
-                 for c in lin)
-
-
-def hue_distance(a, b):
-    (_, ca, ha), (_, cb, hb) = to_oklch(a), to_oklch(b)
-    na, nb = ca < ACHROMATIC, cb < ACHROMATIC
-    if na and nb:
-        return 0.0
-    if na or nb:
-        return NEUTRAL_HUE_PENALTY
-    d = abs(ha - hb) % 360
-    return min(d, 360 - d)
-
-
-def hexs(rgb):
-    return "#%02x%02x%02x" % tuple(round(c) for c in rgb)
-
-
-# --- picking -----------------------------------------------------------------
-
-def candidates(preset):
-    """Every colour the scheme offers as text: (label, rgb)."""
-    v, out, seen = preset.get("variables", {}), [], set()
-    base = resolve(v.get("window_bg_color"), v)
-    for key in NAMED_FG:
-        rgb = resolve(v.get(key), v, over=base)
-        if rgb is not None:
-            out.append((key.replace("_color", ""), rgb))
-    for family, shades in sorted(preset.get("palette", {}).items()):
-        for idx, value in sorted(shades.items()):
-            rgb = resolve(value, v)
-            if rgb is not None:
-                out.append((f"{family}{idx}", rgb))
-    unique = []
-    for label, rgb in out:
-        key = hexs(rgb)
-        if key not in seen:
-            seen.add(key)
-            unique.append((label, tuple(round(c) for c in rgb)))
-    return unique
-
-
-def push(rgb, surfaces, floor):
-    """Move `rgb` along OKLCH lightness until it clears `floor` on every
-    surface. Both directions are measured; the one that gets there with the
-    smaller move wins. Returns (rgb, reached)."""
-    L, C, h = to_oklch(rgb)
-
-    def worst(colour):
-        return min(contrast(colour, s) for s in surfaces)
-
-    best = None
-    for target in (1.0, 0.0):
-        lo, hi = L, target
-        end = from_oklch(hi, C, h)
-        if worst(end) < floor:
-            continue                      # this direction never gets there
-        for _ in range(30):
-            mid = (lo + hi) / 2
-            if worst(from_oklch(mid, C, h)) >= floor:
-                hi = mid
-            else:
-                lo = mid
-        found = from_oklch(hi, C, h)
-        move = abs(hi - L)
-        if best is None or move < best[0]:
-            best = (move, found)
-    if best is None:
-        # Neither direction clears it: give the most contrast there is.
-        ends = [from_oklch(1.0, C, h), from_oklch(0.0, C, h)]
-        return max(ends, key=worst), False
-    return best[1], True
-
-
-def pick(bg, cands, floor, mode):
-    """Foreground for a fill. Returns a dict describing the choice."""
-    scored = [(label, rgb, contrast(rgb, bg), hue_distance(rgb, bg))
-              for label, rgb in cands]
-    clear = [s for s in scored if s[2] >= floor]
-    if clear:
-        if mode == "nearest-hue":
-            label, rgb, ratio, dh = min(
-                clear, key=lambda s: (s[3] // HUE_BAND, -s[2]))
-        else:
-            label, rgb, ratio, dh = max(clear, key=lambda s: s[2])
-        return {"hex": hexs(rgb), "ratio": round(ratio, 2), "source": label,
-                "how": "picked", "hue_distance": round(dh)}
-    # Nothing in the palette is readable here: push the closest-in-family one.
-    if mode == "nearest-hue":
-        label, rgb, _, _ = min(scored, key=lambda s: (s[3], -s[2]))
-    else:
-        label, rgb, _, _ = max(scored, key=lambda s: s[2])
-    out, reached = push(rgb, [bg], floor)
-    return {"hex": hexs(out), "ratio": round(contrast(out, bg), 2),
-            "source": label, "how": "pushed" if reached else "best-effort",
-            "hue_distance": round(hue_distance(out, bg))}
+def _pick(bg, cands, floor, mode):
+    rgb, how, source = _c.pick(bg, cands, floor, mode)
+    return {"hex": hexs(rgb), "ratio": round(contrast(rgb, bg), 2),
+            "source": source, "how": how,
+            "hue_distance": round(_c.hue_distance(rgb, bg))}
 
 
 def analyse(path):
     preset = json.load(open(path))
     v = preset.get("variables", {})
+    names = dict(_c.flatten_palette(preset.get("palette")))
+    names.update(v)
+
+    def resolve(value, _vars, over=None):
+        return _c.resolve(value, names, over)
+
     base = resolve(v.get("window_bg_color"), v)
-    cands = candidates(preset)
+    cands = _c.candidates(v, preset.get("palette"))
     result = {"name": preset.get("name", os.path.basename(path)),
               "file": os.path.basename(path), "fills": {}, "text": {}}
     surfaces = {k: resolve(v.get(k), v, over=base) for k in TEXT_SURFACES}
@@ -231,8 +91,8 @@ def analyse(path):
                  "variants": {}}
         for floor in FLOORS:
             for mode in MODES:
-                entry["variants"][f"{floor}/{mode}"] = pick(bg, cands,
-                                                            floor, mode)
+                entry["variants"][f"{floor}/{mode}"] = _pick(bg, cands,
+                                                             floor, mode)
         result["fills"][role] = entry
     for role in FILLS:
         col = resolve(v.get(f"{role}_color"), v, over=base)
@@ -253,6 +113,46 @@ def analyse(path):
     return result
 
 
+def verify(paths, floor=_c.FLOOR):
+    """Run the engine's readable_variables() over every preset and score the
+    result: every text role and every fill must clear the floor, and every
+    value that already did must come out untouched. Returns failures."""
+    failures, changed, presets_changed = [], 0, 0
+    for path in paths:
+        preset = json.load(open(path))
+        v, pal = preset.get("variables", {}), preset.get("palette")
+        out, changes = _c.readable_variables(v, pal, floor)
+        name = preset.get("name", os.path.basename(path))
+        changed += len(changes)
+        presets_changed += bool(changes)
+        names = dict(_c.flatten_palette(pal))
+        names.update(out)
+        base = _c.resolve(out.get("window_bg_color"), names)
+        surfaces = [s for s in (_c.resolve(out.get(k), names, over=base)
+                                for k in TEXT_SURFACES) if s is not None]
+        for role in FILLS:
+            col = _c.resolve(out.get(f"{role}_color"), names, over=base)
+            if col is not None and surfaces:
+                r = min(contrast(col, s) for s in surfaces)
+                if r < floor - 1e-9:
+                    failures.append(f"{name}: {role}_color {r:.2f}")
+            bg = _c.resolve(out.get(f"{role}_bg_color"), names, over=base)
+            fg = _c.resolve(out.get(f"{role}_fg_color"), names, over=bg)
+            if bg is not None and fg is not None and contrast(fg, bg) < floor - 1e-9:
+                failures.append(f"{name}: {role}_fg on {role}_bg "
+                                f"{contrast(fg, bg):.2f}")
+        touched = {k for k, _, _ in changes}
+        for k in v:
+            if k not in touched and out[k] != v[k]:
+                failures.append(f"{name}: {k} changed without being reported")
+    print(f"{len(paths)} presets checked at {floor}:1")
+    print(f"  values replaced: {changed}, in {presets_changed} presets")
+    print(f"  failures: {len(failures)}")
+    for f in failures:
+        print(f"    {f}")
+    return failures
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("presets", nargs="*")
@@ -260,8 +160,13 @@ def main():
     ap.add_argument("--mode", choices=MODES, default="nearest-hue")
     ap.add_argument("--json", metavar="PATH",
                     help="write every variant for every preset to PATH")
+    ap.add_argument("--verify", action="store_true",
+                    help="score what Apply would write, and fail on any "
+                         "role below the floor")
     args = ap.parse_args()
     paths = args.presets or sorted(glob.glob("data/presets/*.json"))
+    if args.verify:
+        return 1 if verify(paths) else 0
     results = [analyse(p) for p in paths]
 
     if args.json:

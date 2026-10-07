@@ -17,6 +17,7 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 from gradience.backend.models.preset import Preset
+from gradience.backend.utils.contrast import readable_variables
 
 
 theming_warning_start = """/*
@@ -35,9 +36,13 @@ Generated with Vivid Gradience end
 """
 
 def generate_gtk_css(app_type: str, preset: Preset) -> str:
-    variables = preset.variables
     palette = preset.palette
     custom_css = preset.custom_css
+    # Role colours the toolkit draws as text are measured, not trusted: any
+    # that would fall below WCAG AA on the surfaces they sit on is moved
+    # until it reads. Colours that already pass are written exactly as the
+    # preset has them.
+    variables, _ = readable_variables(preset.variables, palette)
 
     gtk_css = theming_warning_start
 

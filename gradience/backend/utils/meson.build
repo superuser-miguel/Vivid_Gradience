@@ -3,6 +3,7 @@ utilsdir = 'gradience/backend/utils'
 gradience_sources = [
     '__init__.py',
     'colors.py',
+    'contrast.py',
     'common.py',
     'gnome.py',
     'gsettings.py',

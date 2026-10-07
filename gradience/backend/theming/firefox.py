@@ -22,6 +22,7 @@ from pathlib import Path
 from configparser import ConfigParser, Error as ConfigParserError
 
 from gradience.backend.logger import Logger
+from gradience.backend.utils.contrast import readable_variables
 
 logging = Logger()
 
@@ -562,7 +563,10 @@ class FirefoxTheme:
             return False
 
     def render(self, preset):
-        v = dict(preset.variables)
+        # Measured first: --link-color and friends take accent_color as text,
+        # so it must read on the surfaces the way the GTK side does.
+        v, _ = readable_variables(preset.variables,
+                                  getattr(preset, "palette", None))
         fg = v.get("window_fg_color", "#ffffff")
         subst = {
             "marker": MARKER,

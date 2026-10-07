@@ -58,6 +58,7 @@ from gi.repository import GObject, Gio, GLib
 
 from gradience.backend.models.preset import Preset
 from gradience.backend.utils.colors import color_vars_to_color_code
+from gradience.backend.utils.contrast import readable_variables
 from gradience.backend.utils.gnome import get_shell_version, get_shell_colors
 from gradience.backend.utils.subprocess import GradienceSubprocess
 from gradience.backend.utils.gsettings import GSettingsSetting, FlatpakGSettings, GSettingsMissingError
@@ -177,7 +178,10 @@ class ShellTheme:
 
     def _create_theme(self, parent: callable, preset: Preset):
         # Convert GTK color variables to normal color values
-        self.preset_variables = color_vars_to_color_code(preset.variables, preset.palette)
+        # Measured first, so the Shell draws the same readable role colours
+        # as the GTK stylesheet does.
+        variables, _ = readable_variables(preset.variables, preset.palette)
+        self.preset_variables = color_vars_to_color_code(variables, preset.palette)
         self.preset_palette = preset.palette
         self.custom_css = preset.custom_css
 
