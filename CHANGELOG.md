@@ -7,6 +7,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.7.0] - 2026-10-08
+
+### Changed
+
+- Role colours are measured before they are written. The toolkit draws
+  `accent_color`, `destructive_color`, `success_color`, `warning_color` and
+  `error_color` as text on the window, view and card surfaces, and 248 of
+  those 425 pairs in the bundled presets fell below WCAG AA. FEAR's red
+  "Reset Theme" label was at 1.11:1. A colour below 4.5:1 on any of those
+  surfaces now keeps its hue and has its OKLCH lightness moved by the smallest
+  amount that clears the floor.
+- Text on the five filled roles (`*_fg_color` on `*_bg_color`) is kept when it
+  passes, and otherwise replaced with the readable shade nearest in hue from
+  the preset's own palette. No bundled preset needs this today; it covers
+  Monet output and new presets.
+- The GTK 3/4 stylesheet, the Shell theme and Firefox all go through the same
+  measurement, in `gradience/backend/utils/contrast.py`. Colours that already
+  pass are written as the preset has them, and presets are never modified.
+
+### Added
+
+- `tools/pick-foreground.py` reports what each contrast floor and picking rule
+  would do across the presets. `--verify` scores what Apply writes and fails
+  on any role below the floor.
+
 ## [0.6.2] - 2026-10-07
 
 ### Fixed

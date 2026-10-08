@@ -76,6 +76,17 @@
   </recommends>
 
   <releases>
+    <release version="0.7.0" date="2026-10-08" type="stable">
+      <description translate="no">
+        <p>Coloured text reads on every preset.</p>
+        <ul>
+          <li>Red, green, amber and accent labels are now checked against the surfaces they sit on before they are written. Any that fall below WCAG AA (4.5:1) keep their hue and are made lighter or darker just enough to read. This fixes 248 unreadable labels across 68 of the bundled presets, including washed-out "Reset Theme" buttons</li>
+          <li>Text on accent and other filled buttons is checked the same way. If it does not read, the nearest readable shade from the preset's own palette is used</li>
+          <li>Colours that already read are written exactly as the preset has them, and presets themselves are not changed</li>
+          <li>The GTK 3 and GTK 4 stylesheets, the Shell theme and Firefox all use the same measured colours</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.6.2" date="2026-10-07" type="stable">
       <description translate="no">
         <p>Firefox fixes: menus and add-on cards follow the preset again.</p>
