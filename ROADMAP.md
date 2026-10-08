@@ -147,6 +147,14 @@ The engine should choose a readable foreground automatically; the colour picker
 should show the user the same measured information so they can choose
 differently. One body of work, two surfaces.
 
+**Shipped in 0.7.0:** every engine (GTK 3/4, Shell, Firefox) now measures the
+role colours before writing them, at a floor of 4.5:1. Coloured text (the five
+`*_color` roles drawn as labels on window, view and card) keeps its hue and
+moves its lightness until it reads. Text on the five filled roles is kept when
+it passes, and otherwise picked from the preset's own palette by nearest hue.
+A colour that already passes is written exactly as the preset has it. The
+neutral pairs (window, view, headerbar and the rest) are not measured yet.
+
 - [ ] **Foreground text follows its background.** Black on light surfaces, white
       on dark ones — but chosen by measurement, not by eye. There are **14
       foreground variables**, each paired with exactly one background:
@@ -193,12 +201,15 @@ the output, not the input.** `tools/icons-from-preset.py` picks a palette ramp b
 measuring what the folder actually becomes. The Shell engine substitutes values
 and hopes.
 
-- [ ] **Pick foregrounds by contrast, not by name.** Given a background, choose
+- [x] **Pick foregrounds by contrast, not by name.** Given a background, choose
       whichever candidate actually reads on it, rather than trusting one mapping
       to be right for every scheme. Self-correcting: a preset with a poor
       `accent_fg_color` gets a better one instead of an unreadable toggle.
       (Peach Fizz passes at 4.62 today — correct, but thin.)
-- [ ] **Audit the generated stylesheet, not just the preset.** Every engine
+- [ ] **Audit the generated stylesheet, not just the preset.** Partly there:
+      `tools/pick-foreground.py --verify` scores the colours Apply writes for
+      every bundled preset. Scoring the Shell and Firefox artefacts themselves
+      is still to do. Every engine
       emits its own foreground/background pairings — Shell, GTK, Firefox chrome.
       Scoring the artefact would catch this whole class of bug, including the
       ones not yet found, and would have caught this one immediately.
