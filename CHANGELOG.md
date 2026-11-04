@@ -7,6 +7,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- A Theme Version picker in the Firefox engine. It lists the tested
+  firefox-gnome-theme releases: v157.1 (recommended) and v150. Changing it
+  moves the profiles the app installed the theme into to that release and
+  writes the preset back. Leaving it on the recommended release means a later
+  pin move still reaches you; choosing an older one keeps it until you change
+  it.
+
+### Changed
+
+- The recommended firefox-gnome-theme release moves from v150 to v157.1,
+  which follows Firefox 156–158: tab groups in GNOME colours, softer
+  separators, reworked menus, address bar and sidebar.
+- `tools/check-firefox-pin.py` checks every release the app offers, not only
+  the pin.
+
 ## [0.7.0] - 2026-10-08
 
 ### Changed

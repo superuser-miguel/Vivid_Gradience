@@ -28,7 +28,7 @@ from gradience.backend.utils.subprocess import GradienceSubprocess
 
 from gradience.backend.theming.firefox import FirefoxTheme
 from gradience.backend.theming.firefox_installer import (
-    FirefoxThemeInstaller, PINNED_TAG)
+    FirefoxThemeInstaller, PINNED_TAG, SUPPORTED_TAGS)
 
 from gradience.frontend.views.firefox_prefs_window import (
     GradienceFirefoxPrefsWindow)
@@ -39,6 +39,7 @@ THEME_HOMEPAGE = "https://github.com/rafaelmardojai/firefox-gnome-theme"
 
 SKIPPED_KEY = "firefox-skipped-profiles"
 KNOWN_KEY = "firefox-known-profiles"
+VERSION_KEY = "firefox-theme-version"
 
 
 @Gtk.Template(resource_path=f"{rootdir}/ui/firefox_theming_group.ui")
@@ -47,6 +48,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
     firefox_theming_expander = Gtk.Template.Child("firefox-theming-expander")
     profiles_row = Gtk.Template.Child("profiles-row")
+    theme_version_row = Gtk.Template.Child("theme-version-row")
     install_theme_button = Gtk.Template.Child("install-theme-button")
     theme_options_row = Gtk.Template.Child("theme-options-row")
     reset_options_row = Gtk.Template.Child("reset-options-row")
@@ -67,10 +69,49 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
         self.profile_rows = []
         self.browser_groups = []
 
+        self.setup_version_row()
+        self.firefox_theming_expander.add_row(self.theme_version_row)
         self.firefox_theming_expander.add_row(self.theme_options_row)
         self.firefox_theming_expander.add_row(self.reset_options_row)
         self.firefox_theming_expander.add_row(self.uninstall_row)
         self.refresh_profiles_row()
+
+    # -- which release to install ---------------------------------------------
+
+    def chosen_tag(self):
+        """The release the user picked, or the pin when they have not picked
+        one (or picked one we no longer list)."""
+        tag = self.settings.get_string(VERSION_KEY)
+        return tag if tag in SUPPORTED_TAGS else PINNED_TAG
+
+    def setup_version_row(self):
+        labels = [_("{0} (recommended)").format(tag) if tag == PINNED_TAG
+                  else tag for tag in SUPPORTED_TAGS]
+        self.theme_version_row.set_model(Gtk.StringList.new(labels))
+        self.theme_version_row.set_selected(
+            SUPPORTED_TAGS.index(self.chosen_tag()))
+        self.theme_version_row.connect(
+            "notify::selected", self.on_version_selected)
+
+    def on_version_selected(self, row, *_args):
+        """Switching releases reinstalls our own copies at the new one and
+        writes the preset back, since a reinstall replaces customChrome.css.
+
+        The pin is saved as "no choice" rather than by name, so a later pin
+        move still reaches someone who never asked for a particular release.
+        Profiles without the theme are not installed into from here — that
+        stays the Install button's job."""
+        index = row.get_selected()
+        if index >= len(SUPPORTED_TAGS):
+            return
+        tag = SUPPORTED_TAGS[index]
+        self.settings.set_string(VERSION_KEY,
+                                 "" if tag == PINNED_TAG else tag)
+        _missing, stale, _foreign = self.installer.plan(
+            self.selected_profiles(), tag)
+        self.refresh_profiles_row(rebuild=False)
+        if stale:
+            self.install_theme(apply_after=True, only_stale=True)
 
     # -- which profiles the engine is allowed to touch ------------------------
 
@@ -136,14 +177,16 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
             for row in self.profile_rows:
                 row.set_subtitle(self.profile_subtitle(row._profile))
 
-        missing, stale, _foreign = self.installer.plan(selected)
+        tag = self.chosen_tag()
+        missing, stale, _foreign = self.installer.plan(selected, tag)
         managed = [p for p in profiles if self.installer.is_managed(p)]
 
         if missing:
             self.install_theme_button.set_label(_("Install Theme"))
             self.install_theme_button.set_visible(True)
         elif stale:
-            self.install_theme_button.set_label(_("Update Theme"))
+            self.install_theme_button.set_label(
+                _("Switch to {0}").format(tag))
             self.install_theme_button.set_visible(True)
         else:
             self.install_theme_button.set_visible(False)
@@ -157,9 +200,13 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
         self.uninstall_row.set_visible(bool(managed))
         if managed:
+            known = len(SUPPORTED_TAGS)
+            tags = sorted({self.installer.installed_tag(p) for p in managed},
+                          key=lambda t: SUPPORTED_TAGS.index(t)
+                          if t in SUPPORTED_TAGS else known)
             self.uninstall_row.set_subtitle(
                 _("The Firefox GNOME Theme {0} is installed in {1} "
-                  "profiles").format(PINNED_TAG, len(managed)))
+                  "profiles").format(", ".join(tags), len(managed)))
 
         if newly_skipped:
             self.toast_overlay.add_toast(Adw.Toast(
@@ -270,7 +317,13 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
         if own_theme:
             return _("Has its own Firefox theme")
         if installed:
-            return _("Firefox GNOME Theme installed")
+            tag = self.installer.installed_tag(profile)
+            if tag is None:
+                return _("Firefox GNOME Theme installed")
+            if tag != self.chosen_tag():
+                return _("Firefox GNOME Theme {0} installed — {1} is "
+                         "selected").format(tag, self.chosen_tag())
+            return _("Firefox GNOME Theme {0} installed").format(tag)
         return _("No Firefox GNOME Theme yet")
 
     def on_profile_toggled(self, row, *_args):
@@ -324,7 +377,8 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
             # through the hook the theme sets aside for exactly that.
             self.apply_to([profile])
             return
-        if self.installer.installed_tag(profile) == PINNED_TAG:
+        tag = self.chosen_tag()
+        if self.installer.installed_tag(profile) == tag:
             self.apply_to([profile])
             return
 
@@ -335,8 +389,8 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
 
         def worker():
             try:
-                tree = self.installer.fetch()
-                self.installer.install(profile, tree)
+                tree = self.installer.fetch(tag)
+                self.installer.install(profile, tree, tag)
             except (OSError, GLib.GError) as e:
                 logging.error(f"Failed installing into {profile}", exc=e)
                 GLib.idle_add(self.on_enable_done, row, profile, False)
@@ -412,7 +466,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
                        "install a tested release ({0}) into those {1} "
                        "profiles and apply the preset — or install it "
                        "yourself from the project page.").format(
-                           PINNED_TAG, len(profiles)))
+                           self.chosen_tag(), len(profiles)))
 
             dialog.add_response("install", _("Install and Apply"))
             dialog.add_response("open-page", _("Open Project Page"))
@@ -468,25 +522,30 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
     def on_install_theme_clicked(self, *_args):
         self.install_theme(apply_after=True)
 
-    def install_theme(self, apply_after=False):
-        """Fetch the pinned release (from cache after the first time) and
-        install it into every switched-on profile without the theme, updating
-        any of our own installs that fall behind the pin. Runs off the main
-        loop; the user's own installs are never touched, and neither are the
-        profiles they have switched off."""
+    def install_theme(self, apply_after=False, only_stale=False):
+        """Fetch the chosen release (from cache after the first time) and
+        install it into every switched-on profile without the theme, moving
+        any of our own installs that are at another release onto it. Runs off
+        the main loop; the user's own installs are never touched, and neither
+        are the profiles they have switched off."""
         self.install_theme_button.set_sensitive(False)
+        self.theme_version_row.set_sensitive(False)
+        tag = self.chosen_tag()
         self.toast_overlay.add_toast(
-            Adw.Toast(title=_("Installing the Firefox GNOME Theme…")))
+            Adw.Toast(title=_("Installing the Firefox GNOME Theme {0}…")
+                      .format(tag)))
         selected = self.selected_profiles()
 
         def worker():
             installed, updated, failed = 0, 0, 0
             try:
-                missing, stale, _foreign = self.installer.plan(selected)
-                tree = self.installer.fetch()
+                missing, stale, _foreign = self.installer.plan(selected, tag)
+                if only_stale:
+                    missing = []
+                tree = self.installer.fetch(tag)
                 for profile in missing:
                     try:
-                        self.installer.install(profile, tree)
+                        self.installer.install(profile, tree, tag)
                         installed += 1
                     except OSError as e:
                         logging.error(
@@ -494,7 +553,7 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
                         failed += 1
                 for profile in stale:
                     try:
-                        self.installer.install(profile, tree)
+                        self.installer.install(profile, tree, tag)
                         updated += 1
                     except OSError as e:
                         logging.error(f"Failed updating {profile}", exc=e)
@@ -503,15 +562,16 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
                 logging.error(
                     "Failed to download the Firefox GNOME Theme.", exc=e)
                 GLib.idle_add(self.on_install_done, None, None, None,
-                              apply_after)
+                              apply_after, tag)
                 return
             GLib.idle_add(self.on_install_done, installed, updated, failed,
-                          apply_after)
+                          apply_after, tag)
 
         threading.Thread(target=worker, daemon=True).start()
 
-    def on_install_done(self, installed, updated, failed, apply_after):
+    def on_install_done(self, installed, updated, failed, apply_after, tag):
         self.install_theme_button.set_sensitive(True)
+        self.theme_version_row.set_sensitive(True)
         self.refresh_profiles_row()
 
         if installed is None:
@@ -528,13 +588,13 @@ class GradienceFirefoxThemingGroup(Adw.PreferencesGroup):
                                       installed + updated, failed)))
         elif updated and not installed:
             self.toast_overlay.add_toast(
-                Adw.Toast(title=_("Theme updated to {0} in {1} "
-                                  "profiles.").format(PINNED_TAG, updated)))
+                Adw.Toast(title=_("Theme switched to {0} in {1} "
+                                  "profiles.").format(tag, updated)))
         else:
             self.toast_overlay.add_toast(
                 Adw.Toast(title=_("Theme {0} installed into {1} "
                                   "profiles.").format(
-                                      PINNED_TAG, installed + updated)))
+                                      tag, installed + updated)))
 
         if apply_after and (installed or updated):
             self.apply_firefox_theme()

@@ -61,5 +61,11 @@
 		<key name="firefox-known-profiles" type="as">
 			<default>[]</default>
 		</key>
+		<!-- Which tested firefox-gnome-theme release to install. Empty means
+		     the recommended one, so it follows the pin when a new release
+		     moves it; a tag means the user chose that release on purpose. -->
+		<key name="firefox-theme-version" type="s">
+			<default>''</default>
+		</key>
 	</schema>
 </schemalist>

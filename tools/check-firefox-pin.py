@@ -26,7 +26,7 @@ then any profile carrying our stamp at the right tag. --fetch downloads
 the release into the host cache if none of those has it.
 
 Usage:
-  tools/check-firefox-pin.py                 # check the current pin
+  tools/check-firefox-pin.py                 # check the pin and every older offered tag
   tools/check-firefox-pin.py --tag v151      # try a candidate before moving the pin
   tools/check-firefox-pin.py --theme-dir ~/src/firefox-gnome-theme
   tools/check-firefox-pin.py --fetch         # allow a network download
@@ -65,6 +65,12 @@ def pinned_tag():
     if not m:
         sys.exit(f"cannot find PINNED_TAG in {INSTALLER}")
     return m.group(1)
+
+
+def older_tags():
+    """The older releases the app still offers next to the pin."""
+    m = re.search(r'^OLDER_TAGS = \(([^)]*)\)', INSTALLER.read_text(), re.M)
+    return re.findall(r'"([^"]+)"', m.group(1)) if m else []
 
 
 def find_theme_tree(tag, fetch_ok):
@@ -140,14 +146,26 @@ def main():
     args = ap.parse_args()
 
     pin = pinned_tag()
-    tag = args.tag or pin
     if args.theme_dir:
-        tree, origin = args.theme_dir, "given on the command line"
-        if not (tree / "userChrome.css").is_file():
-            sys.exit(f"{tree} does not look like firefox-gnome-theme")
+        if not (args.theme_dir / "userChrome.css").is_file():
+            sys.exit(f"{args.theme_dir} does not look like firefox-gnome-theme")
+        trees = [(args.tag or pin, args.theme_dir, "given on the command line")]
     else:
-        tree, origin = find_theme_tree(tag, args.fetch)
+        # Every release the app offers, not only the pin: someone who chose
+        # an older one gets the same colours written into it.
+        tags = [args.tag] if args.tag else [pin, *older_tags()]
+        trees = [(tag, *find_theme_tree(tag, args.fetch)) for tag in tags]
 
+    failures = 0
+    for tag, tree, origin in trees:
+        failures += check_tree(tag, pin, tree, origin)
+    if failures:
+        print(f"\n{failures} problem(s) — do not offer that release until "
+              "resolved")
+    return 1 if failures else 0
+
+
+def check_tree(tag, pin, tree, origin):
     engine_src = ENGINE.read_text()
     writes = set(VAR_WRITE.findall(engine_src))
     our_reads = set(VAR_READ.findall(engine_src))
@@ -183,9 +201,7 @@ def main():
                       "in the schema, read nowhere in the release — "
                       "a switch that does nothing")
 
-    if failures:
-        print(f"\n{failures} problem(s) — do not move the pin until resolved")
-    return 1 if failures else 0
+    return failures
 
 
 if __name__ == "__main__":

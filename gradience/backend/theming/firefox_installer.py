@@ -45,7 +45,15 @@ logging = Logger()
 # Before moving it, run tools/check-firefox-pin.py --tag <new> — it diffs the
 # engine's variables and the options schema against that release and fails on
 # any seam that would break in silence.
-PINNED_TAG = "v150"
+#
+# The pin is the recommended release and the default. Older releases we have
+# also tried stay selectable, so someone who prefers how an earlier one looks
+# can keep it; the checker covers every tag listed here. Drop a tag from
+# OLDER_TAGS once it stops working with current Firefox — a saved choice that
+# is no longer listed falls back to the pin.
+PINNED_TAG = "v157.1"
+OLDER_TAGS = ("v150",)
+SUPPORTED_TAGS = (PINNED_TAG, *OLDER_TAGS)
 ARCHIVE_URL = ("https://github.com/rafaelmardojai/firefox-gnome-theme"
                "/archive/refs/tags/{tag}.tar.gz")
 
@@ -103,18 +111,19 @@ class FirefoxThemeInstaller:
     def is_managed(self, profile):
         return self.installed_tag(profile) is not None
 
-    def plan(self, profiles):
+    def plan(self, profiles, tag=PINNED_TAG):
         """Split profiles into (missing, stale, foreign): no theme at all,
-        our install behind the pin, and installs that are not ours."""
+        our install at a release other than `tag`, and installs that are not
+        ours."""
         missing, stale, foreign = [], [], []
         for profile in profiles:
             if not self.theme_dir(profile).is_dir():
                 missing.append(profile)
                 continue
-            tag = self.installed_tag(profile)
-            if tag is None:
+            installed = self.installed_tag(profile)
+            if installed is None:
                 foreign.append(profile)
-            elif tag != PINNED_TAG:
+            elif installed != tag:
                 stale.append(profile)
         return missing, stale, foreign
 
