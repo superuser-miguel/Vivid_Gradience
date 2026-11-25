@@ -169,6 +169,19 @@ class DesktopSettings:
     def set_color_scheme(self, scheme: str) -> None:
         _set(self.interface, "color-scheme", scheme)
 
+    def get_animations(self) -> bool:
+        try:
+            value = self.interface.get("enable-animations")
+        except AttributeError:
+            return self.interface.get_boolean("enable-animations")
+        return str(value).strip() == "true"
+
+    def set_animations(self, enabled: bool) -> None:
+        try:
+            self.interface.set("enable-animations", "true" if enabled else "false")
+        except AttributeError:
+            self.interface.set_boolean("enable-animations", enabled)
+
     def get_button_layout(self) -> str:
         return _get(self.wm, "button-layout")
 

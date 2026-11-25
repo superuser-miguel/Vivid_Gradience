@@ -35,6 +35,7 @@ class GradienceDesktopGroup(Adw.PreferencesGroup):
     gtk3_theme_row = Gtk.Template.Child("gtk3-theme-row")
     cursor_theme_row = Gtk.Template.Child("cursor-theme-row")
     dark_style_row = Gtk.Template.Child("dark-style-row")
+    animations_row = Gtk.Template.Child("animations-row")
     button_layout_row = Gtk.Template.Child("button-layout-row")
     split_warning_button = Gtk.Template.Child("split-warning-button")
     split_warning_label = Gtk.Template.Child("split-warning-label")
@@ -86,6 +87,9 @@ class GradienceDesktopGroup(Adw.PreferencesGroup):
         self.dark_style_row.set_active(
             self.desktop.get_color_scheme() == "prefer-dark")
         self.dark_style_row.connect("notify::active", self.on_dark_style_toggled)
+
+        self.animations_row.set_active(self.desktop.get_animations())
+        self.animations_row.connect("notify::active", self.on_animations_toggled)
 
         layouts = [label for _value, label in BUTTON_LAYOUTS]
         values = [value for value, _label in BUTTON_LAYOUTS]
@@ -153,6 +157,14 @@ class GradienceDesktopGroup(Adw.PreferencesGroup):
             self.desktop.set_color_scheme(scheme)
         except (GLib.GError, SubprocessError) as e:
             logging.error("Failed to set the color scheme.", exc=e)
+
+    def on_animations_toggled(self, *_args):
+        if self._updating:
+            return
+        try:
+            self.desktop.set_animations(self.animations_row.get_active())
+        except (GLib.GError, SubprocessError) as e:
+            logging.error("Failed to set animations.", exc=e)
 
     def on_button_layout_changed(self, *_args):
         if self._updating:
