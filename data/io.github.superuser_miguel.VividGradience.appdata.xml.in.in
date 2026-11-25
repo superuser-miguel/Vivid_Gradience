@@ -76,6 +76,18 @@
   </recommends>
 
   <releases>
+    <release version="0.7.1" date="2026-11-25" type="stable">
+      <description translate="no">
+        <p>A choice of Firefox theme release, readable overlay controls, and two additions to the desktop settings.</p>
+        <ul>
+          <li>Firefox: a Theme Version picker offers the tested firefox-gnome-theme releases. v157.1, the latest upstream release, is the recommended one, and v150 stays selectable</li>
+          <li>Image Viewer's previous, next and zoom buttons and Camera's controls no longer take the preset's text colour onto their own dark backdrop, where a preset with dark text left them unreadable. They are light on dark under every preset</li>
+          <li>The Shell Engine group warns when the User Themes extension cannot show the Shell theme: not installed, turned off, failed to load, or left out of date by a GNOME upgrade</li>
+          <li>An Animations switch joins the Desktop group</li>
+          <li>The Explore tab in the Preset Manager is hidden. It searched a community preset repository that does not exist</li>
+        </ul>
+      </description>
+    </release>
     <release version="0.7.0" date="2026-10-08" type="stable">
       <description translate="no">
         <p>Coloured text reads on every preset.</p>
