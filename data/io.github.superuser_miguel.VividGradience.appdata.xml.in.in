@@ -30,22 +30,22 @@
   </description>
 
   <screenshots>
-    <screenshot type="default" width="1920" height="3272">
+    <screenshot type="default" width="1280" height="900">
       <caption>The preset gallery</caption>
       <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/presets.png</image>
     </screenshot>
 
-    <screenshot width="1920" height="1051">
+    <screenshot width="1280" height="900">
       <caption>Editing named colors with live preview and contrast warnings</caption>
       <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/colors.png</image>
     </screenshot>
 
-    <screenshot width="1920" height="1080">
-      <caption>The theme engines: GNOME Shell, Monet, Firefox and icons</caption>
+    <screenshot width="1280" height="2170">
+      <caption>The theme engines: GNOME Shell, Monet, Firefox and icons, and the Desktop settings</caption>
       <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/theming.png</image>
     </screenshot>
 
-    <screenshot width="1920" height="1051">
+    <screenshot width="1280" height="900">
       <caption>Custom styles on the Advanced page</caption>
       <image type="source">https://superuser-miguel.github.io/Vivid_Gradience/screenshots/advanced.png</image>
     </screenshot>

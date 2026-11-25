@@ -102,3 +102,4 @@ kbd {
   border-radius: 5px; padding: 1px 5px; white-space: nowrap;
 }
 pre code span { color: var(--muted); }
+.shots figure.tall { grid-column: 1 / -1; max-width: 560px; margin: 0 auto; }

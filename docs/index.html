@@ -4,21 +4,21 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vivid Gradience — change the look of Adwaita, with ease</title>
-<meta name="description" content="A maintained fork of Gradience: recolour Libadwaita and adw-gtk3 from a GTK4 app, with 85 ready-made colour schemes built in.">
+<meta name="description" content="Recolour GNOME from one palette: Libadwaita and GTK apps, the Shell, Firefox and your icons. A maintained fork of Gradience with 85 colour schemes built in.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
 <header class="hero wrap">
   <img class="icon" src="icon.svg" alt="">
-  <span class="badge">Early, but working</span>
+  <span class="badge">Version 0.7.1</span>
   <h1>Vivid Gradience</h1>
   <p class="tagline">Change the look of Adwaita, with ease.</p>
   <p class="lede">
-    A maintained fork of <strong>Gradience</strong>, brought back to the current
-    GNOME runtime. Recolour every part of the Adwaita palette, start from one of
-    <strong>85 ready-made colour schemes</strong>, and apply it to Libadwaita,
-    GTK&nbsp;4 and GTK&nbsp;3 apps — without hand-editing a single config file.
+    Pick one of <strong>85 ready-made colour schemes</strong> or build your own,
+    and apply it to Libadwaita, GTK&nbsp;4 and GTK&nbsp;3 apps, GNOME Shell,
+    Firefox and your icons, without hand-editing a config file. A maintained
+    fork of <strong>Gradience</strong>, on the current GNOME runtime.
   </p>
   <div class="btns">
     <a class="btn primary" href="https://superuser-miguel.github.io/Vivid_Gradience-repo/VividGradience.flatpakref">Install (auto-updating)</a>
@@ -27,8 +27,39 @@
     <a class="btn" href="findings.html">Findings — notes for theme developers</a>
   </div>
   <p class="sub" style="margin-top:12px">Signed Flatpak repo — new releases arrive with <code>flatpak update</code>. Prefer a one-off file? <a href="https://github.com/superuser-miguel/Vivid_Gradience/releases/latest">Download the .flatpak bundle</a>.</p>
-  <img class="shot" src="screenshots/presets.png" alt="The Presets gallery, showing colour-scheme cards grouped into family sections — Casts, Pastel, Neon, Adwaita, Arc, Matcha, Dark and Light">
+  <img class="shot" src="screenshots/presets.png" alt="The Presets gallery: colour-scheme cards in family sections, starting with Casts and Pastel, each card showing the scheme's own colours">
 </header>
+
+<section class="wrap">
+  <h2>New in 0.7</h2>
+  <p class="sub">Two releases: 0.7.0 in October, 0.7.1 in November. <a href="https://github.com/superuser-miguel/Vivid_Gradience/blob/main/CHANGELOG.md">The full changelog.</a></p>
+  <div class="grid">
+    <div class="card">
+      <h3>Coloured text that reads</h3>
+      <p>Red, green, amber and accent text is now measured against the surfaces it sits on before a preset is written. Anything below <strong>4.5:1</strong> keeps its hue and is made lighter or darker just enough to read. That fixed 248 unreadable labels across 68 of the bundled presets.</p>
+    </div>
+    <div class="card">
+      <h3>A choice of Firefox theme release</h3>
+      <p>The Firefox engine offers the tested releases of firefox-gnome-theme. <strong>v157.1</strong>, the latest upstream release, is the recommended one, and v150 stays selectable for older setups.</p>
+    </div>
+    <div class="card">
+      <h3>Readable controls in Image Viewer and Camera</h3>
+      <p>Both apps draw controls over a dark backdrop of their own, and a preset with dark text left them unreadable. They are now light on dark under every preset.</p>
+    </div>
+    <div class="card">
+      <h3>A warning when the Shell theme cannot show</h3>
+      <p>The Shell engine says so when the User Themes extension is missing, turned off, or left out of date by a GNOME upgrade, which used to pass unnoticed.</p>
+    </div>
+    <div class="card">
+      <h3>One measurement for every engine</h3>
+      <p>The GTK&nbsp;3 and GTK&nbsp;4 stylesheets, the Shell theme and Firefox all write the same measured colours, so a label that reads in one place reads in the others.</p>
+    </div>
+    <div class="card">
+      <h3>An Animations switch</h3>
+      <p>The Desktop settings gain a switch for desktop-wide animations, next to dark style, cursor and window buttons.</p>
+    </div>
+  </div>
+</section>
 
 <section class="wrap">
   <h2>Why this fork exists</h2>
@@ -66,8 +97,8 @@
       <p>A schematic window at the top of the Colors tab redraws as you edit, before you apply anything — and marks any text that falls below the <strong>WCAG&nbsp;AA</strong> contrast minimum, so an unreadable pairing is visible immediately.</p>
     </div>
     <div class="card">
-      <h3>Contrast-checked schemes</h3>
-      <p>Every bundled scheme is scored against WCAG&nbsp;AA. All but one clear it — Solarized Light is left as its authors intended, since its low contrast is the scheme rather than a mistake.</p>
+      <h3>Colours measured before they are written</h3>
+      <p>Role colours drawn as text are checked against the surfaces they sit on. One that falls below WCAG&nbsp;AA keeps its hue and moves just far enough to read; one that passes is written exactly as the preset has it. The GTK stylesheets, the Shell theme and Firefox all use the same measured colours.</p>
     </div>
     <div class="card">
       <h3>A palette from your wallpaper</h3>
@@ -75,11 +106,11 @@
     </div>
     <div class="card">
       <h3>GNOME Shell theming, applied live</h3>
-      <p>Generate a matching Shell theme from the current preset — the panel, overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher and quick settings repaint on a running session. <strong>No logging out.</strong> It recolours the stylesheet your installed Shell already ships, so it follows whatever GNOME you run rather than a list of known versions.</p>
+      <p>Generate a matching Shell theme from the current preset — the panel, overview, <kbd>Super</kbd>+<kbd>Tab</kbd> switcher and quick settings repaint on a running session. <strong>No logging out.</strong> It recolours the stylesheet your installed Shell already ships, so it follows whatever GNOME you run rather than a list of known versions. If the User Themes extension it relies on is missing, off or out of date, the app tells you.</p>
     </div>
     <div class="card">
       <h3>Firefox, themed to match</h3>
-      <p>The Firefox engine writes the preset into the profiles you choose, through <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a> — toolbar, tabs, menus and the Library, for Firefox, LibreWolf and Waterfox alike. Each profile gets its own switch, and one you have already themed yourself is switched off on sight rather than painted over. No profile has the theme? The app offers to install a tested release for you, and removes it as cleanly. The theme's own nineteen optional features — OLED black, tabs as headerbar, system icons and the rest — are switches here too, instead of lines you hand-edit into a file the app also writes.</p>
+      <p>The Firefox engine writes the preset into the profiles you choose, through <a href="https://github.com/rafaelmardojai/firefox-gnome-theme">firefox-gnome-theme</a> — toolbar, tabs, menus and the Library, for Firefox, LibreWolf and Waterfox alike. Each profile gets its own switch, and one you have already themed yourself is switched off on sight rather than painted over. No profile has the theme? The app offers to install a tested release for you, with a picker for which one, and removes it as cleanly. The theme's own nineteen optional features — OLED black, tabs as headerbar, system icons and the rest — are switches here too, instead of lines you hand-edit into a file the app also writes.</p>
     </div>
     <div class="card">
       <h3>Icons that follow the scheme</h3>
@@ -87,7 +118,7 @@
     </div>
     <div class="card">
       <h3>Desktop settings without Tweaks</h3>
-      <p>GTK&nbsp;3 theme, cursor, dark style and window buttons, right in the Theming tab — with a warning Tweaks never had, when a chosen GTK&nbsp;3 theme is one your Flatpak apps cannot resolve.</p>
+      <p>GTK&nbsp;3 theme, cursor, dark style, animations and window buttons, right in the Theming tab — with a warning Tweaks never had, when a chosen GTK&nbsp;3 theme is one your Flatpak apps cannot resolve.</p>
     </div>
     <div class="card">
       <h3>Your old theme survives</h3>
@@ -110,23 +141,19 @@
 
 <section class="wrap">
   <h2>A look around</h2>
-  <p class="sub">Four tabs: pick a scheme, tune it, apply it, then go further.</p>
+  <p class="sub">Pick a scheme, tune it, then apply it to each part of the desktop.</p>
   <div class="shots">
     <figure>
-      <img src="screenshots/colors.png" alt="The Colors tab with a search field and collapsible categories of named Adwaita colours">
-      <figcaption><strong>Colors</strong> — every named colour, searchable and grouped.</figcaption>
+      <img src="screenshots/colors.png" alt="The Colors tab with the Rosé Pine preset loaded: a live preview window at the top, a search field, and the named colours in collapsible categories">
+      <figcaption><strong>Colors</strong>, with Rosé Pine loaded. The app takes on the preset as you edit it.</figcaption>
     </figure>
     <figure>
-      <img src="screenshots/theming.png" alt="The Theming tab showing the Shell Engine and Monet Engine option groups">
-      <figcaption><strong>Theming</strong> — the Shell, Monet, Firefox and icon engines, and the Desktop settings.</figcaption>
+      <img src="screenshots/colors-light.png" alt="The same Colors tab with Buttercream, a light preset: the whole app has taken the preset's cream and brown">
+      <figcaption>The same tab with <strong>Buttercream</strong>, one of the light Pastel presets.</figcaption>
     </figure>
-    <figure>
-      <img src="screenshots/advanced.png" alt="The Advanced tab with a custom CSS editor for GTK 4">
-      <figcaption><strong>Advanced</strong> — custom CSS and your theme library.</figcaption>
-    </figure>
-    <figure>
-      <img src="screenshots/preferences.png" alt="The Preferences dialog showing Flatpak application theming options">
-      <figcaption><strong>Preferences</strong> — Flatpak permissions and preset fetching.</figcaption>
+    <figure class="tall">
+      <img src="screenshots/theming.png" alt="The Theming tab: the Shell, Monet, Firefox and Icon engines, each with its own Apply button, a switch for every Firefox profile, and the Desktop settings">
+      <figcaption><strong>Theming</strong>: the Shell, Monet, Firefox and icon engines, and the Desktop settings.</figcaption>
     </figure>
   </div>
 </section>
@@ -173,11 +200,11 @@ flatpak run io.github.superuser_miguel.VividGradience</code></pre>
 
 <section class="wrap">
   <h2>Roadmap</h2>
-  <p class="sub">Honest about what's next. (The preset gallery, the modernised UI, the five theme engines, the theme library and signed auto-updating installs already shipped.)</p>
+  <p class="sub">What's next, in order. (The preset gallery, the five theme engines, measured colours, the theme library and signed auto-updating installs already shipped.)</p>
   <ul class="road">
-    <li><b>Foregrounds chosen by measurement</b> — pick the text colour that actually reads on its own background, from the scheme's own palette, rather than trusting one mapping to suit every preset. The same measurement then marks which swatches clear the contrast floor while you are picking one.</li>
-    <li><b>A palette editor</b> — open a colour cast, assign its swatches to theme roles by hand, and watch the preview and contrast warnings follow. The palette-first colour picker that shipped in 0.5.0 is its seed.</li>
+    <li><b>Blur my Shell detection</b> — say so when that extension's popup blur is overriding the Shell theme's colours, with a one-click way to turn it off.</li>
     <li><b>Theme installs from GitHub and <code>.zip</code></b> — fetch themes from inside the app, straight into the theme library the Advanced tab now manages.</li>
+    <li><b>A palette editor</b> — open a colour cast, assign its swatches to theme roles by hand, and watch the preview and contrast measurement follow.</li>
     <li><b>Time-of-day theme cycle</b> — rotate two to four presets across the day, by clock or by real sunrise and sunset. On its own storage, so an automatic switch never overwrites your own theme history.</li>
     <li><b>Light/dark preset pairs</b> — follow the system colour scheme with a matched pair.</li>
     <li><b>Colour wheel</b> — a proper wheel for picking, alongside the hex fields.</li>
