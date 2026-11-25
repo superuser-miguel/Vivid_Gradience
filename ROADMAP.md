@@ -32,7 +32,8 @@ If you'd like to see a new feature, open an issue or submit a PR.
 - [x] Customize palette colors
 - [x] Add custom CSS code
 - [x] Normalize color variables
-- [x] Preset manager with community presets
+- [x] Preset manager (its community-presets Explore tab is hidden: there is no
+      repository behind it)
 - [x] Autoload theme from CSS
 
 ### Planned Features
@@ -133,7 +134,8 @@ live-running applications.
       in the Desktop group. Distinct from the light/dark *pair* feature.
 - [x] Window control button layout (`wm.preferences.button-layout`) — four
       common arrangements in the Desktop group.
-- [ ] Toggle animations (`interface.enable-animations`)
+- [x] Toggle animations (`interface.enable-animations`) — the Animations
+      switch in the Desktop group.
 - [x] Activate a generated GNOME Shell theme (`shell.extensions.user-theme`) —
       done by the Shell engine
 
@@ -235,7 +237,7 @@ for each is how they drift apart:
 | Feature | Needs | Currently |
 |---|---|---|
 | GTK 3 theming | `adw-gtk3` on the host **and** `org.gtk.Gtk3theme.adw-gtk3` for sandboxed apps | neither checked |
-| GNOME Shell | the User Themes extension | partly checked |
+| GNOME Shell | the User Themes extension | checked; standing warning |
 | Firefox | `firefox-gnome-theme` in the profile | checked; installable in-app |
 
 In every case the answer is the same shape: say what is missing, say what
@@ -274,7 +276,9 @@ remain report-only.
       our colours cannot reach it. adw-gtk3 is the inverse (125 defines, 1,189
       named references, using our exact variable names) and is effectively the
       GTK 3 substrate this app is written for.
-- [ ] Warn when the User Themes extension is absent or disabled (partly built)
+- [x] Warn when the User Themes extension is absent or disabled. A standing
+      row in the Shell Engine group, read from the running Shell, which also
+      catches the extension being left out of date by a GNOME upgrade.
 - [ ] A single "is my desktop consistent?" view — host theme, sandbox theme,
       Shell theme and `gtk.css` either agreeing or not
 

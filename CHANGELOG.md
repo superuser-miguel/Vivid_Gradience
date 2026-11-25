@@ -15,6 +15,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   writes the preset back. Leaving it on the recommended release means a later
   pin move still reaches you; choosing an older one keeps it until you change
   it.
+- An Animations switch in the Desktop group, for the desktop-wide
+  `enable-animations` setting.
+- A standing warning in the Shell Engine group when the User Themes extension
+  cannot show the Shell theme: not installed, turned off, failed to load, or
+  left out of date by a GNOME upgrade. The last case used to pass unnoticed,
+  because the extension still counts as installed and switched on. The same
+  states are named when Apply is pressed.
 
 ### Changed
 
@@ -23,6 +30,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   separators, reworked menus, address bar and sidebar.
 - `tools/check-firefox-pin.py` checks every release the app offers, not only
   the pin.
+
+### Removed
+
+- The Explore tab in the Preset Manager is hidden, along with the links that
+  went with it. It searched a community preset repository that does not
+  exist, so it could only fail. Importing a preset file works as before.
 
 ### Fixed
 
