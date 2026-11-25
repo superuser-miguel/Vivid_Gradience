@@ -35,6 +35,32 @@ Generated with Vivid Gradience end
 */
 """
 
+# Controls an app draws over a backdrop it paints itself. Their backdrop
+# ignores the preset, but their icons and labels inherit the preset's
+# foreground, so a preset can leave them unreadable (dark text on a dark
+# scrim). Both sides are pinned here to what the upstream apps intend:
+# light controls on a dark scrim, whatever the preset or the system scheme.
+#
+#   Loupe:    the previous/next and zoom pills. The pill follows the system
+#             scheme; the buttons inside are plain flat buttons. The class
+#             is matched bare: Loupe's image view has no CSS name of its own
+#             to scope it by.
+#   Snapshot: the control frames and the gallery header bar, a black scrim
+#             over the viewfinder. Upstream relies on forcing the dark scheme
+#             to get a white foreground, which named colours override.
+app_overlay_css = """/* Controls drawn over an app's own backdrop */
+.osd-box {
+  background-color: rgba(0, 0, 0, 0.65);
+  color: rgba(255, 255, 255, 0.9);
+}
+camera .controlsframe,
+gallery .controlsframe,
+gallery headerbar {
+  color: white;
+}
+
+"""
+
 def generate_gtk_css(app_type: str, preset: Preset) -> str:
     palette = preset.palette
     custom_css = preset.custom_css
@@ -52,6 +78,9 @@ def generate_gtk_css(app_type: str, preset: Preset) -> str:
     for prefix_key in palette.keys():
         for key in palette[prefix_key].keys():
             gtk_css += f"@define-color {prefix_key + key} {palette[prefix_key][key]};\n"
+
+    if app_type == "gtk4":
+        gtk_css += "\n" + app_overlay_css
 
     gtk_css += theming_warning_end
 

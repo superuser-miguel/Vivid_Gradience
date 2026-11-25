@@ -24,6 +24,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `tools/check-firefox-pin.py` checks every release the app offers, not only
   the pin.
 
+### Fixed
+
+- Controls that Image Viewer and Camera draw over their own dark backdrop
+  took the preset's foreground, so a preset with dark text left them brown
+  or unreadable: Image Viewer's previous/next and zoom buttons, and Camera's
+  control frames and gallery header bar. They are now light on a dark scrim
+  under every preset and both system schemes.
+
 ## [0.7.0] - 2026-10-08
 
 ### Changed

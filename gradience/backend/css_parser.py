@@ -19,7 +19,8 @@
 import re
 
 from gradience.backend.globals import adw_palette_prefixes
-from gradience.backend.utils.theming import theming_warning_start, theming_warning_end
+from gradience.backend.utils.theming import (
+    theming_warning_start, theming_warning_end, app_overlay_css)
 
 
 # Regular expressions
@@ -37,6 +38,9 @@ def parse_css(path):
     with open(path, "r", encoding="utf-8") as sheet:
         content = sheet.read()
         content = content.replace(theming_warning_start, "").replace(theming_warning_end, "")
+        # Ours, not the preset's: without this it would be read back as the
+        # preset's custom CSS and written twice on the next apply.
+        content = content.replace(app_overlay_css, "")
         for line in content.splitlines():
             cdefine_match = re.search(define_color, line)
             not_cdefine_match = re.search(not_define_color, line)
