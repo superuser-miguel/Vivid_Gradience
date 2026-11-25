@@ -162,7 +162,10 @@ class GradienceApplication(Adw.Application):
         self.load_preset_from_css()
         self.reload_user_defined_presets()
 
-        if self.first_run:
+        if os.environ.get("VG_SHOT"):
+            self.win.present()
+            self._dev_screenshot()
+        elif self.first_run:
             welcome = GradienceWelcomeWindow(self.win)
             welcome.present()
         else:
@@ -172,6 +175,47 @@ class GradienceApplication(Adw.Application):
             else:
                 logging.debug("normal run")
                 self.win.present()
+
+    def _dev_screenshot(self):
+        """Development aid: save a picture of the main window, then quit.
+
+        GNOME on Wayland lets no outside program capture a window, so the
+        app draws its own. Nothing here runs unless VG_SHOT is set:
+
+            VG_SHOT=/path/shot.png   where to write the picture
+            VG_PAGE=theming          tab to show: presets, colors, theming, plugins
+            VG_PRESET=nord           built-in preset to load first
+            VG_SIZE=1200x900         window size
+            VG_SHOT_DELAY=3000       milliseconds to let the window settle
+
+        Run it on a headless compositor and with GSETTINGS_BACKEND=memory, so
+        no window appears on the desktop and no setting is touched.
+        """
+        shot = os.environ["VG_SHOT"]
+        size = os.environ.get("VG_SIZE")
+        if size:
+            width, height = (int(n) for n in size.lower().split("x"))
+            self.win.set_default_size(width, height)
+        preset = os.environ.get("VG_PRESET")
+        if preset:
+            self.load_preset_from_resource(f"{rootdir}/presets/{preset}.json")
+        page = os.environ.get("VG_PAGE")
+        if page:
+            self.win.view_stack.set_visible_child_name(page)
+
+        def take():
+            win = self.win
+            snapshot = Gtk.Snapshot()
+            Gtk.WidgetPaintable.new(win).snapshot(
+                snapshot, win.get_width(), win.get_height())
+            node = snapshot.to_node()
+            texture = win.get_native().get_renderer().render_texture(node, None)
+            texture.save_to_png(shot)
+            logging.debug(f"Screenshot written to {shot}")
+            self.quit()
+            return GLib.SOURCE_REMOVE
+
+        GLib.timeout_add(int(os.environ.get("VG_SHOT_DELAY", "3000")), take)
 
     def setup_signals(self):
         # Custom signals
