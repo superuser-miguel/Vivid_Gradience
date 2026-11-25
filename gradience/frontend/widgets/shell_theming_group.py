@@ -17,11 +17,13 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 from enum import Enum
+import threading
+
 from subprocess import SubprocessError
 
 from gi.repository import GObject, GLib, Gio, Gtk, Adw
 
-from gradience.backend.utils.gnome import is_gnome_available, is_shell_ext_installed
+from gradience.backend.utils.gnome import is_gnome_available, shell_ext_state
 from gradience.backend.utils.subprocess import GradienceSubprocess
 from gradience.backend.constants import rootdir
 from gradience.backend.exceptions import UnsupportedShellVersion
@@ -41,6 +43,7 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
     __gtype_name__ = "GradienceShellThemingGroup"
 
     variant_row = Gtk.Template.Child("variant-row")
+    user_themes_row = Gtk.Template.Child("user-themes-row")
     shell_theming_expander = Gtk.Template.Child("shell-theming-expander")
     other_options_row = Gtk.Template.Child("other-options-row")
 
@@ -58,6 +61,7 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
 
         self.setup_signals()
         self.setup()
+        self.refresh_user_themes_state()
 
     def setup_signals(self):
         self.app.connect("preset-reload", self.reload_colors)
@@ -66,6 +70,53 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
         self.setup_variant_row()
 
         self.shell_theming_expander.add_row(self.other_options_row)
+
+    # What to tell the user for each state the User Themes extension can be
+    # in that stops the Shell theme from showing: (title, what fixes it).
+    def _user_themes_messages(self):
+        return {
+            "missing": (
+                _("The User Themes extension is not installed"),
+                _("The Shell theme cannot show without it. Install User "
+                  "Themes from the Extensions app or extensions.gnome.org.")),
+            "disabled": (
+                _("The User Themes extension is turned off"),
+                _("The Shell theme will not show until it is turned on in "
+                  "the Extensions app.")),
+            "out-of-date": (
+                _("The User Themes extension does not support this GNOME version"),
+                _("It is installed and switched on, but GNOME Shell will not "
+                  "run it. Update the extension to show the Shell theme.")),
+            "error": (
+                _("The User Themes extension failed to load"),
+                _("The Shell theme will not show until it loads. Check it in "
+                  "the Extensions app.")),
+        }
+
+    def refresh_user_themes_state(self):
+        """Ask the Shell about User Themes off the main thread, then show or
+        hide the standing warning. The answer can change under the app, most
+        often when a GNOME upgrade leaves the extension out of date."""
+        def worker():
+            try:
+                state = (shell_ext_state(ShellTheme().THEME_EXT_NAME)
+                         if is_gnome_available() else "unknown")
+            except Exception as e:
+                logging.warning(f"Could not read the User Themes state: {e}")
+                state = "unknown"
+            GLib.idle_add(self._show_user_themes_state, state)
+
+        threading.Thread(target=worker, daemon=True).start()
+
+    def _show_user_themes_state(self, state):
+        message = self._user_themes_messages().get(state)
+        if message is None:
+            self.user_themes_row.set_visible(False)
+        else:
+            self.user_themes_row.set_title(message[0])
+            self.user_themes_row.set_subtitle(message[1])
+            self.user_themes_row.set_visible(True)
+        return GLib.SOURCE_REMOVE
 
     def setup_variant_row(self):
         variant_store = Gtk.StringList()
@@ -110,11 +161,11 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
 
     @Gtk.Template.Callback()
     def on_apply_button_clicked(self, *_args):
-        user_themes_available = is_shell_ext_installed(ShellTheme().THEME_EXT_NAME)
-        user_themes_enabled = is_shell_ext_installed(
-                ShellTheme().THEME_EXT_NAME, check_enabled=True)
+        gnome = is_gnome_available()
+        state = shell_ext_state(ShellTheme().THEME_EXT_NAME) if gnome else "unknown"
+        self._show_user_themes_state(state)
 
-        if not is_gnome_available():
+        if not gnome:
             dialog = Adw.MessageDialog(transient_for=self.win, heading=_("GNOME Shell Missing"),
                 body=_("Shell Engine is designed to work only on systems running GNOME. You can still generate themes on other desktop environments, but it won't have any affect on them."))
 
@@ -125,7 +176,7 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
 
             dialog.connect("response", self.on_shell_missing_response)
             dialog.present()
-        elif is_gnome_available() and not user_themes_available:
+        elif state == "missing":
             dialog = Adw.MessageDialog(transient_for=self.win, heading=_("User Themes Extension Missing"),
                 body=_("Vivid Gradience requires the User Themes extension installed to apply the Shell theme. You can still generate a theme, but you won't be able to apply it without this extension."))
 
@@ -136,9 +187,9 @@ class GradienceShellThemingGroup(Adw.PreferencesGroup):
 
             dialog.connect("response", self.on_user_themes_missing_response)
             dialog.present()
-        elif is_gnome_available() and user_themes_available and not user_themes_enabled:
-            dialog = Adw.MessageDialog(transient_for=self.win, heading=_("User Themes Extension Disabled"),
-                body=_("The User Themes extension is currently disabled on your system. Please enable it to apply the theme."))
+        elif state in ("disabled", "out-of-date", "error"):
+            heading, body = self._user_themes_messages()[state]
+            dialog = Adw.MessageDialog(transient_for=self.win, heading=heading, body=body)
 
             dialog.add_response("cancel", _("Cancel"))
             #dialog.add_response("enable-extension", _("Enable Extension"))

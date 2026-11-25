@@ -17,6 +17,9 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 
 import os
+import re
+
+from subprocess import SubprocessError
 
 from gradience.backend.models.preset import Preset
 from gradience.backend.utils.subprocess import GradienceSubprocess
@@ -50,7 +53,7 @@ def get_full_shell_version() -> str:
     return shell_version
 
 def is_gnome_available() -> bool:
-    xdg_current_desktop = os.environ.get("XDG_CURRENT_DESKTOP").lower()
+    xdg_current_desktop = (os.environ.get("XDG_CURRENT_DESKTOP") or "").lower()
 
     if "gnome" in xdg_current_desktop:
         return True
@@ -83,6 +86,47 @@ def is_shell_ext_installed(uuid: str, check_enabled: bool = False) -> bool:
         return True
 
     return False
+
+# org.gnome.Shell.Extensions' ExtensionState, reduced to what a user can act on.
+_EXT_STATES = {
+    1: "active",
+    2: "disabled",
+    3: "error",
+    4: "out-of-date",
+    6: "disabled",      # INITIALIZED: loaded but never enabled
+    99: "missing",
+}
+
+def shell_ext_state(uuid: str) -> str:
+    """
+    What the running Shell says about the extension `uuid`: one of "active",
+    "disabled", "out-of-date", "error", "missing", or "unknown" when the
+    Shell cannot be asked.
+
+    The Shell is asked over D-Bus rather than through `gnome-extensions`,
+    whose output is translated. "out-of-date" is the state an extension lands
+    in after a GNOME upgrade it does not declare support for: it is still
+    installed and still switched on, and it does not run.
+    """
+    cmd_list = ["gdbus", "call", "--session",
+                "--dest", "org.gnome.Shell.Extensions",
+                "--object-path", "/org/gnome/Shell/Extensions",
+                "--method", "org.gnome.Shell.Extensions.GetExtensionInfo", uuid]
+
+    process = GradienceSubprocess()
+    try:
+        completed = process.run(cmd_list, timeout=5, allow_escaping=True)
+        stdout = process.get_stdout_data(completed, decode=True)
+    except (SubprocessError, OSError):
+        return "unknown"
+
+    if not stdout.strip().startswith("("):
+        return "unknown"
+    match = re.search(r"'state': <(?:double )?([0-9.]+)>", stdout)
+    if match is None:
+        # An empty reply is how the Shell answers for a UUID it does not have.
+        return "missing" if "'uuid'" not in stdout else "unknown"
+    return _EXT_STATES.get(int(float(match.group(1))), "unknown")
 
 def get_shell_colors(preset_variables: Preset.variables) -> dict:
     shell_colors = {}

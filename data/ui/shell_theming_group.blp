@@ -22,6 +22,16 @@ template $GradienceShellThemingGroup: Adw.PreferencesGroup {
       ]
     }
 
+    Adw.ActionRow user-themes-row {
+      visible: false;
+
+      [prefix]
+      Image {
+        icon-name: "dialog-warning-symbolic";
+        styles ["warning"]
+      }
+    }
+
     Adw.ActionRow custom-colors-row {
       title: _("Customize Shell Theme");
       activatable-widget: custom-colors-button;
