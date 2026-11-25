@@ -100,6 +100,8 @@ template $GradiencePresetRow : Adw.ExpanderRow {
       valign: center;
       icon-name: "bug-symbolic";
       tooltip-text: _("Report an Issue");
+      // There is no community preset repository to report to.
+      visible: false;
       clicked => $on_report_button_clicked();
     }
 

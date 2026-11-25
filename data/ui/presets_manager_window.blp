@@ -41,10 +41,12 @@ template $GradiencePresetWindow : Adw.Window {
           visible: false;
         }
 
+        // Hidden with the Explore page: one page needs no switcher.
         [title]
         Adw.ViewSwitcher title {
           stack: view_stack;
           policy: wide;
+          visible: false;
         }
 
         [end]
@@ -74,10 +76,13 @@ template $GradiencePresetWindow : Adw.Window {
 
           }
 
+          // NOTE: Hidden until there is a community preset repository to
+          // search. The one it pointed at does not exist.
           Adw.ViewStackPage {
             name: "explore";
             title: _("Explore");
             icon-name: "web-browser-symbolic";
+            visible: false;
 
             child: Gtk.ScrolledWindow {
               Adw.StatusPage {
@@ -160,6 +165,7 @@ template $GradiencePresetWindow : Adw.Window {
 
         Adw.ViewSwitcherBar {
           stack: view_stack;
+          visible: false;
         }
       }
     }

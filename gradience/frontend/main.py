@@ -212,9 +212,7 @@ class GradienceApplication(Adw.Application):
     def show_presets_manager(self, *_args):
         presets = GradiencePresetWindow(self.win)
         presets.present()
-
-        add_rows_thread = threading.Thread(target=presets.add_explore_rows)
-        add_rows_thread.start()
+        # The Explore page is hidden, so nothing is fetched for it.
 
     def load_preset_from_css(self):
         try:

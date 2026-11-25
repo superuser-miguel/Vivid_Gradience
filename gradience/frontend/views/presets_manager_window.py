@@ -344,13 +344,6 @@ class GradiencePresetWindow(Adw.Window):
 
         self.preset_list = Adw.PreferencesGroup()
         self.preset_list.set_title(_("User Presets"))
-        self.preset_list.set_description(
-            _(
-                "See "
-                '<a href="https://github.com/superuser-miguel/Community">'
-                "superuser-miguel/Community</a> on Github for more presets."
-            )
-        )
 
         logging.debug(f"custom_presets: {self.custom_presets}")
 
@@ -372,8 +365,7 @@ class GradiencePresetWindow(Adw.Window):
             self.preset_empty = Adw.ActionRow()
             self.preset_empty.set_title(
                 _(
-                    "No preset found! Use the import button to import one or "
-                    "search one on the Explore tab."
+                    "No preset found! Use the import button to import one."
                 )
             )
             self.preset_list.add(self.preset_empty)
