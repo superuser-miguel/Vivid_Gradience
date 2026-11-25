@@ -4,8 +4,9 @@ If you'd like to see a new feature, open an issue or submit a PR.
 
 ### Immediate Goals
 
-- [x] Working Flatpak targeting GNOME 48+ / runtime 50 (latest)
-- [x] Automatically track new GNOME runtime releases
+- [x] Working Flatpak targeting GNOME 48+ / runtime 51 (latest)
+- [x] Track new GNOME runtime releases — by hand, as a release step
+      (`tools/check-runtime.sh`); the weekly CI job that tried was retired
 - [x] Signed releases + a hosted, auto-updating Flatpak repo (`flatpak update`),
       distributed independently of Flathub
 - [ ] Modernize the UI — adopt current libadwaita composition:

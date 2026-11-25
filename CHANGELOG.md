@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- The Flatpak moves to the GNOME 51 runtime (GTK 4.24, libadwaita 1.10,
+  Python 3.14), from 50.
+- Moving to a new runtime is a release step done by hand
+  (`tools/check-runtime.sh`, RELEASING.md). The weekly CI job that tried to do
+  it is retired: it had built on 51 every week since September and could
+  never push the result.
+- The documentation screenshots are taken by the app itself
+  (`tools/take-screenshots.sh`).
+
 ## [0.7.1] - 2026-11-25
 
 ### Added

@@ -29,11 +29,11 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       # Must match the Python in the GNOME runtime the manifests target
-      # (runtime-version 50 -> 3.13). pip resolves ABI-specific wheels, so
+      # (runtime-version 51 -> 3.14). pip resolves ABI-specific wheels, so
       # generating on any other version pins wheels the runtime cannot load.
       - uses: actions/setup-python@v6.1.0
         with:
-          python-version: '3.13'
+          python-version: '3.14'
 
       - name: Run a multi-line script
         run: |

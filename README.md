@@ -184,7 +184,7 @@ Past releases are in the [changelog](CHANGELOG.md).
 
 ## Build from source
 
-Needs `flatpak-builder` and the GNOME 50 SDK and Platform runtime.
+Needs `flatpak-builder` and the GNOME 51 SDK and Platform runtime.
 
 ```shell
 git clone https://github.com/superuser-miguel/Vivid_Gradience.git

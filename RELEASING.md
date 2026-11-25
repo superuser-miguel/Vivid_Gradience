@@ -17,6 +17,21 @@ guarantee only holds if the pin is updated — hence step 4.
 
 ## Steps
 
+**0. Check the runtime.** GNOME ships a new runtime each March and September.
+
+```shell
+tools/check-runtime.sh
+```
+
+It compares the pin with the latest runtime on Flathub. When a newer one is
+out, move to it before the release, in one commit: `runtime-version` in both
+manifests, the `flatpak-github-actions:gnome-NN` container tag in
+`.github/workflows/build.yml`, the Python version in
+`.github/workflows/pypi-dependencies.yml` (it must match the runtime's), and
+the version named in `README.md` and `HACKING.md`. Then build locally on it and
+look at the app (`tools/take-screenshots.sh`) before going further. This is
+done by hand on purpose; the weekly CI job that tried to do it was retired.
+
 **1. Bump the version.** `meson.build` `version:` and the `<release>` entry in
 `data/io.github.superuser_miguel.VividGradience.appdata.xml.in.in` must agree.
 Use the real date; `type="stable"` unless it genuinely is a pre-release.

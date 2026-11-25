@@ -28,7 +28,7 @@ jobs:
   flatpak:
     name: Flatpak
     container:
-      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-50
+      image: ghcr.io/flathub-infra/flatpak-github-actions:gnome-51
       options: --privileged
     # x86_64 only, because that is what we ship. The arm leg produced bundles
     # nobody installed, and materialyoucolor publishes no aarch64 wheel, so it
